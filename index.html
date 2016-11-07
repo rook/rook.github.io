@@ -8,7 +8,7 @@
       
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i" rel="stylesheet">  
       
-    <title>Bootstrap 101 Template</title>
+    <title>ROOK.IO</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -135,6 +135,7 @@
         }
             .navigation a.gitHub:hover{
                  background-image: url(images/icn_github_hover.svg);
+                transition: all 0.5s ease;
             }
         
         .navigation a.gitter{
@@ -150,6 +151,7 @@
         }
             .navigation a.twitter:hover{
                  background-image: url(images/icn_twitter_hover.svg);
+                 transition: all 0.5s ease;
             }     
         
         .primary img.logo{
@@ -180,11 +182,27 @@
             background:#333;
             height:627px;
         }
+
         
-        .contribute img{
-            max-height: 65px;
+        .contribute a{
+            display: block;
+            height:65px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .contribute a.github{
+            background-image: url(images/logo_github.svg);            
+        }
+        .contribute a.github:hover{
+            background-image: url(images/logo_github_hover.svg);
         }
         
+        .contribute a.gitter{
+            background-image: url(images/logo_gitter.svg);
+        }
+        .contribute a.gitter:hover{
+            background-image: url(images/logo_gitter_hover.svg);
+        }
         
         
 @media only screen and (max-width: 992px) {
@@ -212,11 +230,10 @@
         <div class="navigation">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-md-offset-9">
+                    <div class="col-md-2 col-md-offset-11">
                         <div class="row">
-                            <div class="col-md-4"><a class="gitHub" href=""></a></div>
+                            <div class="col-md-4"><a class="gitHub" href="https://github.com/rook/"></a></div>
                             <div class="col-md-4"><a class="gitter" href=""></a></div>
-                            <div class="col-md-4"><a class="twitter" href=""></a></div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +251,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
+                        <button onclick="location.href='https://github.com/rook/';" class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
                     </div>
                 </div>
                 <div class="row threeup">
@@ -313,7 +330,7 @@
                 </div>
             </div>
             <div class="row">
-                <button class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
+                <button onclick="location.https://github.com/rook/';" class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
             </div>
         </div>
       </div>
@@ -326,15 +343,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-md-offset-3">
-                    <a href=""><img src="images/logo_github.svg"></a>
+                <div class="col-md-2 col-md-offset-4">
+                    <a class="github" href="https://github.com/rook/"></a>
                 </div>
                 <div class="col-md-2">
-                    <a href=""><img src="images/logo_gitter.svg"></a>
+                    <a class="gitter" href=""></a>
                 </div>
-                <div class="col-md-2">
+           <!-- <div class="col-md-2">
                     <a href=""><img src="images/logo_twitter.svg"></a>
-                </div>
+                </div> -->
             </div>
         </div>
        </div>
