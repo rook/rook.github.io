@@ -8,7 +8,7 @@
       
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i" rel="stylesheet">  
       
-    <title>ROOK.IO</title>
+    <title>Rook.io</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -106,15 +106,24 @@
         .tertiary, .contribute{
             color:#546A79;
         }
+    
+        
+        .contribute{
+            background-color:#EEAF49;
+            border-bottom:4px solid #fff;
+            color:#fff;
+        }
         
         .getStarted{
             background-color: #7EA0B1;
             color:#fff;
+            display:none;
         }
         
         .footer{
             background-color: #546A79;
             height:50px;
+           
         }
         
         .primary, .contribute, .getStarted{
@@ -127,7 +136,9 @@
             background-repeat: no-repeat;
             width:40px;
             height:50px;
-            display: block;
+            display: inline-block;
+            float:right;
+            margin: 0 10px 0;
         }
         
         .navigation a.gitHub{
@@ -222,6 +233,10 @@
             background-image: none;
     }
     
+    .contribute .row a{
+        margin-bottom:30px;
+    }
+    
 }        
     </style>
     
@@ -230,12 +245,8 @@
         <div class="navigation">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2 col-md-offset-11">
-                        <div class="row">
-                            <div class="col-md-4"><a class="gitHub" href="https://github.com/rook/"></a></div>
-                            <div class="col-md-4"><a class="gitter" href=""></a></div>
-                        </div>
-                    </div>
+                    <div><a class="gitter" href="https://gitter.im/rook/rook"></a></div>
+                    <div><a class="gitHub" href="https://github.com/rook/"></a></div>
                 </div>
             </div>
         </div>
@@ -347,7 +358,7 @@
                     <a class="github" href="https://github.com/rook/"></a>
                 </div>
                 <div class="col-md-2">
-                    <a class="gitter" href=""></a>
+                    <a class="gitter" href="https://gitter.im/rook/rook"></a>
                 </div>
            <!-- <div class="col-md-2">
                     <a href=""><img src="images/logo_twitter.svg"></a>
@@ -355,7 +366,7 @@
             </div>
         </div>
        </div>
-      <div class="wrapper footer">
+      <div class="footer">
       </div>
       
       
