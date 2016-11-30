@@ -30,6 +30,11 @@
             margin-top:0px;
         }
         
+        .row{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        
         h1{
             margin-top:30px;
             line-height: 52px;
@@ -107,6 +112,7 @@
             color:#546A79;
         }
     
+
         
         .contribute{
             background-color:#EEAF49;
@@ -217,8 +223,25 @@
         
         
 @media only screen and (max-width: 992px) {
-    .tertiary img {
-        display:none;
+    
+    
+    .tertiary p{
+        padding-bottom:30px;
+    }
+    
+    .tertiary .col-md-1{
+        width:75px;
+        margin:  auto ; 
+        display: block;
+        float:left;
+    }
+    
+.tertiary p{
+        padding-bottom:30px;
+    }
+        
+    .tertiary .scale p{
+        padding-bottom:0px;
     }
     
     .contribute img{
@@ -235,6 +258,10 @@
     
     .contribute .row a{
         margin-bottom:30px;
+    }
+    
+    .tertiary .container.bottom {
+        margin-top: 0px;
     }
     
 }        
@@ -286,7 +313,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <h2>One platform for all of your application data needs.</h2>
-                        <p>Rook natively supports enterprise-class storage apps - file system, block storage, and object storage.  Speed up your time to adapt to the change in business needs, simplify your infrastructure and fully utilize your storage resources.</p>
+                        <p>Rook natively supports enterprise-class storage services including file system, block storage, and object storage. Speed up the time you need to adapt to changing business needs, simplify your infrastructure and fully utilize your storage resources.</p>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-6 flexible">
@@ -311,18 +338,19 @@
                     </div>
                 </div>
            </div>
+
            <div class="container bottom">
                 <div class="row">
-                    <div class="col-md-1"><img src="images/deploy.svg"></div>
+                    <div class="col-md-1 deploy"><img src="images/deploy.svg"></div>
                     <div class="col-md-5">
                         <h3>Easy to deploy and maintain</h3>
-                        <p>Maintaining open-source based storage can be difficult, and consumes a lot of dev resources. With Rook, starting up a cluster is only a few lines of code, done in minutes, not days or weeks. It self-heals and automatically manages your clusters.</p>
+                        <p>Maintaining open-source based storage is difficult and consumes a lot of development resources. Rook helps you start up a cluster with only a few lines of code and is done in minutes, not days or weeks. Rook self-heals and automatically manages your clusters.</p>
                     </div>
                     
-                    <div class="col-md-1"><img src="images/scalesm.svg"></div>
-                    <div class="col-md-5">
+                    <div class="col-md-1 scale"><img src="images/scalesm.svg"></div>
+                    <div class="col-md-5 scale">
                         <h3>Scale up or down anytime</h3>
-                        <p>Rook self-management features allow you to add or remove nodes easily, taking care of configuration and balancing for you. This gives you the flexibility to scale your clusters up or down anytime you need.</p>
+                        <p>Rooks self-management features allow you to add or remove nodes easily and takes care of configuration and balancing for you. This gives you the flexibility to scale your clusters up or down anytime your storage needs change.</p>
                     </div>
                 </div>
             </div>
@@ -350,7 +378,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2>CONTRIBUTE</h2>
-                    <p>Join the Rook community by contributing on GitHub or Gitter and follow us on social media.</p>
+                    <p>Join the Rook community by contributing on GitHub or Gitter.</p>
                 </div>
             </div>
             <div class="row">
