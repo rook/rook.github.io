@@ -146,11 +146,11 @@
     }
     
     .navigation a {
-        background-size: auto 48px;
+        background-size: 39px;
         background-position: top center;
         background-repeat: no-repeat;
         width: 40px;
-        height: 50px;
+        height: 53px;
         display: inline-block;
         float: right;
         margin: 0 10px 0;
@@ -162,7 +162,7 @@
     
     .navigation a.gitHub:hover {
         background-image: url(images/icn_github_hover.svg);
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
     
     .navigation a.gitter {
@@ -171,8 +171,17 @@
     
     .navigation a.gitter:hover {
         background-image: url(images/icn_gitter_hover.svg);
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
+
+    .navigation a.blog {
+        background-image: url(images/icn_blog.svg);
+    }    
+ 
+    .navigation a.blog:hover {
+        background-image: url(images/icn_blog_hover.svg);
+        transition: all 0.3s ease;
+    }    
     
     .navigation a.twitter {
         background-image: url(images/icn_twitter.svg);
@@ -180,7 +189,7 @@
     
     .navigation a.twitter:hover {
         background-image: url(images/icn_twitter_hover.svg);
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
     
     .primary img.logo {
@@ -234,6 +243,14 @@
         background-image: url(images/logo_gitter_hover.svg);
     }
     
+    .contribute a.blog {
+        background-image: url(images/logo_blog.svg);
+    }
+    
+    .contribute a.blog:hover {
+        background-image: url(images/logo_blog_hover.svg);
+    }    
+    
     @media only screen and (max-width: 992px) {
         .tertiary p {
             padding-bottom: 30px;
@@ -277,6 +294,9 @@
                 </div>
                 <div>
                     <a class="gitHub" href="https://github.com/rook/rook"></a>
+                </div>
+                <div>
+                    <a class="blog" href="https://blog.rook.io/"></a>
                 </div>
             </div>
         </div>
@@ -373,15 +393,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-md-offset-4">
+                <div class="col-md-2 col-md-offset-3">
                     <a class="github" href="https://github.com/rook/rook"></a>
                 </div>
                 <div class="col-md-2">
                     <a class="gitter" href="https://gitter.im/rook/rook"></a>
                 </div>
-                <!-- <div class="col-md-2">
-                    <a href=""><img src="images/logo_twitter.svg"></a>
-                </div> --></div>
+                <div class="col-md-2">
+                    <a class="blog" href="https://blog.rook.io/"></a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="footer clearfix">
