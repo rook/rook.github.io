@@ -36,23 +36,43 @@
     }
     
     h1 {
-        margin-top: 30px;
-        line-height: 52px;
+        margin-bottom:30px;
     }
     
     h2 {
-        line-height: 36px;
+        line-height: 45px;
+        font-size: 35px;
+        margin:0 0 70px;
+        font-weight: 400;
+    }
+    
+    .kube h2{
+        margin-bottom:50px;
+    }
+    
+    .primary h2{
+        font-weight: 300;
+        margin-bottom:0px;
+    }
+    
+    .contribute h2 {
+        margin-bottom:0px;
     }
     
     h3 {
-        font-size: 22px;
+        font-size: 18px;
         line-height: 30px;
+        font-weight: 400;
     }
     
     p {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 29px;
         margin: 30px 0;
+    }
+    
+    .contribute p{
+    margin:0 0 50px;
     }
     
     button {
@@ -80,7 +100,7 @@
     }
     
     .wrapper {
-        padding: 100px 0;
+        padding: 80px;
         width: 100%;
     }
     
@@ -88,41 +108,88 @@
     .primary {
         background-color: #4AA0D8;
         color: #fff;
+        padding-right:80px;
     }
     
+
+    
+    
     .primary {
-        padding-top: 50px;
+        text-align: left;
+        background-image: url(images/img_clouds.svg);
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
     
     .primary .row.threeup {
         margin-top: 50px;
     }
     
-    .secondary {
-        background-color: #87BF56;
-        color: #fff;
-        border-top: 3px solid #fff;
+    .primary .call_to_action {
+        margin-top: 27px;
+        text-align: right;
     }
     
-    .secondary .flexible {
+    .call_to_action img{
+        width:100%;
+        max-width:445px;
+    }
+    
+    .primary .button{
+        padding-right:0px;
+    }
+    
+    .kube .row{
+        background:#000;
+    }
+    
+    .kube .left {
+        padding: 80px;
+        background: #91C660;
+        color: #fff;
+    }
+    
+    .kube .left .btn {
+        border: solid 1px #fff;
+    }
+    
+    .kube .right{
+        padding:80px;
+        display:block;
+    }
+    
+    .kube .right img{
+    }
+    
+    
+    .details,
+    .contribute {
+        color: #546A79;
         text-align: center;
     }
     
-    .tertiary,
+    .details img{
+    height:113px;
+    margin-bottom:30px;
+    }
+    
+    .details.six_up .row.top{
+        margin-bottom:30px;
+    }
+    
+     .six_up img{
+        height:75px;
+    }
+    
     .contribute {
-        color: #546A79;
+        text-align: center;
     }
     
     .contribute {
         background-color: #EEAF49;
         border-bottom: 4px solid #fff;
         color: #fff;
-    }
-    
-    .getStarted {
-        background-color: #7EA0B1;
-        color: #fff;
-        display: none;
     }
     
     .footer {
@@ -141,54 +208,54 @@
     
     .primary,
     .contribute,
-    .getStarted {
+    {
         text-align: center;
     }
     
     .navigation a {
-        background-size: 39px;
-        background-position: top center;
+        background-size: 100%;
+        background-position:center;
         background-repeat: no-repeat;
-        width: 40px;
-        height: 53px;
-        display: inline-block;
-        float: right;
-        margin: 0 10px 0;
+        height: 40px;
+        display:block;
+        width:40px;
+        margin:auto;
+        float:right;
     }
     
     .navigation a.gitHub {
-        background-image: url(images/icn_github.svg);
+        background-image:url(images/logo_github.svg);
     }
     
     .navigation a.gitHub:hover {
-        background-image: url(images/icn_github_hover.svg);
+        background-image: url(images/logo_github_hover.svg);
         transition: all 0.3s ease;
     }
     
     .navigation a.gitter {
-        background-image: url(images/icn_gitter.svg);
+        background-image: url(images/logo_gitter.svg);
     }
     
     .navigation a.gitter:hover {
-        background-image: url(images/icn_gitter_hover.svg);
+        background-image: url(images/logo_gitter_hover.svg);
         transition: all 0.3s ease;
     }
-
+    
     .navigation a.blog {
-        background-image: url(images/icn_blog.svg);
-    }    
- 
+        background-image: url(images/logo_blog.svg);
+    }
+    
     .navigation a.blog:hover {
-        background-image: url(images/icn_blog_hover.svg);
+        background-image: url(images/logo_blog_hover.svg);
         transition: all 0.3s ease;
-    }    
+    }
     
     .navigation a.twitter {
-        background-image: url(images/icn_twitter.svg);
+        background-image: url(images/logo_twitter.svg);
     }
     
     .navigation a.twitter:hover {
-        background-image: url(images/icn_twitter_hover.svg);
+        background-image: url(images/logo_twitter_hover.svg);
         transition: all 0.3s ease;
     }
     
@@ -196,22 +263,11 @@
         max-width: 282px;
     }
     
-    .primary .container {
-        background-image: url(images/img_clouds.svg);
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100%;
-    }
-    
     .primary .row img {
         max-height: 140px;
     }
     
-    .secondary img {
-        max-width: 448px;
-    }
-    
-    .tertiary .container.bottom {
+    .details .bottom {
         margin-top: 50px;
     }
     
@@ -242,6 +298,14 @@
     .contribute a.gitter:hover {
         background-image: url(images/logo_gitter_hover.svg);
     }
+
+    .contribute a.twitter {
+        background-image: url(images/logo_twitter.svg);
+    }
+    
+    .contribute a.twitter:hover {
+        background-image: url(images/logo_twitter_hover.svg);
+    }
     
     .contribute a.blog {
         background-image: url(images/logo_blog.svg);
@@ -249,22 +313,62 @@
     
     .contribute a.blog:hover {
         background-image: url(images/logo_blog_hover.svg);
-    }    
+    }
     
-    @media only screen and (max-width: 992px) {
-        .tertiary p {
+    
+    
+    
+    
+       @media only screen and (max-width: 990px) {
+           
+           
+           
+        .primary,
+        .primary .call_to_action{
+        text-align: center;
+        }
+           
+           
+           
+           
+    }
+    
+    
+    @media only screen and (max-width: 1200px) {
+        
+
+        
+        .wrapper,
+        .kube .left,
+        .kube .right{
+            padding:80px 20px;
+        }
+
+        .kube .right img{
+            width:auto;
+        }
+        
+        .navigation{
+            padding-right:20px;
+        }
+        
+        .navigation a{
+            margin:10px;
+        }
+        
+        .details p {
             padding-bottom: 30px;
         }
-        .tertiary .col-md-1 {
+        .details .col-md-1 {
             width: 75px;
             margin: auto;
             display: block;
             float: left;
         }
-        .tertiary p {
+        .details p {
             padding-bottom: 30px;
         }
-        .tertiary .scale p {
+        .details .scale p {
             padding-bottom: 0px;
         }
         .contribute img {
@@ -273,163 +377,183 @@
         .navigation .row .row a {
             margin-bottom: 20px;
         }
-        .primary .container {
+        .primary {
             background-image: none;
         }
         .contribute .row a {
             margin-bottom: 30px;
         }
-        .tertiary .container.bottom {
+        .details .bottom {
             margin-top: 0px;
         }
+
+           .details.six_up .row.top{
+        margin-bottom:0px;
+    }
     }
 </style>
 
 <body>
     <div class="navigation">
-        <div class="container">
+
             <div class="row">
-                <div>
-                    <a class="gitter" href="https://gitter.im/rook/rook"></a>
-                </div>
-                <div>
+                <div class="col-sm-offset-8 col-sm-1">
                     <a class="gitHub" href="https://github.com/rook/rook"></a>
                 </div>
-                <div>
+                <div class="col-sm-1">
+                    <a class="twitter" href="https://twitter.com/rook_io"></a>
+                </div>
+                <div class="col-sm-1">
+                    <a class="gitter" href="https://gitter.im/rook/rook"></a>
+                </div>
+                <div class="col-sm-1">
                     <a class="blog" href="https://blog.rook.io/"></a>
                 </div>
             </div>
-        </div>
+
     </div>
     <div class="wrapper primary">
-        <div class="container">
+
             <div class="row">
-                <div class="col-md-4 col-md-offset-4"> <img class="logo" src="images/logo_rook.svg"> </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <h1>Cloud-Native Software Defined Storage that is open, flexible, scalable and integrates with your environment</h1> </div>
+                <div class="col-md-7">
+                    <h1 alt="Rook"><img class="logo" src="images/logo_rook.svg"></h1>
+                    <h2>Open source file, block and object storage for your cloud-native environment.</h2>
                 </div>
-                <div class="row">
-                    <button onclick="location.href='https://github.com/rook/rook';" class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
-                </div>
-            </div>
-            <div class="row threeup">
-                <div class="col-md-4"> <img src="images/simple.svg">
-                    <p>Simple storage management and effortless deployments. Let Rook self-heal and self-balance your cluster.</p>
-                </div>
-                <div class="col-md-4"> <img src="images/community.svg">
-                    <p>Rook invites an active developer and user community. It is open source software released under the Apache license.</p>
-                </div>
-                <div class="col-md-4"> <img src="images/scale.svg">
-                    <p>Whether you’re scaling up or down, Rook is flexible enough to meet your ever changing storage needs.</p>
+                <div class="col-md-5 call_to_action"> 
+                    <img src="images/hdr_commands.gif">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-6 button">
+                            <button onclick="location.href='https://github.com/rook/rook';" class="btn-block btn-lg">TRY IT</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+    </div>
+    <div class="wrapper details">
+            <h2>What is Rook?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div><img src="images/img_knight.svg"></div>
+                    <h3>Battle-tested, production storage</h3>
+                    <p>Rook is based on an embedded version of Ceph, which has 10+ years of production deployments and runs some of the worlds largest clusters.</p>
+                </div>
+                <div class="col-md-4">
+                    <div><img src="images/img_tower.svg"></div>
+                    <h3>Cloud-native environment integration</h3>
+                    <p>Rook runs as a cloud-native service for optimal integration with applications in need of block, object, or file storage.</p>
+                </div>
+                <div class="col-md-4">
+                    <div><img src="images/img_community.svg"></div>
+                    <h3>Apache 2.0  license</h3>
+                    <p>Rook is open source software released under Apache 2.0 license. We picked this permissive license to foster our community of developers.</p>
+                </div>
+            </div>
+
+    </div>
+    <div class="kube">
+        <div class="row">
+            <div class="left col-lg-6">
+                <h2>This is not the boring old technology stack of the past.</h2>
+                <p>Rook is designed as a native Kubernetes service – it scales along side your apps.</p>
+                <p>Rook offers storage for your Kubernetes app through persistent volumes.</p>
+                <p>Rook takes advantage of many benefits of the platform, such as streamlined resource management, health checks, failover, upgrades, and networking, to name just a few.</p>
+                <button onclick="location.href='https://github.com/rook/rook/blob/master/demo/kubernetes/README.md';" class="btn btn-clear">READ MORE</button>
+            </div>
+            <div class="right col-lg-6"><img src="images/kube.gif"></div>
         </div>
     </div>
-    <div class="wrapper secondary">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <h2>One platform for all of your application data needs.</h2>
-                    <p>Rook natively supports enterprise-class storage services including file system, block storage, and object storage. Speed up the time you need to adapt to changing business needs, simplify your infrastructure and fully utilize your storage resources.</p>
+    <div class="wrapper details six_up">
+
+            <h2>Features</h2>
+            <div class="row top">
+                <div class="col-md-4">
+                    <div><img src="images/deploy.svg"></div>
+                    <h3>File, Block and Object</h3>
+                    <p>Rook offers multiple storage presentations including object storage (compatible with S3 and swift), block storage, and POSIX-compliant shared file system.</p>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-6 flexible"> <img src="images/flexible.svg"> </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper tertiary">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1"><img src="images/cloudStorage.svg"></div>
-                <div class="col-md-5">
-                    <h3>Software-defined storage for your cloud-native apps</h3>
-                    <p>Built as a software defined storage platform, Rook runs on commodity hardware, providing cost saving and flexibility for you. Docker, Kubernetes, or OpenStack developers can take advantage of our support for diverse protocols such as NFS, iSCSI or S3.</p>
+                <div class="col-md-4">
+                    <div><img src="images/img_hyper.svg"></div>
+                    <h3>Hyper-scale or hyper-converged</h3>
+                    <p>With Rook you can either build dedicated storage clusters or hyper-converged clusters where your apps run alongside storage. Hyper-scale comes with either approach.</p>
                 </div>
-                <div class="col-md-1"><img src="images/cephsm.svg"></div>
-                <div class="col-md-5">
-                    <h3>Based on enterprise grade Open Source Ceph</h3>
-                    <p>Rook builds on the Ceph open source project, which is used by many of Fortune 100 companies and backed by thousands of enthusiastic contributors. We did the heavy lifting to take advantage of distributed storage that Ceph provides, so you don't have to.</p>
-                </div>
-            </div>
-        </div>
-        <div class="container bottom">
-            <div class="row">
-                <div class="col-md-1 deploy"><img src="images/deploy.svg"></div>
-                <div class="col-md-5">
-                    <h3>Easy to deploy and maintain</h3>
-                    <p>Maintaining open-source based storage is difficult and consumes a lot of development resources. Rook helps you start up a cluster with only a few lines of code and is done in minutes, not days or weeks. Rook self-heals and automatically manages your clusters.</p>
-                </div>
-                <div class="col-md-1 scale"><img src="images/scalesm.svg"></div>
-                <div class="col-md-5 scale">
-                    <h3>Scale up or down anytime</h3>
-                    <p>Rooks self-management features allow you to add or remove nodes easily and takes care of configuration and balancing for you. This gives you the flexibility to scale your clusters up or down anytime your storage needs change.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper getStarted">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2>HOW TO GET STARTED</h2>
-                    <p>Watch our step by step video to get up and running with Rook in no time</p>
+                <div class="col-md-4">
+                    <div><img src="images/img_zero.svg"></div>
+                    <h3>Zero-touch management</h3>
+                    <p>Rook self-heals to ensure your data is safe in case of disk and node failure. Data is rebalanced across your cluster to ensure fast data access and data protection</p>
                 </div>
             </div>
             <div class="row">
-                <div class="placeholder col-md-10 col-md-offset-1"> placeholder </div>
+                <div class="col-md-4">
+                    <div><img src="images/img_protect.svg"></div>
+                    <h3>Your data, protected</h3>
+                    <p>Rook efficiently distributes and replicates your data across your cluster to minimize the risk of data loss. With snapshot, cloning and versioning, no more losing sleep over your data.</p>
+                </div>
+                <div class="col-md-4">
+                    <div><img src="images/img_scale.svg"></div>
+                    <h3>Elastic storage in your datacenter</h3>
+                    <p>Scale is now possible in your datacenter. Get started with a few terabytes, and easily to scale up to petabytes. Simply add more nodes and Rook takes care of the rest.</p>
+                </div>
+                <div class="col-md-4">
+                    <div><img src="images/img_hardware.svg"></div>
+                    <h3>Runs on commodity hardware</h3>
+                    <p>Runs on commodity hardware to optimize your workload. Take advantage of SSD or NVMe for high performance, or lower your costs with HDD.</p>
+                </div>
             </div>
-            <div class="row">
-                <button onclick="location.https://github.com/rook/rook';" class="col-md-2 col-md-offset-5 btn-lg">TRY IT</button>
-            </div>
-        </div>
+
     </div>
     <div class="wrapper contribute">
-        <div class="container">
+        
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2>CONTRIBUTE</h2>
-                    <p>Join the ROOK community by contributing on our blog, GitHub or Gitter.</p>
+                    <p>Join the Rook community by contributing on our blog, GitHub or Gitter and following us on social media.</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-md-offset-3">
+                <div class="col-sm-2 col-sm-offset-2">
                     <a class="github" href="https://github.com/rook/rook"></a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
+                    <a class="twitter" href="https://twitter.com/rook_io"></a>
+                </div>
+                <div class="col-sm-2">
                     <a class="gitter" href="https://gitter.im/rook/rook"></a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <a class="blog" href="https://blog.rook.io/"></a>
                 </div>
+
             </div>
-        </div>
+
     </div>
     <div class="footer clearfix">
-        <div class="container">
+
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <a href="https://rook.io/"></a>
                 </div>
             </div>
-        </div>
+
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-88441651-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>    
-    
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-88441651-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </body>
 
 </html>
