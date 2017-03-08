@@ -10,6 +10,7 @@
     <title>Rook.io</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/asciinema-player.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,6 +35,14 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    .row-eq-height {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
     
     h1 {
         margin-bottom:30px;
@@ -314,30 +323,15 @@
     .contribute a.blog:hover {
         background-image: url(images/logo_blog_hover.svg);
     }
-    
-    
-    
-    
-    
-       @media only screen and (max-width: 990px) {
-           
-           
-           
+      
+   @media only screen and (max-width: 990px) { 
         .primary,
         .primary .call_to_action{
-        text-align: center;
-        }
-           
-           
-           
-           
+            text-align: center;
+        }          
     }
     
-    
     @media only screen and (max-width: 1200px) {
-        
-
-        
         .wrapper,
         .kube .left,
         .kube .right{
@@ -346,6 +340,10 @@
 
         .kube .right img{
             width:auto;
+        }
+
+        .row-eq-height {
+            display: block;
         }
         
         .navigation{
@@ -387,9 +385,26 @@
             margin-top: 0px;
         }
 
-           .details.six_up .row.top{
-        margin-bottom:0px;
+        .details.six_up .row.top{
+            margin-bottom:0px;
+        }
     }
+
+    /*
+     * Overriding asciinema-player style
+     * --------------------------------------------------
+     */
+    .asciinema-player .control-bar {
+        display: none;
+    }
+
+    .asciinema-player:hover .control-bar {
+        display: block;
+    }
+
+    .asciinema-theme-asciinema .asciinema-terminal {
+        background-color: #000;
+        border-color: #000;
     }
 </style>
 
@@ -452,7 +467,7 @@
 
     </div>
     <div class="kube">
-        <div class="row">
+        <div class="row row-eq-height">
             <div class="left col-lg-6">
                 <h2>Deep Kubernetes Integration.</h2>
                 <p>Rook is designed to run a as a native Kubernetes service – it scales along side your apps.</p>
@@ -460,7 +475,7 @@
                 <p>Rook takes advantage of many benefits of the platform, such as streamlined resource management, health checks, failover, upgrades, and networking, to name just a few.</p>
                 <button onclick="location.href='https://github.com/rook/rook/blob/master/demo/kubernetes/README.md';" class="btn btn-clear">READ MORE</button>
             </div>
-            <div class="right col-lg-6"><img src="images/kube.gif"></div>
+            <div class="right col-lg-6"><asciinema-player id="player" preload autoplay speed="1.5" font-size="16px" poster="npt:0:24.15" src="data/rook-k8s-demo.json"></asciinema-player></div>
         </div>
     </div>
     <div class="wrapper details six_up">
@@ -540,6 +555,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/asciinema-player.js"></script>
+    <script>
+        $(document).ready(function(){
+            setInterval($('#player')[0].play, 5000);
+        });
+    </script>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
