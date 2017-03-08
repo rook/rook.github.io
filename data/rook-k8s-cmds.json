@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "width": 62,
-  "height": 15,
-  "duration": 34.158624,
+  "width": 38,
+  "height": 2,
+  "duration": 10,
   "command": "/bin/bash -l",
   "title": null,
   "env": {
@@ -135,14 +135,6 @@
       "\r\n"
     ],
     [
-      0.006071,
-      "\u001b]133;C;\u0007"
-    ],
-    [
-      0.175815,
-      "deployment \"rook-operator\" created\r\n"
-    ],
-    [
       0.018597,
       "\u001b]133;D;0\u0007\u001b]1337;RemoteHost=jwang@Jianguo-Castle-Mac.local\u0007\u001b]1337;CurrentDir=/Users/jwang/src/go/src/github.com/rook/rook/demo/kubernetes\u0007\u001b]133;A\u0007$ \u001b]133;B\u0007"
     ],
@@ -163,7 +155,7 @@
       "e"
     ],
     [
-      0.798799,
+      0.198799,
       "c"
     ],
     [
@@ -255,136 +247,8 @@
       "ster.yaml"
     ],
     [
-      0.412095,
+      5.206719,
       "\r\n"
-    ],
-    [
-      0.006649,
-      "\u001b]133;C;\u0007"
-    ],
-    [
-      0.137428,
-      "cluster \"my-rook\" created\r\n"
-    ],
-    [
-      0.016477,
-      "\u001b]133;D;0\u0007\u001b]1337;RemoteHost=jwang@Jianguo-Castle-Mac.local\u0007\u001b]1337;CurrentDir=/Users/jwang/src/go/src/github.com/rook/rook/demo/kubernetes\u0007\u001b]133;A\u0007$ \u001b]133;B\u0007"
-    ],
-    [
-      2.0,
-      "k"
-    ],
-    [
-      0.147017,
-      "u"
-    ],
-    [
-      0.089575,
-      "b"
-    ],
-    [
-      0.067894,
-      "e"
-    ],
-    [
-      0.370266,
-      "c"
-    ],
-    [
-      0.248312,
-      "t"
-    ],
-    [
-      0.124224,
-      "l"
-    ],
-    [
-      0.133784,
-      " "
-    ],
-    [
-      0.292498,
-      "g"
-    ],
-    [
-      0.269825,
-      "e"
-    ],
-    [
-      0.011842,
-      "t"
-    ],
-    [
-      0.157428,
-      " "
-    ],
-    [
-      0.527998,
-      "p"
-    ],
-    [
-      0.158268,
-      "o"
-    ],
-    [
-      0.100524,
-      "d"
-    ],
-    [
-      0.124439,
-      "s"
-    ],
-    [
-      0.371198,
-      " "
-    ],
-    [
-      0.393998,
-      "-"
-    ],
-    [
-      0.23622,
-      "n"
-    ],
-    [
-      0.124928,
-      " "
-    ],
-    [
-      0.336214,
-      "r"
-    ],
-    [
-      0.101224,
-      "o"
-    ],
-    [
-      0.135039,
-      "o"
-    ],
-    [
-      0.213103,
-      "k"
-    ],
-    [
-      0.23697,
-      "\r\n"
-    ],
-    [
-      0.012195,
-      "\u001b]133;C;\u0007"
-    ],
-    [
-      0.29089,
-      "NAME                       READY     STATUS    RESTARTS   AGE\r\nmon0                       1/1       Running   0          1m\r\nmon1                       1/1       Running   0          1m\r\nmon2                       1/1       Running   0          1m\r\nosd-03vh9                  1/1       Running   0          56s\r\nosd-c79ct                  "
-    ],
-    [
-      3.7e-05,
-      "1/1       Running   0          56s\r\nosd-hgfqj                  1/1       Running   0          57s\r\nosd-s0q70                  1/1       Running   0          56s\r\nrook-api-635838151-5rxt7   1/1       Running   0          57s\r\n"
-    ],
-    [
-      10.0161,
-      "\u001b]133;D;0\u0007\u001b]1337;RemoteHost=jwang@Jianguo-Castle-Mac.local\u0007\u001b]1337;CurrentDir=/Users/jwang/src/go/src/github.com/rook/rook/demo/kubernetes\u0007\u001b]133;A\u0007$ \u001b]133;B\u0007"
     ]
   ]
 }
