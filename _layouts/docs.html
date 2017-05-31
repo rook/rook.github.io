@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<div id="docs" class="row">
+
+  <div class="docs-menu">
+    {% include docs-project-menu.html project='rook' tag='latest' title='Rook' %}
+  </div>
+
+  <div class="docs-content flex">
+
+    <div class="docs-actions">
+      <a href="{{ page.github }}{{ page.name }}">Edit on Github</a>
+    </div>
+
+    {{ content }}
+
+  </div>
+
+</div>

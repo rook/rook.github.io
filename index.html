@@ -31,7 +31,7 @@
         font-weight: 300;
         margin-top: 0px;
     }
-    
+
     .row {
         margin-left: 0px;
         margin-right: 0px;
@@ -44,47 +44,47 @@
         display: flex;
     }
 
-    
+
     h1 {
         margin-bottom:30px;
     }
-    
+
     h2 {
         line-height: 45px;
         font-size: 35px;
         margin:0 0 70px;
         font-weight: 400;
     }
-    
+
     .kube h2{
         margin-bottom:50px;
     }
-    
+
     .primary h2{
         font-weight: 300;
         margin-bottom:0px;
     }
-    
+
     .contribute h2 {
         margin-bottom:0px;
     }
-    
+
     h3 {
         font-size: 18px;
         line-height: 30px;
         font-weight: 400;
     }
-    
+
     p {
         font-size: 16px;
         line-height: 29px;
         margin: 30px 0;
     }
-    
+
     .contribute p{
     margin:0 0 50px;
     }
-    
+
     button {
         background-color: #87BF56;
         border-color: #87BF56;
@@ -103,27 +103,27 @@
         border-radius: 4px;
         margin: 30px 0;
     }
-    
+
     button:hover {
         background-color: #7cb947;
         border-color: #7cb947;
     }
-    
+
     .wrapper {
         padding: 80px;
         width: 100%;
     }
-    
+
     .navigation,
     .primary {
         background-color: #4AA0D8;
         color: #fff;
         padding-right:80px;
     }
-    
 
-    
-    
+
+
+
     .primary {
         text-align: left;
         background-image: url(images/img_clouds.svg);
@@ -131,78 +131,78 @@
         background-repeat: no-repeat;
         background-size: 100%;
     }
-    
+
     .primary .row.threeup {
         margin-top: 50px;
     }
-    
+
     .primary .call_to_action {
         margin-top: 27px;
         text-align: right;
     }
-    
+
     .call_to_action img{
         width:100%;
         max-width:445px;
     }
-    
+
     .primary .button{
         padding-right:0px;
     }
-    
+
     .kube .row{
         background:#000;
     }
-    
+
     .kube .left {
         padding: 80px;
         background: #91C660;
         color: #fff;
     }
-    
+
     .kube .left .btn {
         border: solid 1px #fff;
     }
-    
+
     .kube .right{
         padding:80px;
         display:block;
-    }   
-    
+    }
+
     .details,
     .contribute {
         color: #546A79;
         text-align: center;
     }
-    
+
     .details img{
     height:113px;
     margin-bottom:30px;
     }
-    
+
     .details.six_up .row.top{
         margin-bottom:30px;
     }
-    
+
      .six_up img{
         height:75px;
     }
-    
+
     .contribute {
         text-align: center;
     }
-    
+
     .contribute {
         background-color: #EEAF49;
         border-bottom: 4px solid #fff;
         color: #fff;
     }
-    
+
     .footer {
         background-color: #546A79;
         padding: 50px 0;
     }
-    
+
     .footer .row a {
         background-image: url("images/logo_rook.svg");
         background-position: center center;
@@ -211,96 +211,125 @@
         height: 20px;
         width: 100%;
     }
-    
+
     .primary,
     .contribute,
     {
         text-align: center;
     }
-    
+
     .navigation a {
         background-size: 100%;
         background-position:center;
         background-repeat: no-repeat;
-        height: 40px;
+        height: 30px;
+        width: 30px;
         display:block;
-        width:40px;
         margin:auto;
         float:right;
     }
-    
+
+    .navigation a .inline-svg {
+        height: 30px;
+    }
+
+    .navigation a .inline-svg {
+        transition: all 0.3s ease;
+    }
+
+    a .inline-svg {
+        height: 40px;
+        fill: #fff;
+    }
+
+    a:hover .inline-svg {
+        fill: #111;
+    }
+
+    .navigation a{
+        margin:10px;
+    }
+
     .navigation a.gitHub {
         background-image:url(images/logo_github.svg);
     }
-    
+
     .navigation a.gitHub:hover {
         background-image: url(images/logo_github_hover.svg);
         transition: all 0.3s ease;
     }
-    
+
     .navigation a.gitter {
         background-image: url(images/logo_gitter.svg);
     }
-    
+
     .navigation a.gitter:hover {
         background-image: url(images/logo_gitter_hover.svg);
         transition: all 0.3s ease;
     }
-    
+
     .navigation a.blog {
         background-image: url(images/logo_blog.svg);
     }
-    
+
     .navigation a.blog:hover {
         background-image: url(images/logo_blog_hover.svg);
         transition: all 0.3s ease;
     }
-    
+
     .navigation a.twitter {
         background-image: url(images/logo_twitter.svg);
     }
-    
+
     .navigation a.twitter:hover {
         background-image: url(images/logo_twitter_hover.svg);
         transition: all 0.3s ease;
     }
-    
+
     .primary img.logo {
         max-width: 282px;
     }
-    
+
     .primary .row img {
         max-height: 140px;
     }
-    
+
     .details .bottom {
         margin-top: 50px;
     }
-    
+
     .placeholder {
         background: #333;
         height: 627px;
     }
-    
+
     .contribute a {
         display: block;
-        height: 65px;
+        height: 50px;
         background-position: center;
         background-repeat: no-repeat;
     }
-    
+
+    .contribute .contribute-offset {
+        margin-left: 29.16%;
+    }
+
+    .contribute a .inline-svg {
+        height: 50px;
+    }
+
     .contribute a.github {
         background-image: url(images/logo_github.svg);
     }
-    
+
     .contribute a.github:hover {
         background-image: url(images/logo_github_hover.svg);
     }
-    
+
     .contribute a.gitter {
         background-image: url(images/logo_gitter.svg);
     }
-    
+
     .contribute a.gitter:hover {
         background-image: url(images/logo_gitter_hover.svg);
     }
@@ -308,26 +337,26 @@
     .contribute a.twitter {
         background-image: url(images/logo_twitter.svg);
     }
-    
+
     .contribute a.twitter:hover {
         background-image: url(images/logo_twitter_hover.svg);
     }
-    
+
     .contribute a.blog {
         background-image: url(images/logo_blog.svg);
     }
-    
+
     .contribute a.blog:hover {
         background-image: url(images/logo_blog_hover.svg);
     }
-      
-   @media only screen and (max-width: 990px) { 
+
+   @media only screen and (max-width: 990px) {
         .primary,
         .primary .call_to_action{
             text-align: center;
-        }          
+        }
     }
-    
+
     @media only screen and (max-width: 1200px) {
         .wrapper,
         .kube .left {
@@ -341,15 +370,11 @@
         .row-eq-height {
             display: block;
         }
-        
+
         .navigation{
             padding-right:20px;
         }
-        
-        .navigation a{
-            margin:10px;
-        }
-        
+
         .details p {
             padding-bottom: 30px;
         }
@@ -418,7 +443,7 @@
 
         .k8s-cmds asciinema-player {
             float: none;
-        } 
+        }
 
         .k8s-cmds .asciinema-theme-asciinema .asciinema-terminal {
             font-size: 16px !important;
@@ -434,7 +459,21 @@
     <div class="navigation">
 
             <div class="row">
-                <div class="col-sm-offset-8 col-sm-1">
+                <div class="col-sm-offset-7 col-sm-1">
+                    <a class="docs" href="/docs/rook/latest/kubernetes.html">
+                        <svg class="inline-svg" viewBox="0 -1 24 29">
+                            <path class="st0" d="M15.5,10H24v16.5c0,0.4-0.1,0.8-0.4,1c-0.3,0.3-0.6,0.4-1,0.4H1.5c-0.4,0-0.7-0.1-1-0.4C0.1,27.3,0,27,0,26.5
+                            v-25c0-0.4,0.1-0.8,0.4-1C0.7,0.1,1.1,0,1.5,0H14v8.5c0,0.5,0.1,0.8,0.4,1.1C14.7,9.9,15.1,10,15.5,10z M18,13.5v-1
+                            c0-0.1-0.1-0.3-0.2-0.4c-0.1-0.1-0.2-0.2-0.3-0.2h-11c-0.1,0-0.2,0.1-0.3,0.2C6.1,12.3,6,12.4,6,12.5v1c0,0.2,0.1,0.3,0.2,0.3
+                            C6.3,13.9,6.4,14,6.5,14h11c0.1,0,0.2-0.1,0.3-0.2C17.9,13.8,18,13.7,18,13.5z M18,17.5v-1c0-0.1-0.1-0.3-0.2-0.4
+                            C17.8,16,17.7,16,17.5,16h-11c-0.1,0-0.3,0-0.3,0.1C6.1,16.2,6,16.4,6,16.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,18,6.4,18,6.5,18h11
+                            c0.1,0,0.2,0,0.3-0.1C17.9,17.8,18,17.6,18,17.5z M18,21.5v-1c0-0.1-0.1-0.3-0.2-0.4C17.7,20,17.6,20,17.5,20h-11
+                            c-0.1,0-0.2,0-0.3,0.1C6.1,20.2,6,20.4,6,20.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,22,6.4,22,6.5,22h11c0.1,0,0.2,0,0.3-0.1
+                            C17.9,21.8,18,21.6,18,21.5z M22.9,7.5C23,7.5,23.2,7.7,23.4,8H16V0.6c0.3,0.2,0.5,0.4,0.5,0.4L22.9,7.5z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-sm-1">
                     <a class="gitHub" href="https://github.com/rook/rook"></a>
                 </div>
                 <div class="col-sm-1">
@@ -456,7 +495,7 @@
                     <h1 alt="Rook"><img class="logo" src="images/logo_rook.svg"></h1>
                     <h2>Open source file, block and object storage for your cloud-native environment.</h2>
                 </div>
-                <div class="col-md-5 call_to_action"> 
+                <div class="col-md-5 call_to_action">
                     <div class="k8s-cmds">
                         <asciinema-player cols="38" rows="2" preload autoplay loop speed="1.5" font-size="18px" src="data/rook-k8s-cmds.json"></asciinema-player>
                     </div>
@@ -542,7 +581,7 @@
 
     </div>
     <div class="wrapper contribute">
-        
+
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2>CONTRIBUTE</h2>
@@ -550,16 +589,30 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-2 col-sm-offset-2">
+                <div class="col-sm-1 contribute-offset">
+                    <a class="docs" href="/docs/rook/latest/kubernetes.html">
+                        <svg class="inline-svg" viewBox="0 -1 24 29">
+                            <path class="st0" d="M15.5,10H24v16.5c0,0.4-0.1,0.8-0.4,1c-0.3,0.3-0.6,0.4-1,0.4H1.5c-0.4,0-0.7-0.1-1-0.4C0.1,27.3,0,27,0,26.5
+                            v-25c0-0.4,0.1-0.8,0.4-1C0.7,0.1,1.1,0,1.5,0H14v8.5c0,0.5,0.1,0.8,0.4,1.1C14.7,9.9,15.1,10,15.5,10z M18,13.5v-1
+                            c0-0.1-0.1-0.3-0.2-0.4c-0.1-0.1-0.2-0.2-0.3-0.2h-11c-0.1,0-0.2,0.1-0.3,0.2C6.1,12.3,6,12.4,6,12.5v1c0,0.2,0.1,0.3,0.2,0.3
+                            C6.3,13.9,6.4,14,6.5,14h11c0.1,0,0.2-0.1,0.3-0.2C17.9,13.8,18,13.7,18,13.5z M18,17.5v-1c0-0.1-0.1-0.3-0.2-0.4
+                            C17.8,16,17.7,16,17.5,16h-11c-0.1,0-0.3,0-0.3,0.1C6.1,16.2,6,16.4,6,16.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,18,6.4,18,6.5,18h11
+                            c0.1,0,0.2,0,0.3-0.1C17.9,17.8,18,17.6,18,17.5z M18,21.5v-1c0-0.1-0.1-0.3-0.2-0.4C17.7,20,17.6,20,17.5,20h-11
+                            c-0.1,0-0.2,0-0.3,0.1C6.1,20.2,6,20.4,6,20.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,22,6.4,22,6.5,22h11c0.1,0,0.2,0,0.3-0.1
+                            C17.9,21.8,18,21.6,18,21.5z M22.9,7.5C23,7.5,23.2,7.7,23.4,8H16V0.6c0.3,0.2,0.5,0.4,0.5,0.4L22.9,7.5z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-sm-1">
                     <a class="github" href="https://github.com/rook/rook"></a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <a class="twitter" href="https://twitter.com/rook_io"></a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <a class="gitter" href="https://gitter.im/rook/rook"></a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <a class="blog" href="https://blog.rook.io/"></a>
                 </div>
 
