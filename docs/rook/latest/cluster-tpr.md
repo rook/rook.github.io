@@ -58,4 +58,4 @@ Below are the settings available, both at the cluster and individual node level,
   - `journalSizeMB`:  The size in MB of a filestore journal.
 
 ## Sample
-A sample cluster TPR can be found and used in the [rook-cluster.yaml](../demo/kubernetes/rook-cluster.yaml) file in the Kubernetes demo directory.
+A sample cluster TPR can be found and used in the [rook-cluster.yaml](https://github.com/rook/rook/blob/master/demo/kubernetes/rook-cluster.yaml) file in the Kubernetes demo directory.

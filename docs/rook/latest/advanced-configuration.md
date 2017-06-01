@@ -264,7 +264,7 @@ and OSDs in the `default` root hierarchy.
 The `size` setting of a pool tells the cluster how many copies of the data
 should be kept for redundancy.  By default the cluster will distribute these
 copies between `host` buckets in the CRUSH Map This can be set when [creating a
-pool via ThirdPartyResource](https://github.com/rook/rook/blob/master/Documentation/pool-tpr.md)
+pool via ThirdPartyResource](pool-tpr.md)
 or after creation with `ceph`.
 
 So for example let's change the `size` of the `rbd` pool to three
