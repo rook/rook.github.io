@@ -1,0 +1,138 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+$brand-blue: #4aa0d8;
+$brand-blue-dark: #546a79;
+$break: 768px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header.site-header {
+
+  border: none;
+  background: $brand-blue;
+
+  .row {
+    align-items: center;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  img.logo {
+    height: 30px;
+    margin-left: 24px;
+  }
+
+  .icon {
+    width: 24px;
+    margin: 0 8px;
+  }
+
+  .icon:last-child {
+    margin-right: 24px;
+  }
+
+}
+
+main.page-content {
+  flex: 1;
+}
+
+footer.site-footer {
+
+  text-align: center;
+  background: $brand-blue-dark;
+  margin-top: 100px;
+
+
+  img.logo {
+    height: 20px;
+  }
+
+}
+
+body {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.page-content {
+  padding: 0;
+  margin-top: 24px;
+}
+
+.docs-menu {
+
+  min-width: 230px;
+  margin: 0 0 0 24px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+
+    li.indent {
+      margin-left: 16px;
+    }
+
+    li a.active {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+
+}
+
+#docs {
+
+  @media screen and (max-width: $break) {
+    flex-direction: column;
+
+    .docs-menu {
+      margin-bottom: 42px;
+    }
+
+  }
+
+}
+
+.docs-content {
+  margin: 0 24px;
+
+  .docs-actions {
+    float: right;
+    margin: 8px 0 16px 24px;
+  }
+}
+
+.row, .column {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+
+  > .flex {
+    min-width: 0;
+  }
+}
+
+.flex {
+  -webkit-flex: 1;
+  flex: 1;
+  flex-direction: inherit;
+}
