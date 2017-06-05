@@ -1,0 +1,12 @@
+{% assign docsPath = '/docs/' | append: include.project %}
+
+<ul>
+
+{{ pather }}
+{% assign filtered = (site.pages | where_exp: 'page', 'page.url contains docsPath' | sort: 'weight' ) %}
+{% for pg in filtered %}
+  <li{% if pg.indent == true %} class="indent"{% endif %}>
+    <a {% if pg.url == page.url %}class="active" {% endif %}href="{{ pg.url }}" title="{{ pg.path }}">{{ pg.title }}</a>
+  </li>
+{% endfor %}
+</ul>
