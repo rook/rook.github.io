@@ -2,11 +2,27 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import "minima";
+@function hexToRGBString($hexColor) {
+  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+}
 
 $brand-blue: #4aa0d8;
 $brand-blue-dark: #546a79;
+$brand-green: #91C660;
+$brand-orange: #EEAF49;
+$brand-red: #EE7C6B;
 $break: 768px;
+
+$color-primary: hexToRGBString($brand-blue);
+$color-primary-dark: hexToRGBString($brand-blue-dark);
+$color-accent: hexToRGBString($brand-green);
+
+$preferred_font: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+
+$text-link-color: $brand-blue;
+
+@import "minima";
+@import "mdl";
 
 * {
   box-sizing: border-box;
@@ -20,11 +36,14 @@ body {
 
 header.site-header {
 
+  display: flex;
   border: none;
   background: $brand-blue;
+  height: 56px;
 
-  .row {
+  > .row {
     align-items: center;
+    flex: 1;
   }
 
   h1 {
@@ -53,22 +72,19 @@ main.page-content {
 
 footer.site-footer {
 
-  text-align: center;
+  display: flex;
+  flex: 1;
   background: $brand-blue-dark;
   margin-top: 100px;
-
+  height: 120px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   img.logo {
     height: 20px;
   }
 
-}
-
-body {
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.5;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .page-content {
@@ -79,7 +95,7 @@ body {
 .docs-menu {
 
   min-width: 230px;
-  margin: 0 0 0 24px;
+  margin: 10px 0 0 24px;
 
   ul {
     list-style: none;
@@ -115,8 +131,13 @@ body {
 
   .docs-actions {
     float: right;
-    margin: 8px 0 16px 24px;
+    margin: 24px 0 16px 24px;
   }
+
+  h1:nth-child(2) {
+    margin-top: 0;
+  }
+
 }
 
 .row, .column {

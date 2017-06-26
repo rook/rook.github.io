@@ -2,16 +2,60 @@
 layout: default
 ---
 
+{% assign url = page.url | split: '/' %}
+
+{% assign currentProject = url[2] %}
+{% assign currentVersion = url[3] %}
+{% assign currentProjectPath = '/docs/' | append: currentProject | append: '/' %}
+{% assign currentProjectVersionPath = | append: currentProjectPath | append: currentVersion | append: '/' %}
+{% assign project = site.data.projects | where_exp: 'item', 'item.project == currentProject' | first %}
+{% assign filepath = page.url | replace: currentProjectVersionPath %}
+
+<script>
+  // expose jekyll variables into the wonderful world of javascript
+  window.Rook = {
+    site: {
+      docs: {{ site.docs | jsonify }},
+      defaults: {{ site.defaults | jsonify }}
+    },
+    current: {
+      url: {{ page.url | jsonify }},
+      project: {{ project | jsonify }},
+      version: {{ currentVersion | jsonify }},
+      projectVersionPath: {{ currentProjectVersionPath | jsonify }},
+      filepath: {{ filepath | jsonify }}
+    },
+    projects: {{ site.data.projects | jsonify }}
+  };
+</script>
+
 <div id="docs" class="row">
 
   <div class="docs-menu">
-    {% include docs-project-menu.html project='rook' tag='latest' title='Rook' %}
+
+    <div id="version-select" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+      <input class="mdl-textfield__input" type="text" id="version" value="{{ currentVersion }}" readonly tabIndex="-1" onchange="Rook.changeVersion(this.value)">
+      <label for="version" class="mdl-textfield__label">Rook Version</label>
+      <ul for="version" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+      {% for version in project.versions %}
+        <li class="mdl-menu__item">{{ version.version }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+
+    {% include docs-project-menu.html project=currentProject tag=currentVersion %}
+
+    <!-- TODO "other" project docs -->
+
   </div>
 
   <div class="docs-content flex">
 
     <div class="docs-actions">
-      <a href="{{ page.github }}{{ page.name }}">Edit on Github</a>
+
+      <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{{ page.github }}{{ page.name }}">Edit on Github</a>
+
+
     </div>
 
     {{ content }}
@@ -19,3 +63,4 @@ layout: default
   </div>
 
 </div>
+
