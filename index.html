@@ -32,11 +32,19 @@
         margin-top: 0px;
     }
 
-    .row {
-        margin-left: 0px;
-        margin-right: 0px;
+    ul{
+        padding:0px;
+        margin:0px;
     }
-
+    
+    li{
+        list-style: none;
+    }
+    
+    a:hover{
+        text-decoration: none;
+    }
+    
     .row-eq-height {
         display: -webkit-box;
         display: -webkit-flex;
@@ -65,6 +73,8 @@
         margin-bottom:0px;
     }
 
+
+    
     .contribute h2 {
         margin-bottom:0px;
     }
@@ -114,16 +124,72 @@
         width: 100%;
     }
 
+    .navigation{
+        padding: 10px 80px;
+    }
+    
+    
+    .navigation ul li,
+    .contribute ul li{
+        display: inline-block;
+        margin:15px
+    }
+    
+    .navigation div{
+        text-align: center;
+    }
+    
     .navigation,
     .primary {
         background-color: #4AA0D8;
         color: #fff;
-        padding-right:80px;
     }
+    
+    
+    .navigation ul.right{
+        float:right;
+    }
+    .navigation ul.left{
+        float:left;
+    }    
+    
 
-
-
-
+    .navigation a img{
+        height:30px;
+    }
+    
+    .contribute a img{
+        height:60px;
+    }
+        
+    
+    .navigation a img,
+    .contribute a img{
+        display:block;
+        margin:auto;
+        margin-bottom:5px;
+    }
+    
+    .navigation a span{
+        font-size: 13px;
+    }
+    
+    .contribute a span{
+        font-size: 16px;
+    }
+    
+    .contribute a span,
+    .navigation a span{
+        text-align: center;
+        width:100%;
+        color:#eee;
+    }
+    
+    .contribute a span:hover,
+    .navigation a span:hover{
+        color:#fff;
+    }
+    
     .primary {
         text-align: left;
         background-image: url(images/img_clouds.svg);
@@ -144,10 +210,6 @@
     .call_to_action img{
         width:100%;
         max-width:445px;
-    }
-
-    .primary .button{
-        padding-right:0px;
     }
 
     .kube .row{
@@ -218,73 +280,7 @@
         text-align: center;
     }
 
-    .navigation a {
-        background-size: 100%;
-        background-position:center;
-        background-repeat: no-repeat;
-        height: 30px;
-        width: 30px;
-        display:block;
-        margin:auto;
-        float:right;
-    }
 
-    .navigation a .inline-svg {
-        height: 30px;
-    }
-
-    .navigation a .inline-svg {
-        transition: all 0.3s ease;
-    }
-
-    a .inline-svg {
-        height: 40px;
-        fill: #fff;
-    }
-
-    a:hover .inline-svg {
-        fill: #111;
-    }
-
-    .navigation a{
-        margin:10px;
-    }
-
-    .navigation a.gitHub {
-        background-image:url(images/logo_github.svg);
-    }
-
-    .navigation a.gitHub:hover {
-        background-image: url(images/logo_github_hover.svg);
-        transition: all 0.3s ease;
-    }
-
-    .navigation a.gitter {
-        background-image: url(images/logo_gitter.svg);
-    }
-
-    .navigation a.gitter:hover {
-        background-image: url(images/logo_gitter_hover.svg);
-        transition: all 0.3s ease;
-    }
-
-    .navigation a.blog {
-        background-image: url(images/logo_blog.svg);
-    }
-
-    .navigation a.blog:hover {
-        background-image: url(images/logo_blog_hover.svg);
-        transition: all 0.3s ease;
-    }
-
-    .navigation a.twitter {
-        background-image: url(images/logo_twitter.svg);
-    }
-
-    .navigation a.twitter:hover {
-        background-image: url(images/logo_twitter_hover.svg);
-        transition: all 0.3s ease;
-    }
 
     .primary img.logo {
         max-width: 282px;
@@ -303,52 +299,6 @@
         height: 627px;
     }
 
-    .contribute a {
-        display: block;
-        height: 50px;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .contribute .contribute-offset {
-        margin-left: 29.16%;
-    }
-
-    .contribute a .inline-svg {
-        height: 50px;
-    }
-
-    .contribute a.github {
-        background-image: url(images/logo_github.svg);
-    }
-
-    .contribute a.github:hover {
-        background-image: url(images/logo_github_hover.svg);
-    }
-
-    .contribute a.gitter {
-        background-image: url(images/logo_gitter.svg);
-    }
-
-    .contribute a.gitter:hover {
-        background-image: url(images/logo_gitter_hover.svg);
-    }
-
-    .contribute a.twitter {
-        background-image: url(images/logo_twitter.svg);
-    }
-
-    .contribute a.twitter:hover {
-        background-image: url(images/logo_twitter_hover.svg);
-    }
-
-    .contribute a.blog {
-        background-image: url(images/logo_blog.svg);
-    }
-
-    .contribute a.blog:hover {
-        background-image: url(images/logo_blog_hover.svg);
-    }
 
    @media only screen and (max-width: 990px) {
         .primary,
@@ -371,9 +321,6 @@
             display: block;
         }
 
-        .navigation{
-            padding-right:20px;
-        }
 
         .details p {
             padding-bottom: 30px;
@@ -390,18 +337,11 @@
         .details .scale p {
             padding-bottom: 0px;
         }
-        .contribute img {
-            margin: 0 0 30px;
-        }
-        .navigation .row .row a {
-            margin-bottom: 20px;
-        }
+
         .primary {
             background-image: none;
         }
-        .contribute .row a {
-            margin-bottom: 30px;
-        }
+
         .details .bottom {
             margin-top: 0px;
         }
@@ -453,41 +393,56 @@
             font-size: 14px !important;
         }
     }
+
 </style>
 
+    
+    
+    
+    
 <body>
     <div class="navigation">
-
             <div class="row">
-                <div class="col-sm-offset-7 col-sm-1">
-                    <a class="docs" href="/docs/rook/latest/kubernetes.html">
-                        <svg class="inline-svg" viewBox="0 -1 24 29">
-                            <path class="st0" d="M15.5,10H24v16.5c0,0.4-0.1,0.8-0.4,1c-0.3,0.3-0.6,0.4-1,0.4H1.5c-0.4,0-0.7-0.1-1-0.4C0.1,27.3,0,27,0,26.5
-                            v-25c0-0.4,0.1-0.8,0.4-1C0.7,0.1,1.1,0,1.5,0H14v8.5c0,0.5,0.1,0.8,0.4,1.1C14.7,9.9,15.1,10,15.5,10z M18,13.5v-1
-                            c0-0.1-0.1-0.3-0.2-0.4c-0.1-0.1-0.2-0.2-0.3-0.2h-11c-0.1,0-0.2,0.1-0.3,0.2C6.1,12.3,6,12.4,6,12.5v1c0,0.2,0.1,0.3,0.2,0.3
-                            C6.3,13.9,6.4,14,6.5,14h11c0.1,0,0.2-0.1,0.3-0.2C17.9,13.8,18,13.7,18,13.5z M18,17.5v-1c0-0.1-0.1-0.3-0.2-0.4
-                            C17.8,16,17.7,16,17.5,16h-11c-0.1,0-0.3,0-0.3,0.1C6.1,16.2,6,16.4,6,16.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,18,6.4,18,6.5,18h11
-                            c0.1,0,0.2,0,0.3-0.1C17.9,17.8,18,17.6,18,17.5z M18,21.5v-1c0-0.1-0.1-0.3-0.2-0.4C17.7,20,17.6,20,17.5,20h-11
-                            c-0.1,0-0.2,0-0.3,0.1C6.1,20.2,6,20.4,6,20.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,22,6.4,22,6.5,22h11c0.1,0,0.2,0,0.3-0.1
-                            C17.9,21.8,18,21.6,18,21.5z M22.9,7.5C23,7.5,23.2,7.7,23.4,8H16V0.6c0.3,0.2,0.5,0.4,0.5,0.4L22.9,7.5z"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="gitHub" href="https://github.com/rook/rook"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="twitter" href="https://twitter.com/rook_io"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="gitter" href="https://gitter.im/rook/rook"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="blog" href="https://blog.rook.io/"></a>
-                </div>
-            </div>
+                    <div class="col-md-2">
+                        <ul class="left">
+                            <li><a class="github-button" href="https://github.com/rook/rook" data-icon="octicon-star" aria-label="Star ntkme/github-buttons on GitHub">Star</a></li>
 
-    </div>
+                            <li><a class="twitter-share-button" href="https://twitter.com/share" data-text="I just discovered Rook, check it out" data-show-count="false">Tweet</a></li>
+                        </ul> 
+                    </div>
+
+                     <div class="col-md-5 col-md-offset-5">
+        
+                        <ul class="right">
+                            <li>
+                            <a class="docs" href="/docs/rook/latest/kubernetes.html">
+                                <img src="images/logo_docs.svg"><span>Docs</span>
+                            </a></li>
+  
+                            <li>
+                            <a class="gitHub" href="https://github.com/rook/rook">
+                                <img src="images/icn_github.svg"><span>GitHub</span>
+                            </a></li>
+               
+                            <li>
+                            <a class="twitter" href="https://twitter.com/rook_io">
+                                <img src="images/logo_twitter.svg"><span>Twitter</span>
+                            </a></li>
+            
+                            <li>
+                            <a class="gitter" href="https://gitter.im/rook/rook">
+                                <img src="images/logo_gitter.svg"><span>Gitter</span>
+                            </a></li>
+                
+                            <li>
+                            <a class="blog" href="https://blog.rook.io/">
+                                <img src="images/logo_blog.svg"><span>Blog</span>
+                            </a></li>
+                        </ul>
+                    </div>
+            
+            </div>
+        </div>
     <div class="wrapper primary">
 
             <div class="row">
@@ -589,32 +544,32 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-1 contribute-offset">
-                    <a class="docs" href="/docs/rook/latest/kubernetes.html">
-                        <svg class="inline-svg" viewBox="0 -1 24 29">
-                            <path class="st0" d="M15.5,10H24v16.5c0,0.4-0.1,0.8-0.4,1c-0.3,0.3-0.6,0.4-1,0.4H1.5c-0.4,0-0.7-0.1-1-0.4C0.1,27.3,0,27,0,26.5
-                            v-25c0-0.4,0.1-0.8,0.4-1C0.7,0.1,1.1,0,1.5,0H14v8.5c0,0.5,0.1,0.8,0.4,1.1C14.7,9.9,15.1,10,15.5,10z M18,13.5v-1
-                            c0-0.1-0.1-0.3-0.2-0.4c-0.1-0.1-0.2-0.2-0.3-0.2h-11c-0.1,0-0.2,0.1-0.3,0.2C6.1,12.3,6,12.4,6,12.5v1c0,0.2,0.1,0.3,0.2,0.3
-                            C6.3,13.9,6.4,14,6.5,14h11c0.1,0,0.2-0.1,0.3-0.2C17.9,13.8,18,13.7,18,13.5z M18,17.5v-1c0-0.1-0.1-0.3-0.2-0.4
-                            C17.8,16,17.7,16,17.5,16h-11c-0.1,0-0.3,0-0.3,0.1C6.1,16.2,6,16.4,6,16.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,18,6.4,18,6.5,18h11
-                            c0.1,0,0.2,0,0.3-0.1C17.9,17.8,18,17.6,18,17.5z M18,21.5v-1c0-0.1-0.1-0.3-0.2-0.4C17.7,20,17.6,20,17.5,20h-11
-                            c-0.1,0-0.2,0-0.3,0.1C6.1,20.2,6,20.4,6,20.5v1c0,0.1,0.1,0.3,0.2,0.4C6.3,22,6.4,22,6.5,22h11c0.1,0,0.2,0,0.3-0.1
-                            C17.9,21.8,18,21.6,18,21.5z M22.9,7.5C23,7.5,23.2,7.7,23.4,8H16V0.6c0.3,0.2,0.5,0.4,0.5,0.4L22.9,7.5z"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="github" href="https://github.com/rook/rook"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="twitter" href="https://twitter.com/rook_io"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="gitter" href="https://gitter.im/rook/rook"></a>
-                </div>
-                <div class="col-sm-1">
-                    <a class="blog" href="https://blog.rook.io/"></a>
-                </div>
+                        <ul class="right">
+                            <li>
+                            <a class="docs" href="/docs/rook/latest/kubernetes.html">
+                                <img src="images/logo_docs.svg"><span>Docs</span>
+                            </a></li>
+  
+                            <li>
+                            <a class="gitHub" href="https://github.com/rook/rook">
+                                <img src="images/icn_github.svg"><span>GitHub</span>
+                            </a></li>
+               
+                            <li>
+                            <a class="twitter" href="https://twitter.com/rook_io">
+                                <img src="images/logo_twitter.svg"><span>Twitter</span>
+                            </a></li>
+            
+                            <li>
+                            <a class="gitter" href="https://gitter.im/rook/rook">
+                                <img src="images/logo_gitter.svg"><span>Gitter</span>
+                            </a></li>
+                
+                            <li>
+                            <a class="blog" href="https://blog.rook.io/">
+                                <img src="images/logo_blog.svg"><span>Blog</span>
+                            </a></li>
+                        </ul>
 
             </div>
 
@@ -628,6 +583,13 @@
             </div>
 
     </div>
+    
+    
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
