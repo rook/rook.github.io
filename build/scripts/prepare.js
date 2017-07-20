@@ -11,13 +11,18 @@ const semverSort = require('semver-sort');
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath).filter(file => fs.lstatSync(path.join(srcpath, file)).isDirectory());
 }
+
+const ROOT_DIR = `${ __dirname }/../../`;
+
 // collect all docs projects
 const data = [];
-const projects = getDirectories(`${ __dirname }/docs`);
+debugger;
+const projects = getDirectories(`${ ROOT_DIR }/docs`);
+debugger;
 projects.forEach(project => {
 
   const channels = ['latest', 'stable', 'beta', 'alpha'];
-  const unsorted = getDirectories(`${ __dirname }/docs/${ project }`);
+  const unsorted = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
 
   // sort versions
   let sorted = [];
