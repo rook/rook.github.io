@@ -21,7 +21,7 @@ const projects = getDirectories(`${ ROOT_DIR }/docs`);
 debugger;
 projects.forEach(project => {
 
-  const channels = ['latest', 'stable', 'beta', 'alpha'];
+  const channels = ['master', 'stable', 'beta', 'alpha'];
   const unsorted = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
 
   // sort versions
