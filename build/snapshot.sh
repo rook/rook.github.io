@@ -12,4 +12,4 @@ docker run --rm -v $(pwd):/opt/rook.github.io rook.github.io npm install
 
 # run prepare script through container
 echo "preparing static assets..."
-docker run -it -v $(pwd):/opt/rook.github.io rook.github.io node build/scripts/prepare.js
+docker run -t -v $(pwd):/opt/rook.github.io rook.github.io node build/scripts/prepare.js
