@@ -8,8 +8,8 @@ fi
 
 # install node dependencies through container
 echo "pulling npm dependencies..."
-docker run --rm -v $(pwd):/opt/rook.github.io rook.github.io npm install
+docker run --rm --user 1000 -v $(pwd):/opt/rook.github.io rook.github.io npm install
 
 # run prepare script through container
 echo "preparing static assets..."
-docker run -t -v $(pwd):/opt/rook.github.io rook.github.io node build/scripts/prepare.js
+docker run -t --user 1000 -v $(pwd):/opt/rook.github.io rook.github.io node build/scripts/prepare.js
