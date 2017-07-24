@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-HOST_DIR=$(cd $(dirname "$0")/../; pwd)
-CONTAINER_DIR="/opt/rook.github.io"
+ROOT_DIR=$(cd $(dirname "$0")/../; pwd)
 
 # check if there are any changes to commit
 if git diff-index --quiet HEAD --; then
