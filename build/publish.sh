@@ -5,7 +5,7 @@ ROOT_DIR=$(cd $(dirname "$0")/../; pwd)
 git -C "$ROOT_DIR" add .
 
 # check if there are any changes to commit
-if git diff-index --quiet HEAD --; then
+if git diff-index --cached --quiet HEAD --; then
   echo "no changes detected"
 else
   echo "committing changes..."
