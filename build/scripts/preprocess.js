@@ -16,9 +16,8 @@ const ROOT_DIR = `${ __dirname }/../../`;
 
 // collect all docs projects
 const data = [];
-debugger;
 const projects = getDirectories(`${ ROOT_DIR }/docs`);
-debugger;
+
 projects.forEach(project => {
 
   const channels = ['master', 'stable', 'beta', 'alpha'];
