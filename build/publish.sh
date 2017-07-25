@@ -12,4 +12,5 @@ else
   git -C "$ROOT_DIR" -c user.email="info@rook.io" -c user.name="Rook" commit --message="docs snapshot for rook version `$DOCS_VERSION`"
   echo "pushing changes..."
   git -C "$ROOT_DIR" push
+  echo "rook.github.io changes published"
 fi
