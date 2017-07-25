@@ -5,7 +5,7 @@ CONTAINER_DIR="/opt/rook.github.io"
 
 # install node dependencies through container
 echo "pulling npm dependencies..."
-docker run --rm --user $(id -u):$(id -g) -w $CONTAINER_DIR -v $HOST_DIR:$CONTAINER_DIR node:8-alpine npm install
+docker run -t --user $(id -u):$(id -g) -w $CONTAINER_DIR -v $HOST_DIR:$CONTAINER_DIR node:8-alpine npm install
 
 # run prepare script through container
 echo "preprocessing static assets..."
