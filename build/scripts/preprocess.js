@@ -6,7 +6,6 @@
 const fs = require('fs')
 const jsonfile = require('jsonfile');
 const path = require('path')
-const semverSort = require('semver-sort');
 
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath).filter(file => fs.lstatSync(path.join(srcpath, file)).isDirectory());
@@ -20,31 +19,24 @@ const projects = getDirectories(`${ ROOT_DIR }/docs`);
 
 projects.forEach(project => {
 
-  const channels = ['master', 'stable', 'beta', 'alpha'];
-  const unsorted = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
+  // get all versions
+  const versions = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
 
-  // sort versions
-  let sorted = [];
-
-  // specific channels first
-  channels.forEach((tag) => {
-    unsorted.indexOf(tag) > -1 && sorted.push(tag);
+  // sort all versions -- bump `master` to top, or versions newest to oldest (we can use float because of major.minor)
+  versions.sort((a, b) => {
+    return a === 'master' ? -1 : parseFloat(a.substr(1)) < parseFloat(b.substr(1)) ? 1 : -1;
   });
 
-  // all other tagged versions descending
-  const other = semverSort.desc(unsorted.filter(tag => channels.indexOf(tag) === -1));
-
-  sorted = sorted.concat(other).map((pv) => {
-    return {
-      version: pv,
-      path: `/docs/${ project }/${ pv }`
-    };
-  })
-
+  // save project data with version path mappings
   data.push({
     project: project,
     path: `/docs/${ project }`,
-    versions: sorted
+    versions: versions.map((pv) => {
+      return {
+        version: pv,
+        path: `/docs/${ project }/${ pv }`
+      };
+    })
   });
 
 });
