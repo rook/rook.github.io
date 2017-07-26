@@ -2,7 +2,7 @@
 
 ROOT_DIR=$(cd $(dirname "$0")/../; pwd)
 
-git -C "$ROOT_DIR" add .
+git -C "$ROOT_DIR" add -A
 
 # check if there are any changes to commit
 if git -C "$ROOT_DIR" diff-index --cached --quiet HEAD --; then
