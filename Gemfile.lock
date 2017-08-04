@@ -26,6 +26,8 @@ GEM
       babel-transpiler
     jekyll-feed (0.9.2)
       jekyll (~> 3.3)
+    jekyll-readme-index (0.1.0)
+      jekyll (~> 3.0)
     jekyll-relative-links (0.4.0)
       jekyll (~> 3.3)
     jekyll-sass-converter (1.5.0)
@@ -57,6 +59,7 @@ DEPENDENCIES
   jekyll (= 3.4.3)
   jekyll-babel
   jekyll-feed (~> 0.6)
+  jekyll-readme-index
   jekyll-relative-links
   minima (~> 2.0)
   tzinfo-data

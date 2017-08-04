@@ -16,6 +16,7 @@ gem "minima", "~> 2.0"
 
 gem 'jekyll-babel'
 gem 'jekyll-relative-links'
+gem 'jekyll-readme-index'
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.

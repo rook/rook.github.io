@@ -12,11 +12,11 @@ markdown: kramdown
 gems:
   - jekyll-relative-links
   - jekyll-babel
+  - jekyll-readme-index
 
 exclude:
   - Gemfile
   - Gemfile.lock
-  - docs/rook/*/README.md
 
 defaults:
   -
