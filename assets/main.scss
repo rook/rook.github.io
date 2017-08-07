@@ -6,6 +6,7 @@
   @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
 }
 
+$brand-grey: #546a79;
 $brand-blue: #4aa0d8;
 $brand-blue-dark: #546a79;
 $brand-green: #91C660;
@@ -32,6 +33,11 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: $brand-grey;
+
+  p {
+    font-weight: 100;
+  }
 }
 
 header.site-header {
@@ -57,7 +63,7 @@ header.site-header {
 
   .icon {
     width: 24px;
-    margin: 0 8px;
+    margin: 0 16px;
   }
 
   .icon:last-child {
@@ -77,6 +83,7 @@ footer.site-footer {
   background: $brand-blue-dark;
   margin-top: 100px;
   height: 120px;
+  max-height: 120px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -94,20 +101,26 @@ footer.site-footer {
 
 .docs-menu {
 
-  min-width: 230px;
+  min-width: 160px;
   margin: 10px 0 0 24px;
 
-  ul {
+  > ul {
     list-style: none;
     margin: 0;
 
+    li {
+      line-height: 26px;
+    }
+
     li.indent {
       margin-left: 16px;
+      font-size: 13px;
+
     }
 
     li a.active {
       text-decoration: underline;
-      font-weight: bold;
+      color: $brand-grey;
     }
   }
 
@@ -127,7 +140,7 @@ footer.site-footer {
 }
 
 .docs-content {
-  margin: 0 24px;
+  margin: 0 24px 0 60px;
 
   .docs-actions {
     float: right;
@@ -156,4 +169,72 @@ footer.site-footer {
   -webkit-flex: 1;
   flex: 1;
   flex-direction: inherit;
+}
+
+.site-width {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// minima syntax highlighting overrides
+
+.highlighter-rouge .highlight {
+  background: #f3f3f4  ;
+  border-color: #e5e8ea;
+}
+
+pre, code {
+  background-color: #f3f3f4;
+}
+
+// mdl overrides
+
+a {
+  font-weight: 100;
+  &:visited {
+    color: $brand-blue;
+  }
+}
+
+.getmdl-select:hover {
+  cursor: pointer;
+  > input:hover {
+    cursor: inherit;
+  }
+}
+
+.mdl-button {
+  text-transform: none;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 100;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  margin-top: 18px;
+  margin-bottom: 14px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 14px;
+  margin-bottom: 12px;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 400;
 }
