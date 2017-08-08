@@ -29,30 +29,32 @@ layout: default
   };
 </script>
 
-<div id="docs" class="row site-width">
+<div id="docs" class="site-width">
 
   <div class="docs-menu">
-
-    <div id="version-select" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth is-dirty" style="width: 180px;">
-      <input class="mdl-textfield__input" type="text" id="version" value="{{ currentVersion }}" readonly tabIndex="-1" onchange="Rook.changeVersion(this.value)">
-      <label for="version">
-        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-      </label>
-      <label for="version" class="mdl-textfield__label">Rook Version</label>
-      <ul for="version" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-      {% for version in project.versions %}
-        <li class="mdl-menu__item">{{ version.version }}</li>
-      {% endfor %}
-      </ul>
-    </div>
 
     {% include docs-project-menu.html project=currentProject tag=currentVersion %}
 
     <!-- TODO "other" project docs -->
 
+    <div class="docs-menu-filler"></div>
+
+      <div id="version-select" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth is-dirty" style="width: 180px;">
+        <input class="mdl-textfield__input" type="text" id="version" value="{{ currentVersion }}" readonly tabIndex="-1" onchange="Rook.changeVersion(this.value)">
+        <label for="version">
+          <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+        </label>
+        <label for="version" class="mdl-textfield__label">Rook Version</label>
+        <ul for="version" class="mdl-menu mdl-menu--top-left mdl-js-menu">
+        {% for version in project.versions %}
+          <li class="mdl-menu__item">{{ version.version }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+
   </div>
 
-  <div class="docs-content flex">
+  <div class="docs-content">
 
     <div class="docs-actions">
 

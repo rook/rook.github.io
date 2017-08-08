@@ -1,6 +1,6 @@
 {% assign documents = (site.pages | where_exp: 'page', 'page.url contains currentProjectVersionPath' | sort: 'weight') %}
 
-<ul>
+<ul class="docs-menu-project">
 {% for document in documents %}
   <li{% if document.indent == true %} class="indent"{% endif %}>
     <a {% if document.url == page.url %}class="active" {% endif %}href="{{ document.url }}" title="{{ document.path }}">{{ document.title }}</a>

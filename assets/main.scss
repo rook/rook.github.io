@@ -72,16 +72,11 @@ header.site-header {
 
 }
 
-main.page-content {
-  flex: 1;
-}
-
 footer.site-footer {
 
   display: flex;
   flex: 1;
   background: $brand-blue-dark;
-  margin-top: 100px;
   height: 120px;
   max-height: 120px;
   flex-direction: column;
@@ -94,15 +89,22 @@ footer.site-footer {
 
 }
 
-.page-content {
-  padding: 0;
-  margin-top: 24px;
-}
-
 .docs-menu {
 
   min-width: 160px;
-  margin: 10px 0 0 24px;
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .docs-menu-filler {
+    flex: 1;
+  }
+
+  #version-select {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+  }
 
   > ul {
     list-style: none;
@@ -126,25 +128,82 @@ footer.site-footer {
 
 }
 
-#docs {
 
-  @media screen and (max-width: $break) {
+
+@media screen and (max-width: $break) {
+
+  #docs {
     flex-direction: column;
+    flex-grow: 1;
 
     .docs-menu {
-      margin-bottom: 42px;
+      margin: 24px;
+
+      #version-select {
+        margin-top: 24px;
+        width: 100% !important;
+      }
     }
 
+    .docs-content {
+
+      margin: 24px;
+
+      .docs-actions {
+        display: none;
+      }
+    }
+  }
+
+}
+
+
+// desktop screens use flex
+@media screen and (min-width: $break) {
+
+  .page-content {
+    display: flex;
+    padding: 0;
+    margin-bottom: 100px;
+    flex: 1;
+  }
+
+  .site-width {
+    margin: 0 auto;
+    max-width: 1200px;
+    min-width: 0;
+  }
+
+  #docs {
+    display: flex;
+    flex: 1;
+
+    .docs-menu {
+
+      .docs-menu-project {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        padding-top: 24px;
+      }
+    }
+
+
+  }
+
+  .docs-content {
+    margin: 24px 24px 0 60px;
+    min-width: 0;
+    flex: 1;
   }
 
 }
 
 .docs-content {
-  margin: 0 24px 0 60px;
 
   .docs-actions {
     float: right;
-    margin: 24px 0 16px 24px;
+    margin: 6px 0 16px 24px;
   }
 
   h1:nth-child(2) {
@@ -169,11 +228,6 @@ footer.site-footer {
   -webkit-flex: 1;
   flex: 1;
   flex-direction: inherit;
-}
-
-.site-width {
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 // minima syntax highlighting overrides
