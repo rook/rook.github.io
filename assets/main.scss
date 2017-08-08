@@ -164,7 +164,6 @@ footer.site-footer {
   .page-content {
     display: flex;
     padding: 0;
-    margin-bottom: 100px;
     flex: 1;
   }
 
@@ -192,7 +191,7 @@ footer.site-footer {
   }
 
   .docs-content {
-    margin: 24px 24px 0 60px;
+    margin: 24px 24px 100px 60px;
     min-width: 0;
     flex: 1;
   }
