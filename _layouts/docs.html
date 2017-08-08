@@ -7,7 +7,7 @@ layout: default
 {% assign currentProject = url[2] %}
 {% assign currentVersion = url[3] %}
 {% assign currentProjectPath = '/docs/' | append: currentProject | append: '/' %}
-{% assign currentProjectVersionPath = | append: currentProjectPath | append: currentVersion | append: '/' %}
+{% assign currentProjectVersionPath = currentProjectPath | append: currentVersion | append: '/' %}
 {% assign project = site.data.projects | where_exp: 'item', 'item.project == currentProject' | first %}
 {% assign filepath = page.url | replace: currentProjectVersionPath %}
 
@@ -25,7 +25,11 @@ layout: default
       projectVersionPath: {{ currentProjectVersionPath | jsonify }},
       filepath: {{ filepath | jsonify }}
     },
-    projects: {{ site.data.projects | jsonify }}
+    projects: {{ site.data.projects | jsonify }},
+    currentProject: {{ currentProject | jsonify }},
+    currentVersion: {{ currentVersion | jsonify }},
+    currentProjectPath: {{ currentProjectPath | jsonify }},
+    currentProjectVersionPath: {{ currentProjectVersionPath | jsonify }}
   };
 </script>
 
