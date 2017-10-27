@@ -6,9 +6,9 @@
   @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
 }
 
-$brand-grey: #546a79;
+$brand-grey: #555555;
 $brand-blue: #4aa0d8;
-$brand-blue-dark: #546a79;
+$brand-blue-dark: #546A79;
 $brand-green: #91C660;
 $brand-orange: #EEAF49;
 $brand-red: #EE7C6B;
@@ -34,14 +34,14 @@ body {
   display: flex;
   flex-direction: column;
   color: $brand-grey;
+  font-family: $preferred_font;
 
   p {
-    font-weight: 100;
+    font-weight: 400;
   }
-}
+}  
 
 header.site-header {
-
   display: flex;
   border: none;
   background: $brand-blue;
@@ -243,7 +243,7 @@ pre, code {
 // mdl overrides
 
 a {
-  font-weight: 100;
+  font-weight: 400;
   &:visited {
     color: $brand-blue;
   }
