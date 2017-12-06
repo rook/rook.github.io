@@ -52,6 +52,29 @@
         display: flex;
     }
 
+    .cncf {
+        text-align: center;
+        background-color: #88BE5C;
+        color: white;
+        font-size: 21px;
+    }
+
+    .cncf a.btn-border {
+        font-size: 16px;
+        margin-left: 16px;
+    }
+
+    .btn-border {
+        border: solid 1px #fff;
+    }
+
+    a.btn-border {
+        color: white;
+    }
+
+    a.btn-border:hover {
+        color: #333;
+    }
 
     h1 {
         margin-bottom:30px;
@@ -305,6 +328,17 @@
         .primary .call_to_action{
             text-align: center;
         }
+        .wrapper.cncf {
+            padding: 50px 20px;
+        }
+    }
+
+    @media only screen and (max-width: 1330px) {
+        .cncf a.btn-border {
+            display: block;
+            margin: 20px 0 0 0;
+
+        }
     }
 
     @media only screen and (max-width: 1200px) {
@@ -462,6 +496,10 @@
                 </div>
             </div>
 
+    </div>
+
+    <div class="wrapper cncf">
+        Rook has just been submitted to the Cloud Native Computing Foundation.  Show your support today! <a href="https://github.com/cncf/toc/pull/57" class="btn btn-border">Join the Conversation</a>
     </div>
     <div class="wrapper details">
             <h2>What is Rook?</h2>
