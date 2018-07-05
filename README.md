@@ -18,6 +18,22 @@ with all required dependencies and then run the script to preprocess the project
 Simply commit your changes and do a git push.  There is also `build/publish.sh` which integrates with the rook `Makefile`
 nicely, and is meant to be run in conjunction with Jenkins CI -- and expects environment variable `DOCS_VERSION`.
 
+# Run
+
+To test your changes to the Rook website locally before committing, you can run the `build/run.sh` script. The script
+requires Docker installed on your machine.
+When running the script, it will start a Jekyll Docker container which will then build and rebuild the docs on changes
+to the `_site/` directory. Viewing the docs in your browser can be achieved by running:
+```
+cd _site/
+# For Python2 users
+python -m SimpleHTTPServer 8000
+# For Python3 users
+python3 -m http.server 8000
+```
+Go to [http://127.0.0.1:8000](http://127.0.0.1:8000) to view the docs.
+Please note that Jekyll takes some time to rebuild the docs on changes (the time varies depending on your hardware specs).
+
 # Github Pages & Jekyll
 
 To avoid additional pre-processing work, we push a project to `rook.github.io` which recognizes the project

@@ -6,6 +6,7 @@ layout: default
 
 {% assign currentProject = url[2] %}
 {% assign currentVersion = url[3] %}
+{% assign latestVersion = site.data.projects[0]['versions'][0]['version'] %}
 {% assign currentProjectPath = '/docs/' | append: currentProject | append: '/' %}
 {% assign currentProjectVersionPath = currentProjectPath | append: currentVersion | append: '/' %}
 {% assign project = site.data.projects | where_exp: 'item', 'item.project == currentProject' | first %}
@@ -29,7 +30,8 @@ layout: default
     currentProject: {{ currentProject | jsonify }},
     currentVersion: {{ currentVersion | jsonify }},
     currentProjectPath: {{ currentProjectPath | jsonify }},
-    currentProjectVersionPath: {{ currentProjectVersionPath | jsonify }}
+    currentProjectVersionPath: {{ currentProjectVersionPath | jsonify }},
+    latestVersion: {{ latestVersion | jsonify }}
   };
 </script>
 
@@ -66,9 +68,51 @@ layout: default
 
     </div>
 
+    {% if currentVersion == "master" %}
+    <style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        margin-bottom: 15px;
+        margin-top: 65px;
+    }
+    </style>
+    <div class="alert">
+        <p>
+            <b>PLEASE NOTE</b>: This document applies to an <b>unreleased</b> version of Rook. It is strongly recommended that you only use official releases of Rook, as unreleased versions are subject to changes and incompatibilities that will not be supported in the official releases.
+        </p>
+        <p>
+            If you are using an official release version of Rook, you should refer to the documentation for your specific version.
+        </p>
+        <strong>
+            Documentation for other releases can be found by using the version selector in the bottom left of any doc page.
+        </strong>
+    </div>
+    {% else %}
+        {% if currentVersion != latestVersion %}
+    <style>
+    .alert {
+        padding: 20px;
+        background-color: #2196F3;
+        color: white;
+        margin-bottom: 15px;
+        margin-top: 65px;
+    }
+    </style>
+    <div class="alert">
+        <p>
+            <b>PLEASE NOTE</b>: This document applies to {{ currentVersion }} version and not to the latest release {{ latestVersion }}
+        </p>
+        <strong>
+            Documentation for other releases can be found by using the version selector in the left bottom of any doc page.
+        </strong>
+    </div>
+        {% endif %}
+    {% endif %}
+
     {{ content }}
 
   </div>
 
 </div>
-
