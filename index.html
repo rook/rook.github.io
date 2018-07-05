@@ -1,6 +1,10 @@
+---
+title: Rook.io
+layout: startpage
+---
+{% assign latestVersion = site.data.projects[0]['versions'][0]['version'] %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -420,7 +424,7 @@
 
                 <ul class="right">
                     <li>
-                        <a href="/docs/rook/master/">
+                        <a href="/docs/rook/{{ latestVersion }}/">
                             <img src="images/logo_docs.svg">
                             <span>Docs</span>
                         </a>
@@ -604,7 +608,7 @@
         <div class="row">
             <ul class="right">
                 <li>
-                    <a href="/docs/rook/master/">
+                    <a href="/docs/rook/{{ latestVersion }}/">
                         <img src="images/logo_docs.svg">
                         <span>Docs</span>
                     </a>

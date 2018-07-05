@@ -22,9 +22,9 @@ projects.forEach(project => {
   // get all versions
   const versions = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
 
-  // sort all versions -- bump `master` to top, or versions newest to oldest (we can use float because of major.minor)
+  // sort all versions -- bump `master` to bottom, or versions newest to oldest (we can use float because of major.minor)
   versions.sort((a, b) => {
-    return a === 'master' ? -1 : parseFloat(a.substr(1)) < parseFloat(b.substr(1)) ? 1 : -1;
+    return a === 'master' ? 9999 : parseFloat(a.substr(1)) < parseFloat(b.substr(1)) ? 1 : -1;
   });
 
   // save project data with version path mappings
