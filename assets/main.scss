@@ -105,6 +105,7 @@ footer.site-footer {
     position: -webkit-sticky;
     position: sticky;
     bottom: 0;
+    background-color: $background-color;
   }
 
   > ul {
@@ -185,6 +186,7 @@ footer.site-footer {
         position: sticky;
         top: 0;
         padding-top: 24px;
+        margin-bottom: 80px;
       }
     }
 
