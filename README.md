@@ -18,21 +18,41 @@ with all required dependencies and then run the script to preprocess the project
 Simply commit your changes and do a git push.  There is also `build/publish.sh` which integrates with the rook `Makefile`
 nicely, and is meant to be run in conjunction with Jenkins CI -- and expects environment variable `DOCS_VERSION`.
 
-# Run
+# Test
 
-To test your changes to the Rook website locally before committing, you can run the `build/run.sh` script. The script
-requires Docker installed on your machine.
-When running the script, it will start a Jekyll Docker container which will then build and rebuild the docs on changes
-to the `_site/` directory. Viewing the docs in your browser can be achieved by running:
+To test your changes to the Rook website locally before committing to the Rook repo, you can generate the docs locally and start a local web server.
+
+To generate the docs:
+```bash
+# Remove the old master docs and copy your updated docs from your rook repo
+rm -fr docs/rook/master
+mkdir docs/rook/master
+cp -r ../rook/Documentation/* docs/rook/master/
+
+# Generate the docs. This requires Docker installed on your machine.
+build/run.sh
 ```
+When running the script, it will start a Jekyll Docker container which will then build and rebuild the docs on changes
+to the `_site/` directory. Please note that Jekyll takes some time to rebuild the docs on changes (the time varies depending on your hardware specs).
+When you see the message `Auto-regeneration: enabled for '/srv/jekyll'`, the docs are generated. If you update the docs, the scripts will be automatically
+re-generated until you stop the script.
+
+After the docs are generated, start the local web server:
+```bash
 cd _site/
 # For Python2 users
 python -m SimpleHTTPServer 8000
 # For Python3 users
 python3 -m http.server 8000
 ```
-Go to [http://127.0.0.1:8000](http://127.0.0.1:8000) to view the docs.
-Please note that Jekyll takes some time to rebuild the docs on changes (the time varies depending on your hardware specs).
+
+To see the docs, open your browser to [http://127.0.0.1:8000/docs/rook/master](http://127.0.0.1:8000/docs/rook/master).
+
+When you are done, revert the changes to the repo:
+```bash
+rm docs/rook/master
+git checkout -- docs/rook/master
+```
 
 # Github Pages & Jekyll
 
