@@ -17,6 +17,8 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - vendor
+  - build
 
 defaults:
   -

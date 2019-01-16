@@ -1,45 +1,40 @@
-'use strict';
+"use strict";
 
 // on publish this script will check all docs projects and versions and prepare static data
 // so it does not have to be generated using complicated logic from liquid templates / jekyll
 
-const fs = require('fs')
-const jsonfile = require('jsonfile');
-const path = require('path')
+const fs = require("fs");
+const jsonfile = require("jsonfile");
+const path = require("path");
+const semver = require("semver");
 
 function getDirectories(srcpath) {
-  return fs.readdirSync(srcpath).filter(file => fs.lstatSync(path.join(srcpath, file)).isDirectory());
+  return fs
+    .readdirSync(srcpath)
+    .filter(file => fs.lstatSync(path.join(srcpath, file)).isDirectory());
 }
 
-const ROOT_DIR = `${ __dirname }/../../`;
+const ROOT_DIR = `${__dirname}/../..`;
 
-// collect all docs projects
-const data = [];
-const projects = getDirectories(`${ ROOT_DIR }/docs`);
-
-projects.forEach(project => {
-
-  // get all versions
-  const versions = getDirectories(`${ ROOT_DIR }/docs/${ project }`);
-
-  // sort all versions -- bump `master` to bottom, or versions newest to oldest (we can use float because of major.minor)
-  versions.sort((a, b) => {
-    return a === 'master' ? 9999 : parseFloat(a.substr(1)) < parseFloat(b.substr(1)) ? 1 : -1;
-  });
-
-  // save project data with version path mappings
-  data.push({
-    project: project,
-    path: `/docs/${ project }`,
-    versions: versions.map((pv) => {
-      return {
-        version: pv,
-        path: `/docs/${ project }/${ pv }`
-      };
-    })
-  });
-
-});
+// collect all docs projects with versions (forcing master to the end)
+const projects = [
+  ...getDirectories(`${ROOT_DIR}/docs`).map(project => {
+    // get all versions except master
+    const versions = getDirectories(`${ROOT_DIR}/docs/${project}`)
+      .filter(v => v !== "master")
+      .sort((a, b) =>
+        semver.rcompare(semver.coerce(a).version, semver.coerce(b).version)
+      );
+    return {
+      project,
+      path: `/docs/${project}`,
+      versions: [...versions, "master"].map(version => ({
+        version,
+        path: `/docs/${project}/${version}`
+      }))
+    };
+  })
+];
 
 // write json for jekyll (and browser)
-jsonfile.writeFileSync('./_data/projects.json', data);
+jsonfile.writeFileSync(`${ROOT_DIR}/_data/projects.json`, projects);
