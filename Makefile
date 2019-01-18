@@ -23,14 +23,14 @@ publish: _data/projects.json
 		echo "no changes detected";\
 	else \
 		echo "committing changes...";\
-		git -C "$(ROOT_DIR)" -c user.email="info@crossplane.io" -c user.name="Crossplane" commit --message="docs snapshot for crossplane version \`$(DOCS_VERSION)\`"; \
+		git -C "$(ROOT_DIR)" -c user.email="info@rook.io" -c user.name="Rook" commit --message="docs snapshot for rook version \`$(DOCS_VERSION)\`"; \
 		echo "pushing changes..."; \
 		git -C "$(ROOT_DIR)" push; \
-		echo "crossplaneio.github.io changes published"; \
+		echo "rook.github.io changes published"; \
 	fi
 
 # Generate projects.json
-_data/projects.json: node_modules docs
+_data/projects.json: node_modules docs $(wildcard docs/*)
 	node build/scripts/preprocess.js
 	@touch _data/projects.json
 
