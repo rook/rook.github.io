@@ -1,10 +1,11 @@
 {
   "name": "rook.github.io",
   "version": "1.0.0",
-  "author": "Ian Lovett <i.c.lovett@gmail.com>",
+  "author": "Michael Goff <thephred@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jsonfile": "^3.0.0"
+    "jsonfile": "^3.0.0",
+    "semver": "^5.6.0"
   },
   "dependencies": {}
 }

@@ -9,7 +9,7 @@ markdown: kramdown
 # plugins
 # NOTE: github pages ignores custom plugins and any other plugin which is not whitelisted
 # SEE: https://pages.github.com/versions/
-gems:
+plugins:
   - jekyll-relative-links
   - jekyll-babel
   - jekyll-readme-index
@@ -17,6 +17,8 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - vendor
+  - build
 
 defaults:
   -

@@ -10,12 +10,12 @@ to pick up the new version for cross linking between versions of the same projec
 
 # Build
 
-To run the build script, you must be running a docker host.  Run `build/build.sh` which will build a container
+To run the build you must be running a docker host.  Run `make build` which will build a container
 with all required dependencies and then run the script to preprocess the project versions and store them statically.
 
 # Publish
 
-Simply commit your changes and do a git push.  There is also `build/publish.sh` which integrates with the rook `Makefile`
+Simply commit your changes and do a git push.  There is also `make publish` which integrates with the rook `Makefile`
 nicely, and is meant to be run in conjunction with Jenkins CI -- and expects environment variable `DOCS_VERSION`.
 
 # Test
@@ -29,24 +29,9 @@ rm -fr docs/rook/master
 mkdir docs/rook/master
 cp -r ../rook/Documentation/* docs/rook/master/
 
-# Generate the docs. This requires Docker installed on your machine.
-build/run.sh
+# Starts a live-reloading server that serves the docs at [http://0.0.0.0:4000/docs/rook/master](http://0.0.0.0:4000/docs/rook/master). This requires Docker installed on your machine.
+make run
 ```
-When running the script, it will start a Jekyll Docker container which will then build and rebuild the docs on changes
-to the `_site/` directory. Please note that Jekyll takes some time to rebuild the docs on changes (the time varies depending on your hardware specs).
-When you see the message `Auto-regeneration: enabled for '/srv/jekyll'`, the docs are generated. If you update the docs, the scripts will be automatically
-re-generated until you stop the script.
-
-After the docs are generated, start the local web server:
-```bash
-cd _site/
-# For Python2 users
-python -m SimpleHTTPServer 8000
-# For Python3 users
-python3 -m http.server 8000
-```
-
-To see the docs, open your browser to [http://127.0.0.1:8000/docs/rook/master](http://127.0.0.1:8000/docs/rook/master).
 
 When you are done, revert the changes to the repo:
 ```bash
