@@ -36,5 +36,5 @@ _data/projects.json: node_modules docs $(wildcard docs/*)
 
 # Install node_modules
 node_modules: package.json package-lock.json
-	npm install
+	npm ci
 	@touch node_modules
