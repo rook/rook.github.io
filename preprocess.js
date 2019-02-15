@@ -14,7 +14,7 @@ function getDirectories(srcpath) {
     .filter(file => fs.lstatSync(path.join(srcpath, file)).isDirectory());
 }
 
-const ROOT_DIR = `${__dirname}/../..`;
+const ROOT_DIR = `${__dirname}`;
 
 // collect all docs projects with versions (forcing master to the end)
 const projects = [

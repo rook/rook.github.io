@@ -31,7 +31,7 @@ publish: _data/projects.json
 
 # Generate projects.json
 _data/projects.json: node_modules docs $(wildcard docs/*)
-	node build/scripts/preprocess.js
+	node preprocess.js
 	@touch _data/projects.json
 
 # Install node_modules
