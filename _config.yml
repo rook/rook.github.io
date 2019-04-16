@@ -23,7 +23,18 @@ exclude:
 defaults:
   -
     scope:
+      path: ""
+    values:
+      layout: default
+      title: "Rook"
+  -
+    scope:
       path: "docs/rook"
     values:
       layout: "docs"
+      doctitle: "Rook Docs"
       github: "https://github.com/rook/rook/blob/master/Documentation/"
+      stylesheet: "docs"
+
+sass:
+  sass_dir: ./_scss

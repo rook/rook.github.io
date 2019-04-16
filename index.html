@@ -1,690 +1,203 @@
 ---
-title: Rook.io
-layout: startpage
+asciinema: true
+stylesheet: index
 ---
-{% assign latestVersion = site.data.projects[0]['versions'][0]['version'] %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i" rel="stylesheet">
-    <title>Rook.io</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/asciinema-player.css" />
-    <link rel="icon" type="image/png" href="favicon.png">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<style>
-    body,
-    h1,
-    h2,
-    h3,
-    h5,
-    h5,
-    h6 {
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 300;
-        margin-top: 0px;
-    }
-
-    ul {
-        padding: 0px;
-        margin: 0px;
-    }
-
-    li {
-        list-style: none;
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
-
-    .row-eq-height {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-    }
-
-
-    h1 {
-        margin-bottom: 30px;
-    }
-
-    h2 {
-        line-height: 45px;
-        font-size: 35px;
-        margin: 0 0 70px;
-        font-weight: 400;
-    }
-
-    .kube h2 {
-        margin-bottom: 50px;
-    }
-
-    .primary h2 {
-        font-weight: 300;
-        margin-bottom: 0px;
-    }
-
-
-
-    .contribute h2 {
-        margin-bottom: 0px;
-    }
-
-    h3 {
-        font-size: 18px;
-        line-height: 30px;
-        font-weight: 400;
-    }
-
-    p {
-        font-size: 16px;
-        line-height: 29px;
-        margin: 30px 0;
-    }
-
-    .contribute p {
-        margin: 0 0 50px;
-    }
-
-    button {
-        background-color: #87BF56;
-        border-color: #87BF56;
-        display: inline-block;
-        margin-bottom: 0;
-        text-align: center;
-        vertical-align: middle;
-        touch-action: manipulation;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-        white-space: nowrap;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857;
-        border-radius: 4px;
-        margin: 30px 0;
-    }
-
-    button:hover {
-        background-color: #7cb947;
-        border-color: #7cb947;
-    }
-
-    .wrapper {
-        padding: 80px;
-        width: 100%;
-    }
-
-    .navigation {
-        padding: 10px 80px;
-    }
-
-
-    .navigation ul li,
-    .contribute ul li {
-        display: inline-block;
-        margin: 15px
-    }
-
-    .navigation div {
-        text-align: center;
-    }
-
-    .navigation,
-    .primary {
-        background-color: #4AA0D8;
-        color: #fff;
-    }
-
-
-    .navigation ul.right {
-        float: right;
-    }
-
-    .navigation ul.left {
-        float: left;
-    }
-
-
-    .navigation a img {
-        height: 30px;
-    }
-
-    .contribute a img {
-        height: 60px;
-    }
-
-
-    .navigation a img,
-    .contribute a img {
-        display: block;
-        margin: auto;
-        margin-bottom: 5px;
-    }
-
-    .navigation a span {
-        font-size: 13px;
-    }
-
-    .contribute a span {
-        font-size: 16px;
-    }
-
-    .contribute a span,
-    .navigation a span {
-        text-align: center;
-        width: 100%;
-        color: #eee;
-    }
-
-    .contribute a span:hover,
-    .navigation a span:hover {
-        color: #fff;
-    }
-
-    .primary {
-        text-align: left;
-        background-image: url(images/img_clouds.svg);
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100%;
-    }
-
-    .primary .row.threeup {
-        margin-top: 50px;
-    }
-
-    .primary .call_to_action {
-        margin-top: 27px;
-        text-align: right;
-    }
-
-    .call_to_action img {
-        width: 100%;
-        max-width: 445px;
-    }
-
-    .kube .row {
-        background: #000;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .kube .left {
-        padding: 80px;
-        background: #91C660;
-        color: #fff;
-    }
-
-    .kube .left .btn {
-        border: solid 1px #fff;
-    }
-
-    .kube .right {
-        padding: 80px;
-        display: block;
-    }
-
-    .details,
-    .contribute {
-        color: #546A79;
-        text-align: center;
-    }
-
-    .details img {
-        height: 113px;
-        margin-bottom: 30px;
-    }
-
-    .details.six_up .row.top {
-        margin-bottom: 30px;
-    }
-
-    .six_up img {
-        height: 75px;
-    }
-
-    .contribute {
-        text-align: center;
-    }
-
-    .contribute {
-        background-color: #EEAF49;
-        border-bottom: 4px solid #fff;
-        color: #fff;
-    }
-
-    .footer {
-        background-color: #546A79;
-        padding: 50px 0;
-    }
-
-    .footer .row {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .footer .row a {
-        background-image: url("images/logo_rook.svg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        display: block;
-        height: 20px;
-        width: 100%;
-    }
-
-    .primary,
-    .contribute,
-        {
-        text-align: center;
-    }
-
-
-
-    .primary img.logo {
-        max-width: 282px;
-    }
-
-    .primary .row img {
-        max-height: 140px;
-    }
-
-    .details .bottom {
-        margin-top: 50px;
-    }
-
-    .placeholder {
-        background: #333;
-        height: 627px;
-    }
-
-
-    @media only screen and (max-width: 990px) {
-        .primary,
-        .primary .call_to_action {
-            text-align: center;
-        }
-    }
-
-    @media only screen and (max-width: 1200px) {
-        .wrapper,
-        .kube .left {
-            padding: 80px 20px;
-        }
-
-        .kube .right {
-            padding: 80px 0;
-        }
-
-        .row-eq-height {
-            display: block;
-        }
-
-
-        .details p {
-            padding-bottom: 30px;
-        }
-        .details .col-md-1 {
-            width: 75px;
-            margin: auto;
-            display: block;
-            float: left;
-        }
-        .details p {
-            padding-bottom: 30px;
-        }
-        .details .scale p {
-            padding-bottom: 0px;
-        }
-
-        .primary {
-            background-image: none;
-        }
-
-        .details .bottom {
-            margin-top: 0px;
-        }
-
-        .details.six_up .row.top {
-            margin-bottom: 0px;
-        }
-    }
-
-    /*
-     * Overriding asciinema-player style
-     * --------------------------------------------------
-     */
-
-    .k8s-cmds asciinema-player {
-        float: right;
-    }
-
-    .k8s-demo .asciinema-player .control-bar {
-        visibility: hidden;
-    }
-
-    .k8s-cmds .asciinema-player .control-bar {
-        display: none
-    }
-
-    .k8s-demo asciinema-player:hover .control-bar {
-        visibility: visible;
-    }
-
-    .asciinema-theme-asciinema .asciinema-terminal {
-        background-color: #000;
-        border-color: #000;
-    }
-
-    @media only screen and (max-width: 990px) {
-        div.k8s-cmds {
-            margin: 0 -30px;
-        }
-
-        .k8s-cmds asciinema-player {
-            float: none;
-        }
-
-        .k8s-cmds .asciinema-theme-asciinema .asciinema-terminal {
-            font-size: 16px !important;
-        }
-
-        .k8s-demo .asciinema-theme-asciinema .asciinema-terminal {
-            font-size: 14px !important;
-        }
-    }
-</style>
-
-
-
-
-
-<body>
-    <div class="navigation">
-        <div class="row">
-            <div class="col-xsm-2">
-                <ul class="left">
-                    <li>
-                        <a class="github-button" href="https://github.com/rook/rook" data-icon="octicon-star" data-show-count="true" aria-label="Star Rook.io on GitHub">Star</a>
-                    </li>
-
-                    <li>
-                        <a class="twitter-share-button" href="https://twitter.com/share" data-text="I just discovered Rook, check it out" data-show-count="false">Tweet</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-xsm-5 col-xsm-offset-5">
-
-                <ul class="right">
-                    <li>
-                        <a href="/docs/rook/{{ latestVersion }}/">
-                            <img src="images/logo_docs.svg">
-                            <span>Docs</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://github.com/rook/rook">
-                            <img src="images/icn_github.svg">
-                            <span>GitHub</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://twitter.com/rook_io">
-                            <img src="images/logo_twitter.svg">
-                            <span>Twitter</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://slack.rook.io/">
-                            <img src="images/logo_slack.svg">
-                            <span>Slack</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://blog.rook.io/">
-                            <img src="images/logo_blog.svg">
-                            <span>Blog</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
+{% include values.inc %}
+
+<div id="holder">
+    <section class="grid-middle hero">
+        <div class="col-5_md-12">
+            <h1>Open-Source,<br />Cloud-Native Storage for Kubernetes</h1>
+            <p>Production ready File, Block and Object Storage</p>
+            <a class="button" href="{{ gettingStartedLink }}">Try it out now</a>
         </div>
-    </div>
-    <div class="wrapper primary">
-
-        <div class="row">
-            <div class="col-md-7">
-                <h1 alt="Rook">
-                    <img class="logo" src="images/logo_rook.svg">
-                </h1>
-                <h2>File, Block, and Object Storage Services for your Cloud-Native Environments</h2>
-            </div>
-            <div class="col-md-5 call_to_action">
-                <div class="k8s-cmds">
-                    <asciinema-player cols="38" rows="2" preload autoplay loop speed="1.5" font-size="18px" src="data/rook-k8s-cmds.json"></asciinema-player>
+        <div class="col-7_md-12_md-first">
+            <img src="{{ "/images/index-hero.svg" | relative_url }}" />
+        </div>
+    </section>
+    <h1 class="text-center">What is Rook?</h1>
+    <section class="grid-middle">
+        <div class="col-6_md-12">
+            <img src="{{ "/images/index-what-is-rook.svg" | relative_url }}" />
+        </div>
+        <div class="col-6_md-12">
+            <h2>A Storage Orchestrator for Kubernetes</h2>
+            <p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.<br /><br />Rook uses the power of the Kubernetes platform to deliver its services: cloud-native container management, scheduling, and orchestration.</p>
+            <div class="github-pills">
+                <div id="watch-pill" class="pill">
+                    <a href="https://github.com/rook/rook/subscription">Watch</a>
+                    <a id="watch-pill-count" class="count" href="https://github.com/rook/rook/watchers"></a>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-6 button">
-                        <button onclick="location.href='https://github.com/rook/rook';" class="btn-block btn-lg">TRY IT</button>
+                <div id="star-pill" class="pill">
+                    <a href="https://github.com/rook/rook">Star</a>
+                    <a id="star-pill-count" class="count" href="https://github.com/rook/rook/stargazers"></a>
+                </div>
+                <div id="fork-pill" class="pill">
+                    <a href="https://github.com/rook/rook/fork">Forks</a>
+                    <a id="fork-pill-count" class="count" href="https://github.com/rook/rook/network"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="grid-middle storage">
+        <div class="col-6_md-12">
+            <h2>Multiple Storage Providers</h2>
+            <p>Rook orchestrates multiple storage solutions, providing a common framework across all of them. Choose the best storage provider for your scenarios, and Rook ensures that they all run well on Kubernetes with the same, consistent experience.</p>
+            <div class="grid providers">
+                <div class="col-4_xs-6"><span>Ceph</span></div>
+                <div class="col-4_xs-6"><span>EdgeFS</span></div>
+                <div class="col-4_xs-6"><span>Minio</span></div>
+                <div class="col-4_xs-6"><span>CockroachDB</span></div>
+                <div class="col-4_xs-6"><span>Cassandra</span></div>
+                <div class="col-4_xs-6"><span>NFS</span></div>
+            </div>
+        </div>
+        <div class="col-6_md-12">
+            <div class="terminal-wrapper">
+                <h3 id="terminal-header">Ceph</h3>
+                <div class="terminal-body">
+                    <div id="terminal-player-wrapper" class="terminal">
+                        <asciinema-player id="terminal-player" cols="61" rows="16" preload loop speed="1.25" src="{{ "/data/ceph.cast" | relative_url }}"></asciinema-player>
+                    </div>
+                </div>
+                <div class="terminal-buttons">
+                    <div class="grid">
+                        <div class="col-4_xs-6"><button class="active" type="button" onclick="terminalTypeClick(this, 'Ceph')" data-terminal-rows="16" data-terminal-src="{{ "/data/ceph.cast" | relative_url }}">Ceph</button></div>
+                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'EdgeFS')" data-terminal-rows="10" data-terminal-src="{{ "/data/edgefs.cast" | relative_url }}">EdgeFS</button></div>
+                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'Minio')" data-terminal-rows="10" data-terminal-src="{{ "/data/minio.cast" | relative_url }}">Minio</button></div>
+                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'CockroachDB')" data-terminal-rows="10" data-terminal-src="{{ "/data/cockroachdb.cast" | relative_url }}">CockroachDB</button></div>
+                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'Cassandra')" data-terminal-rows="9" data-terminal-src="{{ "/data/cassandra.cast" | relative_url }}">Cassandra</button></div>
+                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'NFS')" data-terminal-rows="13" data-terminal-src="{{ "/data/nfs.cast" | relative_url }}">NFS</button></div>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-    <div class="wrapper details">
-        <h2>What is Rook?</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_cloudNative.svg">
-                </div>
-                <h3>Cloud-Native storage service</h3>
-                <p>Rook runs as a cloud-native service for optimal integration with applications in need of storage, and handles
-                    the heavy-lifting behind the scenes such as provisioning and management.</p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_knight.svg">
-                </div>
-                <h3>Battle-tested, production storage</h3>
-                <p>Rook orchestrates battle-tested open-source storage technologies including Ceph, which has years of production
-                    deployments and runs some of the worlds largest clusters.</p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_community.svg">
-                </div>
-                <h3>Apache 2.0 license</h3>
-                <p>Rook is open source software released under the Apache 2.0 license. Rook has an active developer and user
-                    community.
-                </p>
-            </div>
+    </section>
+    <h1 class="text-center">Who loves Rook?</h1>
+    <p class="text-center">With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />Rook is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+    <section class="grid-middle affiliates">
+        <div class="col-2_xs-4">
+            <a href="//pacificresearchplatform.org/">
+                <img
+                    class="prp"
+                    src="{{ "/images/affiliates/prp.jpg" | relative_url }}"
+                    srcset="{{ "/images/affiliates/prp@2x.jpg" | relative_url }} 2x, {{ "/images/affiliates/prp@3x.jpg" | relative_url }} 3x" />
+            </a>
         </div>
-
-    </div>
-    <div class="kube">
-        <div class="row row-eq-height">
-            <div class="left col-lg-6">
-                <h2>Deep Kubernetes Integration.</h2>
-                <p>Rook is designed to run as a native Kubernetes service – it scales along side your apps.</p>
-                <p>Rook offers storage for your Kubernetes app through persistent volumes.</p>
-                <p>Rook takes advantage of many benefits of the platform, such as streamlined resource management, health checks,
-                    failover, upgrades, and networking, to name just a few.</p>
-                <button onclick="location.href='https://github.com/rook/rook';" class="btn btn-clear">READ MORE</button>
-            </div>
-            <div class="right col-lg-6 k8s-demo">
-                <asciinema-player id="player" cols="62" rows="15" preload autoplay loop speed="1.5" font-size="16px" poster="npt:0:24.15"
-                    src="data/rook-k8s-demo.json"></asciinema-player>
-            </div>
+        <div class="col-2_xs-4">
+            <a href="//www.cengn.ca">
+                <img
+                    class="cengn"
+                    src="{{ "/images/affiliates/cengn.jpg" | relative_url }}"
+                    srcset="{{ "/images/affiliates/cengn@2x.jpg" | relative_url }} 2x, {{ "/images/affiliates/cengn@3x.jpg" | relative_url }} 3x" />
+            </a>
         </div>
-    </div>
-    <div class="wrapper details six_up">
-
-        <h2>Features</h2>
-        <div class="row top">
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_gears.svg">
-                </div>
-                <h3>Self-managing service</h3>
-                <p>Whichever supported storage technologies you choose, Rook ensures that resources can be deployed and managed
-                    automatically.
-                </p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_hyper.svg">
-                </div>
-                <h3>Hyper-scale or hyper-converged</h3>
-                <p>With Rook you can either build dedicated storage clusters or hyper-converged clusters where your apps run
-                    alongside storage.</p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_cephLogo.svg">
-                </div>
-                <h3>File, Block, and Object provided by Ceph</h3>
-                <p>Rook integrates Ceph with multiple storage presentations including object storage (compatible with S3 and
-                    swift), block storage, and POSIX-compliant shared file system.</p>
-            </div>
+        <div class="col-2_xs-4">
+            <a href="//www.crowdfox.com">
+                <img
+                    class="crowdfox"
+                    src="{{ "/images/affiliates/crowdfox.jpg" | relative_url }}"
+                    srcset="{{ "/images/affiliates/crowdfox@2x.jpg" | relative_url }} 2x, {{ "/images/affiliates/crowdfox@3x.jpg" | relative_url }} 3x" />
+            </a>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_protect.svg">
-                </div>
-                <h3>Your data, protected</h3>
-                <p>Rook efficiently distributes and replicates your data across your cluster to minimize the risk of data loss.
-                    With snapshots, cloning and versioning, no more losing sleep over your data.</p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_scale.svg">
-                </div>
-                <h3>Elastic storage in your datacenter</h3>
-                <p>Scale is now possible in your datacenter. Get started with a few terabytes, and easily to scale up to petabytes.
-                    Simply add more nodes and Rook takes care of the rest.</p>
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <img src="images/img_hardware.svg">
-                </div>
-                <h3>Runs on commodity hardware</h3>
-                <p>Runs on commodity hardware to optimize your workload. Take advantage of SSD or NVMe for high performance,
-                    or lower your costs with HDD.</p>
-            </div>
+        <div class="col-2_xs-4">
+            <a href="//www.cloudways.com">
+                <img
+                    class="cloudways"
+                    src="{{ "/images/affiliates/cloudways.jpg" | relative_url }}"
+                    srcset="{{ "/images/affiliates/cloudways@2x.jpg" | relative_url }} 2x, {{ "/images/affiliates/cloudways@3x.jpg" | relative_url }} 3x" />
+            </a>
         </div>
-
-    </div>
-    <div class="wrapper contribute">
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <a href="https://cncf.io">
-                    <img src="images/cncf-white.svg">
-                </a>
-                <p>Rook is an incubating level project of the CNCF.</p>
-            </div>
+        <div class="col-2_xs-4">
+            <a href="//gini.net">
+                <img
+                    class="gini"
+                    src="{{ "/images/affiliates/gini.svg" | relative_url }}"/>
+            </a>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h2>CONTRIBUTE</h2>
-                <p>Join the Rook community by contributing on our blog, GitHub or Slack and following us on social media.</p>
-            </div>
+        <div class="col-2_xs-4">
+            <a href="//www.radiosound.com/">
+                <img
+                    class="radiosound"
+                    src="{{ "/images/affiliates/radiosound.jpg" | relative_url }}"
+                    srcset="{{ "/images/affiliates/radiosound@2x.jpg" | relative_url }} 2x, {{ "/images/affiliates/radiosound@3x.jpg" | relative_url }} 3x" />
+            </a>
         </div>
-        <div class="row">
-            <ul class="right">
-                <li>
-                    <a href="/docs/rook/{{ latestVersion }}/">
-                        <img src="images/logo_docs.svg">
-                        <span>Docs</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="https://github.com/rook/rook">
-                        <img src="images/icn_github.svg">
-                        <span>GitHub</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="https://twitter.com/rook_io">
-                        <img src="images/logo_twitter.svg">
-                        <span>Twitter</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="https://slack.rook.io/">
-                        <img src="images/logo_slack.svg">
-                        <span>Slack</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="https://blog.rook.io/">
-                        <img src="images/logo_blog.svg">
-                        <span>Blog</span>
-                    </a>
-                </li>
-            </ul>
-
+    </section>
+    <h1 class="text-center">Features of Rook</h1>
+    <section class="grid-bottom features">
+        <div class="col-3_xs-6">
+            <img class="automate" src="{{ "/images/features/automate.svg" | relative_url }}" />
+            <span>Simple and reliable automated resource management</span>
         </div>
-
-    </div>
-    <div class="footer clearfix">
-
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <a href="https://rook.io/"></a>
-            </div>
+        <div class="col-3_xs-6">
+            <img class="scale" src="{{ "/images/features/scale.svg" | relative_url }}" />
+            <span>Hyper-scale or hyper-converge your storage clusters</span>
         </div>
+        <div class="col-3_xs-6">
+            <img class="distribute" src="{{ "/images/features/distribute.svg" | relative_url }}" />
+            <span>Efficiently distribute and replicate data to minimize loss</span>
+        </div>
+        <div class="col-3_xs-6">
+            <img class="provision" src="{{ "/images/features/provision.svg" | relative_url }}" />
+            <span>Provision, file, block, and object with multiple storage providers</span>
+        </div>
+        <div class="col-3_xs-6">
+            <img class="manage" src="{{ "/images/features/manage.svg" | relative_url }}" />
+            <span>Manage open-source storage techologies</span>
+        </div>
+        <div class="col-3_xs-6">
+            <img class="elasticstorage" src="{{ "/images/features/elasticstorage.svg" | relative_url }}" />
+            <span>Easily enable elastic storage in your datacenter</span>
+        </div>
+        <div class="col-3_xs-6">
+            <img class="opensource" src="{{ "/images/features/opensource.svg" | relative_url }}" />
+            <span>Open source software released under the Apache 2.0 license</span>
+        </div>
+        <div class="col-3_xs-6">
+            <img class="optimize" src="{{ "/images/features/optimize.svg" | relative_url }}" />
+            <span>Optimize workloads on commodity hardware</span>
+        </div>
+    </section>
+</div>
 
-    </div>
+<script>
+    function githubFetch(path) {
+        var el = document.createElement('script');
+        var head = document.getElementsByTagName('head')[0];
+        el.src = path + '?callback=githubFetchCallback';
+        head.insertBefore(el, head.firstChild);
+    }
+    
+    function githubFetchCallback(obj) {
+        document.getElementById('watch-pill-count').innerText = (obj.data.subscribers_count).toLocaleString();
+        document.getElementById('star-pill-count').innerText = (obj.data.stargazers_count).toLocaleString();
+        document.getElementById('fork-pill-count').innerText = (obj.data.network_count).toLocaleString();
+    }
 
+    function terminalTypeClick(elem, text) {
+        if (elem.classList.contains('active')) {
+            return;
+        }
+        
+        var terminalPlayer = document.getElementById('terminal-player');
+        var terminalPlayerWrapper = document.getElementById('terminal-player-wrapper');
+        var terminalSrc = elem.dataset.terminalSrc;
+        var terminalRows = elem.dataset.terminalRows;
+        var buttons = document.querySelectorAll('.terminal-buttons button');
+        
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
 
-    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        elem.classList.add('active');
+        document.getElementById('terminal-header').innerText = text;
+        terminalPlayerWrapper.innerHTML = '<asciinema-player id="terminal-player" cols="61" rows="' + terminalRows + '" preload autoplay loop speed="1.25" src="' + terminalSrc + '"></asciinema-player>';
+    }
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    githubFetch('https://api.github.com/repos/rook/rook');
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/asciinema-player.js"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-93639004-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-</body>
-
-</html>
+    document.getElementById('terminal-player').addEventListener('loadedmetadata', function(e) {
+        this.play();
+    });
+  </script>

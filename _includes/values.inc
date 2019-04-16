@@ -1,0 +1,17 @@
+{% assign blogLink = '//blog.rook.io/' %}
+{% assign cloudibilityLink = '//cloudibility.io/' %}
+{% assign cncfLink = '//www.cncf.io' %}
+{% assign communityMeetingLink = '//github.com/rook/rook#community-meeting' %}
+{% assign contributeLink = '//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute' %}
+{% assign emailLink = 'mailto:info@rook.io' %}
+{% assign featureRequestLink = '//github.com/rook/rook/issues' %}
+{% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
+{% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[0].versions[0].version | append: '/quickstart-toc.html' | relative_url %}
+{% assign githubLink = '//github.com/rook/rook' %}
+{% assign latestDocs = '/docs/rook/' | append: site.data.projects[0].versions[0].version | append: '/' | relative_url %}
+{% assign nexentaLink = '//nexenta.com' %}
+{% assign redHatLink = '//www.redhat.com' %}
+{% assign slackLink = '//slack.rook.io/' %}
+{% assign suseLink = '//www.suse.com/' %}
+{% assign twitterLink = '//twitter.com/rook_io' %}
+{% assign upboundLink = '//upbound.io' %}
