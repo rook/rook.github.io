@@ -1,18 +1,33 @@
+{% include values.inc %}
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-  {% include head.html %}
+    <title>{{ page.doctitle | default: "Rook" | escape }}</title>
 
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+    {% include favicon.html %}
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    {% if page.asciinema %}
+      <link rel="stylesheet" type="text/css" href="{{ "/css/asciinema-player.css?v2.6.1" | relative_url }}" />
+    {% endif %}
+    <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
+    {% if page.stylesheet %}
+      <link rel="stylesheet" href="{{ "/css/" | append: page.stylesheet | append: ".css" | relative_url }}" />
+    {% endif %}
+  </head>
   <body>
-
-    {% include header.html %}
-
-    <main class="page-content" aria-label="Content">
-      {{ content }}
-    </main>
-
+    {% include navigation.html %}
+    <main id="content" aria-label="Content"><div>{{ content }}</div></main>
     {% include footer.html %}
-
+    {% if jekyll.environment == 'production' and site.google_analytics %}
+      {% include google-analytics.html %}
+    {% endif %}
   </body>
-
 </html>

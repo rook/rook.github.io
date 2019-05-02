@@ -1,0 +1,47 @@
+@import 'gridlex-vars';
+
+$lgWidth: map-get($gl-mq-list, 'lg');
+$mdWidth: map-get($gl-mq-list, 'md');
+$smWidth: map-get($gl-mq-list, 'sm');
+$xsWidth: map-get($gl-mq-list, 'xs');
+
+$fontHeader: 'Montserrat', sans-serif;
+$fontBody: 'Open Sans', sans-serif;
+
+$pageWidth: 1280px;
+$pagePadding: 30px;
+$pagePaddingSmall: 15px;
+
+$blue: #2ac6ea;
+$blueDark: #14aacc;
+$blueDarker: #0e748b;
+
+$purpleLight: #4f4384;
+$purple: #1b0c59;
+$purpleDark: #0e0632;
+
+$white: #ffffff;
+$black: #000000;
+
+$textDark: #2b2b2b;
+$textMuted: #4a4a4a;
+$textLight: #767676;
+
+$githubPillBorder: #707677;
+$githubPillBackground: #efefef;
+
+$codeBackground: #d8d8d8;
+$footerDelimiter: #d8d8d8;
+
+$timingSlowest: 1s;
+$timingSlow: 0.5s;
+$timingFast: 0.25s;
+$timingFastest: 0.125s;
+
+// Minima Overrides
+$base-font-family: $fontBody;
+$base-font-weight: 300;
+
+$text-color: $textDark;
+$background-color: $white;
+$brand-color: $blue;

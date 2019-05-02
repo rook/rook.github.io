@@ -1,5 +1,7 @@
-_site
-.sass-cache
-.jekyll-metadata
-node_modules
+/_site
 /vendor
+/node_modules
+/images_bkup
+.bundle
+.jekyll-metadata
+.sass-cache
