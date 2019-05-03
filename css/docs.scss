@@ -70,6 +70,16 @@
     border: none;
   }
 
+  .highlight {
+    &,
+    code,
+    .go {
+      background-color: $codeBackground;
+      font-size: 14px;
+      color: $textDark;
+    }
+  }
+
   .highlighter-rouge {
     .highlight {
       background-color: $codeBackground;
