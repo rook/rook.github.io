@@ -1,6 +1,6 @@
 # Site settings
 title: rook.io
-url: "http://rook.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://rook.io" # the base hostname & protocol for your site, e.g. http://example.com
 google_analytics: UA-93639004-1
 
 # Build settings
