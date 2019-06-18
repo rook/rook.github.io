@@ -1,5 +1,5 @@
 {% assign blogLink = '//blog.rook.io/' %}
-{% assign cloudibilityLink = '//cloudibility.io/' %}
+{% assign cloudicalLink = '//cloudical.io/' %}
 {% assign cncfLink = '//www.cncf.io' %}
 {% assign communityMeetingLink = '//github.com/rook/rook#community-meeting' %}
 {% assign contributeLink = '//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute' %}
