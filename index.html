@@ -9,7 +9,7 @@ stylesheet: index
         <div class="col-5_md-12">
             <h1>Open-Source,<br />Cloud-Native Storage for Kubernetes</h1>
             <p>Production ready File, Block and Object Storage</p>
-            <a class="button" href="{{ githubLink }}">Try it out now</a>
+            <a class="button" href="{{ gettingStartedLink }}">Try it out now</a>
         </div>
         <div class="col-7_md-12_md-first">
             <img src="{{ "/images/index-hero.svg" | relative_url }}" />
@@ -168,7 +168,7 @@ stylesheet: index
         el.src = path + '?callback=githubFetchCallback';
         head.insertBefore(el, head.firstChild);
     }
-    
+
     function githubFetchCallback(obj) {
         document.getElementById('watch-pill-count').innerText = (obj.data.subscribers_count).toLocaleString();
         document.getElementById('star-pill-count').innerText = (obj.data.stargazers_count).toLocaleString();
@@ -179,13 +179,13 @@ stylesheet: index
         if (elem.classList.contains('active')) {
             return;
         }
-        
+
         var terminalPlayer = document.getElementById('terminal-player');
         var terminalPlayerWrapper = document.getElementById('terminal-player-wrapper');
         var terminalSrc = elem.dataset.terminalSrc;
         var terminalRows = elem.dataset.terminalRows;
         var buttons = document.querySelectorAll('.terminal-buttons button');
-        
+
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('active');
         }
