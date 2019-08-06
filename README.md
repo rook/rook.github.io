@@ -39,6 +39,31 @@ rm docs/rook/master
 git checkout -- docs/rook/master
 ```
 
+## Test using a container
+
+### Run a jekyll container
+
+* On a SELinux enabled OS:
+
+    ```console
+    cd rook.github.io
+    sudo docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll:Z jekyll/jekyll jekyll serve --watch
+    ```
+
+    **NOTE**: Be sure to cd into the *rook.github.io* directory before running the above command as the Z at the end of the volume (-v) will relabel its contents so it can be written from within the container, like running `chcon -Rt svirt_sandbox_file_t -l s0:c1,c2` yourself.
+
+* On an OS without SELinux:
+
+    ```console
+    cd rook.github.io
+    sudo docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll jekyll/jekyll jekyll serve --watch
+    ```
+
+### View the site
+
+Visit `http://0.0.0.0:4000` in your local browser.
+
+
 # Github Pages & Jekyll
 
 To avoid additional pre-processing work, we push a project to `rook.github.io` which recognizes the project
