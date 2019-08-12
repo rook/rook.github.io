@@ -47,7 +47,7 @@ git checkout -- docs/rook/master
 
     ```console
     cd rook.github.io
-    sudo docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll:Z jekyll/jekyll jekyll serve --watch
+    docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll:Z jekyll/jekyll jekyll serve --watch
     ```
 
     **NOTE**: Be sure to cd into the *rook.github.io* directory before running the above command as the Z at the end of the volume (-v) will relabel its contents so it can be written from within the container, like running `chcon -Rt svirt_sandbox_file_t -l s0:c1,c2` yourself.
@@ -56,7 +56,7 @@ git checkout -- docs/rook/master
 
     ```console
     cd rook.github.io
-    sudo docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll jekyll/jekyll jekyll serve --watch
+    docker run -d --name rookio -p 4000:4000 -v $(pwd):/srv/jekyll jekyll/jekyll jekyll serve --watch
     ```
 
 ### View the site
