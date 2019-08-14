@@ -45,10 +45,10 @@ With this upgrade guide, there are a few notes to consider:
 
 ## Patch Release Upgrades
 Unless otherwise noted due to extenuating requirements, upgrades from one patch release of Rook to
-another are as simple as updating the image of the Rook operator. For example, when Rook v1.0.4 is
+another are as simple as updating the image of the Rook operator. For example, when Rook v1.0.5 is
 released, the process of updating from v1.0.0 should be as simple as running the following:
 ```
-kubectl -n rook-ceph-system set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.0.4
+kubectl -n rook-ceph-system set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.0.5
 ```
 
 
@@ -212,7 +212,7 @@ to aid users in any manifest-related auditing they wish to do.
 ### 3. Update the Rook operator image
 The largest portion of the upgrade is triggered when the operator's image is updated to `v1.0.x`.
 ```sh
-kubectl -n $ROOK_SYSTEM_NAMESPACE set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.0.4
+kubectl -n $ROOK_SYSTEM_NAMESPACE set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.0.5
 ```
 
 Watch now in amazement as the Ceph mons, mgrs, OSDs, rbd-mirrors, mdses and rgws are terminated and
@@ -255,7 +255,7 @@ to proceed with the next step before the mdses and rgws are finished updating.
 ```
 
 ### 5. Verify the updated cluster
-At this point, your Rook operator should be running version `rook/ceph:v1.0.4`
+At this point, your Rook operator should be running version `rook/ceph:v1.0.5`
 
 Verify the Ceph cluster's health using the [health verification section](#health-verification).
 
@@ -272,8 +272,7 @@ Instead of changing the port, the recommended process is to failover the mons,
 which will create new mons on port 6789. While the operator will automate most of this process, there are
 several steps required to induce the operator to failover a mon.
 1. Cause the mon to fail by setting the replicas on the mon deployment to zero. For example, if your mon is named `mon-a`:
-   - `kubectl -n rook-ceph edit deploy rook-ceph-mon-a`
-1. Find the line with `replicas: 1` and change it to `replicas: 0`. Save the change and exit the editor.
+   - `kubectl -n $ROOK_NAMESPACE scale deploy rook-ceph-mon-a --replicas=0`
 1. Wait for 5-10 minutes for the operator to fail over the mon. You will see messages in the operator log that the mon is down and will be failed over after a timeout.
 The length of the timeout is dependent on the setting `ROOK_MON_OUT_INTERVAL` in the Rook operator deployment (operator.yaml).
 1. After the timeout, a new mon will be started and the old mon deployment will be automatically removed.
