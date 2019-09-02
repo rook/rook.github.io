@@ -38,3 +38,5 @@ defaults:
 
 sass:
   sass_dir: ./_scss
+
+current_release_index: 1

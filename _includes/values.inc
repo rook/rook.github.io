@@ -6,9 +6,9 @@
 {% assign emailLink = 'mailto:info@rook.io' %}
 {% assign featureRequestLink = '//github.com/rook/rook/issues' %}
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
-{% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[0].versions[0].version | append: '/quickstart-toc.html' | relative_url %}
+{% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[0].versions[site.current_release_index].version | append: '/quickstart-toc.html' | relative_url %}
 {% assign githubLink = '//github.com/rook/rook' %}
-{% assign latestDocs = '/docs/rook/' | append: site.data.projects[0].versions[0].version | append: '/' | relative_url %}
+{% assign latestDocs = '/docs/rook/' | append: site.data.projects[0].versions[site.current_release_index].version | append: '/' | relative_url %}
 {% assign nexentaLink = '//nexenta.com' %}
 {% assign redHatLink = '//www.redhat.com' %}
 {% assign slackLink = '//slack.rook.io/' %}
