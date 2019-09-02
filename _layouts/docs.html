@@ -5,7 +5,7 @@ layout: default
 {% assign url = page.url | split: '/' %}
 {% assign currentProject = url[2] %}
 {% assign currentVersion = url[3] %}
-{% assign latestVersion = site.data.projects[0].versions[0].version %}
+{% assign latestVersion = site.data.projects[0].versions[site.current_release_index].version %}
 {% assign currentProjectPath = '/docs/' | append: currentProject | append: '/' %}
 {% assign currentProjectVersionPath = currentProjectPath | append: currentVersion | append: '/' %}
 {% assign project = site.data.projects | where_exp: 'item', 'item.project == currentProject' | first %}
@@ -41,7 +41,7 @@ layout: default
       </div>
     {% elsif currentVersion != latestVersion %}
       <div class="alert old">
-        <p><b>PLEASE NOTE</b>: This document applies to {{ currentVersion }} version and not to the latest release {{ latestVersion }}</p>
+        <p><b>PLEASE NOTE</b>: This document applies to {{ currentVersion }} version and not to the latest <strong>stable</strong> release {{ latestVersion }}</p>
         <strong>Documentation for other releases can be found by using the version selector in the left bottom of any doc page.</strong>
       </div>
     {% endif %}
@@ -117,7 +117,7 @@ layout: default
             itemDom.style.height = fullHeight;
             flushCss(itemDom);
             itemDom.style.transition = '';
-          } 
+          }
           itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
         }
 
@@ -133,7 +133,7 @@ layout: default
       itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
     }
   }
-  
+
   var menuDom = document.getElementById('docs-ul');
   for (var i = 0; i < menu.length; i++) {
     var item = menu[i];
@@ -142,7 +142,7 @@ layout: default
     if (item.childCurrent) {
       itemDom.classList.add('childCurrent');
     }
-    
+
     if (item.children) {
       addArrow(itemDom);
       itemDom.classList.add('children');
