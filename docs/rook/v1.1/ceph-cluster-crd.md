@@ -31,7 +31,7 @@ metadata:
 spec:
   cephVersion:
     # see the "Cluster Settings" section below for more details on which image of ceph to run
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -91,7 +91,7 @@ Settings can be specified at the global level to apply to the cluster as a whole
 - `external`:
   - `enable`: if `true`, the cluster will not be managed by Rook but via an external entity. This mode is intended to connect to an existing cluster. In this case, Rook will only consume the external cluster. However, Rook will be able to deploy various daemons in Kubernetes such as object gateways, mds and nfs. If this setting is enabled **all** the other options will be ignored except `cephVersion.image` and `dataDirHostPath`. See [external cluster configuration](#external-cluster).
 - `cephVersion`: The version information for launching the ceph daemons.
-  - `image`: The image used for running the ceph daemons. For example, `ceph/ceph:v13.2.6-20190604` or `ceph/ceph:v14.2.3-20190904`.
+  - `image`: The image used for running the ceph daemons. For example, `ceph/ceph:v13.2.6-20190604` or `ceph/ceph:v14.2.4-20190917`.
   For the latest ceph images, see the [Ceph DockerHub](https://hub.docker.com/r/ceph/ceph/tags/).
   To ensure a consistent version of the image is running across all nodes in the cluster, it is recommended to use a very specific image version.
   Tags also exist that would give the latest version, but they are only recommended for test environments. For example, the tag `v14` will be updated each time a new nautilus build is released.
@@ -101,6 +101,7 @@ Settings can be specified at the global level to apply to the cluster as a whole
   - On **Minikube** environments, use `/data/rook`. Minikube boots into a tmpfs but it provides some [directories](https://github.com/kubernetes/minikube/blob/master/docs/persistent_volumes.md) where files can be persisted across reboots. Using one of these directories will ensure that Rook's data and configuration files are persisted and that enough storage space is available.
   - **WARNING**: For test scenarios, if you delete a cluster and start a new cluster on the same hosts, the path used by `dataDirHostPath` must be deleted. Otherwise, stale keys and other config will remain from the previous cluster and the new mons will fail to start.
 If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes [empty dir docs](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir).
+- `skipUpgradeChecks`: if set to true Rook won't perform any upgrade checks on Ceph daemons during an upgrade. Use this at **YOUR OWN RISK**, only if you know what you're doing. To understand Rook's upgrade process of Ceph, read the [upgrade doc](Documentation/ceph-upgrade.html#ceph-version-upgrades).
 - `dashboard`: Settings for the Ceph dashboard. To view the dashboard in your browser see the [dashboard guide](ceph-dashboard.md).
   - `enabled`: Whether to enable the dashboard to view cluster status
   - `urlPrefix`: Allows to serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)
@@ -319,7 +320,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -351,7 +352,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -394,7 +395,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -431,7 +432,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -477,7 +478,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -515,7 +516,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -579,7 +580,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -626,7 +627,7 @@ spec:
           requests:
             storage: 10Gi
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904
+    image: ceph/ceph:v14.2.4-20190917
     allowUnsupported: false
   dashboard:
     enabled: true
@@ -712,7 +713,7 @@ spec:
     enable: true
   dataDirHostPath: /var/lib/rook
   cephVersion:
-    image: ceph/ceph:v14.2.3-20190904 # the image version **must** match the version of the external Ceph cluster
+    image: ceph/ceph:v14.2.4-20190917 # the image version **must** match the version of the external Ceph cluster
 ```
 
 Choose the namespace carefully, if you have an existing cluster managed by Rook, you have likely already injected `common.yaml`.

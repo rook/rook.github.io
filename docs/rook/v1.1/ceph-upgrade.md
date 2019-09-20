@@ -221,6 +221,14 @@ Replace the namespace names in the new resources:
 sed "s/ROOK_SYSTEM_NAMESPACE/$ROOK_SYSTEM_NAMESPACE/g" upgrade-from-v1.0-create.yaml > upgrade-from-v1.0-create.yaml.tmp
 sed "s/ROOK_NAMESPACE/$ROOK_NAMESPACE/g" upgrade-from-v1.0-create.yaml.tmp > upgrade-from-v1.0-create.yaml
 rm -f upgrade-from-v1.0-create.yaml.tmp
+sed -i "s/ROOK_NAMESPACE/$ROOK_NAMESPACE/g" upgrade-from-v1.0-apply.yaml
+```
+
+If you have a v1.0 cluster running with CSI drivers enabled, delete the rbac rules created for CSI
+
+```sh
+kubectl -n $ROOK_NAMESPACE delete clusterrole.rbac.authorization.k8s.io/rbd-external-provisioner-runner-rules
+kubectl -n $ROOK_NAMESPACE delete clusterrole.rbac.authorization.k8s.io/cephfs-external-provisioner-runner-rules
 ```
 
 Apply the new permissions:
@@ -228,6 +236,8 @@ Apply the new permissions:
 kubectl create -f upgrade-from-v1.0-create.yaml
 kubectl apply -f upgrade-from-v1.0-apply.yaml
 ```
+
+Note: Ignore `Error from server (AlreadyExists)` error while running `kubectl create -f upgrade-from-v1.0-create.yaml`
 
 ### 2. Update CSI Driver settings (if applicable)
 
@@ -259,6 +269,15 @@ below, which you should change to match where your images are located.
 
 You can also remove the `ROOK_CSI_CEPHFS_IMAGE` and `ROOK_CSI_RBD_IMAGE` `env` variables that are
 no longer used in Rook.
+
+If you have configured the kubelet to use other than `/var/lib/kubelet` please
+add below to the operator `env` variables.
+
+```yaml
+env:
+    - name: ROOK_CSI_KUBELET_DIR_PATH
+      value: "/kubelet/path"
+```
 
 At the same time you edit the CSI driver settings, go ahead and update the operator deployment image:
 ```yaml
@@ -331,7 +350,31 @@ instances.
 kubectl -n $ROOK_NAMESPACE edit cephobjectstore.ceph.rook.io/$OBJECT_STORE_NAME
 ```
 
-### 7. (Recommended) Migrate config overrides from ConfigMap to Ceph directly
+### 7. Delete CSI provisioner and attacher (if applicable)
+
+This has to be done if you have deployed CSI in v1.0 or else you can skip it.
+
+With Rook v1.0 we were deploying cephcsi provisioner (rbd and cephfs) as
+statefulset even if the kubernetes version is `>=v1.14.x` with Rook v1.1
+cephcsi provisioner (rbd and cephfs) will be deployed as statefulset if the
+kubernetes version is `<1.14.x` if not it will be deployed as deployment.
+
+Remove attacher statefulset deployed using Rook 1.0. attacher is now part of
+provisioner in Rook 1.1
+
+```sh
+kubectl delete sts csi-rbdplugin-attacher --namespace $ROOK_NAMESPACE --ignore-not-found
+kubectl delete sts csi-cephfs-attacher --namespace $ROOK_NAMESPACE --ignore-not-found
+```
+
+If kubernetes version is `>=1.14.x` delete the provisioner statefulset
+
+```sh
+kubectl delete sts csi-cephfsplugin-provisioner --namespace $ROOK_NAMESPACE
+kubectl delete sts csi-rbdplugin-provisioner --namespace $ROOK_NAMESPACE
+```
+
+### 8. (Recommended) Migrate config overrides from ConfigMap to Ceph directly
 If there are Ceph configuration overrides set in the `config` field of the ConfigMap
 `rook-config-override`, it is now possible to migrate those configs manually from the ConfigMap to
 Ceph directly as documented [here](ceph-configuration.md#specifying-configuration-options). This is
@@ -371,12 +414,12 @@ Empty the config override in the ConfigMap.
 kubectl --namespace $ROOK_NAMESPACE patch configmap rook-config-override --type=merge -p '{"data": {"config": ""}}'
 ```
 
-### 8. (Recommended) Consider required Ceph config settings
+### 9. (Recommended) Consider required Ceph config settings
 We highly recommend updates to your cluster regarding PG management. There is a new setting where
 Rook can enable the automatic PG management, or you can continue managing it manually.
 See more information in the docs [here](ceph-configuration.md#default-pg-and-pgp-counts).
 
-### 9. Update Rook-Ceph custom resource definitions
+### 10. Update Rook-Ceph custom resource definitions
 **IMPORTANT: Do not perform this step until ALL existing Rook-Ceph clusters are updated**
 
 After all Rook-Ceph clusters have been updated following the steps above, update the Rook-Ceph
