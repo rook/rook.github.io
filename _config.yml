@@ -1,7 +1,11 @@
 # Site settings
-title: rook.io
+title: Rook
 url: "https://rook.io" # the base hostname & protocol for your site, e.g. http://example.com
 google_analytics: UA-93639004-1
+twitter_username: rook_io
+github_username:  rook
+type: website
+image: /images/favicon_192x192.png
 
 # Build settings
 markdown: kramdown
