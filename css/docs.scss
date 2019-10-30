@@ -417,7 +417,11 @@
 
     &.master {
       border-color: #f44336;
-      color: #f44336;
+      background-color: #f44336;
+      color: #ffffff;
+      p {
+        color: #ffffff;
+      }
     }
 
     &.old {
