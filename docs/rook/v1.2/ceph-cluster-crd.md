@@ -31,7 +31,7 @@ metadata:
 spec:
   cephVersion:
     # see the "Cluster Settings" section below for more details on which image of ceph to run
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -106,11 +106,18 @@ Settings can be specified at the global level to apply to the cluster as a whole
   * **WARNING**: For test scenarios, if you delete a cluster and start a new cluster on the same hosts, the path used by `dataDirHostPath` must be deleted. Otherwise, stale keys and other config will remain from the previous cluster and the new mons will fail to start.
 If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes [empty dir docs](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir).
 * `skipUpgradeChecks`: if set to true Rook won't perform any upgrade checks on Ceph daemons during an upgrade. Use this at **YOUR OWN RISK**, only if you know what you're doing. To understand Rook's upgrade process of Ceph, read the [upgrade doc](Documentation/ceph-upgrade.html#ceph-version-upgrades).
+* `continueUpgradeAfterChecksEvenIfNotHealthy`: if set to true Rook will continue the OSD daemon upgrade process even if the PGs are not clean, or continue with the MDS upgrade even the file system is not healthy.
 * `dashboard`: Settings for the Ceph dashboard. To view the dashboard in your browser see the [dashboard guide](ceph-dashboard.md).
   * `enabled`: Whether to enable the dashboard to view cluster status
   * `urlPrefix`: Allows to serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)
   * `port`: Allows to change the default port where the dashboard is served
   * `ssl`: Whether to serve the dashboard via SSL, ignored on Ceph versions older than `13.2.2`
+* `monitoring`: Settings for monitoring Ceph using Prometheus. To enable monitoring on your cluster see the [monitoring guide](Documentation/ceph-monitoring.md#prometheus-alerts).
+  * `enabled`: Whether to enable prometheus based monitoring for this cluster
+  * `rulesNamespace`: Namespace to deploy prometheusRule. If empty, namespace of the cluster will be used.
+      Recommended:
+    * If you have a single Rook Ceph cluster, set the `rulesNamespace` to the same namespace as the cluster or keep it empty.
+    * If you have multiple Rook Ceph clusters in the same Kubernetes cluster, choose the same namespace to set `rulesNamespace` for all the clusters (ideally, namespace with prometheus deployed). Otherwise, you will get duplicate alerts with duplicate alert definitions.
 * `network`: The network settings for the cluster
   * `hostNetwork`: uses network of the hosts instead of using the SDN below the containers.
 * `mon`: contains mon related options [mon settings](#mon-settings)
@@ -120,6 +127,8 @@ For more details on the mons and when to choose a number other than `3`, see the
 * `rbdMirroring`: The settings for rbd mirror daemon(s). Configuring which pools or images to be mirrored must be completed in the rook toolbox by running the
 [rbd mirror](http://docs.ceph.com/docs/mimic/rbd/rbd-mirroring/) command.
   * `workers`: The number of rbd daemons to perform the rbd mirroring between clusters.
+* `crashCollector`: The settings for crash collector daemon(s).
+  * `disable`: is set to `true`, the crash collector will not run on any node where a Ceph daemon runs
 * `annotations`: [annotations configuration settings](#annotations-configuration-settings)
 * `placement`: [placement configuration settings](#placement-configuration-settings)
 * `resources`: [resources configuration settings](#cluster-wide-resources-configuration-settings)
@@ -148,7 +157,7 @@ Official releases of Ceph Container images are available from [Docker Hub](https
 These are general purpose Ceph container with all necessary daemons and dependencies installed.
 
 | TAG                  | MEANING                                                   |
-|----------------------|-----------------------------------------------------------|
+| -------------------- | --------------------------------------------------------- |
 | vRELNUM              | Latest release in this series (e.g., *v14* = Nautilus)    |
 | vRELNUM.Y            | Latest stable release in this stable series (e.g., v14.2) |
 | vRELNUM.Y.Z          | A specific release (e.g., v14.2.5)                        |
@@ -382,7 +391,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -414,7 +423,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -457,7 +466,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -495,7 +504,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -542,7 +551,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -640,7 +649,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -686,7 +695,7 @@ spec:
           requests:
             storage: 10Gi
   cephVersion:
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
     allowUnsupported: false
   dashboard:
     enabled: true
@@ -786,7 +795,7 @@ spec:
   dataDirHostPath: /var/lib/rook
   # providing an image is optional, do this if you want to create other CRs (rgw, mds, nfs)
   cephVersion:
-    image: ceph/ceph:v14.2.5 # MUST match external cluster version
+    image: ceph/ceph:v14.2.6 # MUST match external cluster version
 ```
 
 Choose the namespace carefully, if you have an existing cluster managed by Rook, you have likely already injected `common.yaml`.

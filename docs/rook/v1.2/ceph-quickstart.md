@@ -14,7 +14,7 @@ from other pods running in your cluster.
 
 ## Minimum Version
 
-Kubernetes **v1.10** or higher is supported by Rook.
+Kubernetes **v1.11** or higher is supported by Rook.
 
 ## Prerequisites
 
@@ -75,7 +75,7 @@ metadata:
 spec:
   cephVersion:
     # For the latest ceph images, see https://hub.docker.com/r/ceph/ceph/tags
-    image: ceph/ceph:v14.2.5
+    image: ceph/ceph:v14.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
