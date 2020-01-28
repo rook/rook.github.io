@@ -44,6 +44,20 @@
   </div>
 </footer>
 
+{% if page.layout == 'docs' %}
+  <script src="{{ "/js/anchor.js" | relative_url }}"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+{% endif %}
+
 {% if page.asciinema %}
   <script async defer src="//buttons.github.io/buttons.js"></script>
   <script src="{{ "/js/asciinema-player.js?v2.6.1" | relative_url }}"></script>
