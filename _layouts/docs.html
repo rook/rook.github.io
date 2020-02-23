@@ -5,6 +5,12 @@ layout: default
 {% assign url = page.url | split: '/' %}
 {% assign currentProject = url[2] %}
 {% assign currentVersion = url[3] %}
+{% assign currentPath = '' %}
+{% for i in url %}
+{% if forloop.index0 >= 4 %}
+{% assign currentPath = currentPath | append: '/' | append: url[forloop.index0] %}
+{% endif %}
+{% endfor %}
 {% assign latestVersion = site.data.projects[0].versions[site.current_release_index].version %}
 {% assign currentProjectPath = '/docs/' | append: currentProject | append: '/' %}
 {% assign currentProjectVersionPath = currentProjectPath | append: currentVersion | append: '/' %}
@@ -19,7 +25,7 @@ layout: default
     <a role="button" href="javascript:void(0)">Rook version {{ currentVersion }}</a>
     <div class="versions-dropdown-content">
       {% for ver in project.versions %}
-        <a href="{{ ver.path | append: '/' | relative_url }}"{% if ver.version == currentVersion %} class="active"{% endif %}>Rook version {{ ver.version }}</a>
+        <a href="{{ ver.path | append: currentPath | relative_url }}"{% if ver.version == currentVersion %} class="active"{% endif %}>Rook version {{ ver.version }}</a>
       {% endfor %}
     </div>
     <img src="{{ "/images/arrow.svg" | relative_url }}" />
