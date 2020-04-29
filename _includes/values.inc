@@ -3,7 +3,7 @@
 {% assign cncfLink = '//www.cncf.io' %}
 {% assign communityMeetingLink = '//github.com/rook/rook#community-meeting' %}
 {% assign contributeLink = '//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute' %}
-{% assign emailLink = 'mailto:info@rook.io' %}
+{% assign emailLink = 'mailto:cncf-rook-info@lists.cncf.io' %}
 {% assign featureRequestLink = '//github.com/rook/rook/issues' %}
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
 {% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[0].versions[site.current_release_index].version | append: '/quickstart.html' | relative_url %}
