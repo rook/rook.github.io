@@ -1,11 +1,24 @@
 {% include values.inc %}
 
+{% comment %}
+If this a docs page, include the docs values and check if the page should be "noindex"ed
+{% endcomment %}
+
+{% assign url = page.url | split: '/' %}
+{% if url.size > 1 and url[1] == "docs" %}
+{% include values_docs.inc %}
+{% endif %}
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% if currentVersion and latestVersion and currentVersion != latestVersion %}
+    <meta name="robots" content="noindex">
+    {% endif %}
 
     <title>{{ page.doctitle | default: "Rook" | escape }}</title>
 
