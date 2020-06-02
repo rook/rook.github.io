@@ -1,10 +1,12 @@
+JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.7
+
 # Run jekyll in development mode
 run: _data/projects.json
 	docker run --rm -it \
 		-p 4000:4000 -p 4001:4001 \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
-		jekyll/jekyll -- \
+		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll serve --livereload --livereload-port 4001
 
 # Build (output is in _site)
@@ -12,7 +14,7 @@ build: _data/projects.json
 	docker run --rm -it \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
-		jekyll/jekyll -- \
+		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
 
 # Push new changes to the live site
