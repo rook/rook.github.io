@@ -23,6 +23,7 @@ nicely, and is meant to be run in conjunction with Jenkins CI -- and expects env
 To test your changes to the Rook website locally before committing to the Rook repo, you can generate the docs locally and start a local web server.
 
 To generate the docs:
+
 ```bash
 # Remove the old master docs and copy your updated docs from your rook repo
 rm -fr docs/rook/master
@@ -34,6 +35,7 @@ make run
 ```
 
 When you are done, revert the changes to the repo:
+
 ```bash
 rm docs/rook/master
 git checkout -- docs/rook/master

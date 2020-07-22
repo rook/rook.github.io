@@ -457,7 +457,7 @@ p {
       }
 
       + [class*='col'] {
-        margin: 0 0 0 70px;
+        margin: 0 0 0 60px;
 
         @media (max-width: $smWidth) {
           padding-top: 10px;
@@ -521,9 +521,12 @@ p {
     -ms-flex-align: center;
     align-items: center;
 
-    @media (max-width: $xsWidth) {
-      -ms-flex-direction: column;
-      flex-direction: column;
+    [class*='col'] {
+      @media (max-width: $mdWidth) {
+        -ms-flex-preferred-size: 100%;
+            flex-basis: 100%;
+        max-width: 100%;
+      }
     }
 
     .logo,
@@ -533,19 +536,39 @@ p {
 
     .logo {
       img {
+        padding: 10px;
+        margin: 0 auto;
         height: 18px;
       }
     }
     
-    span {
+    p {
       font-family: $fontHeader;
       font-size: 11px;
       font-weight: 500;
       color: $textLight;
-      margin: 0 0 0 10px;
+      margin: 10px 0 0 0;
 
       @media (max-width: $xsWidth) {
         margin: 10px 0 0 0;
+      }
+    }
+
+    a {
+      font-family: $fontHeader;
+      font-size: 11px;
+      font-weight: 500;
+      color: $blueDarker;
+      transition: all $timingFast ease-in-out;
+      
+      &:visited,
+      &:focus,
+      &:active  {
+        color: $blueDarker;
+      }
+      
+      &:hover{
+        text-decoration: none;
       }
     }
   }

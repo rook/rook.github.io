@@ -257,6 +257,7 @@
     }
 
     a {
+      display: -ms-inline-flexbox;
       display: inline-flex;
 
       &:hover {
