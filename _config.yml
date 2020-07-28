@@ -39,4 +39,4 @@ defaults:
 sass:
   sass_dir: ./_scss
 
-current_release_index: 0
+current_release_index: 1
