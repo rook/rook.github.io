@@ -842,7 +842,7 @@ spec:
             - ReadWriteOnce
 ```
 
-### Dedicated metadata device for OSD on PVC
+### Dedicated metadata and wal device for OSD on PVC
 
 In the simplest case, Ceph OSD BlueStore consumes a single (primary) storage device.
 BlueStore is the engine used by the OSD to store data.
@@ -881,22 +881,164 @@ So just taking the `storage` section this will give something like:
         spec:
           resources:
             requests:
-              # Find the right size https://docs.ceph.com/docs/mimic/rados/configuration/bluestore-config-ref/#sizing
+              # Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing
               storage: 5Gi
-          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)
           storageClassName: io1
           volumeMode: Block
           accessModes:
             - ReadWriteOnce
 ```
 
-> **NOTE**: Note that Rook only supports two naming convention for a given template:
+> **NOTE**: Note that Rook only supports three naming convention for a given template:
 
-* "data": represents the main OSD block device, where your data are being stored
-* "metadata": represents the metadata device used to store the Ceph Bluestore database for an OSD.
-It is recommended to use a faster storage class for the metadata device, with a slower device for the data.
+* "data": represents the main OSD block device, where your data is being stored.
+* "metadata": represents the metadata (including block.db and block.wal) device used to store the Ceph Bluestore database for an OSD.
+* "wal": represents the block.wal device used to store the Ceph Bluestore database for an OSD. If this device is set, "metadata" device will refer specifically to block.db device.
+It is recommended to use a faster storage class for the metadata or wal device, with a slower device for the data.
 Otherwise, having a separate metadata device will not improve the performance.
-To determine the size of the metadata block follow the [official Ceph sizing guide](https://docs.ceph.com/docs/mimic/rados/configuration/bluestore-config-ref/#sizing).
+
+The bluestore partition has the following reference combinations supported by the ceph-volume utility:
+
+* A single "data" device.
+```yaml
+  storage:
+    storageClassDeviceSets:
+    - name: set1
+      count: 3
+      portable: false
+      tuneDeviceClass: false
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
+          storageClassName: gp2
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+```
+
+* A "data" device and a "metadata" device.
+```yaml
+  storage:
+    storageClassDeviceSets:
+    - name: set1
+      count: 3
+      portable: false
+      tuneDeviceClass: false
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
+          storageClassName: gp2
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+      - metadata:
+          name: metadata
+        spec:
+          resources:
+            requests:
+              # Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing
+              storage: 5Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)
+          storageClassName: io1
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+```
+
+* A "data" device and a "wal" device.
+A WAL device can be used for BlueStore’s internal journal or write-ahead log (block.wal), it is only useful to use a WAL device if the device is faster than the primary device (data device).
+There is no separate "metadata" device in this case, the data of main OSD block and block.db located in "data" device.
+```yaml
+  storage:
+    storageClassDeviceSets:
+    - name: set1
+      count: 3
+      portable: false
+      tuneDeviceClass: false
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
+          storageClassName: gp2
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+      - metadata:
+          name: wal
+        spec:
+          resources:
+            requests:
+              # Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing
+              storage: 5Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)
+          storageClassName: io1
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+```
+
+* A "data" device, a "metadata" device and a "wal" device.
+```yaml
+  storage:
+    storageClassDeviceSets:
+    - name: set1
+      count: 3
+      portable: false
+      tuneDeviceClass: false
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)
+          storageClassName: gp2
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+      - metadata:
+          name: metadata
+        spec:
+          resources:
+            requests:
+              # Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing
+              storage: 5Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)
+          storageClassName: io1
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+      - metadata:
+          name: wal
+        spec:
+          resources:
+            requests:
+              # Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing
+              storage: 5Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)
+          storageClassName: io1
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+```
+
+To determine the size of the metadata block follow the [official Ceph sizing guide](https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing).
 
 With the present configuration, each OSD will have its main block allocated a 10GB device as well a 5GB device to act as a bluestore database.
 
@@ -1075,15 +1217,15 @@ spec:
 
 ### Cleanup policy
 
-Rook has the ability to cleanup resources and data that were deployed.
+Rook has the ability to cleanup resources and data that were deployed when a `delete cephcluster` command is issued.
 The policy represents the confirmation that cluster data should be forcibly deleted.
 The cleanupPolicy should only be added to the cluster when the cluster is about to be deleted.
 After the `confirmation` field of the cleanup policy is set, Rook will stop configuring the cluster as if the cluster is about to be destroyed in order to prevent these settings from being deployed unintentionally.
 The `cleanupPolicy` CR settings has different fields:
 
-* `confirmation`: If `yes-really-destroy-data` the operator will automatically delete data on the hostpath of cluster nodes and clean devices with OSDs when a `delete cephcluster` command is issued. Only `yes-really-destroy-data` and an empty string are valid values for this field.
+* `confirmation`: Only an empty string and `yes-really-destroy-data` are valid values for this field. If an empty string is set, Rook will only remove Ceph's metadata. A re-installation will not be possible unless the hosts are cleaned first. If `yes-really-destroy-data` the operator will automatically delete data on the hostpath of cluster nodes and clean devices with OSDs. The cluster can then be re-installed if desired with no further steps.
 * `sanitizeDisks`: sanitizeDisks represents advanced settings that can be used to sanitize drives.
-By default if the `confirmation` is set, Rook will only remove Ceph's metadata, which allows a cluster re-installation if desired.
+This field only affects if `confirmation` is set to `yes-really-destroy-data`.
 However, the administrator might want to sanitize the drives in more depth with the following flags:
   * `method`: indicates if the entire disk should be sanitized or simply ceph's metadata. Possible choices are 'quick' (default) or 'complete'
   * `dataSource`: indicate where to get random bytes from to write on the disk. Possible choices are 'zero' (default) or 'random'.
