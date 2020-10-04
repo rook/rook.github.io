@@ -1,5 +1,13 @@
 # Home
 
+This is the GitHub Pages repository that currently powers rook.io using the Jekyll static site generator.
+
+# Contributing
+
+If you would like to contribute to Rook's documentation, please open a PR on the main [rook repository](https://github.com/rook/rook/tree/master/Documentation). Any changes will automatically be mirrored here to be hosted.
+
+You may preview any changes locally by following the [test](#test) section below.
+
 The homepage is `index.html` in the root.
 
 # Docs
@@ -10,7 +18,7 @@ to pick up the new version for cross linking between versions of the same projec
 
 # Build
 
-To run the build you must be running a docker host.  Run `make build` which will build a container
+To run the build you must be running a Docker host.  Run `make build` which will build a container
 with all required dependencies and then run the script to preprocess the project versions and store them statically.
 
 # Publish
@@ -22,7 +30,7 @@ nicely, and is meant to be run in conjunction with Jenkins CI -- and expects env
 
 To test your changes to the Rook website locally before committing to the Rook repo, you can generate the docs locally and start a local web server.
 
-To generate the docs:
+To generate and view the docs:
 
 ```bash
 # Remove the old master docs and copy your updated docs from your rook repo
@@ -30,11 +38,11 @@ rm -fr docs/rook/master
 mkdir docs/rook/master
 cp -r ../rook/Documentation/* docs/rook/master/
 
-# Starts a live-reloading server that serves the docs at [http://0.0.0.0:4000/docs/rook/master](http://0.0.0.0:4000/docs/rook/master). This requires Docker installed on your machine.
+# Start a live-reloading server that serves the docs at [http://0.0.0.0:4000/docs/rook/master](http://0.0.0.0:4000/docs/rook/master). This requires Docker to be installed on your machine.
 make run
 ```
 
-When you are done, revert the changes to the repo:
+When you are done, revert the changes to this repo:
 
 ```bash
 rm docs/rook/master
