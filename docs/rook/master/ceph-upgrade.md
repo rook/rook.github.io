@@ -47,24 +47,27 @@ With this upgrade guide, there are a few notes to consider:
   both Rook operator updates and for Ceph version updates.
 * We recommend that you read this document in full before you undertake a Rook cluster upgrade.
 
-## Before you Upgrade
-
-## Upgrading the Rook-Ceph Operator
-
 ## Patch Release Upgrades
 
 Unless otherwise noted due to extenuating requirements, upgrades from one patch release of Rook to
-another are as simple as updating the image of the Rook operator. For example, when Rook v1.5.1 is
+another are as simple as updating the common resources and the image of the Rook operator. For example, when Rook v1.5.1 is
 released, the process of updating from v1.5.0 is as simple as running the following:
 
 ```console
+kubectl apply -f common.yaml -f crds.yaml
 kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.5.1
 ```
 
-## Helm Upgrades
+As exemplified above, it is a good practice to update Rook-Ceph common resources from the example
+manifests before any update. The common resources and CRDs might not be updated with every
+release, but K8s will only apply updates to the ones that changed.
+
+## Helm
+
+* The minimum supported Helm version is **v3.2.0**
 
 If you have installed Rook via the Helm chart, Helm will handle some details of the upgrade for you.
-The upgrade steps will clarify if Helm manages the step for you.
+The upgrade steps in this guide will clarify if Helm manages the step for you.
 
 Helm will **not** update the Ceph version. See [Ceph Version Upgrades](#ceph-version-upgrades) for
 instructions on updating the Ceph version.
@@ -78,7 +81,7 @@ master branch are subject to changes and incompatibilities that will not be supp
 official releases. Builds from the master branch can have functionality changed or removed at any
 time without compatibility support and without prior notice.
 
-## Prerequisites
+### Prerequisites
 
 We will do all our work in the Ceph example manifests directory.
 
@@ -110,21 +113,6 @@ In order to successfully upgrade a Rook cluster, the following prerequisites mus
   starting state.
 * All pods consuming Rook storage should be created, running, and in a steady state. No Rook
   persistent volumes should be in the act of being created or deleted.
-
-### Helm
-
-* Your Helm version should be newer than v3.2.0 to avoid [this issue](https://github.com/helm/helm/issues/7697).
-* For a Rook cluster already deployed with Helm older than v3.2.0, also execute the following commands.
-
-```sh
-KIND=ClusterRole
-NAME=psp:rook
-RELEASE=your-apps-release-name
-NAMESPACE=your-apps-namespace
-kubectl annotate $KIND $NAME meta.helm.sh/release-name=$RELEASE
-kubectl annotate $KIND $NAME meta.helm.sh/release-namespace=$NAMESPACE
-kubectl label $KIND $NAME app.kubernetes.io/managed-by=Helm
-```
 
 ## Health Verification
 
@@ -200,7 +188,7 @@ details on the health of the system, such as `ceph osd status`. See the
 Rook will prevent the upgrade of the Ceph daemons if the health is in a `HEALTH_ERR` state.
 If you desired to proceed with the upgrade anyway, you will need to set either
 `skipUpgradeChecks: true` or `continueUpgradeAfterChecksEvenIfNotHealthy: true`
-as described in the [cluster CR settings](https://rook.github.io/docs/rook/v1.4/ceph-cluster-crd.html#cluster-settings).
+as described in the [cluster CR settings](https://rook.github.io/docs/rook/v1.5/ceph-cluster-crd.html#cluster-settings).
 
 ### Container Versions
 
@@ -255,23 +243,27 @@ time without compatibility support and without prior notice.
 
 Let's get started!
 
-## 1. Update the RBAC and CRDs
+## 1. Update common resources and CRDs
 
 > Automatically updated if you are upgrading via the helm chart
 
-First apply new resources. This includes slightly modified privileges (RBAC) needed by the Operator
-and updates to the Custom Resource Definitions (CRDs).
+First apply updates to Rook-Ceph common resources. This includes slightly modified privileges (RBAC)
+needed by the Operator. Also update the Custom Resource Definitions (CRDs).
 
 > **IMPORTANT:** If you are using Kubernetes version v1.15 or lower, you will need to manually
-> modify the `upgrade-from-v1.4-apply.yaml` file to use
+> modify the `common.yaml` file to use
 > `rbac.authorization.k8s.io/v1beta1` instead of `rbac.authorization.k8s.io/v1`
 > You will also need to apply `pre-k8s-1.16/crds.yaml` instead of `crds.yaml`.
 
 ```sh
-kubectl apply -f upgrade-from-v1.4-apply.yaml -f crds.yaml
+git clone --single-branch --branch v1.5.0 https://github.com/rook/rook.git
+cd rook/cluster/examples/kubernetes/ceph
+kubectl apply -f common.yaml -f crds.yaml
 ```
 
 ## 2. Update Ceph CSI versions
+
+> Automatically updated if you are upgrading via the helm chart
 
 If you have specified custom CSI images in the Rook-Ceph Operator deployment, we recommended you
 update to use the latest Ceph-CSI drivers. See the [CSI Version](#csi-version) section for more
@@ -316,8 +308,8 @@ rook-ceph-osd-1         req/upd/avl: 1/1/1      rook-version=v1.4.7
 rook-ceph-osd-2         req/upd/avl: 1/1/1      rook-version=v1.4.7
 ```
 
-An easy check to see if the upgrade is totally
-finished is to check that there is only one `rook-version` reported across the cluster.
+An easy check to see if the upgrade is totally finished is to check that there is only one
+`rook-version` reported across the cluster.
 
 ```console
 # kubectl -n $ROOK_NAMESPACE get deployment -l rook_cluster=$ROOK_NAMESPACE -o jsonpath='{range .items[*]}{"rook-version="}{.metadata.labels.rook-version}{"\n"}{end}' | sort | uniq
@@ -330,14 +322,14 @@ This cluster is finished:
 
 ## 5. Verify the updated cluster
 
-At this point, your Rook operator should be running version `rook/ceph:v1.4.0`.
+At this point, your Rook operator should be running version `rook/ceph:v1.5.0`.
 
 Verify the Ceph cluster's health using the [health verification section](#health-verification).
 
 
 ## Ceph Version Upgrades
 
-Rook v1.4 supports Ceph Nautilus 14.2.5 or newer and Ceph Octopus v15.2.0 or newer. These are the
+Rook v1.5 supports Ceph Nautilus 14.2.5 or newer and Ceph Octopus v15.2.0 or newer. These are the
 only supported major versions of Ceph.
 
 > **IMPORTANT: When an update is requested, the operator will check Ceph's status, if it is in `HEALTH_ERR` it will refuse to do the upgrade.**
@@ -365,15 +357,7 @@ These images are tagged in a few ways:
 
 ### Example upgrade to Ceph Octopus
 
-#### 1. Update the CRDs
-
-It is a good practice to update Rook-Ceph CRDs from the example manifests before any update.
-
-```sh
-kubectl apply -f crds.yaml
-```
-
-#### 2. Update the main Ceph daemons
+#### 1. Update the main Ceph daemons
 
 The majority of the upgrade will be handled by the Rook operator. Begin the upgrade by changing the
 Ceph image field in the cluster CRD (`spec.cephVersion.image`).
@@ -384,7 +368,7 @@ CLUSTER_NAME="$ROOK_NAMESPACE"  # change if your cluster name is not the Rook na
 kubectl -n $ROOK_NAMESPACE patch CephCluster $CLUSTER_NAME --type=merge -p "{\"spec\": {\"cephVersion\": {\"image\": \"$NEW_CEPH_IMAGE\"}}}"
 ```
 
-#### 3. Wait for the daemon pod updates to complete
+#### 2. Wait for the daemon pod updates to complete
 
 As with upgrading Rook, you must now wait for the upgrade to complete. Status can be determined in a
 similar way to the Rook upgrade as well.
@@ -404,7 +388,7 @@ This cluster is finished:
     ceph-version=15.2.4-0
 ```
 
-#### 4. Verify the updated cluster
+#### 3. Verify the updated cluster
 
 Verify the Ceph cluster's health using the [health verification section](#health-verification).
 
@@ -417,9 +401,6 @@ version of CSI.
 The operator configuration variables have recently moved from the operator deployment to the
 `rook-ceph-operator-config` ConfigMap. The values in the operator deployment can still be set,
 but if the ConfigMap settings are applied, they will override the operator deployment settings.
-
-> If the cluster was originally installed prior to v1.3, the ConfigMap may not exist.
-> See the latest `operator.yaml` for example ConfigMap settings.
 
 ```console
 kubectl -n $ROOK_NAMESPACE edit configmap rook-ceph-operator-config
