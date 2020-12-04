@@ -32,7 +32,7 @@ metadata:
 spec:
   cephVersion:
     # see the "Cluster Settings" section below for more details on which image of ceph to run
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -59,7 +59,7 @@ metadata:
 spec:
   cephVersion:
     # see the "Cluster Settings" section below for more details on which image of ceph to run
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -168,7 +168,7 @@ Settings can be specified at the global level to apply to the cluster as a whole
 * `external`:
   * `enable`: if `true`, the cluster will not be managed by Rook but via an external entity. This mode is intended to connect to an existing cluster. In this case, Rook will only consume the external cluster. However, Rook will be able to deploy various daemons in Kubernetes such as object gateways, mds and nfs if an image is provided and will refuse otherwise. If this setting is enabled **all** the other options will be ignored except `cephVersion.image` and `dataDirHostPath`. See [external cluster configuration](#external-cluster). If `cephVersion.image` is left blank, Rook will refuse the creation of extra CRs like object, file and nfs.
 * `cephVersion`: The version information for launching the ceph daemons.
-  * `image`: The image used for running the ceph daemons. For example, `ceph/ceph:v14.2.12` or `ceph/ceph:v15.2.5`. For more details read the [container images section](#ceph-container-images).
+  * `image`: The image used for running the ceph daemons. For example, `ceph/ceph:v14.2.12` or `ceph/ceph:v15.2.7`. For more details read the [container images section](#ceph-container-images).
   For the latest ceph images, see the [Ceph DockerHub](https://hub.docker.com/r/ceph/ceph/tags/).
   To ensure a consistent version of the image is running across all nodes in the cluster, it is recommended to use a very specific image version.
   Tags also exist that would give the latest version, but they are only recommended for test environments. For example, the tag `v14` will be updated each time a new nautilus build is released.
@@ -198,6 +198,9 @@ For more details on the mons and when to choose a number other than `3`, see the
   * `modules`: is the list of Ceph manager modules to enable
 * `crashCollector`: The settings for crash collector daemon(s).
   * `disable`: is set to `true`, the crash collector will not run on any node where a Ceph daemon runs
+* `logCollector`: The settings for log collector daemon.
+  * `enabled`: if set to `true`, the log collector will run as a side-car next to each Ceph daemon. The Ceph configuration option `log_to_file` will be turned on, meaning Ceph daemons will log on files in addition to still logging to container's stdout. These logs will be rotated. (default: false)
+  * `periodicity`: how often to rotate daemon's log. (default: 24h). Specified with a time suffix which may be 'h' for hours or 'd' for days. **Rotating too often will slightly impact the daemon's performance since the signal briefly interrupts the program.**
 * `annotations`: [annotations configuration settings](#annotations-and-labels)
 * `labels`: [labels configuration settings](#annotations-and-labels)
 * `placement`: [placement configuration settings](#placement-configuration-settings)
@@ -543,6 +546,7 @@ You can set resource requests/limits for Rook components through the [Resource R
 * `crashcollector`: Set resource requests/limits for crash. This pod runs wherever there is a Ceph pod running.
 It scrapes for Ceph daemon core dumps and sends them to the Ceph manager crash module so that core dumps are centralized and can be easily listed/accessed.
 You can read more about the [Ceph Crash module](https://docs.ceph.com/docs/master/mgr/crash/).
+* `logcollector`: Set resource requests/limits for the log collector. When enabled, this container runs as side-car to each Ceph daemons.
 * `cleanup`: Set resource requests/limits for cleanup job, responsible for wiping cluster's data after uninstall
 
 In order to provide the best possible experience running Ceph in containers, Rook internally recommends minimum memory limits if resource limits are passed.
@@ -649,7 +653,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -681,7 +685,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -722,7 +726,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -769,7 +773,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -872,7 +876,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
@@ -918,7 +922,7 @@ spec:
           requests:
             storage: 10Gi
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
     allowUnsupported: false
   dashboard:
     enabled: true
@@ -1330,7 +1334,7 @@ spec:
     enable: true
   dataDirHostPath: /var/lib/rook
   cephVersion:
-    image: ceph/ceph:v15.2.5 # Should match external cluster version
+    image: ceph/ceph:v15.2.7 # Should match external cluster version
 ```
 
 ### Cleanup policy
@@ -1422,7 +1426,7 @@ capabilities = ["read"]
 You can write the policy like so and then create a token:
 
 ```console
-vault policy write ocs /tmp/rook.hcl
+vault policy write rook /tmp/rook.hcl
 vault token create -policy=rook
 Key                  Value
 ---                  -----
