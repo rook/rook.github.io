@@ -57,3 +57,9 @@ processing the Jekyll site manually, it does limit our ability to run custom cod
 plugins.  Github only allows for [public popular whitelisted gems](https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/).
 
 Improvements in the future may include setting up our own build step to process the static site and test before pushing.
+
+# Licensing
+
+The source code in this repository is licensed under the [Apache 2.0](LICENSE) license.
+
+The documentation is distributed under [CC-BY-4.0](LICENSE-DOCS).
