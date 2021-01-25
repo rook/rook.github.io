@@ -99,6 +99,8 @@ The following tables lists the configurable parameters of the rook-operator char
 | `discover.podLabels`               | Labels to add to the discover pods.                                                                                            | <none>                                                    |
 | `csi.enableRbdDriver`              | Enable Ceph CSI RBD driver.                                                                                                    | `true`                                                    |
 | `csi.enableCephfsDriver`           | Enable Ceph CSI CephFS driver.                                                                                                 | `true`                                                    |
+| `csi.enableCephfsSnapshotter`      | Enable Snapshotter in CephFS provisioner pod.                                                                                  | `true`                                                    |
+| `csi.enableRBDSnapshotter`         | Enable Snapshotter in RBD provisioner pod.                                                                                     | `true`                                                    |
 | `csi.pluginPriorityClassName`      | PriorityClassName to be set on csi driver plugin pods.                                                                         | <none>                                                    |
 | `csi.provisionerPriorityClassName` | PriorityClassName to be set on csi driver provisioner pods.                                                                    | <none>                                                    |
 | `csi.enableOMAPGenerator`          | EnableOMAP generator deploys omap sidecar in CSI provisioner pod, to enable it set it to true                                  | `false`                                                    |
@@ -139,6 +141,7 @@ The following tables lists the configurable parameters of the rook-operator char
 | `agent.nodeAffinity`               | The node labels for affinity of `rook-agent` (***)                                                                             | <none>                                                    |
 | `admissionController.tolerations`  | Array of tolerations in YAML format which will be added to admission controller deployment.                                    | <none>                                                    |
 | `admissionController.nodeAffinity` | The node labels for affinity of the admission controller deployment (***)                                                      | <none>                                                    |
+| `allowMultipleFilesystems`         | **(experimental)** Allows multiple filesystems to be deployed to a Ceph cluster. Octopus (v15) or Nautilus (v14)               | `false`                                                   |
 
 &ast; For information on what to set `agent.flexVolumeDirPath` to, please refer to the [Rook flexvolume documentation](flexvolume.md)
 
