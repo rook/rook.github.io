@@ -71,6 +71,8 @@ helm delete --namespace rook-ceph rook-ceph
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+After uninstalling you may want to clean up the CRDs as described on the [teardown documentation](ceph-teardown.md#removing-the-cluster-crd-finalizer).
+
 ## Configuration
 
 The following tables lists the configurable parameters of the rook-operator chart and their default values.
