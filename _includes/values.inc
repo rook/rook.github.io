@@ -9,7 +9,7 @@
 {% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[0].versions[site.current_release_index].version | append: '/quickstart.html' | relative_url %}
 {% assign githubLink = '//github.com/rook/rook' %}
 {% assign latestDocs = '/docs/rook/' | append: site.data.projects[0].versions[site.current_release_index].version | append: '/' | relative_url %}
-{% assign nexentaLink = '//nexenta.com' %}
+{% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com' %}
 {% assign slackLink = '//slack.rook.io/' %}
 {% assign suseLink = '//www.suse.com/' %}
