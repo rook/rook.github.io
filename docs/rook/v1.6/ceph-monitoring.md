@@ -38,7 +38,7 @@ With the Prometheus operator running, we can create a service monitor that will 
 From the root of your locally cloned Rook repo, go the monitoring directory:
 
 ```console
-$ git clone --single-branch --branch v1.6.0-beta.0 https://github.com/rook/rook.git
+$ git clone --single-branch --branch v1.6.0 https://github.com/rook/rook.git
 cd rook/cluster/examples/kubernetes/ceph/monitoring
 ```
 
@@ -179,3 +179,21 @@ This will create the service monitor to have promethues monitor CSI
 
 RBD per-image IO statistics collection is disabled by default. This can be enabled by setting `enableRBDStats: true` in the CephBlockPool spec.
 Prometheus does not need to be restarted after enabling it.
+
+### Using custom label selectors in Prometheus
+
+If Prometheus needs to select specific resources, we can do so by injecting labels into these objects and using it as label selector.
+
+```YAML
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+[...]
+spec:
+[...]
+labels:
+  monitoring:
+    prometheus: k8s
+[...]
