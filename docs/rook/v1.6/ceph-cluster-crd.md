@@ -537,7 +537,10 @@ This allows to keep Rook components running when for example a node runs out of 
 You can set resource requests/limits for Rook components through the [Resource Requirements/Limits](#resource-requirementslimits) structure in the following keys:
 
 * `mon`: Set resource requests/limits for mons
-* `osd`: Set resource requests/limits for OSDs
+* `osd`: Set resource requests/limits for OSDs.
+  This key applies for all OSDs regardless of their device classes. In case of need to apply resource requests/limits for OSDs with particular device class use specific osd keys below. If the memory resource is declared Rook will automatically set the OSD configuration `osd_memory_target` to the same value. This aims to ensure that the actual OSD memory consumption is consistent with the OSD pods' resource declaration.
+* `osd-<deviceClass>`: Set resource requests/limits for OSDs on a specific device class. Rook will automatically detect `hdd`,
+  `ssd`, or `nvme` device classes. Custom device classes can also be set.
 * `mgr`: Set resource requests/limits for MGRs
 * `mgr-sidecar`: Set resource requests/limits for the MGR sidecar, which is only created when `mgr.count: 2`.
   The sidecar requires very few resources since it only executes every 15 seconds to query Ceph for the active
@@ -555,10 +558,11 @@ If a user configures a limit or request value that is too low, Rook will still r
 * `mon`: 1024MB
 * `mgr`: 512MB
 * `osd`: 2048MB
-* `mds`: 4096MB
 * `prepareosd`: 50MB
 * `crashcollector`: 60MB
 * `mgr-sidecar`: 100MB limit, 40MB requests
+
+> **HINT** The resources for MDS daemons are not configured in the Cluster. Refer to the [Ceph Filesystem CRD](ceph-filesystem-crd.md) instead.
 
 ### Resource Requirements/Limits
 
