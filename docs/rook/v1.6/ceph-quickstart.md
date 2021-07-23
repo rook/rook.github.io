@@ -24,8 +24,10 @@ To make sure you have a Kubernetes cluster that is ready for `Rook`, you can [fo
 
 In order to configure the Ceph storage cluster, at least one of these local storage options are required:
 - Raw devices (no partitions or formatted filesystems)
+  - This requires `lvm2` to be installed on the host.
+    To avoid this dependency, you can create a single full-disk partition on the disk (see below)
 - Raw partitions (no formatted filesystem)
-- PVs available from a storage class in `block` mode
+- Persistent Volumes available from a storage class in `block` mode
 
 You can confirm whether your partitions or devices are formatted filesystems with the following command.
 
@@ -48,7 +50,7 @@ If the `FSTYPE` field is not empty, there is a filesystem on top of the correspo
 If you're feeling lucky, a simple Rook cluster can be created with the following kubectl commands and [example yaml files](https://github.com/rook/rook/blob/{{ branchName }}/cluster/examples/kubernetes/ceph). For the more detailed install, skip to the next section to [deploy the Rook operator](#deploy-the-rook-operator).
 
 ```console
-$ git clone --single-branch --branch v1.6.7 https://github.com/rook/rook.git
+$ git clone --single-branch --branch v1.6.8 https://github.com/rook/rook.git
 cd rook/cluster/examples/kubernetes/ceph
 kubectl create -f crds.yaml -f common.yaml -f operator.yaml
 kubectl create -f cluster.yaml
