@@ -9,17 +9,13 @@
       <span></span> <span></span> <span></span>
     </div>
     <ul class="links">
-      <!-- TODO: Add this back once docs are re-organized in main rook repo and remove standalone Documentaion link below
-        <li class="dropdown">
-          <a role="button" href="javascript:void(0)">Documentation</a>
-          <div class="dropdown-content">
-            <a href="{{ latestDocs }}">ROOK</a>
-            <a href="#">Cassandra</a>
-            <a href="#">Ceph</a>
-            <a href="#">NFS</a>
-          </div>
-        </li> -->
-      <li><a href="{{ latestDocs }}">Documentation</a></li>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="{{ cephDocLink }}">Ceph</a>
+          <a href="{{ cassandraDocLink }}">Cassandra</a>
+          <a href="{{ nfsDocLink }}">NFS</a>
+        </div>
       <li class="dropdown">
         <a role="button" href="javascript:void(0)">Community</a>
         <div class="dropdown-content">

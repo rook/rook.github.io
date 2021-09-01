@@ -9,10 +9,10 @@ layout: default
 <section class="docs-header">
   <h1>Documentation</h1>
   <div class="versions">
-    <a role="button" href="javascript:void(0)">Rook version {{ currentVersion }}</a>
+    <a role="button" href="javascript:void(0)">Rook {{ current_project_name }} {{ currentVersion }}</a>
     <div class="versions-dropdown-content">
       {% for ver in project.versions %}
-        <a href="{{ ver.path | append: currentPath | relative_url }}"{% if ver.version == currentVersion %} class="active"{% endif %}>Rook version {{ ver.version }}</a>
+        <a href="{{ ver.path | append: currentPath | relative_url }}"{% if ver.version == currentVersion %} class="active"{% endif %}>Rook {{ current_project_name}} {{ ver.version }}</a>
       {% endfor %}
     </div>
     <img src="{{ "/images/arrow.svg" | relative_url }}" />
