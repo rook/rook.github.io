@@ -1,6 +1,6 @@
 ---
-title: Upgrade
-weight: 3000
+title: Cassandra Upgrade
+weight: 6000
 ---
 
 # Cassandra Operator Upgrades

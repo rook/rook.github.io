@@ -1,26 +1,25 @@
 ---
 title: Cassandra Quickstart
-weight: 1000
+weight: 2000
 ---
 {% include_relative branch.liquid %}
 
-# Cassandra Quickstart TEST
+# Cassandra Quickstart
+
+Welcome to Rook! We hope you have a great experience installing the Rook **cloud-native storage orchestrator** platform to enable highly available, durable storage in your Kubernetes cluster.
 
 [Cassandra](http://cassandra.apache.org/) is a highly available, fault tolerant, peer-to-peer NoSQL database featuring lightning fast performance and tunable consistency. It provides massive scalability with no single point of failure.
 
 [Scylla](https://www.scylladb.com) is a close-to-the-hardware rewrite of Cassandra in C++. It features a shared nothing architecture that enables true linear scaling and major hardware optimizations that achieve ultra-low latencies and extreme throughput. It is a drop-in replacement for Cassandra and uses the same interfaces, so it is also supported by Rook.
 
-## Prerequisites
-
-A Kubernetes cluster (v1.16 or higher) is necessary to run the Rook Cassandra operator.
-To make sure you have a Kubernetes cluster that is ready for `Rook`, you can [follow these instructions](k8s-pre-reqs.md) (the flexvolume plugin is not necessary for Cassandra)
+If you have any questions along the way, please don't hesitate to ask us in our [Slack channel](https://rook-io.slack.com). You can sign up for our Slack [here](https://slack.rook.io).
 
 ## Deploy Cassandra Operator
 
 First deploy the Rook Cassandra Operator using the following commands:
 
 ```console
-$ git clone --single-branch --branch {{ branchName }} https://github.com/rook/rook.git
+$ git clone --single-branch --branch {{ branchName }} https://github.com/rook/cassandra.git
 cd rook/cluster/examples/kubernetes/cassandra
 kubectl apply -f crds.yaml
 kubectl apply -f operator.yaml
