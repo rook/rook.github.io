@@ -1,12 +1,17 @@
 ---
-title: Network Filesystem (NFS)
-weight: 1000
+title: NFS Quickstart
+weight: 2000
 ---
 {% include_relative branch.liquid %}
 
-# Network Filesystem (NFS) TEST
+# Network Filesystem (NFS) Quickstart
+
+Welcome to Rook! We hope you have a great experience installing the Rook **cloud-native storage orchestrator** platform
+to enable highly available, durable storage in your Kubernetes cluster.
 
 NFS allows remote hosts to mount filesystems over a network and interact with those filesystems as though they are mounted locally. This enables system administrators to consolidate resources onto centralized servers on the network.
+
+If you have any questions along the way, please don't hesitate to ask us in our [Slack channel](https://rook-io.slack.com). You can sign up for our Slack [here](https://slack.rook.io).
 
 ## Prerequisites
 
@@ -22,7 +27,7 @@ You can read further about the details and limitations of these volumes in the [
 First deploy the Rook NFS operator using the following commands:
 
 ```console
-$ git clone --single-branch --branch {{ branchName }} https://github.com/rook/rook.git
+$ git clone --single-branch --branch v1.7.2 https://github.com/rook/nfs.git
 cd rook/cluster/examples/kubernetes/nfs
 kubectl create -f crds.yaml
 kubectl create -f operator.yaml
