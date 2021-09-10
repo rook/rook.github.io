@@ -19,7 +19,7 @@ If you have any questions along the way, please don't hesitate to ask us in our 
 First deploy the Rook Cassandra Operator using the following commands:
 
 ```console
-$ git clone --single-branch --branch v1.7.2 https://github.com/rook/cassandra.git
+$ git clone --single-branch --branch v1.7.3 https://github.com/rook/cassandra.git
 cd rook/cluster/examples/kubernetes/cassandra
 kubectl apply -f crds.yaml
 kubectl apply -f operator.yaml
