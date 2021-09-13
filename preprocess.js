@@ -21,14 +21,14 @@ const projects = [
   ...getDirectories(`${ROOT_DIR}/docs`).map(project => {
     // get all versions except master
     const versions = getDirectories(`${ROOT_DIR}/docs/${project}`)
-      .filter(v => v !== "master")
+      .filter(v => v !== "latest")
       .sort((a, b) =>
         semver.rcompare(semver.coerce(a).version, semver.coerce(b).version)
       );
     return {
       project,
       path: `/docs/${project}`,
-      versions: [...versions, "master"].map(version => ({
+      versions: [...versions, "latest"].map(version => ({
         version,
         path: `/docs/${project}/${version}`
       }))
