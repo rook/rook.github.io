@@ -18,12 +18,12 @@ Kubernetes status is the first line of investigating when something goes wrong w
 
 * Rook pod status:
   * `kubectl get pod -n <cluster-namespace> -o wide`
-    * e.g., `kubectl get pod -n rook-cassandra -o wide`
+    * e.g., `kubectl get pod -n rook-nfs -o wide`
 * Logs for Rook pods
-  * Logs for the operator: `kubectl logs -n <cluster-namespace> -l app=rook-cassandra-cassandra`
-    * e.g., `kubectl logs -n rook-cassandra -l app=rook-cassandra-operator`
-  * Logs for a specific pod: `kubectl logs -n <cluster-namespace> <pod-name>`, or a pod using a label such as mon1: `kubectl logs -n rook-cassandra -l <label-matcher>`
-    * e.g., `kubectl logs -n rook-cassandra -l mon=a`
+  * Logs for the operator: `kubectl logs -n <cluster-namespace> -l app=rook-nfs-operator`
+    * e.g., `kubectl logs -n rook-nfs -l app=rook-nfs-operator`
+  * Logs for a specific pod: `kubectl logs -n <cluster-namespace> <pod-name>`, or a pod using a label such as mon1: `kubectl logs -n rook-nfs -l <label-matcher>`
+    * e.g., `kubectl logs -n rook-nfs -l mon=a`
   * Logs on a specific node to find why a PVC is failing to mount:
     * Connect to the node, then get kubelet logs (if your distro is using systemd): `journalctl -u kubelet`
   * Pods with multiple containers
