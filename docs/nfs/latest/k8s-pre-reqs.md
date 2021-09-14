@@ -11,7 +11,7 @@ and Rook is granted the required privileges (see below for more information).
 
 ## Minimum Version
 
-Kubernetes **v1.16** or higher is supported for the NFS operator.
+Kubernetes **v1.16** or higher is supported for the Cassandra operator.
 
 ## Bootstrapping Kubernetes
 
