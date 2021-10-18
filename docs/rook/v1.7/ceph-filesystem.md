@@ -91,8 +91,7 @@ metadata:
 # Change "rook-ceph" provisioner prefix to match the operator namespace if needed
 provisioner: rook-ceph.cephfs.csi.ceph.com
 parameters:
-  # clusterID is the namespace where the rook cluster is running
-  # If you change this namespace, also change the namespace below where the secret namespaces are defined
+  # clusterID is the namespace where operator is deployed.
   clusterID: rook-ceph
 
   # CephFS filesystem name into which the volume shall be created
