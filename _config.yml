@@ -55,6 +55,6 @@ defaults:
 sass:
   sass_dir: ./_scss
 
-current_ceph_release_index: 0
+current_ceph_release_index: 1
 current_cassandra_release_index: 0
 current_nfs_release_index: 0
