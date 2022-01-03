@@ -26,6 +26,14 @@ build: _data/projects.json
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
 
+bundle_update: ## Update Gemfile.lock (via bundler)
+bundle_update: _data/projects.json
+	docker run --rm -it \
+		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		-v "$(PWD):/srv/jekyll" \
+		jekyll/jekyll -- \
+		bundle update
+
 publish:	## push new changes to the live site
 publish: _data/projects.json
 	$(eval ROOT_DIR = $(shell pwd -P))
