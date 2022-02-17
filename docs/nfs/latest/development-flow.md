@@ -5,8 +5,10 @@ weight: 12000
 
 # Contributing
 
+**The Rook Cassandra operator is [deprecated](https://github.com/rook/cassandra#deprecated)**
+
 Thank you for your time and effort to help us improve Rook! Here are a few steps to get started. If you have any questions,
-don't hesitate to reach out to us on our [Slack](https://rook-io.slack.com) dev channel.
+don't hesitate to reach out to us on our [Slack](https://Rook-io.slack.com) dev channel.
 
 ## Prerequisites
 
@@ -18,7 +20,7 @@ don't hesitate to reach out to us on our [Slack](https://rook-io.slack.com) dev 
 
 ### Create a Fork
 
-From your browser navigate to [http://github.com/rook/nfs](http://github.com/rook/nfs) and click the "Fork" button.
+From your browser navigate to [http://github.com/rook/cassandra](http://github.com/rook/cassandra) and click the "Fork" button.
 
 ### Clone Your Fork
 
@@ -32,13 +34,13 @@ mkdir -p $GOPATH/src/github.com/rook
 cd $GOPATH/src/github.com/rook
 
 # Clone your fork, where <user> is your GitHub account name
-$ git clone https://github.com/<user>/nfs.git
+$ git clone https://github.com/<user>/cassandra.git
 cd rook
 ```
 
 ### Build
 
-Build the NFS operator image:
+Build the Cassandra operator image:
 
 ```console
 make
@@ -81,7 +83,7 @@ First you will need to add the upstream remote to your local git:
 
 ```console
 # Add 'upstream' to the list of remotes
-git remote add upstream https://github.com/rook/nfs.git
+git remote add upstream https://github.com/rook/cassandra.git
 
 # Verify the remote was added
 git remote -v
@@ -108,14 +110,14 @@ rook
 │
 ├── pkg
 │   ├── apis
-│   │   ├── nfs.rook.io           # NFS server specific specs
+│   │   ├── cassandra.rook.io     # cassandra server specific specs
 │   │   │   └── v1alpha1
 │   │   └── rook.io               # rook.io API group of common types
 │   │       └── v1alpha2
 │   ├── client                    # auto-generated strongly typed client code to access Rook APIs
 │   ├── clusterd
-│   ├── operator                  # all orchestration logic and custom controllers for the nfs operator
-│   │   ├── nfs
+│   ├── operator                  # all orchestration logic and custom controllers for the cassandra operator
+│   │   ├── cassandra
 │   │   ├── k8sutil
 │   │   └── test
 │   ├── test
@@ -159,7 +161,7 @@ Submit a pull request for the design to be discussed and approved by the communi
 
 An issue should be opened to track the work of authoring and completing the design document.
 This issue is in addition to the issue that is tracking the implementation of the feature.
-The [design label](https://github.com/rook/nfs/labels/design) should be assigned to the issue to denote it as such.
+The [design label](https://github.com/rook/cassandra/labels/design) should be assigned to the issue to denote it as such.
 
 ### Create a Branch
 
@@ -225,7 +227,7 @@ go tool cover -html=coverage.out -o coverage.html
 #### Running the Integration Tests
 
 For instructions on how to execute the end to end smoke test suite,
-follow the [test instructions](https://github.com/rook/nfs/blob/master/tests/README.md).
+follow the [test instructions](https://github.com/rook/cassandra/blob/master/tests/README.md).
 
 ### Commit structure
 
@@ -247,14 +249,14 @@ component: commit title
 This is the commit message, here I'm explaining, what the bug was along with its root cause.
 Then I'm explaining how I fixed it.
 
-Closes: https://github.com/rook/nfs/issues/<NUMBER>
+Closes: https://github.com/rook/cassandra/issues/<NUMBER>
 Signed-off-by: First Name Last Name <email address>
 ```
 
 The `component` **MUST** be one of the following:
 - bot
 - build
-- nfs
+- cassandra
 - ci
 - core
 - docs
@@ -285,7 +287,7 @@ Once your commit history is clean, ensure you have based on the [latest upstream
 
 ### Submitting
 
-Go to the [Rook github](https://www.github.com/rook/nfs) to open the PR. If you have pushed recently, you should see an obvious link to open the PR. If you have not pushed recently, go to the Pull Request tab and select your fork and branch for the PR.
+Go to the [Rook github](https://www.github.com/rook/cassandra) to open the PR. If you have pushed recently, you should see an obvious link to open the PR. If you have not pushed recently, go to the Pull Request tab and select your fork and branch for the PR.
 
 After the PR is open, you can make changes simply by pushing new commits. Your PR will track the changes in your fork and update automatically.
 
