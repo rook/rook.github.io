@@ -5,6 +5,8 @@ weight: 6000
 
 # Cassandra Operator Upgrades
 
+**The Rook Cassandra operator is [deprecated](https://github.com/rook/cassandra#deprecated)**
+
 This guide will walk you through the manual steps to upgrade the software in Cassandra Operator from one version to the next. The cassandra operator is made up of two parts:
 
 1. The `Operator` binary that runs as a standalone application, watches the Cassandra Cluster CRD and makes administrative decisions.

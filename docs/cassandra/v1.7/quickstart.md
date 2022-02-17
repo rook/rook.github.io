@@ -6,6 +6,8 @@ weight: 2000
 
 # Cassandra Quickstart
 
+**The Rook Cassandra operator is [deprecated](https://github.com/rook/cassandra#deprecated)**
+
 Welcome to Rook! We hope you have a great experience installing the Rook **cloud-native storage orchestrator** platform to enable highly available, durable storage in your Kubernetes cluster.
 
 [Cassandra](http://cassandra.apache.org/) is a highly available, fault tolerant, peer-to-peer NoSQL database featuring lightning fast performance and tunable consistency. It provides massive scalability with no single point of failure.
