@@ -6,14 +6,12 @@ weight: 1000
 
 # Prerequisites
 
-**The Rook Cassandra operator is [deprecated](https://github.com/rook/cassandra#deprecated)**
-
 Rook can be installed on any existing Kubernetes cluster as long as it meets the minimum version
 and Rook is granted the required privileges (see below for more information).
 
 ## Minimum Version
 
-Kubernetes **v1.16** or higher is supported for the Cassandra operator.
+Kubernetes **v1.16** or higher is supported for the NFS operator.
 
 ## Bootstrapping Kubernetes
 
