@@ -5,6 +5,8 @@ weight: 3000
 
 # Cassandra Cluster CRD
 
+**The Rook Cassandra operator is [deprecated](https://github.com/rook/cassandra#deprecated)**
+
 Cassandra database clusters can be created and configuring using the `clusters.cassandra.rook.io` custom resource definition (CRD).
 
 Please refer to the the [user guide walk-through](quickstart.md) for complete instructions.
