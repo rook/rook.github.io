@@ -27,7 +27,7 @@ You can read further about the details and limitations of these volumes in the [
 First deploy the Rook NFS operator using the following commands:
 
 ```console
-$ git clone --single-branch --branch v1.7.3 https://github.com/rook/nfs.git
+$ git clone --single-branch --branch {{ branchName }} https://github.com/rook/nfs.git
 cd rook/cluster/examples/kubernetes/nfs
 kubectl create -f crds.yaml
 kubectl create -f operator.yaml
@@ -411,7 +411,7 @@ Save this PVC and NFS Server instance as `nfs-ceph.yaml`:
 ---
 # A rook ceph cluster must be running
 # Create a rook ceph cluster using examples in rook/cluster/examples/kubernetes/ceph
-# Refer to https://rook.io/docs/rook/master/ceph-quickstart.html for a quick rook cluster setup
+# Refer to https://rook.io/docs/rook/latest/ceph-quickstart.html for a quick rook cluster setup
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
