@@ -28,14 +28,11 @@ layout: default
     </div>
     {% if currentVersion == "latest" %}
       <div class="alert master">
-        <p><b>PLEASE NOTE</b>: This document applies to an <b>unreleased</b> version of Rook. It is strongly recommended that you only use official releases of Rook, as unreleased versions are subject to changes and incompatibilities that will not be supported in the official releases.</p>
-        <p>If you are using an official release version of Rook, you should refer to the documentation for your specific version.</p>
-        <strong>Documentation for other releases can be found by using the version selector in the bottom left of any doc page.</strong>
+        <p><b>PLEASE NOTE:</b> This document applies to an <b>unreleased</b> version of Rook. It is strongly recommended that you only use official releases of Rook, as unreleased versions are subject to changes and incompatibilities that will not be supported in the official releases.</p>
       </div>
     {% elsif currentVersion != latestVersion %}
       <div class="alert old">
         <p><b>PLEASE NOTE</b>: This document applies to {{ currentVersion }} version and not to the latest <strong>stable</strong> release {{ latestVersion }}</p>
-        <strong>Documentation for other releases can be found by using the version selector in the top right of any doc page.</strong>
       </div>
     {% endif %}
     <div class="docs-text">
