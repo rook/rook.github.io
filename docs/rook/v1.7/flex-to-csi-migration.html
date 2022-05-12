@@ -1,0 +1,824 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.7/flex-to-csi-migration.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/flex-to-csi-migration.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/flex-to-csi-migration.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/flex-to-csi-migration.html" class="active">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/flex-to-csi-migration.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/flex-to-csi-migration.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/flex-to-csi-migration.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/flex-to-csi-migration.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/flex-to-csi-migration.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/flex-to-csi-migration.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/flex-to-csi-migration.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/flex-to-csi-migration.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/flex-to-csi-migration.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/flex-to-csi-migration.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/flex-to-csi-migration.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/flex-to-csi-migration.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/flex-to-csi-migration.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/flex-to-csi-migration.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.7 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="flex-to-csi-migration">Flex to CSI Migration</h1>
+
+<p>In Rook v1.8, the Flex driver has been deprecated. Before updating to v1.8, any Flex volumes created in previous versions of Rook will need to be converted to Ceph-CSI volumes.</p>
+
+<p>The tool <a href="https://github.com/ceph/persistent-volume-migrator">persistent-volume-migrator</a> will help automate migration of Flex rbd volumes to Ceph-CSI volumes.</p>
+
+<blockquote>
+  <p><strong>Note</strong> Migration of CephFS FlexVolumes is not supported for now.</p>
+</blockquote>
+
+<h2 id="migration-preparation">Migration Preparation</h2>
+
+<ol>
+  <li>Rook v1.7.9 or later v1.7.x version is required. If you have a previous version of Rook running, follow the <a href="https://rook.io/docs/rook/v1.7/ceph-upgrade.html">upgrade guide</a> to upgrade from previous releases until on the latest v1.7.x.</li>
+  <li>Enable the CSI driver if not already enabled. See the <a href="https://github.com/rook/rook/blob/release-1.7/cluster/examples/kubernetes/ceph/operator.yaml#L29-L32">operator settings</a> such as <code class="language-plaintext highlighter-rouge">ROOK_CSI_ENABLE_RBD</code>.</li>
+  <li>Confirm the Rook-Ceph cluster is healthy (<code class="language-plaintext highlighter-rouge">ceph status</code> shows <code class="language-plaintext highlighter-rouge">health: OK</code>)</li>
+  <li>Create the CSI storage class to which you want to migrate</li>
+  <li>Create the migrator pod
+1) <code class="language-plaintext highlighter-rouge">kubectl create -f cluster/examples/kubernetes/ceph/flex-migrator.yaml</code></li>
+</ol>
+
+<p><strong>NOTE</strong>: The Migration procedure will come with a downtime as we need to scale down the applications using the volumes before migration.</p>
+
+<h2 id="migrate-a-pvc">Migrate a PVC</h2>
+
+<ol>
+  <li>Stop the application pods that are consuming the flex volume(s) that need to be converted. For example, scale the application deployment down to 0: <code class="language-plaintext highlighter-rouge">kubectl scale --replicas=0 deploy/&lt;name&gt;</code></li>
+  <li>Connect to migration pod
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">migration_pod=$(kubectl -n rook-ceph get pod -l app=rook-ceph-migrator -o jsonpath='{.items[*].metadata.name}')</code></p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph exec -it "$migration_pod" -- sh</code></p>
+      </li>
+    </ol>
+  </li>
+  <li>Run the tool to migrate the PVC. See the <a href="#migration-tool-options">section below</a> for more details on the options and the sample output.
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">pv-migrator --pvc=&lt;pvc-name&gt; --pvc-ns=&lt;pvc-namespace&gt; --destination-sc=&lt;storageclass-name-to-migrate-in&gt;</code></li>
+    </ol>
+  </li>
+  <li>Start the application pods which were stopped in step 1. For example, scale the application deployment back up: <code class="language-plaintext highlighter-rouge">kubectl scale --replicas=1 deploy/&lt;name&gt;</code></li>
+</ol>
+
+<h2 id="migration-tool-options">Migration Tool Options</h2>
+
+<p>These are the options for converting a single PVC. For more options, see the <a href="https://github.com/ceph/persistent-volume-migrator">tool documentation</a>, for example to convert all PVCs automatically that belong to the same storage class.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">--pvc</code>: <strong>required</strong>: name of the pvc to migrate</li>
+  <li><code class="language-plaintext highlighter-rouge">--pvc-ns</code>: <strong>required</strong>: namespace in which the target PVC is present.</li>
+  <li><code class="language-plaintext highlighter-rouge">--destination-sc</code>: <strong>required</strong>: name of the ceph-csi storage class in which you want to migrate. The destination StroageClass pool name should be same as PVC you want to migrate.</li>
+  <li><code class="language-plaintext highlighter-rouge">--rook-ns</code>: <strong>optional</strong> namespace where the rook operator is running. <strong>default: rook-ceph</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">--ceph-cluster-ns</code>: <strong>optional</strong> namespace where the ceph cluster is running. <strong>default: rook-ceph</strong>.</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">pv-migrator --pvc=rbd-pvc --pvc-ns=default --destination-sc=csi-rook-ceph-block
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">I1125 07:56:22.247311      63 log.go:34] Create Kubernetes Client
+I1125 07:56:22.259115      63 log.go:34] List all the PVC from the source storageclass
+I1125 07:56:22.261205      63 log.go:34] 1 PVCs found with source StorageClass
+I1125 07:56:22.261221      63 log.go:34] Start Migration of PVCs to CSI
+I1125 07:56:22.261226      63 log.go:34] migrating PVC "rbd-pvc" from namespace "default"
+I1125 07:56:22.261229      63 log.go:34] Fetch PV information from PVC rbd-pvc
+I1125 07:56:22.266734      63 log.go:34] PV found "pvc-30a01887-8821-4baf-835c-16a7e55ba7f0"
+---
+</span><span class="gp">I1125 07:56:26.483172      63 log.go:34] successfully renamed volume csi-vol-2f8de58f-4dc5-11ec-a130-0242ac110005 -&gt;</span><span class="w"> </span>pvc-30a01887-8821-4baf-835c-16a7e55ba7f0
+<span class="go">I1125 07:56:26.483194      63 log.go:34] Delete old PV object: pvc-30a01887-8821-4baf-835c-16a7e55ba7f0
+I1125 07:56:26.504578      63 log.go:34] waiting for PV pvc-30a01887-8821-4baf-835c-16a7e55ba7f0 in state &amp;PersistentVolumeStatus{Phase:Bound,Message:,Reason:,} to be deleted (0 seconds elapsed)
+I1125 07:56:26.702921      63 log.go:34] deleted persistent volume pvc-30a01887-8821-4baf-835c-16a7e55ba7f0
+I1125 07:56:26.702944      63 log.go:34] successfully migrated pvc rbd-pvc
+I1125 07:56:26.703335      63 log.go:34] Successfully migrated all the PVCs to CSI
+</span></code></pre></div></div>
+
+<p>After running above command you should see something similar to this output.</p>
+
+<h2 id="cleanup-guide">Cleanup Guide</h2>
+
+<p>Delete the <code class="language-plaintext highlighter-rouge">flex-migration.yaml</code> when done using migration tool.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">kubectl delete -f cluster/examples/kubernetes/ceph/flex-migrator.yaml</code></li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.7/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.7/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.7/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.7/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.7/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.7/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.7/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.7/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.7/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.7/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.7/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.7/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.7/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.7/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.7/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.7/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.7/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.7/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.7/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.7/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.7/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.7/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.7/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.7/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.7/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.7/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.7/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.7/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.7/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.7/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.7/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.7/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.7/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.7/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.7/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.7/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.7/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.7/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.7/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.7/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.7/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.7/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.7/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.7/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.7/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.7/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Flex Migration",
+      "/docs/rook/v1.7/flex-to-csi-migration.html",
+      true,
+      true
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.7/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.7/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.7/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

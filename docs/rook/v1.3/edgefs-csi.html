@@ -1,0 +1,1434 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.3/edgefs-csi.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.3</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/edgefs-csi.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/edgefs-csi.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/edgefs-csi.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/edgefs-csi.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/edgefs-csi.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/edgefs-csi.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/edgefs-csi.html" class="active">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/edgefs-csi.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/edgefs-csi.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/edgefs-csi.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/edgefs-csi.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/edgefs-csi.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/edgefs-csi.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/edgefs-csi.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/edgefs-csi.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/edgefs-csi.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/edgefs-csi.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.3 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      
+<h1 id="edgefs-rook-integrated-csi-driver-provisioner-attacher-and-snapshotter">EdgeFS Rook integrated CSI driver, provisioner, attacher and snapshotter</h1>
+
+<p><a href="https://github.com/container-storage-interface/">Container Storage Interface (CSI)</a> driver, provisioner, attacher and snapshotter for EdgeFS Scale-Out NFS/ISCSI services</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>EdgeFS CSI plugins implement an interface between CSI enabled Container Orchestrator (CO) and EdgeFS local cluster site. It allows dynamic and static provisioning of EdgeFS NFS exports and ISCSI LUNs, and attaching them to application workloads. With EdgeFS NFS/ISCSI implementation, I/O load can be spread-out across multiple PODs, thus eliminating I/O bottlenecks of classing single-node NFS/ISCSI and providing highly available persistent volumes.  Current implementation of EdgeFS CSI plugins was tested in Kubernetes environment (requires Kubernetes 1.13+)</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>Ensure your kubernetes cluster version is 1.13+</li>
+  <li>Kubernetes cluster must allow privileged pods, this flag must be set for the API server and the kubelet
+(<a href="https://github.com/kubernetes-csi/docs/blob/735f1ef4adfcb157afce47c64d750b71012c8151/book/src/Setup.md#enable-privileged-pods">instructions</a>):</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">  --allow-privileged=true
+</span></code></pre></div></div>
+
+<ul>
+  <li>Required the API server and the kubelet feature gates
+(<a href="https://github.com/kubernetes-csi/docs/blob/735f1ef4adfcb157afce47c64d750b71012c8151/book/src/Setup.md#enabling-features">instructions</a>):</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">  --feature-gates=VolumeSnapshotDataSource=true,CSIDriverRegistry=true
+</span></code></pre></div></div>
+
+<ul>
+  <li>Mount propagation must be enabled, the Docker daemon for the cluster must allow shared mounts
+(<a href="https://github.com/kubernetes-csi/docs/blob/735f1ef4adfcb157afce47c64d750b71012c8151/book/src/Setup.md#enabling-mount-propagation">instructions</a>)</li>
+  <li>
+    <p>Kubernetes CSI drivers require <code class="language-plaintext highlighter-rouge">CSIDriver</code> and <code class="language-plaintext highlighter-rouge">CSINodeInfo</code> resource types
+<a href="https://github.com/kubernetes-csi/docs/blob/460a49286fe164a78fde3114e893c48b572a36c8/book/src/Setup.md#csidriver-custom-resource-alpha">to be defined on the cluster</a>.
+Check if they are already defined:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get customresourcedefinition.apiextensions.k8s.io/csidrivers.csi.storage.k8s.io
+kubectl get customresourcedefinition.apiextensions.k8s.io/csinodeinfos.csi.storage.k8s.io
+</span></code></pre></div>    </div>
+
+    <p>If the cluster doesn’t have “csidrivers” and “csinodeinfos” resource types, create them:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.13/pkg/crd/manifests/csidriver.yaml
+kubectl create -f https://raw.githubusercontent.com/kubernetes/csi-api/release-1.13/pkg/crd/manifests/csinodeinfo.yaml
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Depends on preferred CSI driver type, following utilities must be installed on each Kubernetes node (For Debian/Ubuntu based systems):</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="k">for </span>NFS
+<span class="go">apt install -y nfs-common rpcbind
+</span><span class="gp">#</span><span class="w"> </span><span class="k">for </span>ISCSI
+<span class="go">apt install -y open-iscsi
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="edgefs-csi-drivers-configuration">EdgeFS CSI drivers configuration</h2>
+
+<p>For each driver type (NFS/ISCSI) we have already prepared configuration files examples, there are:</p>
+
+<ul>
+  <li><a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/edgefs/csi/nfs/edgefs-nfs-csi-driver-config.yaml">EdgeFS CSI NFS driver config</a></li>
+  <li><a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/edgefs/csi/iscsi/edgefs-iscsi-csi-driver-config.yaml">EdgeFS CSI ISCSI driver config</a></li>
+</ul>
+
+<p>Secret file configuration options example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>EdgeFS k8s cluster options
+<span class="gp">k8sEdgefsNamespaces: ["rook-edgefs"]          #</span><span class="w"> </span>edgefs cluster namespace
+<span class="gp">k8sEdgefsMgmtPrefix: rook-edgefs-mgr     #</span><span class="w"> </span>edgefs cluster management prefix
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>EdgeFS csi operations options
+<span class="gp">cluster: cltest           #</span><span class="w"> </span>substitution edgefs cluster name <span class="k">for </span>csi operations
+<span class="gp">tenant: test              #</span><span class="w"> </span>substitution edgefs tenant name <span class="k">for </span>csi operations
+<span class="gp">#</span>serviceFilter: <span class="s2">"nfs01"</span>   <span class="c"># comma delimited list of allowed service names for filtering</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>EdgeFS GRPC security options
+<span class="gp">username: admin           #</span><span class="w"> </span>edgefs k8s cluster grpc service username
+<span class="gp">password: admin           #</span><span class="w"> </span>edgefs k8s cluster grpc service password
+</code></pre></div></div>
+
+<p>Options for NFS and ISCSI configuration files</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">Name</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Description</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Default value</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Required</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Type</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">k8sEdgefsNamespaces</code></td>
+      <td>Array of Kubernetes cluster’s namespaces for EdgeFS service discovery</td>
+      <td><code class="language-plaintext highlighter-rouge">rook-edgefs</code></td>
+      <td>true</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">k8sEdgefsMgmtPrefix</code></td>
+      <td>Rook EdgeFS cluster mgmt service prefix</td>
+      <td><code class="language-plaintext highlighter-rouge">rook-edgefs-mgr</code></td>
+      <td>true</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">username</code></td>
+      <td>EdgeFS gRPC API server privileged user</td>
+      <td><code class="language-plaintext highlighter-rouge">admin</code></td>
+      <td>true</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">password</code></td>
+      <td>EdgeFS gRPC API server password</td>
+      <td><code class="language-plaintext highlighter-rouge">admin</code></td>
+      <td>true</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cluster</code></td>
+      <td>EdgeFS cluster namespace also known as ‘region’</td>
+      <td> </td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tenant</code></td>
+      <td>EdgeFS tenant isolated namespace</td>
+      <td> </td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bucket</code></td>
+      <td>EdgeFS tenant bucket to use as a default</td>
+      <td> </td>
+      <td>false</td>
+      <td>ISCSI only</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">serviceFilter</code></td>
+      <td>Comma delimited list of allowed service names for filtering</td>
+      <td><code class="language-plaintext highlighter-rouge">""</code> means all services allowed</td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">serviceBalancerPolicy</code></td>
+      <td>Service selection policy [<code class="language-plaintext highlighter-rouge">minexportspolicy</code>, <code class="language-plaintext highlighter-rouge">randomservicepolicy</code>]</td>
+      <td><code class="language-plaintext highlighter-rouge">minexportspolicy</code></td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chunksize</code></td>
+      <td>Chunk size for actual volume, in bytes</td>
+      <td><code class="language-plaintext highlighter-rouge">16384</code>, should be power of two</td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">blocksize</code></td>
+      <td>Block size for actual volume, in bytes</td>
+      <td><code class="language-plaintext highlighter-rouge">4096</code>, should be power of two</td>
+      <td>false</td>
+      <td>iSCSI only</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fsType</code></td>
+      <td>New volume’s filesystem type</td>
+      <td><code class="language-plaintext highlighter-rouge">ext4</code>, <code class="language-plaintext highlighter-rouge">ext3</code>, <code class="language-plaintext highlighter-rouge">xfs</code></td>
+      <td>ext4</td>
+      <td>ISCSI only</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">forceVolumeDeletion</code></td>
+      <td>Automatically deletes EdgeFS volume after usage</td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+      <td>false</td>
+      <td>both</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By using <code class="language-plaintext highlighter-rouge">k8sEdgefsNamespaces</code> and <code class="language-plaintext highlighter-rouge">k8sEdgefsMgmtPrefix</code> parameters, driver is capable of detecting ClusterIPs and Endpoint IPs to provision and attach volumes.</p>
+
+<h2 id="apply-edgefs-csi-nfs-driver-configuration">Apply EdgeFS CSI NFS driver configuration</h2>
+
+<p>Check configuration options and create kubernetes secret for Edgefs CSI NFS plugin</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git clone --single-branch --branch v1.3.11 https://github.com/rook/rook.git
+cd rook/cluster/examples/kubernetes/edgefs/csi/nfs
+kubectl create secret generic edgefs-nfs-csi-driver-config --from-file=./edgefs-nfs-csi-driver-config.yaml
+</span></code></pre></div></div>
+
+<h2 id="deploy-edgefs-csi-nfs-driver">Deploy EdgeFS CSI NFS driver</h2>
+
+<p>After secret is created successfully, deploy EdgeFS CSI plugin, provisioner and attacher using the following command</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/nfs
+kubectl apply -f edgefs-nfs-csi-driver.yaml
+</span></code></pre></div></div>
+
+<p>There should be number of EdgeFS CSI plugin PODs available running as a DaemonSet:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">...
+</span><span class="go">NAMESPACE     NAME                           READY   STATUS    RESTARTS   AGE
+default       edgefs-nfs-csi-controller-0    4/4     Running   0          33s
+default       edgefs-nfs-csi-node-9st9n      2/2     Running   0          33s
+default       edgefs-nfs-csi-node-js7jp      2/2     Running   0          33s
+default       edgefs-nfs-csi-node-lhjgr      2/2     Running   0          33s
+</span><span class="c">...
+</span></code></pre></div></div>
+
+<p>At this point configuration is all ready and available for consumption by applications.</p>
+
+<h2 id="pre-provisioned-volumes-nfs">Pre-provisioned volumes (NFS)</h2>
+
+<p>This method allows to use already created exports in EdgeFS services. This method keeps exports provisioned after application PODs terminated.
+Read more on how to create PersistentVolume specification for pre-provisioned volumes:</p>
+
+<p><a href="https://kubernetes-csi.github.io/docs/Usage.html#pre-provisioned-volumes">Link to Pre-provisioned volumes manifest specification</a></p>
+
+<p>To test creation and mount pre-provisioned volume to pod execute example</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Make sure that <code class="language-plaintext highlighter-rouge">volumeHandle: segment:service@cluster/tenant/bucket</code> in nginx.yaml already exist on EdgeFS cluster and served via any Edgefs NFS service. Any volumeHandle’s parameters may be omitted and will be substituted via CSI configuration file parameters.</p>
+</blockquote>
+
+<p>Examples:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/nfs/examples
+kubectl apply -f ./preprovisioned-edgefs-volume-nginx.yaml
+</span></code></pre></div></div>
+
+<h2 id="dynamically-provisioned-volumes-nfs">Dynamically provisioned volumes (NFS)</h2>
+
+<p>To setup the system for dynamic provisioning, administrator needs to setup a StorageClass pointing to the CSI driver’s external-provisioner and specifying any parameters required by the driver</p>
+
+<p><a href="https://kubernetes-csi.github.io/docs/Usage.html#dynamic-provisioning">Link to dynamically provisioned volumes specification</a></p>
+
+<h3 id="note">Note</h3>
+
+<p>For dynamically provisioned volumes kubernetes will generate volume name automatically
+(for example pvc-871068ed-8b5d-11e8-9dae-005056b37cb2)
+Additional creation options should be passed as parameters in StorageClass definition i.e :</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">edgefs-nfs-csi-storageclass</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">io.edgefs.csi.nfs</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">segment</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">service</span><span class="pi">:</span> <span class="s">nfs01</span>
+  <span class="na">tenant</span><span class="pi">:</span> <span class="s">ten1</span>
+  <span class="na">encryption</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Parameters and their options are case sensitive and should be in lower case.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">Name</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Description</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Allowed values</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Default value</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">segment</code></td>
+      <td>Edgefs cluster namespace for current StorageClass or PV.</td>
+      <td> </td>
+      <td>rook-edgefs</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">service</code></td>
+      <td>Edgefs cluster service if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cluster</code></td>
+      <td>Edgefs cluster namespace if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tenant</code></td>
+      <td>Edgefs tenant  namespace if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chunksize</code></td>
+      <td>Chunk size for actual volume, in bytes</td>
+      <td>should be power of two</td>
+      <td>16384 bytes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">blocksize</code></td>
+      <td>Block size for actual volume, in bytes</td>
+      <td>should be power of two</td>
+      <td>4096 bytes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">acl</code></td>
+      <td>Volume acl restrictions</td>
+      <td> </td>
+      <td>all</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ec</code></td>
+      <td>Enables ccow erasure coding for volume</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">false</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code></td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ecmode</code></td>
+      <td>Set ccow erasure mode data mode (If ‘ec’ option enabled)</td>
+      <td><code class="language-plaintext highlighter-rouge">3:1:xor</code>, <code class="language-plaintext highlighter-rouge">2:2:rs</code>, <code class="language-plaintext highlighter-rouge">4:2:rs</code>, <code class="language-plaintext highlighter-rouge">6:2:rs</code>, <code class="language-plaintext highlighter-rouge">9:3:rs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">6:2:rs</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">encryption</code></td>
+      <td>Enables encryption for volume</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">false</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code></td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/nfs/examples
+kubectl apply -f ./dynamic-nginx.yaml
+</span></code></pre></div></div>
+
+<h2 id="apply-edgefs-csi-iscsi-driver-configuration">Apply Edgefs CSI ISCSI driver configuration</h2>
+
+<p>Check configuration options and create kubernetes secret for Edgefs CSI ISCSI plugin</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/iscsi
+kubectl create secret generic edgefs-iscsi-csi-driver-config --from-file=./edgefs-iscsi-csi-driver-config.yaml
+</span></code></pre></div></div>
+
+<h2 id="deploy-edgefs-csi-iscsi-driver">Deploy Edgefs CSI ISCSI driver</h2>
+
+<p>After secret is created successfully, deploy EdgeFS CSI plugin, provisioner, attacher and snapshotter using the following command</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/iscsi
+kubectl apply -f edgefs-iscsi-csi-driver.yaml
+</span></code></pre></div></div>
+
+<p>There should be number of EdgeFS CSI ISCSI plugin PODs available running as a DaemonSet:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">...
+</span><span class="go">NAMESPACE     NAME                             READY   STATUS    RESTARTS   AGE
+default       edgefs-iscsi-csi-controller-0    4/4     Running   0          12s
+default       edgefs-iscsi-csi-node-26464      2/2     Running   0          12s
+default       edgefs-iscsi-csi-node-p5r58      2/2     Running   0          12s
+default       edgefs-iscsi-csi-node-ptn2m      2/2     Running   0          12s
+</span><span class="c">...
+</span></code></pre></div></div>
+
+<p>At this point configuration is all ready and available for consumption by applications.</p>
+
+<h2 id="pre-provisioned-volumes-iscsi">Pre-provisioned volumes (ISCSI)</h2>
+
+<p>This method allows to use already created exports in EdgeFS ISCSI services. This method keeps exports provisioned after application PODs terminated.
+Read more on how to create PersistentVolume specification for pre-provisioned volumes:</p>
+
+<p><a href="https://kubernetes-csi.github.io/docs/Usage.html#pre-provisioned-volumes">Link to Pre-provisioned volumes manifest specification</a></p>
+
+<p>To test creation and mount pre-provisioned volume to pod execute example:</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Make sure that <code class="language-plaintext highlighter-rouge">volumeHandle: segment:service@cluster/tenant/bucket/lun</code> in nginx.yaml already exist on EdgeFS cluster and served via any Edgefs ISCSI service. Any volumeHandle’s parameters may be omitted and will be substituted via CSI configuration file parameters.</p>
+</blockquote>
+
+<p>Example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/iscsi/examples
+kubectl apply -f ./preprovisioned-edgefs-volume-nginx.yaml
+</span></code></pre></div></div>
+
+<h2 id="dynamically-provisioned-volumes-iscsi">Dynamically provisioned volumes (ISCSI)</h2>
+
+<p>For dynamic volume provisioning, the administrator needs to set up a <em>StorageClass</em> pointing to the driver.
+In this case Kubernetes generates volume name automatically (for example <code class="language-plaintext highlighter-rouge">pvc-ns-cfc67950-fe3c-11e8-a3ca-005056b857f8</code>).
+Default driver configuration may be overwritten in <code class="language-plaintext highlighter-rouge">parameters</code> section:</p>
+
+<p><a href="https://kubernetes-csi.github.io/docs/Usage.html#dynamic-provisioning">Link to dynamically provisioned volumes specification</a></p>
+
+<h3 id="note-for-dynamically-provisioned-volumes">Note for dynamically provisioned volumes</h3>
+
+<p>For dynamically provisioned volumes, Kubernetes will generate volume names automatically
+(for example pvc-871068ed-8b5d-11e8-9dae-005056b37cb2).
+To pass additional creation parameters, you can add them as parameters to your StorageClass definition.</p>
+
+<p>Example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">edgefs-iscsi-csi-storageclass</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">io.edgefs.csi.nfs</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">segment</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">service</span><span class="pi">:</span> <span class="s">iscsi01</span>
+  <span class="na">cluster</span><span class="pi">:</span> <span class="s">cltest</span>
+  <span class="na">tenant</span><span class="pi">:</span> <span class="s">test</span>
+  <span class="na">bucket</span><span class="pi">:</span> <span class="s">bk1</span>
+  <span class="na">encryption</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Parameters and their options are case sensitive and should be in lower case.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">Name</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Description</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Allowed values</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Default value</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">segment</code></td>
+      <td>Edgefs cluster namespace for specific StorageClass or PV.</td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">rook-edgefs</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">service</code></td>
+      <td>Edgefs cluster service if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cluster</code></td>
+      <td>Edgefs cluster namespace if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tenant</code></td>
+      <td>Edgefs tenant  namespace if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bucket</code></td>
+      <td>Edgefs bucket namespace if not defined in secret</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chunksize</code></td>
+      <td>Chunk size for actual volume, in bytes</td>
+      <td>should be power of two</td>
+      <td><code class="language-plaintext highlighter-rouge">16384</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">blocksize</code></td>
+      <td>Blocksize size for actual volume, in bytes</td>
+      <td>should be power of two</td>
+      <td><code class="language-plaintext highlighter-rouge">4096</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fsType</code></td>
+      <td>New volume’s filesystem type</td>
+      <td><code class="language-plaintext highlighter-rouge">ext4</code>, <code class="language-plaintext highlighter-rouge">ext3</code>, <code class="language-plaintext highlighter-rouge">xfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ext4</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">acl</code></td>
+      <td>Volume acl restrictions</td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">all</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ec</code></td>
+      <td>Enables ccow erasure coding for volume</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">false</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code></td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ecmode</code></td>
+      <td>Set ccow erasure mode data mode (If ‘ec’ option enabled)</td>
+      <td><code class="language-plaintext highlighter-rouge">4:2:rs</code> ,<code class="language-plaintext highlighter-rouge">6:2:rs</code>, <code class="language-plaintext highlighter-rouge">4:2:rs</code>, <code class="language-plaintext highlighter-rouge">9:3:rs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">4:2:rs</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">encryption</code></td>
+      <td>Enables encryption for volume</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">false</code>, <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code></td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/examples/kubernetes/edgefs/csi/nfs/examples
+kubectl apply -f ./dynamic-nginx.yaml
+</span></code></pre></div></div>
+
+<h2 id="edgefs-csi-iscsi-driver-snapshots-and-clones">EdgeFS CSI ISCSI driver snapshots and clones</h2>
+
+<h3 id="getting-information-about-existing-snapshots">Getting information about existing snapshots</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>snapshot classes
+<span class="go">kubectl get volumesnapshotclasses.snapshot.storage.k8s.io
+
+</span><span class="gp">#</span><span class="w"> </span>snapshot list
+<span class="go">kubectl get volumesnapshots.snapshot.storage.k8s.io
+
+</span><span class="gp">#</span><span class="w"> </span>volumesnapshotcontents
+<span class="go">kubectl get volumesnapshotcontents.snapshot.storage.k8s.io
+</span></code></pre></div></div>
+
+<h3 id="to-create-volumes-clone-from-existing-snapshot-you-should">To create volume’s clone from existing snapshot you should:</h3>
+
+<ul>
+  <li>Create snapshotter StorageClass <a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/edgefs/csi/iscsi/examples/snapshots/snapshot-class.yaml">Example yaml</a></li>
+  <li>Have an existing PVC based on EdgeFS ISCSI LUN</li>
+  <li>Take snapshot from volume <a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/edgefs/csi/iscsi/examples/snapshots/create-snapshot.yaml">Example yaml</a></li>
+  <li>Clone volume from existing snapshot <a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/edgefs/csi/iscsi/examples/snapshots/nginx-snapshot-clone-volume.yaml">Example yaml</a></li>
+</ul>
+
+<h2 id="troubleshooting-and-log-collection">Troubleshooting and log collection</h2>
+
+<p>For details about other configuration and deployment of NFS, ISCSI and EdgeFS CSI plugin, see Wiki pages:</p>
+
+<ul>
+  <li><a href="https://github.com/Nexenta/edgefs-csi/wiki/EdgeFS-CSI-Quick-Start-Guide">Quick Start Guide</a></li>
+</ul>
+
+<p>Please submit an issue at: <a href="https://github.com/Nexenta/edgefs-csi/issues">Issues</a></p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<ul>
+  <li>Show installed drivers:</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get csidrivers.csi.storage.k8s.io
+kubectl describe csidrivers.csi.storage.k8s.io
+</span></code></pre></div></div>
+
+<ul>
+  <li>Error:</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">MountVolume.MountDevice failed for volume "pvc-ns-&lt;...&gt;</span><span class="s2">" :
+</span><span class="go">driver name io.edgefs.csi.iscsi not found in the list of registered CSI drivers
+</span></code></pre></div></div>
+
+<p>Make sure <em>kubelet</em> is configured with <code class="language-plaintext highlighter-rouge">--root-dir=/var/lib/kubelet</code>, otherwise update paths in the driver yaml file
+  (<a href="https://github.com/kubernetes-csi/docs/blob/387dce893e59c1fcf3f4192cbea254440b6f0f07/book/src/Setup.md#enabling-features">all requirements</a>).</p>
+
+<ul>
+  <li>“VolumeSnapshotDataSource” feature gate is disabled:</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">vim /var/lib/kubelet/config.yaml
+</span><span class="gp">#</span><span class="w"> </span>...
+<span class="gp">#</span><span class="w"> </span>featureGates:
+<span class="gp">#</span><span class="w">   </span>VolumeSnapshotDataSource: <span class="nb">true</span>
+<span class="gp">#</span><span class="w"> </span>...
+<span class="go">vim /etc/kubernetes/manifests/kube-apiserver.yaml
+</span><span class="gp">#</span><span class="w"> </span>...
+<span class="gp">#</span><span class="w">     </span>- <span class="nt">--feature-gates</span><span class="o">=</span><span class="nv">VolumeSnapshotDataSource</span><span class="o">=</span><span class="nb">true</span>
+<span class="gp">#</span><span class="w"> </span>...
+</code></pre></div></div>
+
+<ul>
+  <li>Driver logs (for ISCSI driver, to get NFS driver logs substitute iscsi to nfs)</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl logs -f edgefs-iscsi-csi-controller-0 driver
+</span><span class="gp">kubectl logs -f $</span><span class="o">(</span>kubectl get pods | <span class="nb">awk</span> <span class="s1">'/edgefs-iscsi-csi-node-/ {print $1;exit}'</span><span class="o">)</span> driver
+<span class="gp">#</span><span class="w"> </span>combine all pods:
+<span class="gp">kubectl get pods | awk '/edgefs-iscsi-csi-node-/ {system("kubectl logs " $</span>1 <span class="s2">" driver &amp;"</span><span class="o">)}</span><span class="s1">'
+</span></code></pre></div></div>
+
+<ul>
+  <li>Show termination message in case driver failed to run:</li>
+</ul>
+
+<!--  -->
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get pod edgefs-iscsi-csi-controller-0 -o go-template="{{range .status.containerStatuses}}{{.lastState.terminated.message}}{{end}}"
+</span></code></pre></div></div>
+<!--  -->
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.3/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.3/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.3/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.3/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.3/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.3/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.3/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.3/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.3/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.3/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.3/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.3/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.3/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.3/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.3/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.3/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.3/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.3/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.3/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.3/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.3/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.3/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.3/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.3/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.3/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.3/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.3/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.3/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.3/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.3/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.3/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.3/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.3/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.3/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.3/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.3/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.3/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.3/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.3/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.3/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.3/edgefs-csi.html",
+      true,
+      true
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.3/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.3/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.3/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.3/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.3/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.3/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.3/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.3/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.3/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.3/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.3/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.3/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.3/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph OSD Management",
+      "/docs/rook/v1.3/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.3/openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.3/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.3/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.3/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.3/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.3/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.3/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.3/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.3/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.3/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

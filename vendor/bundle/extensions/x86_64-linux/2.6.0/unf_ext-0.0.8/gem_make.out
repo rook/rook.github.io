@@ -1,0 +1,22 @@
+current directory: /usr/local/bundle/gems/unf_ext-0.0.8/ext/unf_ext
+/usr/local/bin/ruby -I /usr/local/lib/ruby/site_ruby/2.6.0 -r ./siteconf20220512-28-uksos0.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /usr/local/bundle/gems/unf_ext-0.0.8/ext/unf_ext
+make "DESTDIR=" clean
+
+current directory: /usr/local/bundle/gems/unf_ext-0.0.8/ext/unf_ext
+make "DESTDIR="
+compiling unf.cc
+cc1plus: warning: command line option '-Wdeclaration-after-statement' is valid for C/ObjC but not for C++
+cc1plus: warning: command line option '-Wimplicit-function-declaration' is valid for C/ObjC but not for C++
+cc1plus: warning: command line option '-Wimplicit-int' is valid for C/ObjC but not for C++
+cc1plus: warning: unrecognized command line option '-Wno-self-assign'
+cc1plus: warning: unrecognized command line option '-Wno-parentheses-equality'
+cc1plus: warning: unrecognized command line option '-Wno-constant-logical-operand'
+linking shared-object unf_ext.so
+
+current directory: /usr/local/bundle/gems/unf_ext-0.0.8/ext/unf_ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20220512-28-1i0uq7p

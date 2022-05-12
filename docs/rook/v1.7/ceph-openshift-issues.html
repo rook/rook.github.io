@@ -1,0 +1,816 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.7/ceph-openshift-issues.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-openshift-issues.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-openshift-issues.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-openshift-issues.html" class="active">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-openshift-issues.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-openshift-issues.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-openshift-issues.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-openshift-issues.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-openshift-issues.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-openshift-issues.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-openshift-issues.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-openshift-issues.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-openshift-issues.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-openshift-issues.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-openshift-issues.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-openshift-issues.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-openshift-issues.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-openshift-issues.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.7 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="openshift-common-issues">OpenShift Common Issues</h1>
+
+<h2 id="enable-monitoring-in-the-storage-dashboard">Enable Monitoring in the Storage Dashboard</h2>
+
+<p>OpenShift Console uses OpenShift Prometheus for monitoring and populating data in Storage Dashboard. Additional configuration is required to monitor the Ceph Cluster from the storage dashboard.</p>
+
+<ol>
+  <li>
+    <p>Change the monitoring namespace to <code class="language-plaintext highlighter-rouge">openshift-monitoring</code></p>
+
+    <p>Change the namespace of the RoleBinding <code class="language-plaintext highlighter-rouge">rook-ceph-metrics</code> from <code class="language-plaintext highlighter-rouge">rook-ceph</code> to <code class="language-plaintext highlighter-rouge">openshift-monitoring</code> for the <code class="language-plaintext highlighter-rouge">prometheus-k8s</code> ServiceAccount in <a href="https://github.com/rook/rook/blob/master/cluster/examples/kubernetes/ceph/monitoring/rbac.yaml#L70">rbac.yaml</a>.</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subjects:
+- kind: ServiceAccount
+  name: prometheus-k8s
+  namespace: openshift-monitoring
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Enable Ceph Cluster monitoring</p>
+
+    <p>Follow <a href="/docs/rook/v1.7/ceph-monitoring.html#prometheus-alerts">ceph-monitoring/prometheus-alerts</a>.</p>
+  </li>
+  <li>
+    <p>Set the required label on the namespace</p>
+
+    <p><code class="language-plaintext highlighter-rouge">oc label namespace rook-ceph "openshift.io/cluster-monitoring=true"</code></p>
+  </li>
+</ol>
+
+<h2 id="troubleshoot-monitoring-issues">Troubleshoot Monitoring Issues</h2>
+
+<blockquote>
+  <p><strong>Pre-req:</strong> Switch to <code class="language-plaintext highlighter-rouge">rook-ceph</code> namespace with <code class="language-plaintext highlighter-rouge">oc project rook-ceph</code></p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Ensure ceph-mgr pod is Running</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> oc get pods -l app=rook-ceph-mgr
+</span></code></pre></div>    </div>
+
+    <blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME            READY   STATUS    RESTARTS   AGE
+rook-ceph-mgr   1/1     Running   0          14h
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+  <li>
+    <p>Ensure service monitor is present</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> oc get servicemonitor rook-ceph-mgr
+</span></code></pre></div>    </div>
+
+    <blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                          AGE
+rook-ceph-mgr                 14h
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+  <li>
+    <p>Ensure prometheus rules are present</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> oc get prometheusrules -l prometheus=rook-prometheus
+</span></code></pre></div>    </div>
+
+    <blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                    AGE
+prometheus-ceph-rules   14h
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.7/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.7/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.7/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.7/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.7/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.7/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.7/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.7/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.7/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.7/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.7/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.7/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.7/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.7/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.7/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.7/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.7/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.7/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.7/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.7/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.7/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.7/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.7/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.7/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.7/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.7/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.7/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.7/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.7/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.7/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.7/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.7/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.7/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.7/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.7/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.7/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.7/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.7/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.7/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.7/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.7/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.7/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.7/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.7/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.7/ceph-openshift-issues.html",
+      true,
+      true
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.7/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Flex Migration",
+      "/docs/rook/v1.7/flex-to-csi-migration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.7/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.7/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.7/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

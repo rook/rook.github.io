@@ -1,0 +1,1013 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.9/ceph-csi-drivers.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.9</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-csi-drivers.html" class="active">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-csi-drivers.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-csi-drivers.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-csi-drivers.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-csi-drivers.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-csi-drivers.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-csi-drivers.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-csi-drivers.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-csi-drivers.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-csi-drivers.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-csi-drivers.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-csi-drivers.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-csi-drivers.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-csi-drivers.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-csi-drivers.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-csi-drivers.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-csi-drivers.md">Edit on GitHub</a>
+    </div>
+    
+    <div class="docs-text">
+      
+<h1 id="ceph-csi-drivers">Ceph CSI Drivers</h1>
+
+<p>There are three CSI drivers integrated with Rook that will enable different scenarios:</p>
+
+<ul>
+  <li>RBD: This block storage driver is optimized for RWO pod access where only one pod may access the
+storage. <a href="/docs/rook/v1.9/ceph-block.html">More information</a>.</li>
+  <li>CephFS: This file storage driver allows for RWX with one or more pods accessing the same storage.
+<a href="/docs/rook/v1.9/ceph-filesystem.html">More information</a>.</li>
+  <li>NFS (experimental): This file storage driver allows creating NFS exports that can be mounted to
+pods, or the exports can be mounted directly via an NFS client from inside or outside the
+Kubernetes cluster. <a href="/docs/rook/v1.9/ceph-nfs-crd.html#ceph-csi-nfs-provisioner-and-nfs-csi-driver">More information</a>.</li>
+</ul>
+
+<p>The Ceph Filesysetem (CephFS) and RADOS Block Device (RBD) drivers are enabled automatically with
+the Rook operator. The NFS driver is disabled by default. All drivers will be started in the same
+namespace as the operator when the first CephCluster CR is created.</p>
+
+<h2 id="supported-versions">Supported Versions</h2>
+<p>The supported Ceph CSI version is 3.3.0 or greater with Rook. Refer to ceph csi <a href="https://github.com/ceph/ceph-csi/releases">releases</a>
+for more information.</p>
+
+<h2 id="static-provisioning">Static Provisioning</h2>
+
+<p>Both drivers also support the creation of static PV and static PVC from existing RBD image/CephFS volume. Refer to <a href="https://github.com/ceph/ceph-csi/blob/devel/docs/static-pvc.md">static PVC</a> for more information.</p>
+
+<h2 id="configure-csi-drivers-in-non-default-namespace">Configure CSI Drivers in non-default namespace</h2>
+
+<p>If you’ve deployed the Rook operator in a namespace other than “rook-ceph”,
+change the prefix in the provisioner to match the namespace you used. For
+example, if the Rook operator is running in the namespace “my-namespace” the
+provisioner value should be “my-namespace.rbd.csi.ceph.com”. The same provisioner
+name needs to be set in both the storageclass and snapshotclass.</p>
+
+<h2 id="liveness-sidecar">Liveness Sidecar</h2>
+
+<p>All CSI pods are deployed with a sidecar container that provides a prometheus metric for tracking if the CSI plugin is alive and running.
+These metrics are meant to be collected by prometheus but can be accesses through a GET request to a specific node ip.
+for example <code class="language-plaintext highlighter-rouge">curl -X get http://[pod ip]:[liveness-port][liveness-path]  2&gt;/dev/null | grep csi</code>
+the expected output should be</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">curl -X GET http://10.109.65.142:9080/metrics 2&gt;</span>/dev/null | <span class="nb">grep </span>csi
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># HELP csi_liveness Liveness Probe
+# TYPE csi_liveness gauge
+csi_liveness 1
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Check the <a href="/docs/rook/v1.9/ceph-monitoring.html">monitoring doc</a> to see how to integrate CSI
+liveness and grpc metrics into ceph monitoring.</p>
+
+<h2 id="dynamically-expand-volume">Dynamically Expand Volume</h2>
+
+<h3 id="prerequisite">Prerequisite</h3>
+
+<ul>
+  <li>For filesystem resize to be supported for your Kubernetes cluster, the
+kubernetes version running in your cluster should be &gt;= v1.15 and for block
+volume resize support the Kubernetes version should be &gt;= v1.16. Also,
+<code class="language-plaintext highlighter-rouge">ExpandCSIVolumes</code> feature gate has to be enabled for the volume resize
+functionality to work.</li>
+</ul>
+
+<p>To expand the PVC the controlling StorageClass must have <code class="language-plaintext highlighter-rouge">allowVolumeExpansion</code>
+set to <code class="language-plaintext highlighter-rouge">true</code>. <code class="language-plaintext highlighter-rouge">csi.storage.k8s.io/controller-expand-secret-name</code> and
+<code class="language-plaintext highlighter-rouge">csi.storage.k8s.io/controller-expand-secret-namespace</code> values set in
+storageclass. Now expand the PVC by editing the PVC
+<code class="language-plaintext highlighter-rouge">pvc.spec.resource.requests.storage</code> to a higher values than the current size.
+Once PVC is expanded on backend and same is reflected size is reflected on
+application mountpoint, the status capacity <code class="language-plaintext highlighter-rouge">pvc.status.capacity.storage</code> of
+PVC will be updated to new size.</p>
+
+<h2 id="rbd-mirroring">RBD Mirroring</h2>
+
+<p>To support RBD Mirroring, the <a href="https://github.com/csi-addons/volume-replication-operator/blob/main/README.md">Volume Replication Operator</a> will be started in the RBD provisioner pod.
+The Volume Replication Operator is a kubernetes operator that provides common and reusable APIs for storage disaster recovery. It is based on <a href="https://github.com/csi-addons/spec">csi-addons/spec</a> specification and can be used by any storage provider.
+It follows the controller pattern and provides extended APIs for storage disaster recovery. The extended APIs are provided via Custom Resource Definitions (CRDs).</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>Kubernetes version 1.21 or greater is required.</p>
+
+<h3 id="enable-volume-replication">Enable volume replication</h3>
+
+<ol>
+  <li>Install the volume replication CRDs:</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f https://raw.githubusercontent.com/csi-addons/volume-replication-operator/v0.3.0/config/crd/bases/replication.storage.openshift.io_volumereplications.yaml
+kubectl create -f https://raw.githubusercontent.com/csi-addons/volume-replication-operator/v0.3.0/config/crd/bases/replication.storage.openshift.io_volumereplicationclasses.yaml
+</span></code></pre></div></div>
+
+<ol>
+  <li>Enable the volume replication controller:
+    <ul>
+      <li>For Helm deployments see the <a href="/docs/rook/v1.9/helm-operator.html#configuration">csi.volumeReplication.enabled setting</a>.</li>
+      <li>For non-Helm deployments set <code class="language-plaintext highlighter-rouge">CSI_ENABLE_VOLUME_REPLICATION: "true"</code> in operator.yaml</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="ephemeral-volume-support">Ephemeral volume support</h2>
+
+<p>The generic ephemeral volume feature adds support for specifying PVCs in the
+<code class="language-plaintext highlighter-rouge">volumes</code> field to indicate a user would like to create a Volume as part of the pod spec.
+This feature requires the GenericEphemeralVolume feature gate to be enabled.</p>
+
+<p>For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="nn">...</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">mypvc</span>
+      <span class="na">ephemeral</span><span class="pi">:</span>
+        <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+          <span class="na">spec</span><span class="pi">:</span>
+            <span class="na">accessModes</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">ReadWriteOnce"</span><span class="pi">]</span>
+            <span class="na">storageClassName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">rook-ceph-block"</span>
+            <span class="na">resources</span><span class="pi">:</span>
+              <span class="na">requests</span><span class="pi">:</span>
+                <span class="na">storage</span><span class="pi">:</span> <span class="s">1Gi</span>
+</code></pre></div></div>
+
+<p>A volume claim template is defined inside the pod spec which refers to a volume
+provisioned and used by the pod with its lifecycle. The volumes are provisioned
+when pod get spawned and destroyed at time of pod delete.</p>
+
+<p>Refer to <a href="https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes">ephemeral-doc</a> for more info.
+Also, See the example manifests for an <a href="https://github.com/rook/rook/tree/release-1.9/deploy/examples/csi/rbd/pod-ephemeral.yaml">RBD ephemeral volume</a> and a <a href="https://github.com/rook/rook/tree/release-1.9/deploy/examples/csi/cephfs/pod-ephemeral.yaml">CephFS ephemeral volume</a>.</p>
+
+<h2 id="csi-addons-controller">CSI-Addons Controller</h2>
+
+<p>The CSI-Addons Controller handles the requests from users to initiate an operation. Users create a CR that the controller inspects, and forwards a request to one or more CSI-Addons side-cars for execution.</p>
+
+<h3 id="deploying-the-controller">Deploying the controller</h3>
+
+<p>Users can deploy the controller by running the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> https://raw.githubusercontent.com/csi-addons/kubernetes-csi-addons/v0.3.0/deploy/controller/crds.yaml
+kubectl create <span class="nt">-f</span> https://raw.githubusercontent.com/csi-addons/kubernetes-csi-addons/v0.3.0/deploy/controller/rbac.yaml
+kubectl create <span class="nt">-f</span> https://raw.githubusercontent.com/csi-addons/kubernetes-csi-addons/v0.3.0/deploy/controller/setup-controller.yaml
+</code></pre></div></div>
+
+<p>This creates the required crds and configure permissions.</p>
+
+<h3 id="enable-the-csi-addons-sidecar">Enable the CSI-Addons Sidecar</h3>
+
+<p>To use the features provided by the CSI-Addons, the <code class="language-plaintext highlighter-rouge">csi-addons</code>
+containers need to be deployed in the RBD provisioner and nodeplugin pods,
+which are not enabled by default.</p>
+
+<p>Execute the following command in the cluster to enable the CSI-Addons
+sidecar:</p>
+
+<ul>
+  <li>Update the <code class="language-plaintext highlighter-rouge">rook-ceph-operator-config</code> configmap and patch the
+ following configurations</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl patch cm rook-ceph-operator-config <span class="nt">-nrook-ceph</span> <span class="nt">-p</span> <span class="s1">$'data:</span><span class="se">\n</span><span class="s1"> "CSI_ENABLE_CSIADDONS": "true"'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>After enabling <code class="language-plaintext highlighter-rouge">CSI_ENABLE_CSIADDONS</code> in the configmap, a new sidecar container with name <code class="language-plaintext highlighter-rouge">csi-addons</code>
+ should now start automatically in the RBD CSI provisioner and nodeplugin pods.</li>
+</ul>
+
+<blockquote>
+  <p>NOTE: Make sure the version of ceph-csi used is v3.5.0+</p>
+</blockquote>
+
+<h3 id="csi-addons-operation">CSI-ADDONS Operation</h3>
+
+<p>CSI-Addons supports the following operations:</p>
+
+<ul>
+  <li>Reclaim Space
+    <ul>
+      <li><a href="https://github.com/csi-addons/kubernetes-csi-addons/blob/v0.3.0/docs/reclaimspace.md#reclaimspacejob">Creating a ReclaimSpaceJob</a></li>
+      <li><a href="https://github.com/csi-addons/kubernetes-csi-addons/blob/v0.3.0/docs/reclaimspace.md#reclaimspacecronjob">Creating a ReclaimSpaceCronJob</a></li>
+      <li><a href="https://github.com/csi-addons/kubernetes-csi-addons/blob/v0.3.0/docs/reclaimspace.md#annotating-perstentvolumeclaims">Annotating PersistentVolumeClaims</a></li>
+    </ul>
+  </li>
+  <li>Network Fencing
+    <ul>
+      <li><a href="https://github.com/csi-addons/kubernetes-csi-addons/blob/v0.3.0/docs/networkfence.md">Creating a NetworkFence</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="enable-rbd-encryption-support">Enable RBD Encryption Support</h2>
+
+<p>Ceph-CSI supports encrypting individual RBD PersistentVolumeClaim with LUKS encryption. More details can be found
+<a href="https://github.com/ceph/ceph-csi/blob/v3.6.0/docs/deploy-rbd.md#encryption-for-rbd-volumes">here</a>
+with full list of supported encryption configurations. A sample configmap can be found
+<a href="https://github.com/ceph/ceph-csi/blob/v3.6.0/examples/kms/vault/kms-config.yaml">here</a>.</p>
+
+<blockquote>
+  <p>NOTE: Rook also supports OSD encryption (see <code class="language-plaintext highlighter-rouge">encryptedDevice</code> option <a href="/docs/rook/v1.9/ceph-cluster-crd.html#osd-configuration-settings">here</a>).
+Using both RBD PVC encryption and OSD encryption together will lead to double encryption and may reduce read/write performance.</p>
+</blockquote>
+
+<p>Unlike OSD encryption, existing ceph clusters can also enable Ceph-CSI RBD PVC encryption support and multiple kinds of encryption
+KMS can be used on the same ceph cluster using different storageclasses.</p>
+
+<p>Following steps demonstrate how to enable support for encryption:</p>
+
+<ul>
+  <li>Create the <code class="language-plaintext highlighter-rouge">rook-ceph-csi-kms-config</code> configmap with required encryption configuration in
+the same namespace where the Rook operator is deployed. An example is shown below:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-csi-kms-config</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="s">config.json</span><span class="pi">:</span> <span class="pi">|-</span>
+    <span class="s">{</span>
+      <span class="s">"user-secret-metadata": {</span>
+        <span class="s">"encryptionKMSType": "metadata",</span>
+        <span class="s">"secretName": "storage-encryption-secret"</span>
+      <span class="s">}</span>
+    <span class="s">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Update the <code class="language-plaintext highlighter-rouge">rook-ceph-operator-config</code> configmap and patch the
+ following configurations</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl patch cm rook-ceph-operator-config <span class="nt">-nrook-ceph</span> <span class="nt">-p</span> <span class="s1">$'data:</span><span class="se">\n</span><span class="s1"> "CSI_ENABLE_ENCRYPTION": "true"'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Create necessary resources (secrets, configmaps etc) as required by the encryption type.
+In this case, create <code class="language-plaintext highlighter-rouge">storage-encryption-secret</code> secret in the namespace of pvc as shown:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">storage-encryption-secret</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">stringData</span><span class="pi">:</span>
+  <span class="na">encryptionPassphrase</span><span class="pi">:</span> <span class="s">test-encryption</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Create a new <a href="../deploy/examples/csi/rbd/storageclass.yaml">storageclass</a> with additional parameters
+<code class="language-plaintext highlighter-rouge">encrypted: "true"</code> and <code class="language-plaintext highlighter-rouge">encryptionKMSID: "&lt;key used in configmap&gt;"</code>. An example is show below:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-block-encrypted</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="c1"># additional parameters required for encryption</span>
+  <span class="na">encrypted</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="na">encryptionKMSID</span><span class="pi">:</span> <span class="s2">"</span><span class="s">user-secret-metadata"</span>
+<span class="c1"># ...</span>
+</code></pre></div></div>
+
+<ul>
+  <li>PVCs created using the new storageclass will be encrypted.</li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.9/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.9/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.9/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.9/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.9/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.9/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.9/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.9/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.9/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.9/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.9/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.9/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.9/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.9/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.9/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.9/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.9/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.9/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.9/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.9/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/v1.9/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.9/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.9/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.9/ceph-csi-drivers.html",
+      true,
+      true
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.9/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.9/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.9/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.9/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.9/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirror CRD",
+      "/docs/rook/v1.9/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Filesystem Mirror CRD",
+      "/docs/rook/v1.9/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolume Group CRD",
+      "/docs/rook/v1.9/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "RADOS Namespace CRD",
+      "/docs/rook/v1.9/ceph-pool-radosnamespace.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/v1.9/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.9/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.9/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.9/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.9/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.9/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.9/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.9/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.9/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.9/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.9/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.9/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.9/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.9/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.9/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.9/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.9/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/v1.9/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.9/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

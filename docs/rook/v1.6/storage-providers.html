@@ -1,0 +1,863 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.6/storage-providers.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.6</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/storage-providers.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/storage-providers.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/storage-providers.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/storage-providers.html" class="active">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/storage-providers.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/storage-providers.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/storage-providers.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/storage-providers.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/storage-providers.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/storage-providers.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/storage-providers.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/storage-providers.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/storage-providers.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/storage-providers.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/storage-providers.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/storage-providers.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/storage-providers.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.6 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="storage-providers">Storage Providers</h1>
+
+<p>Rook is the home for operators for multiple storage providers. Each of these storage providers
+has specific requirements and each of them is very independent. There is no runtime dependency
+between the storage providers. Development is where the storage providers benefit from one another.</p>
+
+<p>Rook provides a development framework with a goal of enabling storage providers to create
+operators for Kubernetes to manage their storage layer. As the storage provider community
+grows, we expect this framework to grow as common storage constructs are identified
+that will benefit the community. Rook does not aim to replace other frameworks or
+communities, but to fill gaps not provided by other core projects.</p>
+
+<p>Storage providers in Rook are currently built on the <a href="https://github.com/kubernetes-sigs/controller-runtime">Controller Runtime</a>,
+but may also be built on other frameworks such as the <a href="https://sdk.operatorframework.io/">Operator SDK</a>
+or <a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a>. The choice of the
+underlying framework is up to the storage provider.</p>
+
+<p>Rook does not aim to be a general framework for storage, but to provide a
+very specific set of helpers to meet the storage provider needs in the Rook project.</p>
+
+<h2 id="rook-framework">Rook Framework</h2>
+
+<p>Rook provides the following framework to assist storage providers in building an operator:</p>
+
+<ul>
+  <li>Common golang packages shared by storage providers are in the main <a href="https://github.com/rook/rook">Rook repo</a>.</li>
+  <li>Common build scripts for building the operator images are in the main
+<a href="https://github.com/rook/rook/tree/master/build">Rook repo</a>.</li>
+  <li>Each provider has its own repo under the <a href="https://github.com/rook">Rook org</a>.
+    <ul>
+      <li>Multiple community members are given push access to the repo, including
+owners of the storage provider, Rook steering committee members,
+and other Rook maintainers if deemed helpful or necessary by the steering
+committee. Maintainers for the new provider are added according to the
+<a href="https://github.com/rook/rook/blob/master/GOVERNANCE.md">governance</a>.</li>
+      <li>Providers added to Rook prior to 2020 are grandfathered into the main
+<a href="https://github.com/rook/rook">Rook repo</a>.</li>
+    </ul>
+  </li>
+  <li>Storage providers must follow the Rook <a href="https://github.com/rook/rook/blob/master/GOVERNANCE.md">governance</a>
+in the interest of the good of the overall project. Storage providers have
+autonomy in their feature work, while collaboration with the community
+is expected for shared features.</li>
+  <li>A quarterly release cadence is in place for the operators in the main Rook repo.
+Operators in their own repo define their own cadence and versioning scheme as desired.
+    <ul>
+      <li>Storage providers own their release process, while following Rook best practices to
+ensure high quality.</li>
+      <li>Each provider owns independent CI based on Github actions, with patterns and build
+automation that can be re-used by providers</li>
+    </ul>
+  </li>
+  <li>Docker images are pushed to the <a href="https://hub.docker.com/u/rook">Rook DockerHub</a> where
+each storage provider has its own repo.</li>
+  <li>Helm charts are published to <a href="https://charts.rook.io/release">charts.rook.io</a></li>
+  <li>Documentation for the storage provider is to be written by the storage provider
+members. The build process will publish the documentation to the <a href="https://rook.github.io/docs/rook/master/">Rook website</a>.</li>
+  <li>All storage providers are added to the <a href="https://rook.io/">Rook.io website</a></li>
+  <li>A great Slack community is available where you can communicate amongst developers and users</li>
+</ul>
+
+<h2 id="considering-joining-rook">Considering Joining Rook?</h2>
+
+<p>If you own a storage provider and are interested in joining the Rook project to create
+an operator, please consider the following:</p>
+
+<ul>
+  <li>You are making a clear commitment to the development of the storage provider.
+Creating an operator is not a one-time engineering cost, but is a long term commitment
+to the community.</li>
+  <li>Support for a storage provider in Rook requires dedication and community support.</li>
+  <li>Do you really need an operator? Many storage applications (e.g. CSI drivers)
+can be deployed with tools such as a Helm chart and don’t really need the
+flexibility of an operator.</li>
+  <li>Joining Rook is also about community, not just the framework.</li>
+</ul>
+
+<h2 id="engineering-requirements">Engineering Requirements</h2>
+
+<p>The engineering costs of each storage provider include:</p>
+
+<ul>
+  <li>Develop the operator</li>
+  <li>Rook maintainers will help answer questions along the way, but ultimately
+you own the development</li>
+  <li>If there are test failures in the CI, they should be investigated in a timely manner</li>
+  <li>If issues are opened in Github, they need investigation and triage to provide
+expectations about the priority and timeline</li>
+  <li>If users have questions in Slack, they should be answered in a timely manner.
+Community members can also be redirected to other locations if desired for the provider.</li>
+  <li>A regular cadence of releases is expected. Software always needs to evolve with new versions
+of K8s, accommodate new features in the storage provider, etc.</li>
+  <li>Each provider maintains a ROADMAP.md in the root of their repo, updates it regularly
+(e.g. quarterly or with the release cadence), and provides input to the overall Rook
+<a href="https://github.com/rook/rook/blob/master/ROADMAP.md">roadmap</a> for common features.</li>
+</ul>
+
+<h3 id="inactive-providers">Inactive Providers</h3>
+
+<p>If a storage provider does not have engineering resources, Rook cannot claim to support it.
+After some months of inactivity Rook will deprecate a storage provider. The timing
+will be decided on a case by case basis by the steering committee. The repo and other artifacts
+for deprecated storage providers will be left intact for reference.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.6/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.6/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.6/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.6/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.6/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.6/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.6/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.6/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.6/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.6/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.6/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.6/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.6/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.6/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.6/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.6/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.6/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.6/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.6/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.6/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.6/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.6/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.6/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.6/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.6/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.6/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.6/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.6/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.6/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.6/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.6/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.6/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.6/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.6/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.6/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.6/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.6/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.6/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.6/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.6/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.6/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.6/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.6/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.6/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.6/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.6/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.6/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.6/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.6/storage-providers.html",
+      true,
+      true
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.6/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

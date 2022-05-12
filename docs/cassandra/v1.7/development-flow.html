@@ -1,0 +1,690 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+
+    <title>Cassandra Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/cassandra/v1.7/development-flow.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Cassandra</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Cassandra v1.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/cassandra/v1.7/development-flow.html" class="active">Rook Cassandra v1.7</a>
+      
+        <a href="/docs/cassandra/latest/development-flow.html">Rook Cassandra latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/cassandra/blob/master/Documentation/development-flow.md">Edit on GitHub</a>
+    </div>
+    
+    <div class="docs-text">
+      <h1 id="contributing">Contributing</h1>
+
+<p><strong>The Rook Cassandra operator is <a href="https://github.com/rook/cassandra#deprecated">deprecated</a></strong></p>
+
+<p>Thank you for your time and effort to help us improve Rook! Here are a few steps to get started. If you have any questions,
+don’t hesitate to reach out to us on our <a href="https://Rook-io.slack.com">Slack</a> dev channel.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://golang.org/dl/">GO 1.16</a> or greater installed</li>
+  <li>Git client installed</li>
+  <li>Github account</li>
+</ol>
+
+<h2 id="initial-setup">Initial Setup</h2>
+
+<h3 id="create-a-fork">Create a Fork</h3>
+
+<p>From your browser navigate to <a href="http://github.com/rook/cassandra">http://github.com/rook/cassandra</a> and click the “Fork” button.</p>
+
+<h3 id="clone-your-fork">Clone Your Fork</h3>
+
+<p>Open a console window and do the following;</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create the rook repo path
+<span class="gp">mkdir -p $</span>GOPATH/src/github.com/rook
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Navigate to the <span class="nb">local </span>repo path and clone your fork
+<span class="gp">cd $</span>GOPATH/src/github.com/rook
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Clone your fork, where &lt;user&gt; is your GitHub account name
+<span class="gp">$</span><span class="w"> </span>git clone https://github.com/&lt;user&gt;/cassandra.git
+<span class="go">cd rook
+</span></code></pre></div></div>
+
+<h3 id="build">Build</h3>
+
+<p>Build the Cassandra operator image:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">make
+</span></code></pre></div></div>
+
+<p>If you want to use <code class="language-plaintext highlighter-rouge">podman</code> instead of <code class="language-plaintext highlighter-rouge">docker</code> then uninstall <code class="language-plaintext highlighter-rouge">docker</code> packages from your machine, make will automatically pick up <code class="language-plaintext highlighter-rouge">podman</code>.</p>
+
+<h3 id="development-settings">Development Settings</h3>
+
+<p>To provide consistent whitespace and other formatting in your <code class="language-plaintext highlighter-rouge">go</code> and other source files (e.g., Markdown), it is recommended you apply
+the following settings in your IDE:</p>
+
+<ul>
+  <li>Format with the <code class="language-plaintext highlighter-rouge">goreturns</code> tool</li>
+  <li>Trim trailing whitespace</li>
+  <li>Markdown Table of Contents is correctly updated automatically</li>
+</ul>
+
+<p>For example, in VS Code this translates to the following settings:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"go.buildOnSave"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"go.formatTool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"goreturns"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"files.trimTrailingWhitespace"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"files.insertFinalNewline"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"files.trimFinalNewlines"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markdown.extension.toc.unorderedList.marker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markdown.extension.toc.githubCompatibility"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markdown.extension.toc.levels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2..2"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In addition to that it is recommended to install the following extensions:</p>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One by Yu Zhang - Visual Studio Marketplace</a></li>
+</ul>
+
+<h3 id="add-upstream-remote">Add Upstream Remote</h3>
+
+<p>First you will need to add the upstream remote to your local git:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Add <span class="s1">'upstream'</span> to the list of remotes
+<span class="go">git remote add upstream https://github.com/rook/cassandra.git
+
+</span><span class="gp">#</span><span class="w"> </span>Verify the remote was added
+<span class="go">git remote -v
+</span></code></pre></div></div>
+
+<p>Now you should have at least <code class="language-plaintext highlighter-rouge">origin</code> and <code class="language-plaintext highlighter-rouge">upstream</code> remotes. You can also add other remotes to collaborate with other contributors.</p>
+
+<h2 id="layout">Layout</h2>
+
+<p>A source code layout is shown below, annotated with comments about the use of each important directory:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rook
+├── build                         # build makefiles and logic to build, publish and release all Rook artifacts
+├── cluster
+│   └── examples                  # Sample yaml files for Rook cluster
+│
+├── cmd                           # Binaries with main entrypoint
+│   └── rook                      # Main command entry points for operators and daemons
+│
+├── design                        # Design documents
+├── Documentation                 # Rook project Documentation
+├── images                        # Dockerfiles to build images for all supported storage providers
+│
+├── pkg
+│   ├── apis
+│   │   ├── cassandra.rook.io     # cassandra server specific specs
+│   │   │   └── v1alpha1
+│   │   └── rook.io               # rook.io API group of common types
+│   │       └── v1alpha2
+│   ├── client                    # auto-generated strongly typed client code to access Rook APIs
+│   ├── clusterd
+│   ├── operator                  # all orchestration logic and custom controllers for the cassandra operator
+│   │   ├── cassandra
+│   │   ├── k8sutil
+│   │   └── test
+│   ├── test
+│   ├── util
+│   └── version
+└── tests                         # integration tests
+    ├── framework                 # the Rook testing framework
+    │   ├── clients               # test clients used to consume Rook resources during integration tests
+    │   ├── installer             # installs Rook and its supported storage providers into integration tests environments
+    │   └── utils
+    ├── integration               # all test cases that will be invoked during integration testing
+    └── scripts                   # scripts for setting up integration and manual testing environments
+</code></pre></div></div>
+
+<h2 id="development">Development</h2>
+
+<p>To add a feature or to make a bug fix, you will need to create a branch in your fork and then submit a pull request (PR) from the branch.</p>
+
+<h3 id="design-document">Design Document</h3>
+
+<p>For new features of significant scope and complexity, a design document is recommended before work begins on the implementation.
+So create a design document if:</p>
+
+<ul>
+  <li>Adding a new storage provider</li>
+  <li>Adding a new CRD</li>
+  <li>Adding a significant feature to an existing storage provider. If the design is simple enough to describe in a github issue, you likely don’t need a full design doc.</li>
+</ul>
+
+<p>For smaller, straightforward features and bug fixes, there is no need for a design document.
+Authoring a design document for big features has many advantages:</p>
+
+<ul>
+  <li>Helps flesh out the approach by forcing the author to think critically about the feature and can identify potential issues early on</li>
+  <li>Gets agreement amongst the community before code is written that could be wasted effort in the wrong direction</li>
+  <li>Serves as an artifact of the architecture that is easier to read for visitors to the project than just the code by itself</li>
+</ul>
+
+<p>Note that writing code to prototype the feature while working on the design may be very useful to help flesh out the approach.</p>
+
+<p>A design document should be written as a markdown file in the <a href="/design">design folder</a>.
+You can follow the process outlined in the <a href="/design/design_template.md">design template</a>.
+You will see many examples of previous design documents in that folder.
+Submit a pull request for the design to be discussed and approved by the community before being merged into master, just like any other change to the repository.</p>
+
+<p>An issue should be opened to track the work of authoring and completing the design document.
+This issue is in addition to the issue that is tracking the implementation of the feature.
+The <a href="https://github.com/rook/cassandra/labels/design">design label</a> should be assigned to the issue to denote it as such.</p>
+
+<h3 id="create-a-branch">Create a Branch</h3>
+
+<p>From a console, create a new branch based on your fork and start working on it:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Ensure all your remotes are up to <span class="nb">date </span>with the latest
+<span class="go">git fetch --all
+
+</span><span class="gp">#</span><span class="w"> </span>Create a new branch that is based off upstream master.  Give it a simple, but descriptive name.
+<span class="gp">#</span><span class="w"> </span>Generally it will be two to three words separated by dashes and without numbers.
+<span class="go">git checkout -b feature-name upstream/master
+</span></code></pre></div></div>
+
+<p>Now you are ready to make the changes and commit to your branch.</p>
+
+<h3 id="updating-your-fork">Updating Your Fork</h3>
+
+<p>During the development lifecycle, you will need to keep up-to-date with the latest upstream master. As others on the team push changes, you will need to <code class="language-plaintext highlighter-rouge">rebase</code> your commits on top of the latest. This avoids unnecessary merge commits and keeps the commit history clean.</p>
+
+<p>Whenever you need to update your local repository, you never want to merge. You <strong>always</strong> will rebase. Otherwise you will end up with merge commits in the git history. If you have any modified files, you will first have to stash them (<code class="language-plaintext highlighter-rouge">git stash save -u "&lt;some description&gt;"</code>).</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">git fetch --all
+git rebase upstream/master
+</span></code></pre></div></div>
+
+<p>Rebasing is a very powerful feature of Git. You need to understand how it works or else you will risk losing your work. Read about it in the <a href="https://git-scm.com/docs/git-rebase">Git documentation</a>, it will be well worth it. In a nutshell, rebasing does the following:</p>
+
+<ul>
+  <li>“Unwinds” your local commits. Your local commits are removed temporarily from the history.</li>
+  <li>The latest changes from upstream are added to the history</li>
+  <li>Your local commits are re-applied one by one</li>
+  <li>If there are merge conflicts, you will be prompted to fix them before continuing. Read the output closely. It will tell you how to complete the rebase.</li>
+  <li>When done rebasing, you will see all of your commits in the history.</li>
+</ul>
+
+<h2 id="submitting-a-pull-request">Submitting a Pull Request</h2>
+
+<p>Once you have implemented the feature or bug fix in your branch, you will open a PR to the upstream rook repo. Before opening the PR ensure you have added unit tests, are passing the integration tests, cleaned your commit history, and have rebased on the latest upstream.</p>
+
+<p>In order to open a pull request (PR) it is required to be up to date with the latest changes upstream. If other commits are pushed upstream before your PR is merged, you will also need to rebase again before it will be merged.</p>
+
+<h3 id="regression-testing">Regression Testing</h3>
+
+<p>All pull requests must pass the unit and integration tests before they can be merged. These tests automatically
+run as a part of the build process. The results of these tests along with code reviews and other criteria determine whether
+your request will be accepted into the <code class="language-plaintext highlighter-rouge">rook/rook</code> repo. It is prudent to run all tests locally on your development box prior to submitting a pull request to the <code class="language-plaintext highlighter-rouge">rook/rook</code> repo.</p>
+
+<h4 id="unit-tests">Unit Tests</h4>
+
+<p>From the root of your local Rook repo execute the following to run all of the unit tests:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">make test
+</span></code></pre></div></div>
+
+<p>Unit tests for individual packages can be run with the standard <code class="language-plaintext highlighter-rouge">go test</code> command. Before you open a PR, confirm that you have sufficient code coverage on the packages that you changed. View the <code class="language-plaintext highlighter-rouge">coverage.html</code> in a browser to inspect your new code.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">go test -coverprofile=coverage.out
+go tool cover -html=coverage.out -o coverage.html
+</span></code></pre></div></div>
+
+<h4 id="running-the-integration-tests">Running the Integration Tests</h4>
+
+<p>For instructions on how to execute the end to end smoke test suite,
+follow the <a href="https://github.com/rook/cassandra/blob/master/tests/README.md">test instructions</a>.</p>
+
+<h3 id="commit-structure">Commit structure</h3>
+
+<p>Rook maintainers value clear, lengthy and explanatory commit messages. So by default each of your commits must:</p>
+
+<ul>
+  <li>be prefixed by the component it’s affecting</li>
+  <li>contain a commit message which explains the original issue and how it was fixed if a bug.
+If a feature it is a full description of the new functionality.</li>
+  <li>refer to the issue it’s closing, this is mandatory when fixing a bug</li>
+  <li>have a sign-off, this is achieved by adding <code class="language-plaintext highlighter-rouge">-s</code> when committing so in practice run <code class="language-plaintext highlighter-rouge">git commit -s</code>. If not the DCO bot will complain.
+If you forgot to add the sign-off you can also amend a previous commit with the sign-off by running <code class="language-plaintext highlighter-rouge">git commit --amend -s</code>.
+If you’ve pushed your changes to Github already you’ll need to force push your branch with <code class="language-plaintext highlighter-rouge">git push -f</code>.</li>
+</ul>
+
+<p>Here is an example of an acceptable commit message:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>component: commit title
+
+This is the commit message, here I'm explaining, what the bug was along with its root cause.
+Then I'm explaining how I fixed it.
+
+Closes: https://github.com/rook/cassandra/issues/&lt;NUMBER&gt;
+Signed-off-by: First Name Last Name &lt;email address&gt;
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">component</code> <strong>MUST</strong> be one of the following:</p>
+<ul>
+  <li>bot</li>
+  <li>build</li>
+  <li>cassandra</li>
+  <li>ci</li>
+  <li>core</li>
+  <li>docs</li>
+  <li>test</li>
+</ul>
+
+<p>Note: sometimes you will feel like there is not so much to say, for instance if you are fixing a typo in a text.
+In that case, it is acceptable to shorten the commit message.
+Also, you don’t always need to close an issue, again for a very small fix.</p>
+
+<p>You can read more about <a href="https://www.conventionalcommits.org/en/v1.0.0-beta.2/">conventional commits</a>.</p>
+
+<h3 id="commit-history">Commit History</h3>
+
+<p>To prepare your branch to open a PR, you will need to have the minimal number of logical commits so we can maintain
+a clean commit history. Most commonly a PR will include a single commit where all changes are squashed, although
+sometimes there will be multiple logical commits.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Inspect your commit <span class="nb">history </span>to determine <span class="k">if </span>you need to squash commits
+<span class="go">git log
+
+</span><span class="gp">#</span><span class="w"> </span>Rebase the commits and edit, squash, or even reorder them as you determine will keep the <span class="nb">history </span>clean.
+<span class="gp">#</span><span class="w"> </span>In this example, the last 5 commits will be opened <span class="k">in </span>the git rebase tool.
+<span class="go">git rebase -i HEAD~5
+</span></code></pre></div></div>
+
+<p>Once your commit history is clean, ensure you have based on the <a href="#Updating-your-fork">latest upstream</a> before you open the PR.</p>
+
+<h3 id="submitting">Submitting</h3>
+
+<p>Go to the <a href="https://www.github.com/rook/cassandra">Rook github</a> to open the PR. If you have pushed recently, you should see an obvious link to open the PR. If you have not pushed recently, go to the Pull Request tab and select your fork and branch for the PR.</p>
+
+<p>After the PR is open, you can make changes simply by pushing new commits. Your PR will track the changes in your fork and update automatically.</p>
+
+<p><strong>Never</strong> open a pull request against a released branch (e.g. release-1.2) unless the content you are editing is gone from master and only exists in the released branch.
+By default, you should always open a pull request against master.</p>
+
+<h3 id="backport-a-fix-to-a-release-branch">Backport a Fix to a Release Branch</h3>
+
+<p>The flow for getting a fix into a release branch is:</p>
+
+<ol>
+  <li>Open a PR to merge the changes to master following the process outlined above.</li>
+  <li>Add the backport label to that PR such as backport-release-1.1</li>
+  <li>After your PR is merged to master, the mergify bot will automatically open a PR with your commits backported to the release branch</li>
+  <li>If there are any conflicts you will need to resolve them by pulling the branch, resolving the conflicts and force push back the branch</li>
+  <li>After the CI is green, the bot will automatically merge the backport PR.</li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/cassandra/v1.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/cassandra/v1.7/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra Quickstart",
+      "/docs/cassandra/v1.7/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/cassandra/v1.7/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra Upgrade",
+      "/docs/cassandra/v1.7/cassandra-operator-upgrade.html",
+      false,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/cassandra/v1.7/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/cassandra/v1.7/development-flow.html",
+      false,
+      true
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

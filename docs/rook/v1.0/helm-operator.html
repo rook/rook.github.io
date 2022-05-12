@@ -1,0 +1,1023 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.0/helm-operator.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.0</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/helm-operator.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/helm-operator.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/helm-operator.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/helm-operator.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/helm-operator.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/helm-operator.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/helm-operator.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/helm-operator.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/helm-operator.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/helm-operator.html" class="active">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/helm-operator.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/helm-operator.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/helm-operator.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/helm-operator.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/helm-operator.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/helm-operator.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/helm-operator.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.0 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-operator-helm-chart">Ceph Operator Helm Chart</h1>
+
+<p>Installs <a href="https://github.com/rook/rook">rook</a> to create, configure, and manage Ceph clusters on Kubernetes.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This chart bootstraps a <a href="https://github.com/rook/rook">rook-ceph-operator</a> deployment on a <a href="http://kubernetes.io">Kubernetes</a> cluster using the <a href="https://helm.sh">Helm</a> package manager.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>Kubernetes 1.10+</li>
+</ul>
+
+<h3 id="rbac">RBAC</h3>
+
+<p>If role-based access control (RBAC) is enabled in your cluster, you may need to give Tiller (the server-side component of Helm) additional permissions. <strong>If RBAC is not enabled, be sure to set <code class="language-plaintext highlighter-rouge">rbacEnable</code> to <code class="language-plaintext highlighter-rouge">false</code> when installing the chart.</strong></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create a ServiceAccount <span class="k">for </span>Tiller <span class="k">in </span>the <span class="sb">`</span>kube-system<span class="sb">`</span> namespace
+<span class="go">kubectl --namespace kube-system create sa tiller
+
+</span><span class="gp">#</span><span class="w"> </span>Create a ClusterRoleBinding <span class="k">for </span>Tiller
+<span class="go">kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+
+</span><span class="gp">#</span><span class="w"> </span>Patch Tiller<span class="s1">'s Deployment to use the new ServiceAccount
+</span><span class="go">kubectl --namespace kube-system patch deploy/tiller-deploy -p '{"spec": {"template": {"spec": {"serviceAccountName": "tiller"}}}}'
+</span></code></pre></div></div>
+
+<h2 id="installing">Installing</h2>
+
+<p>The Ceph Operator helm chart will install the basic components necessary to create a storage platform for your Kubernetes cluster.
+After the helm chart is installed, you will need to <a href="/docs/rook/v1.0/ceph-quickstart.html#create-a-rook-cluster">create a Rook cluster</a>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">helm install</code> command deploys rook on the Kubernetes cluster in the default configuration. The <a href="#configuration">configuration</a> section lists the parameters that can be configured during installation. It is recommended that the rook operator be installed into the <code class="language-plaintext highlighter-rouge">rook-ceph</code> namespace (you will install your clusters into separate namespaces).</p>
+
+<p>Rook currently publishes builds of the Ceph operator to the <code class="language-plaintext highlighter-rouge">release</code> and <code class="language-plaintext highlighter-rouge">master</code> channels.</p>
+
+<h3 id="release">Release</h3>
+<p>The release channel is the most recent release of Rook that is considered stable for the community.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">helm repo add rook-release https://charts.rook.io/release
+helm install --namespace rook-ceph rook-release/rook-ceph
+</span></code></pre></div></div>
+
+<h3 id="master">Master</h3>
+<p>The master channel includes the latest commits, with all automated tests green. Historically it has been very stable, though it is only recommended for testing.
+The critical point to consider is that upgrades are not supported to or from master builds.</p>
+
+<p>To install the helm chart from master, you will need to pass the specific version returned by the <code class="language-plaintext highlighter-rouge">search</code> command.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">helm repo add rook-master https://charts.rook.io/master
+helm search rook-ceph
+</span><span class="gp">helm install --namespace rook-ceph rook-master/rook-ceph --version &lt;version&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p>For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm install --namespace rook-ceph rook-master/rook-ceph --version v0.9.0-563.g242e032
+</code></pre></div></div>
+
+<h3 id="development-build">Development Build</h3>
+<p>To deploy from a local build from your development environment:</p>
+<ol>
+  <li>Build the Rook docker image: <code class="language-plaintext highlighter-rouge">make</code></li>
+  <li>Copy the image to your K8s cluster, such as with the <code class="language-plaintext highlighter-rouge">docker save</code> then the <code class="language-plaintext highlighter-rouge">docker load</code> commands</li>
+  <li>Install the helm chart
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cd cluster/charts/rook-ceph
+helm install --namespace rook-ceph --name rook-ceph .
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="uninstalling-the-chart">Uninstalling the Chart</h2>
+
+<p>To uninstall/delete the <code class="language-plaintext highlighter-rouge">rook-ceph</code> deployment:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>helm delete <span class="nt">--purge</span> rook-ceph
+</code></pre></div></div>
+
+<p>The command removes all the Kubernetes components associated with the chart and deletes the release.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The following tables lists the configurable parameters of the rook-operator chart and their default values.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">image.repository</code></td>
+      <td>Image</td>
+      <td><code class="language-plaintext highlighter-rouge">rook/ceph</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">image.tag</code></td>
+      <td>Image tag</td>
+      <td><code class="language-plaintext highlighter-rouge">master</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">image.pullPolicy</code></td>
+      <td>Image pull policy</td>
+      <td><code class="language-plaintext highlighter-rouge">IfNotPresent</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rbacEnable</code></td>
+      <td>If true, create &amp; use RBAC resources</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pspEnable</code></td>
+      <td>If true, create &amp; use PSP resources</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">resources</code></td>
+      <td>Pod resource requests &amp; limits</td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">annotations</code></td>
+      <td>Pod annotations</td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">logLevel</code></td>
+      <td>Global log level</td>
+      <td><code class="language-plaintext highlighter-rouge">INFO</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nodeSelector</code></td>
+      <td>Kubernetes <code class="language-plaintext highlighter-rouge">nodeSelector</code> to add to the Deployment.</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tolerations</code></td>
+      <td>List of Kubernetes <code class="language-plaintext highlighter-rouge">tolerations</code> to add to the Deployment.</td>
+      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hostpathRequiresPrivileged</code></td>
+      <td>Runs Ceph Pods as privileged to be able to write to <code class="language-plaintext highlighter-rouge">hostPath</code>s in OpenShift with SELinux restrictions.</td>
+      <td><code class="language-plaintext highlighter-rouge">false</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.flexVolumeDirPath</code></td>
+      <td>Path where the Rook agent discovers the flex volume plugins (*)</td>
+      <td><code class="language-plaintext highlighter-rouge">/usr/libexec/kubernetes/kubelet-plugins/volume/exec/</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.libModulesDirPath</code></td>
+      <td>Path where the Rook agent should look for kernel modules (*)</td>
+      <td><code class="language-plaintext highlighter-rouge">/lib/modules</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.mounts</code></td>
+      <td>Additional paths to be mounted in the agent container</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.mountSecurityMode</code></td>
+      <td>Mount Security Mode for the agent.</td>
+      <td><code class="language-plaintext highlighter-rouge">Any</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.toleration</code></td>
+      <td>Toleration for the agent pods</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.tolerationKey</code></td>
+      <td>The specific key of the taint to tolerate</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">discover.toleration</code></td>
+      <td>Toleration for the discover pods</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">discover.tolerationKey</code></td>
+      <td>The specific key of the taint to tolerate</td>
+      <td><none></none></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mon.healthCheckInterval</code></td>
+      <td>The frequency for the operator to check the mon health</td>
+      <td><code class="language-plaintext highlighter-rouge">45s</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mon.monOutTimeout</code></td>
+      <td>The time to wait before failing over an unhealthy mon</td>
+      <td><code class="language-plaintext highlighter-rouge">600s</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&amp;ast; For information on what to set <code class="language-plaintext highlighter-rouge">agent.flexVolumeDirPath</code> to, please refer to the <a href="/docs/rook/v1.0/flexvolume.html">Rook flexvolume documentation</a>
+&amp;ast; <code class="language-plaintext highlighter-rouge">agent.mounts</code> should have this format <code class="language-plaintext highlighter-rouge">mountname1=/host/path:/container/path,mountname2=/host/path2:/container/path2</code></p>
+
+<h3 id="command-line">Command Line</h3>
+<p>You can pass the settings with helm command line parameters. Specify each parameter using the
+<code class="language-plaintext highlighter-rouge">--set key=value[,key=value]</code> argument to <code class="language-plaintext highlighter-rouge">helm install</code>. For example, the following command will install rook where RBAC is not enabled.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>helm <span class="nb">install</span> <span class="nt">--namespace</span> rook-ceph <span class="nt">--name</span> rook-ceph rook-release/rook-ceph <span class="nt">--set</span> <span class="nv">rbacEnable</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div></div>
+
+<h3 id="settings-file">Settings File</h3>
+<p>Alternatively, a yaml file that specifies the values for the above parameters (<code class="language-plaintext highlighter-rouge">values.yaml</code>) can be provided while installing the chart.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>helm <span class="nb">install</span> <span class="nt">--namespace</span> rook-ceph <span class="nt">--name</span> rook-ceph rook-release/rook-ceph <span class="nt">-f</span> values.yaml
+</code></pre></div></div>
+
+<p>Here are the sample settings to get you started.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span>
+  <span class="na">prefix</span><span class="pi">:</span> <span class="s">rook</span>
+  <span class="na">repository</span><span class="pi">:</span> <span class="s">rook/ceph</span>
+  <span class="na">tag</span><span class="pi">:</span> <span class="s">v1.0.0</span>
+  <span class="na">pullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
+
+<span class="na">resources</span><span class="pi">:</span>
+  <span class="na">limits</span><span class="pi">:</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s">100m</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s">128Mi</span>
+  <span class="na">requests</span><span class="pi">:</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s">100m</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s">128Mi</span>
+
+<span class="na">rbacEnable</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">pspEnable</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.0/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.0/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.0/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.0/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.0/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.0/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.0/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.0/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.0/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph cluster Pod Security Policies",
+      "/docs/rook/v1.0/ceph-psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.0/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.0/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.0/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.0/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.0/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.0/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.0/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.0/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.0/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.0/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.0/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.0/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.0/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.0/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.0/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.0/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.0/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.0/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.0/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.0/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.0/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.0/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.0/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.0/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.0/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.0/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.0/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.0/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.0/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.0/helm-operator.html",
+      true,
+      true
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.0/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.0/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.0/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.0/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.0/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.0/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.0/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.0/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.0/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.0/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

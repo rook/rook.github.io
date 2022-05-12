@@ -1,0 +1,948 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.4/container-linux.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.4</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/container-linux.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/container-linux.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/container-linux.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/container-linux.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/container-linux.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/container-linux.html" class="active">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/container-linux.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/container-linux.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/container-linux.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/container-linux.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/container-linux.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/container-linux.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/container-linux.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/container-linux.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/container-linux.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/container-linux.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/container-linux.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.4 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="using-the-container-linux-update-operator-with-rook">Using the Container Linux Update Operator with Rook</h1>
+
+<p>When you are using Container Linux (CoreOS) and have the update engine enabled, it could be that a node reboots quickly after another not leaving enough time for the Rook cluster to rebuild. The <a href="https://github.com/coreos/container-linux-update-operator">Container Linux Update Operator</a> is the solution for this, you can block your nodes to reboot until the Ceph cluster is healthy.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>An operational Container Linux Kubernetes cluster (Successfully tested with 1.8.4)</li>
+  <li>A working rook cluster</li>
+  <li>The update-engine.service systemd unit on each machine should be unmasked, enabled and started in systemd</li>
+  <li>The locksmithd.service systemd unit on each machine should be masked and stopped in systemd</li>
+</ul>
+
+<h2 id="start-the-update-operator">Start the update operator</h2>
+
+<p>Proper reading of the README on the <a href="https://github.com/coreos/container-linux-update-operator">Container Linux Update Operator</a> is necessary. Clone the repo and go in the <code class="language-plaintext highlighter-rouge">examples</code> directory.</p>
+
+<p>Look for the file named <code class="language-plaintext highlighter-rouge">update-operator.yaml</code> and update the <code class="language-plaintext highlighter-rouge">command</code> part of the container from:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">command</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">/bin/update-operator"</span>
+</code></pre></div></div>
+
+<p>to:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">command</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">/bin/update-operator"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">--before-reboot-annotations"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">ceph-before-reboot-check"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">--after-reboot-annotations"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">ceph-after-reboot-check"</span>
+</code></pre></div></div>
+
+<p>You can also add the <code class="language-plaintext highlighter-rouge">-v 6</code> argument for more extensive logging.</p>
+
+<p>Now create the update-operator by invoking following commands:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f namespace.yaml
+kubectl create -f cluster-role.yaml
+kubectl create -f cluster-role-binding.yaml
+kubectl create -f update-operator.yaml
+kubectl create -f update-agent.yaml
+</span></code></pre></div></div>
+
+<p>These files create a new namespace <code class="language-plaintext highlighter-rouge">reboot-coordinator</code>, configured to listen for the node annotation <code class="language-plaintext highlighter-rouge">ceph-reboot-check</code>. Now you can create both files in the <code class="language-plaintext highlighter-rouge">cluster/examples/coreos</code> folder, here’s a short description of what each file does:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rbac.yaml</code>: This file contains the necessary RBAC settings.</li>
+  <li><code class="language-plaintext highlighter-rouge">ceph-after-reboot-script.yaml</code>: This file creates a <code class="language-plaintext highlighter-rouge">ConfigMap</code> containing a bash script which will be mounted in the <code class="language-plaintext highlighter-rouge">rook-toolbox</code> image as executable file.</li>
+  <li><code class="language-plaintext highlighter-rouge">ceph-before-reboot-script.yaml</code>: This file creates a <code class="language-plaintext highlighter-rouge">ConfigMap</code> containing a bash script which will be mounted in the <code class="language-plaintext highlighter-rouge">rook-toolbox</code> image as executable file.</li>
+  <li><code class="language-plaintext highlighter-rouge">before-reboot-daemonset.yaml</code>: This file creates a <code class="language-plaintext highlighter-rouge">DaemonSet</code> which waits for a node being labeled <code class="language-plaintext highlighter-rouge">before-reboot=true</code>, runs and checks the Ceph status. If all is correct, it annotates the node with <code class="language-plaintext highlighter-rouge">ceph-before-reboot-check=true</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">after-reboot-daemonset.yaml</code>: This file creates a <code class="language-plaintext highlighter-rouge">DaemonSet</code> which waits for a node being labeled <code class="language-plaintext highlighter-rouge">after-reboot=true</code>, runs and unsets the <code class="language-plaintext highlighter-rouge">noout</code> option for the ceph OSDs. If all is correct, it annotates the node with <code class="language-plaintext highlighter-rouge">ceph-after-reboot-check=true</code>.</li>
+</ul>
+
+<p>The node annotation <code class="language-plaintext highlighter-rouge">ceph-no-noout=true</code> can be used to avoid <code class="language-plaintext highlighter-rouge">ceph-before-reboot-check</code> from setting the OSD <code class="language-plaintext highlighter-rouge">noout</code> flag. This annotation should only be used when deleting a node from a cluster, this way the cluster starts rebalancing immediately, not waiting for the node to come back up.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f rbac.yaml
+kubectl create -f ceph-after-reboot-script.yaml
+kubectl create -f ceph-before-reboot-script.yaml
+kubectl create -f before-reboot-daemonset.yaml
+kubectl create -f after-reboot-daemonset.yaml
+</span></code></pre></div></div>
+
+<h2 id="destroy-the-update-operator">Destroy the update operator</h2>
+
+<p>To destroy all elements created in this file, run:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f before-reboot-daemonset.yaml
+kubectl delete -f after-reboot-daemonset.yaml
+kubectl delete -f ceph-after-reboot-script.yaml
+kubectl delete -f ceph-before-reboot-script.yaml
+kubectl delete -f rbac.yaml
+</span></code></pre></div></div>
+
+<p>Then you may safely delete the update operator itself:
+From the directory of the Container Linux Update Operator you cloned earlier, go again into the <code class="language-plaintext highlighter-rouge">examples</code> folder and run following commands:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f update-agent.yaml
+kubectl delete -f update-operator.yaml
+kubectl delete -f cluster-role-binding.yaml
+kubectl delete -f cluster-role.yaml
+kubectl delete -f namespace.yaml
+</span></code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.4/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.4/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.4/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.4/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.4/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.4/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.4/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.4/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.4/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.4/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.4/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.4/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.4/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.4/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.4/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.4/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.4/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.4/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.4/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.4/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.4/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.4/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.4/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.4/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.4/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.4/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.4/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.4/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.4/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.4/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.4/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.4/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.4/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.4/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.4/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.4/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.4/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.4/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.4/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.4/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.4/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.4/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.4/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.4/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.4/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.4/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.4/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.4/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.4/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.4/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.4/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.4/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.4/container-linux.html",
+      true,
+      true
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.4/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.4/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.4/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.4/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

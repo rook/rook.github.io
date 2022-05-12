@@ -1,0 +1,13 @@
+#content { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; }
+#content #holder { margin: 25px 0; }
+#content h1 { font-size: 85px; margin: 0 0 16px; }
+@media (max-width: 36em) { #content h1 { font-size: 65px; } }
+#content h2 { line-height: 1.2; margin: 0 0 10px; }
+#content p { font-size: 15px; line-height: 2; margin: 0 auto 30px; }
+#content img { width: 100%; max-width: 660px; }
+@media (max-width: 64em) { #content [class*='col-'] { text-align: center; } }
+#content [class*='col-'].text-right { text-align: right; }
+#content [class*='col-'].text-right img { position: relative; }
+@media (max-width: 80em) { #content [class*='col-'].text-right img { margin-right: -60px; } }
+@media (max-width: 64em) { #content [class*='col-'].text-right img { margin-right: -30px; } }
+@media (max-width: 48em) { #content [class*='col-'].text-right img { margin-right: -15px; } }

@@ -1,0 +1,1222 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/latest/rbd-mirroring.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph latest</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/rbd-mirroring.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/rbd-mirroring.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/rbd-mirroring.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/rbd-mirroring.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/rbd-mirroring.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/rbd-mirroring.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/rbd-mirroring.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/rbd-mirroring.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/rbd-mirroring.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/rbd-mirroring.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/rbd-mirroring.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/rbd-mirroring.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/rbd-mirroring.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/rbd-mirroring.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/rbd-mirroring.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/rbd-mirroring.html" class="active">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/rbd-mirroring.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert master">
+        <p><b>PLEASE NOTE:</b> This document applies to an <b>unreleased</b> version of Rook. It is strongly recommended that you only use official releases of Rook, as unreleased versions are subject to changes and incompatibilities that will not be supported in the official releases.</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="rbd-mirroring">RBD Mirroring</h1>
+<h2 id="disaster-recovery">Disaster Recovery</h2>
+
+<p>Disaster recovery (DR) is an organization’s ability to react to and recover from an incident that negatively affects business operations.
+This plan comprises strategies for minimizing the consequences of a disaster, so an organization can continue to operate – or quickly resume the key operations.
+Thus, disaster recovery is one of the aspects of <a href="https://en.wikipedia.org/wiki/Business_continuity_planning">business continuity</a>.
+One of the solutions, to achieve the same, is <a href="https://docs.ceph.com/en/latest/rbd/rbd-mirroring/">RBD mirroring</a>.</p>
+
+<h2 id="rbd-mirroring-1">RBD Mirroring</h2>
+
+<p><a href="https://docs.ceph.com/en/latest/rbd/rbd-mirroring/">RBD mirroring</a>
+ is an asynchronous replication of RBD images between multiple Ceph clusters.
+ This capability is available in two modes:</p>
+
+<ul>
+  <li>Journal-based: Every write to the RBD image is first recorded
+ to the associated journal before modifying the actual image.
+ The remote cluster will read from this associated journal and
+ replay the updates to its local image.</li>
+  <li>Snapshot-based: This mode uses periodically scheduled or
+ manually created RBD image mirror-snapshots to replicate
+ crash-consistent RBD images between clusters.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Note</strong>: This document sheds light on rbd mirroring and how to set it up using rook.
+For steps on failover or failback scenarios</p>
+</blockquote>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#create-rbd-pools">Create RBD Pools</a></li>
+  <li><a href="#bootstrap-peers">Bootstrap Peers</a></li>
+  <li><a href="#configure-the-rbdmirror-daemon">Configure the RBDMirror Daemon</a></li>
+  <li><a href="#add-mirroring-peer-information-to-rbd-pools">Add mirroring peer information to RBD pools</a></li>
+  <li><a href="#enable-csi-replication-sidecars">Enable CSI Replication Sidecars</a></li>
+  <li><a href="#volume-replication-custom-resources">Volume Replication Custom Resources</a></li>
+  <li><a href="#enable-mirroring-on-a-pvc">Enable mirroring on a PVC</a>
+    <ul>
+      <li><a href="#create-a-volume-replication-class-cr">Creating a VolumeReplicationClass CR</a></li>
+      <li><a href="#create-a-volumereplication-cr">Creating a VolumeReplications CR</a></li>
+      <li><a href="/docs/rook/latest/async-disaster-recovery.html#checking-replication-status">Check VolumeReplication CR status</a></li>
+    </ul>
+  </li>
+  <li><a href="#backup-&amp;-restore">Backup and Restore</a></li>
+</ul>
+
+<h2 id="create-rbd-pools">Create RBD Pools</h2>
+
+<p>In this section, we create specific RBD pools that are RBD mirroring
+ enabled for use with the DR use case.</p>
+
+<p>Execute the following steps on each peer cluster to create mirror
+ enabled pools:</p>
+
+<ul>
+  <li>Create a RBD pool that is enabled for mirroring by adding the section
+ <code class="language-plaintext highlighter-rouge">spec.mirroring</code> in the CephBlockPool CR:</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mirroredpool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">mirroring</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s">image</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> pool-mirrored.yaml
+</code></pre></div></div>
+
+<ul>
+  <li>Repeat the steps on the peer cluster.</li>
+</ul>
+
+<blockquote>
+  <p><strong>NOTE:</strong> Pool name across the cluster peers must be the same
+for RBD replication to function.</p>
+</blockquote>
+
+<p>See the <a href="/docs/rook/latest/ceph-pool-crd.html#mirroring">CephBlockPool documentation</a> for more details.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> It is also feasible to edit existing pools and
+enable them for replication.</p>
+</blockquote>
+
+<h2 id="bootstrap-peers">Bootstrap Peers</h2>
+
+<p>In order for the rbd-mirror daemon to discover its peer cluster, the
+ peer must be registered and a user account must be created.</p>
+
+<p>The following steps enable bootstrapping peers to discover and
+ authenticate to each other:</p>
+
+<ul>
+  <li>For Bootstrapping a peer cluster its bootstrap secret is required. To determine the name of the secret that contains the bootstrap secret execute the following command on the remote cluster (cluster-2)</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl get cephblockpool.ceph.rook.io/mirroredpool <span class="nt">-n</span> rook-ceph <span class="nt">-ojsonpath</span><span class="o">=</span><span class="s1">'{.status.info.rbdMirrorBootstrapPeerSecretName}'</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">pool-peer-token-mirroredpool</code> is the desired bootstrap secret name.</p>
+
+<ul>
+  <li>The secret pool-peer-token-mirroredpool contains all the information related to the token and needs to be injected to the peer, to fetch the decoded secret:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl get secret <span class="nt">-n</span> rook-ceph pool-peer-token-mirroredpool <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.token}'</span>|base64 <span class="nt">-d</span>
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">eyJmc2lkIjoiNGQ1YmNiNDAtNDY3YS00OWVkLThjMGEtOWVhOGJkNDY2OTE3IiwiY2xpZW50X2lkIjoicmJkLW1pcnJvci1wZWVyIiwia2V5IjoiQVFDZ3hmZGdxN013R0JBQWZzcUtCaGpZVjJUZDRxVzJYQm5kemc9PSIsIm1vbl9ob3N0IjoiW3YyOjE5Mi4xNjguMzkuMzY6MzMwMCx2MToxOTIuMTY4LjM5LjM2OjY3ODldIn0</span><span class="o">=</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li>With this Decoded value, create a secret on the primary site (cluster-1):</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl <span class="nt">-n</span> rook-ceph create secret generic rbd-primary-site-secret <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">token</span><span class="o">=</span><span class="nv">eyJmc2lkIjoiNGQ1YmNiNDAtNDY3YS00OWVkLThjMGEtOWVhOGJkNDY2OTE3IiwiY2xpZW50X2lkIjoicmJkLW1pcnJvci1wZWVyIiwia2V5IjoiQVFDZ3hmZGdxN013R0JBQWZzcUtCaGpZVjJUZDRxVzJYQm5kemc9PSIsIm1vbl9ob3N0IjoiW3YyOjE5Mi4xNjguMzkuMzY6MzMwMCx2MToxOTIuMTY4LjM5LjM2OjY3ODldIn0</span><span class="o">=</span> <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">pool</span><span class="o">=</span>mirroredpool
+</code></pre></div></div>
+
+<ul>
+  <li>This completes the bootstrap process for cluster-1 to be peered with cluster-2.</li>
+  <li>Repeat the process switching cluster-2 in place of cluster-1, to complete the bootstrap process across both peer clusters.</li>
+</ul>
+
+<p>For more details, refer to the official rbd mirror documentation on
+ <a href="https://docs.ceph.com/en/latest/rbd/rbd-mirroring/#bootstrap-peers">how to create a bootstrap peer</a>.</p>
+
+<h2 id="configure-the-rbdmirror-daemon">Configure the RBDMirror Daemon</h2>
+
+<p>Replication is handled by the rbd-mirror daemon. The rbd-mirror daemon
+ is responsible for pulling image updates from the remote, peer cluster,
+ and applying them to image within the local cluster.</p>
+
+<p>Creation of the rbd-mirror daemon(s) is done through the custom resource
+ definitions (CRDs), as follows:</p>
+
+<ul>
+  <li>Create mirror.yaml, to deploy the rbd-mirror daemon</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephRBDMirror</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-rbd-mirror</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">openshift-storage</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="c1"># the number of rbd-mirror daemons to deploy</span>
+  <span class="na">count</span><span class="pi">:</span> <span class="m">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Create the RBD mirror daemon</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl create <span class="nt">-f</span> mirror.yaml <span class="nt">-n</span> rook-ceph
+</code></pre></div></div>
+
+<ul>
+  <li>Validate if <code class="language-plaintext highlighter-rouge">rbd-mirror</code> daemon pod is now up</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl get pods <span class="nt">-n</span> rook-ceph
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rook-ceph-rbd-mirror-a-6985b47c8c-dpv4k  1/1  Running  0  10s
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li>Verify that daemon health is OK</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get cephblockpools.ceph.rook.io mirroredpool <span class="nt">-n</span> rook-ceph <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.mirroringStatus.summary}'</span>
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s2">"daemon_health"</span>:<span class="s2">"OK"</span>,<span class="s2">"health"</span>:<span class="s2">"OK"</span>,<span class="s2">"image_health"</span>:<span class="s2">"OK"</span>,<span class="s2">"states"</span>:<span class="o">{</span><span class="s2">"replaying"</span>:1<span class="o">}}</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li>Repeat the above steps on the peer cluster.</li>
+</ul>
+
+<p>See the <a href="/docs/rook/latest/ceph-rbd-mirror-crd.html">CephRBDMirror CRD</a> for more details on the mirroring settings.</p>
+
+<h2 id="add-mirroring-peer-information-to-rbd-pools">Add mirroring peer information to RBD pools</h2>
+
+<p>Each pool can have its own peer. To add the peer information, patch the already created mirroring enabled pool
+to update the CephBlockPool CRD.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl <span class="nt">-n</span> rook-ceph patch cephblockpool mirroredpool <span class="nt">--type</span> merge <span class="nt">-p</span> <span class="s1">'{"spec":{"mirroring":{"peers": {"secretNames": ["rbd-primary-site-secret"]}}}}'</span>
+</code></pre></div></div>
+<h2 id="create-volumereplication-crds">Create VolumeReplication CRDs</h2>
+
+<p>Volume Replication Operator follows controller pattern and provides extended
+APIs for storage disaster recovery. The extended APIs are provided via Custom
+Resource Definition(CRD). Create the VolumeReplication CRDs on all the peer clusters.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl create <span class="nt">-f</span> https://raw.githubusercontent.com/csi-addons/volume-replication-operator/v0.3.0/config/crd/bases/replication.storage.openshift.io_volumereplications.yaml
+
+<span class="nv">$ </span>kubectl create <span class="nt">-f</span> https://raw.githubusercontent.com/csi-addons/volume-replication-operator/v0.3.0/config/crd/bases/replication.storage.openshift.io_volumereplicationclasses.yaml
+</code></pre></div></div>
+
+<h2 id="enable-csi-replication-sidecars">Enable CSI Replication Sidecars</h2>
+
+<p>To achieve RBD Mirroring, <code class="language-plaintext highlighter-rouge">csi-omap-generator</code> and <code class="language-plaintext highlighter-rouge">volume-replication</code>
+ containers need to be deployed in the RBD provisioner pods, which are not enabled by default.</p>
+
+<ul>
+  <li>
+    <p><strong>Omap Generator</strong>: Omap generator is a sidecar container that when
+ deployed with the CSI provisioner pod, generates the internal CSI
+ omaps between the PV and the RBD image. This is required as static PVs are
+ transferred across peer clusters in the DR use case, and hence
+ is needed to preserve PVC to storage mappings.</p>
+  </li>
+  <li>
+    <p><strong>Volume Replication Operator</strong>: Volume Replication Operator is a
+ kubernetes operator that provides common and reusable APIs for
+ storage disaster recovery.
+ It is based on <a href="https://github.com/csi-addons/spec">csi-addons/spec</a>
+ specification and can be used by any storage provider.
+ For more details, refer to <a href="https://github.com/csi-addons/volume-replication-operator">volume replication operator</a>.</p>
+  </li>
+</ul>
+
+<p>Execute the following steps on each peer cluster to enable the
+ OMap generator and Volume Replication sidecars:</p>
+
+<ul>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">rook-ceph-operator-config</code> configmap and add the
+ following configurations</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl edit cm rook-ceph-operator-config <span class="nt">-n</span> rook-ceph
+</code></pre></div></div>
+
+<p>Add the following properties if not present:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data</span><span class="pi">:</span>
+  <span class="na">CSI_ENABLE_OMAP_GENERATOR</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="na">CSI_ENABLE_VOLUME_REPLICATION</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+</code></pre></div></div>
+
+<ul>
+  <li>After updating the configmap with those settings, two new sidecars
+ should now start automatically in the CSI provisioner pod.</li>
+  <li>Repeat the steps on the peer cluster.</li>
+</ul>
+
+<h2 id="volume-replication-custom-resources">Volume Replication Custom Resources</h2>
+
+<p>VolumeReplication CRDs provide support for two custom resources:</p>
+
+<ul>
+  <li>
+    <p><strong>VolumeReplicationClass</strong>: <em>VolumeReplicationClass</em> is a cluster scoped
+resource that contains driver related configuration parameters. It holds
+the storage admin information required for the volume replication operator.</p>
+  </li>
+  <li>
+    <p><strong>VolumeReplication</strong>: <em>VolumeReplication</em> is a namespaced resource that contains references to storage object to be replicated and VolumeReplicationClass
+corresponding to the driver providing replication.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>For more information, please refer to the
+<a href="https://github.com/csi-addons/volume-replication-operator">volume-replication-operator</a>.</p>
+</blockquote>
+
+<h2 id="enable-mirroring-on-a-pvc">Enable mirroring on a PVC</h2>
+
+<p>Below guide assumes that we have a PVC (rbd-pvc) in BOUND state; created using
+ <em>StorageClass</em> with <code class="language-plaintext highlighter-rouge">Retain</code> reclaimPolicy.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl get pvc
+</code></pre></div></div>
+
+<blockquote>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+rbd-pvc   Bound    pvc-65dc0aac-5e15-4474-90f4-7a3532c621ec   1Gi        RWO            csi-rbd-sc   44s
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="create-a-volume-replication-class-cr">Create a Volume Replication Class CR</h3>
+
+<p>In this case, we create a Volume Replication Class on cluster-1</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl apply <span class="nt">-f</span> deploy/examples/volume-replication-class.yaml
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">schedulingInterval</code> can be specified in formats of
+minutes, hours or days using suffix <code class="language-plaintext highlighter-rouge">m</code>,<code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">d</code> respectively.
+The optional schedulingStartTime can be specified using the ISO 8601
+time format.</p>
+</blockquote>
+
+<h3 id="create-a-volumereplication-cr">Create a VolumeReplication CR</h3>
+
+<ul>
+  <li>Once VolumeReplicationClass is created, create a Volume Replication for
+ the PVC which we intend to replicate to secondary cluster.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl apply <span class="nt">-f</span> deploy/examples/volume-replication.yaml
+</code></pre></div></div>
+
+<blockquote>
+  <p>:memo: <em>VolumeReplication</em> is a namespace scoped object. Thus,
+it should be created in the same namespace as of PVC.</p>
+</blockquote>
+
+<h3 id="checking-replication-status">Checking Replication Status</h3>
+
+<p><code class="language-plaintext highlighter-rouge">replicationState</code> is the state of the volume being referenced.
+ Possible values are primary, secondary, and resync.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">primary</code> denotes that the volume is primary.</li>
+  <li><code class="language-plaintext highlighter-rouge">secondary</code> denotes that the volume is secondary.</li>
+  <li><code class="language-plaintext highlighter-rouge">resync</code> denotes that the volume needs to be resynced.</li>
+</ul>
+
+<p>To check VolumeReplication CR status:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$kubectl</span> get volumereplication pvc-volumereplication <span class="nt">-oyaml</span>
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+<span class="na">spec</span><span class="pi">:</span>
+ <span class="na">dataSource</span><span class="pi">:</span>
+   <span class="na">apiGroup</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+   <span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+   <span class="na">name</span><span class="pi">:</span> <span class="s">rbd-pvc</span>
+ <span class="na">replicationState</span><span class="pi">:</span> <span class="s">primary</span>
+ <span class="na">volumeReplicationClass</span><span class="pi">:</span> <span class="s">rbd-volumereplicationclass</span>
+<span class="na">status</span><span class="pi">:</span>
+ <span class="na">conditions</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">lastTransitionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-05-04T07:39:00Z"</span>
+   <span class="na">message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+   <span class="na">observedGeneration</span><span class="pi">:</span> <span class="m">1</span>
+   <span class="na">reason</span><span class="pi">:</span> <span class="s">Promoted</span>
+   <span class="na">status</span><span class="pi">:</span> <span class="s2">"</span><span class="s">True"</span>
+   <span class="na">type</span><span class="pi">:</span> <span class="s">Completed</span>
+ <span class="pi">-</span> <span class="na">lastTransitionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-05-04T07:39:00Z"</span>
+   <span class="na">message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+   <span class="na">observedGeneration</span><span class="pi">:</span> <span class="m">1</span>
+   <span class="na">reason</span><span class="pi">:</span> <span class="s">Healthy</span>
+   <span class="na">status</span><span class="pi">:</span> <span class="s2">"</span><span class="s">False"</span>
+   <span class="na">type</span><span class="pi">:</span> <span class="s">Degraded</span>
+ <span class="pi">-</span> <span class="na">lastTransitionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-05-04T07:39:00Z"</span>
+   <span class="na">message</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+   <span class="na">observedGeneration</span><span class="pi">:</span> <span class="m">1</span>
+   <span class="na">reason</span><span class="pi">:</span> <span class="s">NotResyncing</span>
+   <span class="na">status</span><span class="pi">:</span> <span class="s2">"</span><span class="s">False"</span>
+   <span class="na">type</span><span class="pi">:</span> <span class="s">Resyncing</span>
+ <span class="na">lastCompletionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-05-04T07:39:00Z"</span>
+ <span class="na">lastStartTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-05-04T07:38:59Z"</span>
+ <span class="na">message</span><span class="pi">:</span> <span class="s">volume is marked primary</span>
+ <span class="na">observedGeneration</span><span class="pi">:</span> <span class="m">1</span>
+ <span class="na">state</span><span class="pi">:</span> <span class="s">Primary</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="backup--restore">Backup &amp; Restore</h2>
+
+<blockquote>
+  <p><strong>NOTE:</strong> To effectively resume operations after a failover/relocation,
+backup of the kubernetes artifacts like deployment, PVC, PV, etc need to be created beforehand by the admin; so that the application can be restored on the peer cluster.</p>
+</blockquote>
+
+<p>Here, we take a backup of PVC and PV object on one site, so that they can be restored later to the peer cluster.</p>
+
+<h4 id="take-backup-on-cluster-1"><strong>Take backup on cluster-1</strong></h4>
+
+<ul>
+  <li>Take backup of the PVC <code class="language-plaintext highlighter-rouge">rbd-pvc</code></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl  get pvc rbd-pvc <span class="nt">-oyaml</span> <span class="o">&gt;</span> pvc-backup.yaml
+</code></pre></div></div>
+
+<ul>
+  <li>Take a backup of the PV, corresponding to the PVC</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl get pv/pvc-65dc0aac-5e15-4474-90f4-7a3532c621ec <span class="nt">-oyaml</span> <span class="o">&gt;</span> pv_backup.yaml
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: We can also take backup using external tools like <strong>Velero</strong>.
+See <a href="https://velero.io/docs/main/">velero documentation</a> for more information.</p>
+</blockquote>
+
+<h4 id="restore-the-backup-on-cluster-2"><strong>Restore the backup on cluster-2</strong></h4>
+
+<ul>
+  <li>Create storageclass on the secondary cluster</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl create <span class="nt">-f</span> examples/rbd/storageclass.yaml
+</code></pre></div></div>
+
+<ul>
+  <li>Create VolumeReplicationClass on the secondary cluster</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-1]<span class="nv">$ </span>kubectl apply <span class="nt">-f</span> deploy/examples/volume-replication-class.yaml
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumereplicationclass.replication.storage.openshift.io/rbd-volumereplicationclass created
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li>If Persistent Volumes and Claims are created manually on the secondary cluster,
+   remove the <code class="language-plaintext highlighter-rouge">claimRef</code> on the backed up PV objects in yaml files; so that the
+   PV can get bound to the new claim on the secondary cluster.</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">capacity</span><span class="pi">:</span>
+    <span class="na">storage</span><span class="pi">:</span> <span class="s">1Gi</span>
+  <span class="na">claimRef</span><span class="pi">:</span>
+    <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">rbd-pvc</span>
+    <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+    <span class="na">resourceVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">64252"</span>
+    <span class="na">uid</span><span class="pi">:</span> <span class="s">65dc0aac-5e15-4474-90f4-7a3532c621ec</span>
+  <span class="na">csi</span><span class="pi">:</span>
+<span class="nn">...</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Apply the Persistent Volume backup from the primary cluster</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl create <span class="nt">-f</span> pv-backup.yaml
+</code></pre></div></div>
+
+<ul>
+  <li>Apply the Persistent Volume claim from the restored backup</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl create <span class="nt">-f</span> pvc-backup.yaml
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cluster-2]<span class="nv">$ </span>kubectl get pvc
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+rbd-pvc   Bound    pvc-65dc0aac-5e15-4474-90f4-7a3532c621ec   1Gi        RWO            rook-ceph-block   44s
+</code></pre></div>  </div>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/latest/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/latest/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/latest/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/latest/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/latest/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/latest/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/latest/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/latest/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/latest/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/latest/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/latest/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/latest/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/latest/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/latest/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/latest/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/latest/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/latest/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/latest/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/latest/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/latest/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/latest/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/latest/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/latest/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/latest/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/latest/rbd-mirroring.html",
+      true,
+      true
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/latest/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/latest/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/latest/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/latest/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirror CRD",
+      "/docs/rook/latest/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Filesystem Mirror CRD",
+      "/docs/rook/latest/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolume Group CRD",
+      "/docs/rook/latest/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "RADOS Namespace CRD",
+      "/docs/rook/latest/ceph-pool-radosnamespace.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/latest/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/latest/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/latest/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/latest/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/latest/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/latest/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/latest/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/latest/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/latest/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/latest/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/latest/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/latest/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/latest/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/latest/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/latest/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/latest/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/latest/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/latest/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/latest/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/latest/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/latest/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

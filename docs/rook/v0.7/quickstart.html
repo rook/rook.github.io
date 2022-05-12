@@ -1,0 +1,682 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v0.7/quickstart.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v0.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/quickstart.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/quickstart.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/quickstart.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/quickstart.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/quickstart.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/quickstart.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/quickstart.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/quickstart.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/quickstart.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/quickstart.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/quickstart.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/quickstart.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/quickstart.html" class="active">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/quickstart.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/quickstart.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/quickstart.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/quickstart.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v0.7 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="quickstart-guide">Quickstart Guide</h1>
+
+<p>Welcome to Rook! We hope you have a great experience installing the Rook storage platform to enable highly available, durable storage
+in your cluster. If you have any questions along the way, please don’t hesitate to ask us in our <a href="https://Rook-io.slack.com">Slack channel</a>.</p>
+
+<p>This guide will walk you through the basic setup of a Rook cluster. This will enable you to consume block, object, and file storage
+from other pods running in your cluster.</p>
+
+<h2 id="minimum-version">Minimum Version</h2>
+
+<p>Kubernetes <strong>v1.6</strong> or higher is targeted by Rook (while Rook is in alpha it will track the latest release to use the latest features).</p>
+
+<p>Support is available for Kubernetes <strong>v1.5.2</strong>, although your mileage may vary.
+You will need to use the yaml files from the <a href="/cluster/examples/kubernetes/1.5">1.5 folder</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>To make sure you have a Kubernetes cluster that is ready for <code class="language-plaintext highlighter-rouge">Rook</code>, you can <a href="/docs/rook/v0.7/k8s-pre-reqs.html">follow these instructions</a>.</p>
+
+<p>If you are using <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> to persist rook data on kubernetes hosts, make sure your host has at least 5GB of space available on the specified path.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>If you’re feeling lucky, a simple Rook cluster can be created with the following kubectl commands. For the more detailed install, skip to the next section to <a href="#deploy-the-rook-operator">deploy the Rook operator</a>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd cluster/examples/kubernetes
+kubectl create -f rook-operator.yaml
+kubectl create -f rook-cluster.yaml
+</code></pre></div></div>
+
+<p>After the cluster is running, you can create <a href="#storage">block, object, or file</a> storage to be consumed by other applications in your cluster.</p>
+
+<h2 id="deploy-the-rook-operator">Deploy the Rook Operator</h2>
+
+<p>The first step is to deploy the Rook system components, which include the Rook agent running on each node in your cluster as well as Rook operator pod.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>cluster/examples/kubernetes
+kubectl create <span class="nt">-f</span> rook-operator.yaml
+
+<span class="c"># verify the rook-operator and rook-agents pods are in the `Running` state before proceeding</span>
+kubectl <span class="nt">-n</span> rook-system get pod
+</code></pre></div></div>
+
+<p>You can also deploy the operator with the <a href="/docs/rook/v0.7/helm-operator.html">Rook Helm Chart</a>.</p>
+
+<hr />
+<h3 id="restart-kubelet"><strong>Restart Kubelet</strong></h3>
+<p><strong>(K8S 1.7.x and older only)</strong></p>
+
+<p>For versions of Kubernetes prior to 1.8, the Kubelet process on all nodes will require a restart after the Rook operator and Rook agents have been deployed. As part of their initial setup, the Rook agents deploy and configure a Flexvolume plugin in order to integrate with Kubernetes’ volume controller framework. In Kubernetes v1.8+, the <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/flexvolume.md#dynamic-plugin-discovery">dynamic Flexvolume plugin discovery</a> will find and initialize our plugin, but in older versions of Kubernetes a manual restart of the Kubelet will be required.</p>
+
+<h3 id="disable-attacher-detacher-controller"><strong>Disable Attacher-detacher controller</strong></h3>
+<p><strong>(K8S 1.6.x only)</strong></p>
+
+<p>For Kubernetes 1.6, it is also necessary to pass the <code class="language-plaintext highlighter-rouge">--enable-controller-attach-detach=false</code> flag to Kubelet when you restart it.  This is a workaround for a <a href="https://github.com/kubernetes/kubernetes/issues/47109">Kubernetes issue</a> that only affects 1.6.</p>
+
+<hr />
+
+<h2 id="create-a-rook-cluster">Create a Rook Cluster</h2>
+
+<p>Now that the Rook operator and agent pods are running, we can create the Rook cluster. For the cluster to survive reboots, 
+make sure you set the <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> property. For more settings, see the documentation on <a href="/docs/rook/v0.7/cluster-crd.html">configuring the cluster</a>.</p>
+
+<p>Save the cluster spec as <code class="language-plaintext highlighter-rouge">rook-cluster.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rook.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">storeConfig</span><span class="pi">:</span>
+      <span class="na">storeType</span><span class="pi">:</span> <span class="s">bluestore</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="m">1024</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="m">1024</span>
+</code></pre></div></div>
+
+<p>Create the cluster:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> rook-cluster.yaml
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">kubectl</code> to list pods in the <code class="language-plaintext highlighter-rouge">rook</code> namespace. You should be able to see the following pods once they are all running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl <span class="nt">-n</span> rook get pod
+NAME                              READY     STATUS    RESTARTS   AGE
+rook-api-1511082791-7qs0m         1/1       Running   0          5m
+rook-ceph-mgr0-1279756402-wc4vt   1/1       Running   0          5m
+rook-ceph-mon0-jflt5              1/1       Running   0          6m
+rook-ceph-mon1-wkc8p              1/1       Running   0          6m
+rook-ceph-mon2-p31dj              1/1       Running   0          6m
+rook-ceph-osd-0h6nb               1/1       Running   0          5m
+</code></pre></div></div>
+
+<h1 id="storage">Storage</h1>
+
+<p>For a walkthrough of the three types of storage exposed by Rook, see the guides for:</p>
+<ul>
+  <li><strong><a href="/docs/rook/v0.7/block.html">Block</a></strong>: Create block storage to be consumed by a pod</li>
+  <li><strong><a href="/docs/rook/v0.7/object.html">Object</a></strong>: Create an object store that is accessible inside or outside the Kubernetes cluster</li>
+  <li><strong><a href="/docs/rook/v0.7/filesystem.html">Shared File System</a></strong>: Create a file system to be shared across multiple pods</li>
+</ul>
+
+<h1 id="tools">Tools</h1>
+
+<p>We have created a toolbox container that contains the full suite of Ceph clients for debugging and troubleshooting your Rook cluster.  Please see the <a href="/docs/rook/v0.7/toolbox.html">toolbox readme</a> for setup and usage information. Also see our <a href="/docs/rook/v0.7/advanced-configuration.html">advanced configuration</a> document for helpful maintenance and tuning examples.</p>
+
+<p>The toolbox also contains the <code class="language-plaintext highlighter-rouge">rookctl</code> tool as required in the <a href="/docs/rook/v0.7/filesystem.html">File System</a> and <a href="/docs/rook/v0.7/object.html">Object</a> walkthroughs, or a <a href="/docs/rook/v0.7/client.html">simplified walkthrough of block, file and object storage</a>. In the near future, <code class="language-plaintext highlighter-rouge">rookctl</code> will not be required for kubernetes scenarios.</p>
+
+<h1 id="monitoring">Monitoring</h1>
+
+<p>Each Rook cluster has some built in metrics collectors/exporters for monitoring with <a href="https://prometheus.io/">Prometheus</a>.
+To learn how to set up monitoring for your Rook cluster, you can follow the steps in the <a href="/docs/rook/v0.7/monitoring.html">monitoring guide</a>.</p>
+
+<h1 id="teardown">Teardown</h1>
+
+<p>When you are done with the test cluster, see <a href="/docs/rook/v0.7/teardown.html">these instructions</a> to clean up the cluster.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v0.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v0.7/quickstart.html",
+      false,
+      true
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v0.7/teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v0.7/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Flex Volume Configuration",
+      "/docs/rook/v0.7/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBAC Security",
+      "/docs/rook/v0.7/rbac.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v0.7/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage",
+      "/docs/rook/v0.7/storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v0.7/block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v0.7/object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.7/filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Custom Resources",
+      "/docs/rook/v0.7/crds.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster",
+      "/docs/rook/v0.7/cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pool",
+      "/docs/rook/v0.7/pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store",
+      "/docs/rook/v0.7/object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.7/filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v0.7/monitoring.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v0.7/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Operator",
+      "/docs/rook/v0.7/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v0.7/upgrade.html",
+      false,
+      false
+    );
+  
+    add(
+      "Tools",
+      "/docs/rook/v0.7/tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v0.7/toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Rook Client",
+      "/docs/rook/v0.7/client.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v0.7/advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v0.7/common-problems.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v0.7/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v0.7/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

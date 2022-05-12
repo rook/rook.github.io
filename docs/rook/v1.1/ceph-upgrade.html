@@ -1,0 +1,1300 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.1/ceph-upgrade.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.1</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-upgrade.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-upgrade.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-upgrade.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-upgrade.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-upgrade.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-upgrade.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-upgrade.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-upgrade.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-upgrade.html" class="active">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-upgrade.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-upgrade.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-upgrade.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-upgrade.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-upgrade.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-upgrade.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-upgrade.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-upgrade.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.1 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="rook-ceph-upgrades">Rook-Ceph Upgrades</h1>
+<p>This guide will walk you through the steps to upgrade the software in a Rook-Ceph cluster from one
+version to the next. This includes both the Rook-Ceph operator software itself as well as the Ceph
+cluster software.</p>
+
+<p>With the release of Rook 1.0, upgrades for both the operator and for Ceph are nearly entirely
+automated save for where Rook’s permissions need to be explicitly updated by an admin. Achieving the
+level of upgrade automation has been refined by community feedback, and we will always be open to
+further feedback for improving automation and improving Rook.</p>
+
+<p>We welcome feedback and opening issues!</p>
+
+<h2 id="supported-versions">Supported Versions</h2>
+<p>Please refer to the upgrade guides from previous releases for supported upgrade paths.
+Rook upgrades are only supported between official releases. Upgrades to and from <code class="language-plaintext highlighter-rouge">master</code> are not
+supported.</p>
+
+<p>For a guide to upgrade previous versions of Rook, please refer to the version of documentation for
+those releases.</p>
+<ul>
+  <li><a href="https://rook.io/docs/rook/v1.0/ceph-upgrade.html">Upgrade 0.9 to 1.0</a></li>
+  <li><a href="https://rook.io/docs/rook/v0.9/ceph-upgrade.html">Upgrade 0.8 to 0.9</a></li>
+  <li><a href="https://rook.io/docs/rook/v0.8/upgrade.html">Upgrade 0.7 to 0.8</a></li>
+  <li><a href="https://rook.io/docs/rook/v0.7/upgrade.html">Upgrade 0.6 to 0.7</a></li>
+  <li><a href="https://rook.io/docs/rook/v0.6/upgrade.html">Upgrade 0.5 to 0.6</a></li>
+</ul>
+
+<h2 id="considerations">Considerations</h2>
+<p>With this upgrade guide, there are a few notes to consider:</p>
+<ul>
+  <li><strong>WARNING:</strong> Upgrading a Rook cluster is not without risk. There may be unexpected issues or
+obstacles that damage the integrity and health of your storage cluster, including data loss. Only
+proceed with this guide if you are comfortable with that.</li>
+  <li>The Rook cluster’s storage may be unavailable for short periods during the upgrade process for
+both Rook operator updates and for Ceph version updates.</li>
+  <li>We recommend that you read this document in full before you undertake a Rook cluster upgrade.</li>
+</ul>
+
+<h1 id="upgrading-the-rook-ceph-operator">Upgrading the Rook-Ceph Operator</h1>
+
+<h2 id="patch-release-upgrades">Patch Release Upgrades</h2>
+<p>Unless otherwise noted due to extenuating requirements, upgrades from one patch release of Rook to
+another are as simple as updating the image of the Rook operator. For example, when Rook v1.1.9 is
+released, the process of updating from v1.1.0 is as simple as running the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.1.9
+</code></pre></div></div>
+
+<h2 id="upgrading-from-v10-to-v11">Upgrading from v1.0 to v1.1</h2>
+<p><strong>Rook releases from master are expressly unsupported.</strong> It is strongly recommended that you use
+<a href="https://github.com/rook/rook/releases">official releases</a> of Rook. Unreleased versions from the
+master branch are subject to changes and incompatibilities that will not be supported in the
+official releases. Builds from the master branch can have functionality changed and even removed at
+any time without compatibility support and without prior notice.</p>
+
+<p><strong>Users are required to upgrade Ceph to Mimic (v13.2.4 or newer) or Nautilus (v14.2.x) now.</strong> Rook 1.0
+was the last Rook release which will support Ceph’s Luminous (v12.x.x) version. These are the only
+supported major versions of Ceph.</p>
+
+<p>Rook documentation for 1.1 has identified some Ceph configuration options that the user is
+advised to consider regarding PG management for pools. See the topic <a href="/docs/rook/v1.1/ceph-configuration.html#default-pg-and-pgp-counts">here</a>.
+While this is not directly related to the upgrade, it could be beneficial to consider these
+options now. If the user determines that these configuration options apply to them, they will be
+able to set the configuration as documented once the Rook operator has been upgraded.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>We will do all our work in the Ceph example manifests directory.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$YOUR_ROOK_REPO</span>/cluster/examples/kubernetes/ceph/
+</code></pre></div></div>
+
+<p>Unless your Rook cluster was created with customized namespaces, namespaces for Rook clusters
+created before v0.8 are likely to be:</p>
+<ul>
+  <li>Clusters created by v0.7 or earlier: <code class="language-plaintext highlighter-rouge">rook-system</code> and <code class="language-plaintext highlighter-rouge">rook</code></li>
+  <li>Clusters created in v0.8 or v0.9: <code class="language-plaintext highlighter-rouge">rook-ceph-system</code> and <code class="language-plaintext highlighter-rouge">rook-ceph</code></li>
+  <li>Clusters created in v1.0 or newer: only <code class="language-plaintext highlighter-rouge">rook-ceph</code></li>
+</ul>
+
+<p>With this guide, we do our best not to assume the namespaces in your cluster.
+To make things as easy as possible, modify and use the below snippet to configure your environment.
+We will use these environment variables throughout this document.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Parameterize the environment</span>
+<span class="nb">export </span><span class="nv">ROOK_SYSTEM_NAMESPACE</span><span class="o">=</span><span class="s2">"rook-ceph"</span>
+<span class="nb">export </span><span class="nv">ROOK_NAMESPACE</span><span class="o">=</span><span class="s2">"rook-ceph"</span>
+</code></pre></div></div>
+
+<p>In order to successfully upgrade a Rook cluster, the following prerequisites must be met:</p>
+<ul>
+  <li>The cluster must be running Ceph Mimic (v13.2.3 or newer) or Nautilus (v14.2.x) before upgrading
+to Rook 1.1; Ceph Luminous (v12.x.x) is no longer supported.</li>
+  <li>The cluster should be in a healthy state with full functionality.
+Review the <a href="#health-verification">health verification section</a> in order to verify your cluster is
+in a good starting state.</li>
+  <li>All pods consuming Rook storage should be created, running, and in a steady state. No Rook
+persistent volumes should be in the act of being created or deleted.</li>
+</ul>
+
+<h2 id="health-verification">Health Verification</h2>
+<p>Before we begin the upgrade process, let’s first review some ways that you can verify the health of
+your cluster, ensuring that the upgrade is going smoothly after each step. Most of the health
+verification checks for your cluster during the upgrade process can be performed with the Rook
+toolbox. For more information about how to run the toolbox, please visit the
+<a href="/docs/rook/v1.1/ceph-toolbox.html#running-the-toolbox-in-kubernetes">Rook toolbox readme</a>.</p>
+
+<p>See the common issues pages for troubleshooting and correcting health issues:</p>
+<ul>
+  <li><a href="/docs/rook/v1.1/common-issues.html">General troubleshooting</a></li>
+  <li><a href="/docs/rook/v1.1/ceph-common-issues.html">Ceph troubleshooting</a></li>
+</ul>
+
+<h3 id="pods-all-running">Pods all Running</h3>
+<p>In a healthy Rook cluster, the operator, the agents and all Rook namespace pods should be in the
+<code class="language-plaintext highlighter-rouge">Running</code> state and have few, if any, pod restarts. To verify this, run the following commands:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_SYSTEM_NAMESPACE</span> get pods
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pods
+</code></pre></div></div>
+
+<h3 id="status-output">Status Output</h3>
+<p>The Rook toolbox contains the Ceph tools that can give you status details of the cluster with the
+<code class="language-plaintext highlighter-rouge">ceph status</code> command. Let’s look at an output sample and review some of the details:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TOOLS_POD</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nb">exec</span> <span class="nt">-it</span> <span class="nv">$TOOLS_POD</span> <span class="nt">--</span> ceph status
+<span class="c">#  cluster:</span>
+<span class="c">#    id:     a3f4d647-9538-4aff-9fd1-b845873c3fe9</span>
+<span class="c">#    health: HEALTH_OK</span>
+<span class="c">#</span>
+<span class="c">#  services:</span>
+<span class="c">#    mon: 3 daemons, quorum b,c,a</span>
+<span class="c">#    mgr: a(active)</span>
+<span class="c">#    mds: myfs-1/1/1 up  {0=myfs-a=up:active}, 1 up:standby-replay</span>
+<span class="c">#    osd: 6 osds: 6 up, 6 in</span>
+<span class="c">#    rgw: 1 daemon active</span>
+<span class="c">#</span>
+<span class="c">#  data:</span>
+<span class="c">#    pools:   9 pools, 900 pgs</span>
+<span class="c">#    objects: 67  objects, 11 KiB</span>
+<span class="c">#    usage:   6.1 GiB used, 54 GiB / 60 GiB avail</span>
+<span class="c">#    pgs:     900 active+clean</span>
+<span class="c">#</span>
+<span class="c">#  io:</span>
+<span class="c">#    client:   7.4 KiB/s rd, 681 B/s wr, 11 op/s rd, 4 op/s wr</span>
+<span class="c">#    recovery: 164 B/s, 1 objects/s</span>
+</code></pre></div></div>
+
+<p>In the output above, note the following indications that the cluster is in a healthy state:</p>
+<ul>
+  <li>Cluster health: The overall cluster status is <code class="language-plaintext highlighter-rouge">HEALTH_OK</code> and there are no warning or error status
+messages displayed.</li>
+  <li>Monitors (mon):  All of the monitors are included in the <code class="language-plaintext highlighter-rouge">quorum</code> list.</li>
+  <li>Manager (mgr): The Ceph manager is in the <code class="language-plaintext highlighter-rouge">active</code> state.</li>
+  <li>OSDs (osd): All OSDs are <code class="language-plaintext highlighter-rouge">up</code> and <code class="language-plaintext highlighter-rouge">in</code>.</li>
+  <li>Placement groups (pgs): All PGs are in the <code class="language-plaintext highlighter-rouge">active+clean</code> state.</li>
+  <li>(If applicable) Ceph filesystem metadata server (mds): all MDSes are <code class="language-plaintext highlighter-rouge">active</code> for all filesystems</li>
+  <li>(If applicable) Ceph object store RADOS gateways (rgw): all daemons are <code class="language-plaintext highlighter-rouge">active</code></li>
+</ul>
+
+<p>If your <code class="language-plaintext highlighter-rouge">ceph status</code> output has deviations from the general good health described above, there may
+be an issue that needs to be investigated further. There are other commands you may run for more
+details on the health of the system, such as <code class="language-plaintext highlighter-rouge">ceph osd status</code>. See the
+<a href="https://docs.ceph.com/docs/master/rados/troubleshooting/">Ceph troubleshooting docs</a> for help.</p>
+
+<h3 id="container-versions">Container Versions</h3>
+<p>The container version running in a specific pod in the Rook cluster can be verified in its pod spec
+output. For example for the monitor pod <code class="language-plaintext highlighter-rouge">mon-b</code>, we can verify the container version it is running
+with the below commands:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">POD_NAME</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-o</span> custom-columns<span class="o">=</span>name:.metadata.name <span class="nt">--no-headers</span> | <span class="nb">grep </span>rook-ceph-mon-b<span class="si">)</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="k">${</span><span class="nv">POD_NAME</span><span class="k">}</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.containers[0].image}'</span>
+</code></pre></div></div>
+
+<h3 id="all-pods-status-and-version">All Pods Status and Version</h3>
+<p>The status and container versions for all Rook pods can be collected all at once with the following
+commands:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_SYSTEM_NAMESPACE</span> get pod <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"\n\t"}{.status.phase}{"\t\t"}{.spec.containers[0].image}{"\t"}{.spec.initContainers[0]}{"\n"}{end}'</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"\n\t"}{.status.phase}{"\t\t"}{.spec.containers[0].image}{"\t"}{.spec.initContainers[0].image}{"\n"}{end}'</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">rook-version</code> label exists on Ceph controller resources. For various resource controllers, a
+summary of the resource controllers can be gained with the commands below. These will report the
+requested, updated, and currently available replicas for various Rook-Ceph resources in addition to
+the version of Rook for resources managed by the updated Rook-Ceph operator. Note that the operator
+and toolbox deployments do not have a <code class="language-plaintext highlighter-rouge">rook-version</code> label set.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get deployments <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"  \treq/upd/avl: "}{.spec.replicas}{"/"}{.status.updatedReplicas}{"/"}{.status.readyReplicas}{"  \trook-version="}{.metadata.labels.rook-version}{"\n"}{end}'</span>
+
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get <span class="nb">jobs</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"  \tsucceeded: "}{.status.succeeded}{"      \trook-version="}{.metadata.labels.rook-version}{"\n"}{end}'</span>
+</code></pre></div></div>
+
+<h3 id="rook-volume-health">Rook Volume Health</h3>
+<p>Any pod that is using a Rook volume should also remain healthy:</p>
+<ul>
+  <li>The pod should be in the <code class="language-plaintext highlighter-rouge">Running</code> state with few, if any, restarts</li>
+  <li>There should be no errors in its logs</li>
+  <li>The pod should still be able to read and write to the attached Rook volume.</li>
+</ul>
+
+<h2 id="rook-operator-upgrade-process">Rook Operator Upgrade Process</h2>
+<p>In the examples given in this guide, we will be upgrading a live Rook cluster running <code class="language-plaintext highlighter-rouge">v1.0.6</code> to
+the version <code class="language-plaintext highlighter-rouge">v1.1.0</code>. This upgrade should work from any official patch release of Rook 1.0 to any
+official patch release of 1.1. We will further assume that your previous cluster was created using
+an earlier version of this guide and manifests. If you have created custom manifests, these steps
+may not work as written.</p>
+
+<p><strong>Rook release from master are expressly unsupported.</strong> It is strongly recommended that you use
+<a href="https://github.com/rook/rook/releases">official releases</a> of Rook. Unreleased versions from the
+master branch are subject to changes and incompatibilities that will not be supported in the
+official releases. Builds from the master branch can have functionality changed or removed at any
+time without compatibility support and without prior notice.</p>
+
+<p>Let’s get started!</p>
+
+<h3 id="1-update-modified-permissions">1. Update modified permissions</h3>
+<p><strong>IMPORTANT:</strong> Ensure that you are using the latest manifests from the <code class="language-plaintext highlighter-rouge">release-1.1</code> branch. If you
+have custom configuration options set in your 1.0 manifests, you will need to also alter those
+values in the 1.1 manifests.</p>
+
+<p>A few permissions have been added in v1.1. To make updating these resources easy, special upgrade
+manifests have been created.</p>
+
+<p>Replace the namespace names in the new resources:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s2">"s/ROOK_SYSTEM_NAMESPACE/</span><span class="nv">$ROOK_SYSTEM_NAMESPACE</span><span class="s2">/g"</span> upgrade-from-v1.0-create.yaml <span class="o">&gt;</span> upgrade-from-v1.0-create.yaml.tmp
+<span class="nb">sed</span> <span class="s2">"s/ROOK_NAMESPACE/</span><span class="nv">$ROOK_NAMESPACE</span><span class="s2">/g"</span> upgrade-from-v1.0-create.yaml.tmp <span class="o">&gt;</span> upgrade-from-v1.0-create.yaml
+<span class="nb">rm</span> <span class="nt">-f</span> upgrade-from-v1.0-create.yaml.tmp
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/ROOK_SYSTEM_NAMESPACE/</span><span class="nv">$ROOK_SYSTEM_NAMESPACE</span><span class="s2">/g"</span> upgrade-from-v1.0-apply.yaml
+</code></pre></div></div>
+
+<p>If you have a v1.0 cluster running with CSI drivers enabled, delete the rbac rules created for CSI</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_SYSTEM_NAMESPACE</span> delete clusterrole.rbac.authorization.k8s.io/rbd-external-provisioner-runner-rules
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_SYSTEM_NAMESPACE</span> delete clusterrole.rbac.authorization.k8s.io/cephfs-external-provisioner-runner-rules
+</code></pre></div></div>
+
+<p>Apply the new permissions:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> upgrade-from-v1.0-create.yaml
+kubectl apply <span class="nt">-f</span> upgrade-from-v1.0-apply.yaml
+</code></pre></div></div>
+
+<p>Note: Ignore <code class="language-plaintext highlighter-rouge">Error from server (AlreadyExists)</code> error while running <code class="language-plaintext highlighter-rouge">kubectl create -f upgrade-from-v1.0-create.yaml</code></p>
+
+<h3 id="2-update-csi-driver-settings-if-applicable">2. Update CSI Driver settings (if applicable)</h3>
+
+<p><strong>If you did not configure the CSI driver in the v1.0 release, skip to step 3.</strong></p>
+
+<p>If you have a v1.0 cluster running with CSI drivers enabled, the environment (<code class="language-plaintext highlighter-rouge">env</code>) variables
+controlling which Ceph CSI images are used likely need to be updated as well. If this is the case,
+it is easiest to <code class="language-plaintext highlighter-rouge">kubectl edit</code> the operator deployment and modify everything needed at once.</p>
+
+<p>If you would like to use the upstream images which Rook uses by default, then you may simply remove
+all <code class="language-plaintext highlighter-rouge">env</code> variables with the <code class="language-plaintext highlighter-rouge">ROOK_CSI_</code> prefix from the <code class="language-plaintext highlighter-rouge">CephCluster</code> resource.</p>
+
+<p>OR, if you would like to use images hosted in a different location like a local image registry, then
+the following <code class="language-plaintext highlighter-rouge">env</code> variables will need to be configured. The suggested upstream images are included
+below, which you should change to match where your images are located.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">env</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_CEPH_IMAGE</span>
+        <span class="s">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/cephcsi/cephcsi:v1.2.2"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_REGISTRAR_IMAGE</span>
+        <span class="s">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/k8scsi/csi-node-driver-registrar:v1.1.0"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_PROVISIONER_IMAGE</span>
+        <span class="s">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/k8scsi/csi-provisioner:v1.4.0"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_SNAPSHOTTER_IMAGE</span>
+        <span class="s">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/k8scsi/csi-snapshotter:v1.2.2"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_ATTACHER_IMAGE</span>
+        <span class="s">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/k8scsi/csi-attacher:v1.2.0"</span>
+</code></pre></div></div>
+
+<p>You can also remove the <code class="language-plaintext highlighter-rouge">ROOK_CSI_CEPHFS_IMAGE</code> and <code class="language-plaintext highlighter-rouge">ROOK_CSI_RBD_IMAGE</code> <code class="language-plaintext highlighter-rouge">env</code> variables that are
+no longer used in Rook.</p>
+
+<p>You should also delete outdated <code class="language-plaintext highlighter-rouge">*.snapshot.storage.io</code> CRDs that may have been created by the previous version. If they are not cleaned up, there may be an error in preventing the VolumeSnapshots from ever being “Ready-To-Use: true”:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete crd volumesnapshotclasses.snapshot.storage.k8s.io volumesnapshotcontents.snapshot.storage.k8s.io volumesnapshots.snapshot.storage.k8s.io
+</span></code></pre></div></div>
+
+<p>The new versions of the CRDs will be created when the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-provisioner-0</code> pod is started following the operator upgrade.</p>
+
+<p>If you have configured the kubelet to use other than <code class="language-plaintext highlighter-rouge">/var/lib/kubelet</code> please
+add below to the operator <code class="language-plaintext highlighter-rouge">env</code> variables.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_CSI_KUBELET_DIR_PATH</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/kubelet/path"</span>
+</code></pre></div></div>
+
+<p>At the same time you edit the CSI driver settings, go ahead and update the operator deployment image:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">image</span><span class="pi">:</span> <span class="s">rook/ceph:v1.1.0</span>
+</code></pre></div></div>
+
+<p>Skip to step 4 since the operator image is already updated.</p>
+
+<h4 id="3-update-the-rook-operator">3. Update the Rook Operator</h4>
+<p>The largest portion of the upgrade is triggered when the operator’s image is updated to <code class="language-plaintext highlighter-rouge">v1.1.x</code>.
+When the operator is updated, it will proceed to update all of the Ceph daemons.
+(If step 2 was completed, this change has already been applied.)</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_SYSTEM_NAMESPACE</span> <span class="nb">set </span>image deploy/rook-ceph-operator rook-ceph-operator<span class="o">=</span>rook/ceph:v1.1.0
+</code></pre></div></div>
+
+<h3 id="4-wait-for-the-upgrade-to-complete">4. Wait for the upgrade to complete</h3>
+<p>Watch now in amazement as the Ceph mons, mgrs, OSDs, rbd-mirrors, MDSes and RGWs are terminated and
+replaced with updated versions in sequence. The cluster may be offline very briefly as mons update,
+and the Ceph Filesystem may fall offline a few times while the MDSes are upgrading. This is normal.
+Continue on to the next upgrade step while the update is commencing.</p>
+
+<p>Before moving on, the Ceph cluster’s core (RADOS) components (i.e., mons, mgrs, and OSDs) must be
+fully updated.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>watch <span class="nt">--exec</span> kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get deployments <span class="nt">-l</span> <span class="nv">rook_cluster</span><span class="o">=</span><span class="nv">$ROOK_NAMESPACE</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"  \treq/upd/avl: "}{.spec.replicas}{"/"}{.status.updatedReplicas}{"/"}{.status.readyReplicas}{"  \trook-version="}{.metadata.labels.rook-version}{"\n"}{end}'</span>
+</code></pre></div></div>
+
+<p>As an example, this cluster is midway through updating the OSDs from 1.0 to 1.1. When all
+deployments report <code class="language-plaintext highlighter-rouge">1/1/1</code> availability and <code class="language-plaintext highlighter-rouge">rook-version=v1.1.0</code>, the Ceph cluster’s core
+components are fully updated.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Every 2.0s: kubectl -n rook-ceph get deployment -o j...
+
+rook-ceph-mgr-a         req/upd/avl: 1/1/1      rook-version=v1.1.0
+rook-ceph-mon-a         req/upd/avl: 1/1/1      rook-version=v1.1.0
+rook-ceph-mon-b         req/upd/avl: 1/1/1      rook-version=v1.1.0
+rook-ceph-mon-c         req/upd/avl: 1/1/1      rook-version=v1.1.0
+rook-ceph-osd-0         req/upd/avl: 1//        rook-version=v1.1.0
+rook-ceph-osd-1         req/upd/avl: 1/1/1      rook-version=v1.0.6
+rook-ceph-osd-2         req/upd/avl: 1/1/1      rook-version=v1.0.6
+</code></pre></div></div>
+
+<p>The MDSes and RGWs are the last daemons to update. An easy check to see if the upgrade is totally
+finished is to check that there is only one <code class="language-plaintext highlighter-rouge">rook-version</code> reported across the cluster. It is safe
+to proceed with the next step before the MDSes and RGWs are finished updating.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get deployment <span class="nt">-l</span> <span class="nv">rook_cluster</span><span class="o">=</span><span class="nv">$ROOK_NAMESPACE</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{"rook-version="}{.metadata.labels.rook-version}{"\n"}{end}'</span> | <span class="nb">sort</span> | <span class="nb">uniq</span>
+<span class="c"># This cluster is not yet finished:</span>
+<span class="c">#   rook-version=v1.0.6</span>
+<span class="c">#   rook-version=v1.1.0</span>
+<span class="c"># This cluster is finished:</span>
+<span class="c">#   rook-version=v1.1.0</span>
+</code></pre></div></div>
+
+<h3 id="5-verify-the-updated-cluster">5. Verify the updated cluster</h3>
+<p>At this point, your Rook operator should be running version <code class="language-plaintext highlighter-rouge">rook/ceph:v1.1.0</code></p>
+
+<p>Verify the Ceph cluster’s health using the <a href="#health-verification">health verification section</a>.</p>
+
+<h3 id="6-update-if-applicable-cephobjectstores">6. Update (if applicable) CephObjectStores</h3>
+<p>The CephObjectStore <code class="language-plaintext highlighter-rouge">gateway</code> parameter <code class="language-plaintext highlighter-rouge">allNodes</code> was deprecated in Rook v1.0 and is not supported
+any more. If you have CephObjectStores using <code class="language-plaintext highlighter-rouge">allNodes: true</code>, Rook will replace each daemonset with
+a deployment (one for one replacement) gradually during the upgrade. Once complete, you should edit
+your CephObjectStore to set <code class="language-plaintext highlighter-rouge">allNodes: false</code>, and set <code class="language-plaintext highlighter-rouge">instances</code> to the current number of RGW
+instances.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> edit cephobjectstore.ceph.rook.io/<span class="nv">$OBJECT_STORE_NAME</span>
+</code></pre></div></div>
+
+<h3 id="7-delete-csi-provisioner-and-attacher-if-applicable">7. Delete CSI provisioner and attacher (if applicable)</h3>
+
+<p>This has to be done if you have deployed CSI in v1.0 or else you can skip it.</p>
+
+<p>With Rook v1.0 we were deploying cephcsi provisioner (rbd and cephfs) as
+statefulset even if the kubernetes version is <code class="language-plaintext highlighter-rouge">&gt;=v1.14.x</code> with Rook v1.1
+cephcsi provisioner (rbd and cephfs) will be deployed as statefulset if the
+kubernetes version is <code class="language-plaintext highlighter-rouge">&lt;1.14.x</code> if not it will be deployed as deployment.</p>
+
+<p>Remove attacher statefulset deployed using Rook 1.0. attacher is now part of
+provisioner in Rook 1.1</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete sts csi-rbdplugin-attacher <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nt">--ignore-not-found</span>
+kubectl delete sts csi-cephfs-attacher <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nt">--ignore-not-found</span>
+</code></pre></div></div>
+
+<p>If kubernetes version is <code class="language-plaintext highlighter-rouge">&gt;=1.14.x</code> delete the provisioner statefulset</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete sts csi-cephfsplugin-provisioner <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span>
+kubectl delete sts csi-rbdplugin-provisioner <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span>
+</code></pre></div></div>
+
+<h3 id="8-recommended-migrate-config-overrides-from-configmap-to-ceph-directly">8. (Recommended) Migrate config overrides from ConfigMap to Ceph directly</h3>
+<p>If there are Ceph configuration overrides set in the <code class="language-plaintext highlighter-rouge">config</code> field of the ConfigMap
+<code class="language-plaintext highlighter-rouge">rook-config-override</code>, it is now possible to migrate those configs manually from the ConfigMap to
+Ceph directly as documented <a href="/docs/rook/v1.1/ceph-configuration.html#specifying-configuration-options">here</a>. This is
+not required but is recommended because the values configured in Ceph directly can be temporarily
+overridden by the user as needed in debug/failure scenarios.</p>
+
+<h4 id="example">Example</h4>
+<p>List the contents of the override ConfigMap.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span> describe configmap rook-config-override
+<span class="c"># Name:         rook-config-override</span>
+<span class="c"># Namespace:    rook-ceph</span>
+<span class="c"># Labels:       &lt;none&gt;</span>
+<span class="c"># Annotations:  &lt;none&gt;</span>
+<span class="c">#</span>
+<span class="c"># Data</span>
+<span class="c"># ====</span>
+<span class="c"># config:</span>
+<span class="c"># ----</span>
+<span class="c"># [global]</span>
+<span class="c"># debug_ms = 1/5</span>
+<span class="c">#</span>
+<span class="c"># [osd.0]</span>
+<span class="c"># debug_osd = 10</span>
+<span class="c"># Events:  &lt;none&gt;</span>
+</code></pre></div></div>
+
+<p>Apply the configurations to Ceph directly using Ceph’s CLI.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TOOLS_POD</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nb">exec</span> <span class="nt">-it</span> <span class="nv">$TOOLS_POD</span> <span class="nt">--</span> ceph config <span class="nb">set </span>global debug_ms 1/5
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nb">exec</span> <span class="nt">-it</span> <span class="nv">$TOOLS_POD</span> <span class="nt">--</span> ceph config <span class="nb">set </span>osd.0 debug_osd 10
+</code></pre></div></div>
+
+<p>Empty the config override in the ConfigMap.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">--namespace</span> <span class="nv">$ROOK_NAMESPACE</span> patch configmap rook-config-override <span class="nt">--type</span><span class="o">=</span>merge <span class="nt">-p</span> <span class="s1">'{"data": {"config": ""}}'</span>
+</code></pre></div></div>
+
+<h3 id="9-recommended-consider-required-ceph-config-settings">9. (Recommended) Consider required Ceph config settings</h3>
+<p>We highly recommend updates to your cluster regarding PG management. There is a new setting where
+Rook can enable the automatic PG management, or you can continue managing it manually.
+See more information in the docs <a href="/docs/rook/v1.1/ceph-configuration.html#default-pg-and-pgp-counts">here</a>.</p>
+
+<h3 id="10-update-rook-ceph-custom-resource-definitions">10. Update Rook-Ceph custom resource definitions</h3>
+<p><strong>IMPORTANT: Do not perform this step until ALL existing Rook-Ceph clusters are updated</strong></p>
+
+<p>After all Rook-Ceph clusters have been updated following the steps above, update the Rook-Ceph
+Custom Resource Definitions. This is important to get the latest schema validations that will
+support running external Ceph clusters and will also help with creating or modifying Rook-Ceph
+deployments in the future.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> upgrade-from-v1.0-crds.yaml
+</code></pre></div></div>
+
+<h1 id="ceph-version-upgrades">Ceph Version Upgrades</h1>
+<p>Rook 1.1 supports Ceph Mimic v13.2.4 or newer and Ceph Nautilus v14.2.0 or newer. These are the only
+supported major versions of Ceph.</p>
+
+<p><strong>IMPORTANT: When an update is requested, the operator will check Ceph’s status, if it is in <code class="language-plaintext highlighter-rouge">HEALTH_ERR</code> it will refuse to do the upgrade.</strong></p>
+
+<p>Rook is cautious when performing upgrades. When an upgrade is requested (the Ceph image has been
+updated in the CR), Rook will go through all the daemons one by one and will individually perform
+checks on them. It will make sure a particular daemon can be stopped before performing the upgrade,
+once the deployment has been updated, it checks if this is ok to continue. After each daemon is
+updated we wait for things to settle (monitors to be in a quorum, PGs to be clean for OSDs, up for
+MDSs, etc.), then only when the condition is met we move to the next daemon. We repeat this process
+until all the daemons have been updated.</p>
+
+<h2 id="ceph-images">Ceph images</h2>
+<p>Official Ceph container images can be found on <a href="https://hub.docker.com/r/ceph/ceph/tags/">Docker Hub</a>.
+These images are tagged in a few ways:</p>
+<ul>
+  <li>The most explicit form of tags are full-ceph-version-and-build tags (e.g., <code class="language-plaintext highlighter-rouge">v13.2.6-20190830</code>).
+These tags are recommended for production clusters, as there is no possibility for the cluster to
+be heterogeneous with respect to the version of Ceph running in containers.</li>
+  <li>Ceph major version tags (e.g., <code class="language-plaintext highlighter-rouge">v13</code>) are useful for development and test clusters so that the
+latest version of Ceph is always available.</li>
+</ul>
+
+<p><strong>Ceph containers other than the official images from the registry above will not be supported.</strong></p>
+
+<h2 id="example-upgrade-to-ceph-nautilus">Example upgrade to Ceph Nautilus</h2>
+
+<h3 id="1-update-the-main-ceph-daemons">1. Update the main Ceph daemons</h3>
+<p>The majority of the upgrade will be handled by the Rook operator. Begin the upgrade by changing the
+Ceph image field in the cluster CRD (<code class="language-plaintext highlighter-rouge">spec:cephVersion:image</code>).</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">NEW_CEPH_IMAGE</span><span class="o">=</span><span class="s1">'ceph/ceph:v14.2.2-20190830'</span>
+<span class="nv">CLUSTER_NAME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ROOK_NAMESPACE</span><span class="s2">"</span>  <span class="c"># change if your cluster name is not the Rook namespace</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> patch CephCluster <span class="nv">$CLUSTER_NAME</span> <span class="nt">--type</span><span class="o">=</span>merge <span class="nt">-p</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">spec</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">cephVersion</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">image</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="nv">$NEW_CEPH_IMAGE</span><span class="se">\"</span><span class="s2">}}}"</span>
+</code></pre></div></div>
+
+<h3 id="2-wait-for-the-daemon-pod-updates-to-complete">2. Wait for the daemon pod updates to complete</h3>
+<p>As with upgrading Rook, you must now wait for the upgrade to complete. Status can be determined in a
+similar way to the Rook upgrade as well.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>watch <span class="nt">--exec</span> kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get deployments <span class="nt">-l</span> <span class="nv">rook_cluster</span><span class="o">=</span><span class="nv">$ROOK_NAMESPACE</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"  \treq/upd/avl: "}{.spec.replicas}{"/"}{.status.updatedReplicas}{"/"}{.status.readyReplicas}{"  \tceph-version="}{.metadata.labels.ceph-version}{"\n"}{end}'</span>
+</code></pre></div></div>
+
+<p>Determining when the Ceph has fully updated is rather simple.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get deployment <span class="nt">-l</span> <span class="nv">rook_cluster</span><span class="o">=</span><span class="nv">$ROOK_NAMESPACE</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{"ceph-version="}{.metadata.labels.ceph-version}{"\n"}{end}'</span> | <span class="nb">sort</span> | <span class="nb">uniq</span>
+<span class="c"># This cluster is not yet finished:</span>
+<span class="c">#     ceph-version=13.2.6</span>
+<span class="c">#     ceph-version=14.2.2</span>
+<span class="c"># This cluster is finished:</span>
+<span class="c">#     ceph-version=14.2.2</span>
+</code></pre></div></div>
+
+<h3 id="3-verify-the-updated-cluster">3. Verify the updated cluster</h3>
+<p>Verify the Ceph cluster’s health using the <a href="#health-verification">health verification section</a>.</p>
+
+<p>If you see a health warning about enabling msgr2, please see the section in the Rook v1.0 guide on
+<a href="https://rook.io/docs/rook/v1.0/ceph-upgrade.html#6-update-the-mon-ports">updating the mon ports</a>.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TOOLS_POD</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nb">exec</span> <span class="nt">-it</span> <span class="nv">$TOOLS_POD</span> <span class="nt">--</span> ceph status
+<span class="c">#  cluster:</span>
+<span class="c">#    id:     b02807da-986a-40b0-ab7a-fa57582b1e4f</span>
+<span class="c">#    health: HEALTH_WARN</span>
+<span class="c">#            3 monitors have not enabled msgr2</span>
+</code></pre></div></div>
+
+<p>Alternatively, this warning can suppressed if a temporary workaround is needed.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TOOLS_POD</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span>
+kubectl <span class="nt">-n</span> <span class="nv">$ROOK_NAMESPACE</span> <span class="nb">exec</span> <span class="nt">-it</span> <span class="nv">$TOOLS_POD</span> <span class="nt">--</span> ceph config <span class="nb">set </span>global mon_warn_on_msgr2_not_enabled <span class="nb">false</span>
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.1/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.1/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.1/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.1/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.1/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.1/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.1/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.1/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.1/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.1/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.1/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.1/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.1/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.1/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.1/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.1/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.1/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.1/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.1/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.1/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.1/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.1/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.1/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.1/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.1/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.1/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.1/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.1/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.1/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.1/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.1/ceph-upgrade.html",
+      true,
+      true
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.1/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.1/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.1/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.1/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.1/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.1/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.1/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.1/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.1/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.1/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.1/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.1/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.1/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.1/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.1/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.1/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.1/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.1/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.1/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.1/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.1/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.1/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.1/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.1/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.1/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.1/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.1/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.1/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.1/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.1/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.1/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.1/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

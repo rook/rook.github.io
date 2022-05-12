@@ -1,0 +1,687 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v0.5/cluster-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v0.5</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/cluster-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/cluster-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/cluster-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/cluster-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/cluster-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/cluster-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/cluster-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/cluster-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/cluster-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/cluster-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/cluster-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/cluster-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/cluster-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/cluster-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/cluster-crd.html" class="active">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/cluster-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/cluster-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v0.5 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="creating-rook-clusters">Creating Rook Clusters</h1>
+
+<p>Rook allows creation and customization of storage clusters through the custom resource definitions (CRDs). The following settings are
+available for a cluster.</p>
+
+<h2 id="settings">Settings</h2>
+
+<p>Settings can be specified at the global level to apply to the cluster as a whole, while other settings can be specified at more fine-grained levels.  If any setting is unspecified, a suitable default will be used automatically.</p>
+
+<h3 id="cluster-metadata">Cluster metadata</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name that will be used internally for the Ceph cluster. Most commonly the name is the same as the namespace since multiple clusters are not supported in the same namespace.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The Kubernetes namespace that will be created for the Rook cluster. The services, pods, and other resources created by the operator will be added to this namespace. The common scenario is to create a single Rook cluster. If multiple clusters are created, they must not have conflicting devices or host paths.</li>
+</ul>
+
+<h3 id="cluster-settings">Cluster settings</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">versionTag</code>: The version (tag) of the <code class="language-plaintext highlighter-rouge">rook/rook</code> container that will be deployed. Upgrades are not yet supported if this setting is updated for an existing cluster, but upgrades will be coming.</li>
+  <li><code class="language-plaintext highlighter-rouge">dataDirHostPath</code>: The host path where config and data should be stored for each of the services. If the directory does not exist, it will be created. Because this directory persists on the host, it will remain after pods are deleted.  Therefore, for test scenarios, the path must be deleted if you are going to delete a cluster and start a new cluster on the same hosts.  More details can be found in the Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath">host path docs</a>.
+If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/#emptydir">empty dir docs</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">placement</code>: <a href="#placement-configuration-settings">placement configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">storage</code>: Storage selection and configuration that will be used across the cluster.  Note that these settings can be overridden for specific nodes.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useAllNodes</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating if all nodes in the cluster should be used for storage according to the cluster level storage selection and configuration values.
+If individual nodes are specified under the <code class="language-plaintext highlighter-rouge">nodes</code> field below, then <code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">nodes</code>: Names of individual nodes in the cluster that should have their storage included in accordance with either the cluster level configuration specified above or any node specific overrides described in the next section below.
+<code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> to use specific nodes and their config.</li>
+      <li><a href="#storage-selection-settings">storage selection settings</a></li>
+      <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="node-settings">Node settings</h3>
+
+<p>In addition to the cluster level settings specified above, each individual node can also specify configuration to override the cluster level settings and defaults.  If a node does not specify any configuration then it will inherit the cluster level settings.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the node, which should match its <code class="language-plaintext highlighter-rouge">kubernetes.io/hostname</code> label.</li>
+  <li><code class="language-plaintext highlighter-rouge">devices</code>: A list of individual device names belonging to this node to include in the storage cluster.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the device (e.g., <code class="language-plaintext highlighter-rouge">sda</code>).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">directories</code>:  A list of directory paths on this node that will be included in the storage cluster.  Note that using two directories on the same physical device can cause a negative performance impact.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">path</code>: The path on disk of the directory (e.g., <code class="language-plaintext highlighter-rouge">/rook/storage-dir</code>).</li>
+    </ul>
+  </li>
+  <li><a href="#storage-selection-settings">storage selection settings</a></li>
+  <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+</ul>
+
+<h3 id="storage-selection-settings">Storage Selection Settings</h3>
+
+<p>Below are the settings available, both at the cluster and individual node level, for selecting which storage resources will be included in the cluster.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useAllDevices</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating whether all devices found on nodes in the cluster should be automatically consumed by OSDs. <strong>Not recommended</strong> unless you have a very controlled environment where you will not risk formatting of devices with existing data. When <code class="language-plaintext highlighter-rouge">true</code>, all devices will be used except those with partitions created or a local filesystem. Is overridden by <code class="language-plaintext highlighter-rouge">deviceFilter</code> if specified.</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceFilter</code>: A regular expression that allows selection of devices to be consumed by OSDs.  If individual devices have been specified for a node then this filter will be ignored.  This field uses <a href="https://golang.org/pkg/regexp/syntax/">golang regular expression syntax</a>. For example:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sdb</code>: Only selects the <code class="language-plaintext highlighter-rouge">sdb</code> device if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^sd.</code>: Selects all devices starting with <code class="language-plaintext highlighter-rouge">sd</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^sd[a-d]</code>: Selects devices starting with <code class="language-plaintext highlighter-rouge">sda</code>, <code class="language-plaintext highlighter-rouge">sdb</code>, <code class="language-plaintext highlighter-rouge">sdc</code>, and <code class="language-plaintext highlighter-rouge">sdd</code> if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^s</code>: Selects all devices that start with <code class="language-plaintext highlighter-rouge">s</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^[^r]</code>: Selects all devices that do <em>not</em> start with <code class="language-plaintext highlighter-rouge">r</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">metadataDevice</code>: Name of a device to use for the metadata of OSDs on each node.  Performance can be improved by using a low latency device (such as SSD or NVMe) as the metadata device, while other spinning platter (HDD) devices on a node are used to store data.</li>
+</ul>
+
+<h3 id="storage-configuration-settings">Storage Configuration Settings</h3>
+
+<p>Below are the settings available, both at the cluster and individual node level, that affect how the selected storage resources will be configured.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">location</code>: Location information about the cluster to help with data placement, such as region or data center.  This is directly fed into the underlying Ceph CRUSH map.  More information on CRUSH maps can be found in the <a href="http://docs.ceph.com/docs/master/rados/operations/crush-map/">ceph docs</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">storeConfig</code>: Configuration information about the store format for each OSD.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">storeType</code>: <code class="language-plaintext highlighter-rouge">filestore</code> or <code class="language-plaintext highlighter-rouge">bluestore</code> (default: <code class="language-plaintext highlighter-rouge">filestore</code>), The underlying storage format to use for each OSD.</li>
+      <li><code class="language-plaintext highlighter-rouge">databaseSizeMB</code>:  The size in MB of a bluestore database.</li>
+      <li><code class="language-plaintext highlighter-rouge">walSizeMB</code>:  The size in MB of a bluestore write ahead log (WAL).</li>
+      <li><code class="language-plaintext highlighter-rouge">journalSizeMB</code>:  The size in MB of a filestore journal.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="placement-configuration-settings">Placement Configuration Settings</h3>
+
+<p>Placement configuration for the cluster services. It includes the following keys: <code class="language-plaintext highlighter-rouge">api</code>, <code class="language-plaintext highlighter-rouge">mds</code>, <code class="language-plaintext highlighter-rouge">mon</code>, <code class="language-plaintext highlighter-rouge">osd</code>, <code class="language-plaintext highlighter-rouge">rgw</code> and <code class="language-plaintext highlighter-rouge">all</code>. Each service will have its placement configuration generated by merging the generic configuration under <code class="language-plaintext highlighter-rouge">all</code> with the most specific one (which will override any attributes).</p>
+
+<p>A Placement configuration is specified (according to the kubernetes <a href="https://kubernetes.io/docs/api-reference/v1.6/#podspec-v1-core">PodSpec</a>) as:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nodeAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/api-reference/v1.6/#nodeaffinity-v1-core">NodeAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">tolerations</code>: list of kubernetes <a href="https://kubernetes.io/docs/api-reference/v1.6/#toleration-v1-core">Toleration</a></li>
+</ul>
+
+<h2 id="samples">Samples</h2>
+
+<h3 id="storage-configuration-all-devices">Storage configuration: All devices</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Namespace
+metadata:
+  name: rook
+---
+apiVersion: rook.io/v1alpha1
+kind: Cluster
+metadata:
+  name: rook
+  namespace: rook
+spec:
+  versionTag: v0.5.1
+  dataDirHostPath:
+  # cluster level storage configuration and selection
+  storage:
+    useAllNodes: true
+    useAllDevices: true
+    deviceFilter:
+    metadataDevice:
+    location:
+    storeConfig:
+      storeType: bluestore
+      databaseSizeMB: 1024 # this value can be removed for environments with normal sized disks (100 GB or larger)
+      journalSizeMB: 1024  # this value can be removed for environments with normal sized disks (20 GB or larger)
+</code></pre></div></div>
+
+<h3 id="storage-configuration-specific-devices">Storage Configuration: Specific devices</h3>
+
+<p>Individual nodes and their config can be specified so that only the named nodes below will be used as storage resources. 
+Each node’s ‘name’ field should match their ‘kubernetes.io/hostname’ label.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Namespace
+metadata:
+  name: rook
+---
+apiVersion: rook.io/v1alpha1
+kind: Cluster
+metadata:
+  name: rook
+  namespace: rook
+spec:
+  versionTag: v0.5.1
+  dataDirHostPath:
+  # cluster level storage configuration and selection
+  storage:                
+    useAllNodes: false
+    useAllDevices: false
+    deviceFilter:
+    metadataDevice:
+    location:
+    storeConfig:
+      storeType: filestore
+      databaseSizeMB: 1024 # this value can be removed for environments with normal sized disks (100 GB or larger)
+      journalSizeMB: 1024  # this value can be removed for environments with normal sized disks (20 GB or larger)
+    nodes:
+    - name: "172.17.4.101"
+      directories:         # specific directores to use for storage can be specified for each node
+      - path: "/rook/storage-dir"
+    - name: "172.17.4.201"
+      devices:             # specific devices to use for storage can be specified for each node
+      - name: "sdb"
+      - name: "sdc"
+      storeConfig:         # configuration can be specified at the node level which overrides the cluster level config
+        storeType: bluestore
+    - name: "172.17.4.301"
+      deviceFilter: "^sd."
+</code></pre></div></div>
+
+<h3 id="node-affinity">Node Affinity</h3>
+
+<p>To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
+The example under ‘all’ would have all services scheduled on kubernetes nodes labeled with ‘role=storage’ and
+tolerate taints with a key of ‘storage-node’.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Namespace
+metadata:
+  name: rook
+---
+apiVersion: rook.io/v1alpha1
+kind: Cluster
+metadata:
+  name: rook
+  namespace: rook
+spec:
+  versionTag: v0.5.1
+  dataDirHostPath:
+  placement:
+    all:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+              - storage-node
+      tolerations:
+      - key: storage-node
+        operator: Exists
+    api:
+      nodeAffinity:
+      tolerations:
+    mgr:
+      nodeAffinity:
+      tolerations:
+    mon:
+      nodeAffinity:
+      tolerations:
+    osd:
+      nodeAffinity:
+      tolerations:
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v0.5/",
+      false,
+      false
+    );
+  
+    add(
+      "Kubernetes",
+      "/docs/rook/v0.5/kubernetes.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v0.5/k8s-pre-reqs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v0.5/k8s-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v0.5/k8s-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.5/k8s-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v0.5/k8s-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pool CRD",
+      "/docs/rook/v0.5/pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v0.5/cluster-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Helm Chart",
+      "/docs/rook/v0.5/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Standalone",
+      "/docs/rook/v0.5/standalone.html",
+      false,
+      false
+    );
+  
+    add(
+      "Rook Client",
+      "/docs/rook/v0.5/client.html",
+      false,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v0.5/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v0.5/toolbox.html",
+      false,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v0.5/advanced-configuration.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,971 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.6/ceph-monitoring.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.6</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-monitoring.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-monitoring.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-monitoring.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-monitoring.html" class="active">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-monitoring.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-monitoring.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-monitoring.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-monitoring.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-monitoring.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-monitoring.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-monitoring.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-monitoring.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-monitoring.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-monitoring.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-monitoring.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-monitoring.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-monitoring.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.6 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      
+<h1 id="prometheus-monitoring">Prometheus Monitoring</h1>
+
+<p>Each Rook Ceph cluster has some built in metrics collectors/exporters for monitoring with <a href="https://prometheus.io/">Prometheus</a>.</p>
+
+<p>If you do not have Prometheus running, follow the steps below to enable monitoring of Rook. If your cluster already
+contains a Prometheus instance, it will automatically discover Rooks scrape endpoint using the standard
+<code class="language-plaintext highlighter-rouge">prometheus.io/scrape</code> and <code class="language-plaintext highlighter-rouge">prometheus.io/port</code> annotations.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: This assumes that the Prometheus instances is searching all your Kubernetes namespaces for Pods with these annotations.</p>
+</blockquote>
+
+<h2 id="prometheus-operator">Prometheus Operator</h2>
+
+<p>First the Prometheus operator needs to be started in the cluster so it can watch for our requests to start monitoring Rook and respond by deploying the correct Prometheus pods and configuration.
+A full explanation can be found in the <a href="https://github.com/prometheus-operator/prometheus-operator">Prometheus operator repository on GitHub</a>, but the quick instructions can be found here:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/v0.40.0/bundle.yaml
+</span></code></pre></div></div>
+
+<p>This will start the Prometheus operator, but before moving on, wait until the operator is in the <code class="language-plaintext highlighter-rouge">Running</code> state:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get pod
+</span></code></pre></div></div>
+
+<p>Once the Prometheus operator is in the <code class="language-plaintext highlighter-rouge">Running</code> state, proceed to the next section to create a Prometheus instance.</p>
+
+<h2 id="prometheus-instances">Prometheus Instances</h2>
+
+<p>With the Prometheus operator running, we can create a service monitor that will watch the Rook cluster and collect metrics regularly.
+From the root of your locally cloned Rook repo, go the monitoring directory:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone <span class="nt">--single-branch</span> <span class="nt">--branch</span> v1.6.11 https://github.com/rook/rook.git
+<span class="go">cd rook/cluster/examples/kubernetes/ceph/monitoring
+</span></code></pre></div></div>
+
+<p>Create the service monitor as well as the Prometheus server pod and service:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f service-monitor.yaml
+kubectl create -f prometheus.yaml
+kubectl create -f prometheus-service.yaml
+</span></code></pre></div></div>
+
+<p>Ensure that the Prometheus server pod gets created and advances to the <code class="language-plaintext highlighter-rouge">Running</code> state before moving on:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get pod prometheus-rook-prometheus-0
+</span></code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE</strong>: It is not recommended to consume storage from the Ceph cluster for Prometheus.
+If the Ceph cluster fails, Prometheus would become unresponsive and thus not alert you of the failure.</p>
+</blockquote>
+
+<h2 id="prometheus-web-console">Prometheus Web Console</h2>
+
+<p>Once the Prometheus server is running, you can open a web browser and go to the URL that is output from this command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">echo "http://$</span><span class="o">(</span>kubectl <span class="nt">-n</span> rook-ceph <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">={</span>.status.hostIP<span class="o">}</span> get pod prometheus-rook-prometheus-0<span class="o">)</span>:30900<span class="s2">"
+</span></code></pre></div></div>
+
+<p>You should now see the Prometheus monitoring website.</p>
+
+<p><img src="/docs/rook/v1.6/media/prometheus-monitor.png" alt="Prometheus Monitoring Website" /></p>
+
+<p>Click on <code class="language-plaintext highlighter-rouge">Graph</code> in the top navigation bar.</p>
+
+<p><img src="/docs/rook/v1.6/media/prometheus-graph.png" alt="Prometheus Add graph" /></p>
+
+<p>In the dropdown that says <code class="language-plaintext highlighter-rouge">insert metric at cursor</code>, select any metric you would like to see, for example <code class="language-plaintext highlighter-rouge">ceph_cluster_total_used_bytes</code></p>
+
+<p><img src="/docs/rook/v1.6/media/prometheus-metric-cursor.png" alt="Prometheus Select Metric" /></p>
+
+<p>Click on the <code class="language-plaintext highlighter-rouge">Execute</code> button.</p>
+
+<p><img src="/docs/rook/v1.6/media/prometheus-execute-metric-cursor.png" alt="Prometheus Execute Metric" /></p>
+
+<p>Below the <code class="language-plaintext highlighter-rouge">Execute</code> button, ensure the <code class="language-plaintext highlighter-rouge">Graph</code> tab is selected and you should now see a graph of your chosen metric over time.</p>
+
+<p><img src="/docs/rook/v1.6/media/prometheus-metric-cursor-graph.png" alt="Prometheus Execute Metric" /></p>
+
+<h2 id="prometheus-consoles">Prometheus Consoles</h2>
+
+<p>You can find Prometheus Consoles for and from Ceph here: <a href="https://github.com/ceph/cephmetrics/tree/master/dashboards/current">GitHub ceph/cephmetrics - dashboards/current directory</a>.</p>
+
+<p>A guide to how you can write your own Prometheus consoles can be found on the official Prometheus site here: <a href="https://prometheus.io/docs/visualization/consoles/">Prometheus.io Documentation - Console Templates</a>.</p>
+
+<h2 id="prometheus-alerts">Prometheus Alerts</h2>
+
+<p>To enable the Ceph Prometheus alerts follow these steps:</p>
+
+<ol>
+  <li>Create the RBAC rules to enable monitoring.</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/monitoring/rbac.yaml
+</span></code></pre></div></div>
+
+<ol>
+  <li>Make following changes to your CephCluster object (e.g., <code class="language-plaintext highlighter-rouge">cluster.yaml</code>).</li>
+</ol>
+
+<pre><code class="language-YAML">apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+[...]
+spec:
+[...]
+  monitoring:
+    enabled: true
+    rulesNamespace: "rook-ceph"
+[...]
+</code></pre>
+
+<p>(Where <code class="language-plaintext highlighter-rouge">rook-ceph</code> is the CephCluster name / namespace)</p>
+
+<ol>
+  <li>Deploy or update the CephCluster object.</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl apply -f cluster.yaml
+</span></code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE</strong>: This expects the Prometheus Operator and a Prometheus instance to be pre-installed by the admin.</p>
+</blockquote>
+
+<h2 id="grafana-dashboards">Grafana Dashboards</h2>
+
+<p>The dashboards have been created by <a href="https://github.com/galexrt">@galexrt</a>. For feedback on the dashboards please reach out to him on the <a href="https://slack.rook.io">Rook.io Slack</a>.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: The dashboards are only compatible with Grafana 7.2.0 or higher.</p>
+
+  <p>Also note that the dashboards are updated from time to time, to fix issues and improve them.</p>
+</blockquote>
+
+<p>The following Grafana dashboards are available:</p>
+
+<ul>
+  <li><a href="https://grafana.com/dashboards/2842">Ceph - Cluster</a></li>
+  <li><a href="https://grafana.com/dashboards/5336">Ceph - OSD (Single)</a></li>
+  <li><a href="https://grafana.com/dashboards/5342">Ceph - Pools</a></li>
+</ul>
+
+<h2 id="updates-and-upgrades">Updates and Upgrades</h2>
+
+<p>When updating Rook, there may be updates to RBAC for monitoring. It is easy to apply the changes
+with each update or upgrade. This should be done at the same time you update Rook common resources
+like <code class="language-plaintext highlighter-rouge">common.yaml</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl apply -f cluster/examples/kubernetes/ceph/monitoring/rbac.yaml
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>This is updated automatically if you are upgrading via the helm chart</p>
+</blockquote>
+
+<h2 id="teardown">Teardown</h2>
+
+<p>To clean up all the artifacts created by the monitoring walk-through, copy/paste the entire block below (note that errors about resources “not found” can be ignored):</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f service-monitor.yaml
+kubectl delete -f prometheus.yaml
+kubectl delete -f prometheus-service.yaml
+kubectl delete -f https://raw.githubusercontent.com/coreos/prometheus-operator/v0.40.0/bundle.yaml
+</span></code></pre></div></div>
+
+<p>Then the rest of the instructions in the <a href="https://github.com/prometheus-operator/prometheus-operator#removal">Prometheus Operator docs</a> can be followed to finish cleaning up.</p>
+
+<h2 id="special-cases">Special Cases</h2>
+
+<h3 id="tectonic-bare-metal">Tectonic Bare Metal</h3>
+
+<p>Tectonic strongly discourages the <code class="language-plaintext highlighter-rouge">tectonic-system</code> Prometheus instance to be used outside their intentions, so you need to create a new <a href="https://coreos.com/operators/prometheus/docs/latest/">Prometheus Operator</a> yourself.
+After this you only need to create the service monitor as stated above.</p>
+
+<h3 id="csi-liveness">CSI Liveness</h3>
+
+<p>To integrate CSI liveness and grpc into ceph monitoring we will need to deploy
+a service and service monitor.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f csi-metrics-service-monitor.yaml
+</span></code></pre></div></div>
+
+<p>This will create the service monitor to have promethues monitor CSI</p>
+
+<h3 id="collecting-rbd-per-image-io-statistics">Collecting RBD per-image IO statistics</h3>
+
+<p>RBD per-image IO statistics collection is disabled by default. This can be enabled by setting <code class="language-plaintext highlighter-rouge">enableRBDStats: true</code> in the CephBlockPool spec.
+Prometheus does not need to be restarted after enabling it.</p>
+
+<h3 id="using-custom-label-selectors-in-prometheus">Using custom label selectors in Prometheus</h3>
+
+<p>If Prometheus needs to select specific resources, we can do so by injecting labels into these objects and using it as label selector.</p>
+
+<pre><code class="language-YAML">apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+[...]
+spec:
+[...]
+labels:
+  monitoring:
+    prometheus: k8s
+[...]
+</code></pre>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.6/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.6/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.6/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.6/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.6/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.6/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.6/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.6/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.6/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.6/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.6/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.6/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.6/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.6/ceph-monitoring.html",
+      true,
+      true
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.6/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.6/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.6/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.6/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.6/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.6/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.6/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.6/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.6/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.6/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.6/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.6/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.6/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.6/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.6/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.6/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.6/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.6/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.6/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.6/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.6/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.6/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.6/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.6/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.6/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.6/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.6/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.6/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.6/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.6/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.6/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.6/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.6/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.6/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.6/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.6/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,1224 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.4/ceph-disaster-recovery.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.4</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-disaster-recovery.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-disaster-recovery.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-disaster-recovery.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-disaster-recovery.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-disaster-recovery.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-disaster-recovery.html" class="active">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-disaster-recovery.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-disaster-recovery.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-disaster-recovery.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-disaster-recovery.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-disaster-recovery.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-disaster-recovery.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-disaster-recovery.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-disaster-recovery.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-disaster-recovery.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-disaster-recovery.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.4 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="disaster-recovery">Disaster Recovery</h1>
+
+<h2 id="restoring-mon-quorum">Restoring Mon Quorum</h2>
+
+<p>Under extenuating circumstances, the mons may lose quorum. If the mons cannot form quorum again,
+there is a manual procedure to get the quorum going again. The only requirement is that at least one mon
+is still healthy. The following steps will remove the unhealthy
+mons from quorum and allow you to form a quorum again with a single mon, then grow the quorum back to the original size.</p>
+
+<p>For example, if you have three mons and lose quorum, you will need to remove the two bad mons from quorum, notify the good mon
+that it is the only mon in quorum, and then restart the good mon.</p>
+
+<h3 id="stop-the-operator">Stop the operator</h3>
+
+<p>First, stop the operator so it will not try to failover the mons while we are modifying the monmap</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas=0
+</span></code></pre></div></div>
+
+<h3 id="inject-a-new-monmap">Inject a new monmap</h3>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Injecting a monmap must be done very carefully. If run incorrectly, your cluster could be permanently destroyed.</p>
+</blockquote>
+
+<p>The Ceph monmap keeps track of the mon quorum. We will update the monmap to only contain the healthy mon.
+In this example, the healthy mon is <code class="language-plaintext highlighter-rouge">rook-ceph-mon-b</code>, while the unhealthy mons are <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code> and <code class="language-plaintext highlighter-rouge">rook-ceph-mon-c</code>.</p>
+
+<p>Take a backup of the current <code class="language-plaintext highlighter-rouge">rook-ceph-mon-b</code> Deployment:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">kubectl -n rook-ceph get deployment rook-ceph-mon-b -o yaml &gt;</span><span class="w"> </span>rook-ceph-mon-b-deployment.yaml
+</code></pre></div></div>
+
+<p>Open the file and copy the <code class="language-plaintext highlighter-rouge">command</code> and <code class="language-plaintext highlighter-rouge">args</code> from the <code class="language-plaintext highlighter-rouge">mon</code> container (see <code class="language-plaintext highlighter-rouge">containers</code> list). This is needed for the monmap changes.
+Cleanup the copied <code class="language-plaintext highlighter-rouge">command</code> and <code class="language-plaintext highlighter-rouge">args</code> fields to form a pastable command.
+Example:</p>
+
+<p>The following parts of the <code class="language-plaintext highlighter-rouge">mon</code> container:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">args</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">--fsid=41a537f2-f282-428e-989f-a9e07be32e47</span>
+    <span class="pi">-</span> <span class="s">--keyring=/etc/ceph/keyring-store/keyring</span>
+    <span class="pi">-</span> <span class="s">--log-to-stderr=true</span>
+    <span class="pi">-</span> <span class="s">--err-to-stderr=true</span>
+    <span class="pi">-</span> <span class="s">--mon-cluster-log-to-stderr=true</span>
+    <span class="pi">-</span> <span class="s1">'</span><span class="s">--log-stderr-prefix=debug</span><span class="nv"> </span><span class="s">'</span>
+    <span class="pi">-</span> <span class="s">--default-log-to-file=false</span>
+    <span class="pi">-</span> <span class="s">--default-mon-cluster-log-to-file=false</span>
+    <span class="pi">-</span> <span class="s">--mon-host=$(ROOK_CEPH_MON_HOST)</span>
+    <span class="pi">-</span> <span class="s">--mon-initial-members=$(ROOK_CEPH_MON_INITIAL_MEMBERS)</span>
+    <span class="pi">-</span> <span class="s">--id=b</span>
+    <span class="pi">-</span> <span class="s">--setuser=ceph</span>
+    <span class="pi">-</span> <span class="s">--setgroup=ceph</span>
+    <span class="pi">-</span> <span class="s">--foreground</span>
+    <span class="pi">-</span> <span class="s">--public-addr=10.100.13.242</span>
+    <span class="pi">-</span> <span class="s">--setuser-match-path=/var/lib/ceph/mon/ceph-b/store.db</span>
+    <span class="pi">-</span> <span class="s">--public-bind-addr=$(ROOK_POD_IP)</span>
+    <span class="na">command</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ceph-mon</span>
+<span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<p>Should be made into a command like this: (<strong>do not copy the example command!</strong>)</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ceph-mon \
+    --fsid=41a537f2-f282-428e-989f-a9e07be32e47 \
+    --keyring=/etc/ceph/keyring-store/keyring \
+    --log-to-stderr=true \
+    --err-to-stderr=true \
+    --mon-cluster-log-to-stderr=true \
+    --log-stderr-prefix=debug \
+    --default-log-to-file=false \
+    --default-mon-cluster-log-to-file=false \
+    --mon-host=$</span>ROOK_CEPH_MON_HOST <span class="se">\</span>
+    <span class="nt">--mon-initial-members</span><span class="o">=</span><span class="nv">$ROOK_CEPH_MON_INITIAL_MEMBERS</span> <span class="se">\</span>
+    <span class="nt">--id</span><span class="o">=</span>b <span class="se">\</span>
+    <span class="nt">--setuser</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--setgroup</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--foreground</span> <span class="se">\</span>
+    <span class="nt">--public-addr</span><span class="o">=</span>10.100.13.242 <span class="se">\</span>
+    <span class="nt">--setuser-match-path</span><span class="o">=</span>/var/lib/ceph/mon/ceph-b/store.db <span class="se">\</span>
+    <span class="nt">--public-bind-addr</span><span class="o">=</span><span class="nv">$ROOK_POD_IP</span>
+</code></pre></div></div>
+
+<p>(be sure to remove the single quotes around the <code class="language-plaintext highlighter-rouge">--log-stderr-prefix</code> flag and the paranthesis around the variables being passed ROOK_CEPH_MON_HOST, ROOK_CEPH_MON_INITIAL_MEMBERS and ROOK_POD_IP )</p>
+
+<p>Patch the <code class="language-plaintext highlighter-rouge">rook-ceph-mon-b</code> Deployment to run a sleep instead of the <code class="language-plaintext highlighter-rouge">ceph mon</code> command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph patch deployment rook-ceph-mon-b -p '{"spec": {"template": {"spec": {"containers": [{"name": "mon", "command": ["sleep", "infinity"], "args": []}]}}}}'
+</span></code></pre></div></div>
+
+<p>Connect to the pod of a healthy mon and run the following commands.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">kubectl -n rook-ceph exec -it &lt;mon-pod&gt;</span><span class="w"> </span>bash
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nb">set </span>a few simple variables
+<span class="go">cluster_namespace=rook-ceph
+good_mon_id=b
+monmap_path=/tmp/monmap
+
+</span><span class="gp">#</span><span class="w"> </span>extract the monmap to a file, by pasting the ceph mon <span class="nb">command</span>
+<span class="gp">#</span><span class="w"> </span>from the good mon deployment and adding the
+<span class="gp">#</span><span class="w"> </span><span class="sb">`</span><span class="nt">--extract-monmap</span><span class="o">=</span><span class="k">${</span><span class="nv">monmap_path</span><span class="k">}</span><span class="sb">`</span> flag
+<span class="gp">ceph-mon \
+    --fsid=41a537f2-f282-428e-989f-a9e07be32e47 \
+    --keyring=/etc/ceph/keyring-store/keyring \
+    --log-to-stderr=true \
+    --err-to-stderr=true \
+    --mon-cluster-log-to-stderr=true \
+    --log-stderr-prefix=debug \
+    --default-log-to-file=false \
+    --default-mon-cluster-log-to-file=false \
+    --mon-host=$</span>ROOK_CEPH_MON_HOST <span class="se">\</span>
+    <span class="nt">--mon-initial-members</span><span class="o">=</span><span class="nv">$ROOK_CEPH_MON_INITIAL_MEMBERS</span> <span class="se">\</span>
+    <span class="nt">--id</span><span class="o">=</span>b <span class="se">\</span>
+    <span class="nt">--setuser</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--setgroup</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--foreground</span> <span class="se">\</span>
+    <span class="nt">--public-addr</span><span class="o">=</span>10.100.13.242 <span class="se">\</span>
+    <span class="nt">--setuser-match-path</span><span class="o">=</span>/var/lib/ceph/mon/ceph-b/store.db <span class="se">\</span>
+    <span class="nt">--public-bind-addr</span><span class="o">=</span><span class="nv">$ROOK_POD_IP</span> <span class="se">\</span>
+    <span class="nt">--extract-monmap</span><span class="o">=</span><span class="k">${</span><span class="nv">monmap_path</span><span class="k">}</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>review the contents of the monmap
+<span class="go">monmaptool --print /tmp/monmap
+
+</span><span class="gp">#</span><span class="w"> </span>remove the bad mon<span class="o">(</span>s<span class="o">)</span> from the monmap
+<span class="gp">monmaptool $</span><span class="o">{</span>monmap_path<span class="o">}</span> <span class="nt">--rm</span> &lt;bad_mon&gt;
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="k">in </span>this example we remove mon0 and mon2:
+<span class="gp">monmaptool $</span><span class="o">{</span>monmap_path<span class="o">}</span> <span class="nt">--rm</span> a
+<span class="gp">monmaptool $</span><span class="o">{</span>monmap_path<span class="o">}</span> <span class="nt">--rm</span> c
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>inject the modified monmap into the good mon, by pasting
+<span class="gp">#</span><span class="w"> </span>the ceph mon <span class="nb">command </span>and adding the
+<span class="gp">#</span><span class="w"> </span><span class="sb">`</span><span class="nt">--inject-monmap</span><span class="o">=</span><span class="k">${</span><span class="nv">monmap_path</span><span class="k">}</span><span class="sb">`</span> flag, like this
+<span class="gp">ceph-mon \
+    --fsid=41a537f2-f282-428e-989f-a9e07be32e47 \
+    --keyring=/etc/ceph/keyring-store/keyring \
+    --log-to-stderr=true \
+    --err-to-stderr=true \
+    --mon-cluster-log-to-stderr=true \
+    --log-stderr-prefix=debug \
+    --default-log-to-file=false \
+    --default-mon-cluster-log-to-file=false \
+    --mon-host=$</span>ROOK_CEPH_MON_HOST <span class="se">\</span>
+    <span class="nt">--mon-initial-members</span><span class="o">=</span><span class="nv">$ROOK_CEPH_MON_INITIAL_MEMBERS</span> <span class="se">\</span>
+    <span class="nt">--id</span><span class="o">=</span>b <span class="se">\</span>
+    <span class="nt">--setuser</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--setgroup</span><span class="o">=</span>ceph <span class="se">\</span>
+    <span class="nt">--foreground</span> <span class="se">\</span>
+    <span class="nt">--public-addr</span><span class="o">=</span>10.100.13.242 <span class="se">\</span>
+    <span class="nt">--setuser-match-path</span><span class="o">=</span>/var/lib/ceph/mon/ceph-b/store.db <span class="se">\</span>
+    <span class="nt">--public-bind-addr</span><span class="o">=</span><span class="nv">$ROOK_POD_IP</span> <span class="se">\</span>
+    <span class="nt">--inject-monmap</span><span class="o">=</span><span class="k">${</span><span class="nv">monmap_path</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>Exit the shell to continue.</p>
+
+<h3 id="edit-the-rook-configmaps">Edit the Rook configmaps</h3>
+
+<p>Edit the configmap that the operator uses to track the mons.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph edit configmap rook-ceph-mon-endpoints
+</span></code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">data</code> element you will see three mons such as the following (or more depending on your <code class="language-plaintext highlighter-rouge">moncount</code>):</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data</span><span class="pi">:</span> <span class="s">a=10.100.35.200:6789;b=10.100.13.242:6789;c=10.100.35.12:6789</span>
+</code></pre></div></div>
+
+<p>Delete the bad mons from the list, for example to end up with a single good mon:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data</span><span class="pi">:</span> <span class="s">b=10.100.13.242:6789</span>
+</code></pre></div></div>
+
+<p>Save the file and exit.</p>
+
+<p>Now we need to adapt a Secret which is used for the mons and other components.
+The following <code class="language-plaintext highlighter-rouge">kubectl patch</code> command is an easy way to do that. In the end it patches the <code class="language-plaintext highlighter-rouge">rook-ceph-config</code> secret and updates the two key/value pairs <code class="language-plaintext highlighter-rouge">mon_host</code> and <code class="language-plaintext highlighter-rouge">mon_initial_members</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">mon_host=$</span><span class="o">(</span>kubectl <span class="nt">-n</span> rook-ceph get svc rook-ceph-mon-b <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.clusterIP}'</span><span class="o">)</span>
+<span class="gp">kubectl -n rook-ceph patch secret rook-ceph-config -p '{"stringData": {"mon_host": "[v2:'"$</span><span class="o">{</span>mon_host<span class="o">}</span><span class="s2">"':3300,v1:'"</span><span class="k">${</span><span class="nv">mon_host</span><span class="k">}</span><span class="s2">"':6789]"</span>, <span class="s2">"mon_initial_members"</span>: <span class="s2">"'"</span><span class="k">${</span><span class="nv">good_mon_id</span><span class="k">}</span><span class="s2">"'"</span><span class="o">}}</span><span class="s1">'
+</span></code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE</strong>: If you are using <code class="language-plaintext highlighter-rouge">hostNetwork: true</code>, you need to replace the <code class="language-plaintext highlighter-rouge">mon_host</code> var with the node IP the mon is pinned to (<code class="language-plaintext highlighter-rouge">nodeSelector</code>). This is because there is no <code class="language-plaintext highlighter-rouge">rook-ceph-mon-*</code> service created in that “mode”.</p>
+</blockquote>
+
+<h3 id="restart-the-mon">Restart the mon</h3>
+
+<p>You will need to “restart” the good mon pod with the original <code class="language-plaintext highlighter-rouge">ceph-mon</code> command to pick up the changes. For this run <code class="language-plaintext highlighter-rouge">kubectl replace</code> on the backup of the mon deployment yaml:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl replace --force -f rook-ceph-mon-b-deployment.yaml
+</span></code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Option <code class="language-plaintext highlighter-rouge">--force</code> will delete the deployment and create a new one</p>
+</blockquote>
+
+<p>Start the rook <a href="/Documentation/ceph-toolbox.md">toolbox</a> and verify the status of the cluster.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph -s
+</span></code></pre></div></div>
+
+<p>The status should show one mon in quorum. If the status looks good, your cluster should be healthy again.</p>
+
+<h3 id="restart-the-operator">Restart the operator</h3>
+<p>Start the rook operator again to resume monitoring the health of the cluster.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>create the operator. it is safe to ignore the errors that a number of resources already exist.
+<span class="go">kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas=1
+</span></code></pre></div></div>
+
+<p>The operator will automatically add more mons to increase the quorum size again, depending on the <code class="language-plaintext highlighter-rouge">mon.count</code>.</p>
+
+<h1 id="adopt-an-existing-rook-ceph-cluster-into-a-new-kubernetes-cluster">Adopt an existing Rook Ceph cluster into a new Kubernetes cluster</h1>
+
+<h2 id="situations-this-section-can-help-resolve">Situations this section can help resolve</h2>
+
+<ol>
+  <li>The Kubernetes environment underlying a running Rook Ceph cluster failed catastrophically, requiring a new Kubernetes environment in which the user wishes to recover the previous Rook Ceph cluster.</li>
+  <li>The user wishes to migrate their existing Rook Ceph cluster to a new Kubernetes environment, and downtime can be tolerated.</li>
+</ol>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ol>
+  <li>A working Kubernetes cluster to which we will migrate the previous Rook Ceph cluster.</li>
+  <li>At least one Ceph mon db is in quorum, and sufficient number of Ceph OSD is <code class="language-plaintext highlighter-rouge">up</code> and <code class="language-plaintext highlighter-rouge">in</code> before disaster.</li>
+  <li>The previous Rook Ceph cluster is not running.</li>
+</ol>
+
+<h3 id="overview-for-steps-below">Overview for Steps below</h3>
+
+<ol>
+  <li>Start a new and clean Rook Ceph cluster, with old <code class="language-plaintext highlighter-rouge">CephCluster</code> <code class="language-plaintext highlighter-rouge">CephBlockPool</code> <code class="language-plaintext highlighter-rouge">CephFilesystem</code> <code class="language-plaintext highlighter-rouge">CephNFS</code> <code class="language-plaintext highlighter-rouge">CephObjectStore</code>.</li>
+  <li>Shut the new cluster down when it has been created successfully.</li>
+  <li>Replace ceph-mon data with that of the old cluster.</li>
+  <li>Replace <code class="language-plaintext highlighter-rouge">fsid</code> in <code class="language-plaintext highlighter-rouge">secrets/rook-ceph-mon</code> with that of the old one.</li>
+  <li>Fix monmap in ceph-mon db.</li>
+  <li>Fix ceph mon auth key.</li>
+  <li>Disable auth.</li>
+  <li>Start the new cluster, watch it resurrect.</li>
+  <li>Fix admin auth key, and enable auth.</li>
+  <li>Restart cluster for the final time.</li>
+</ol>
+
+<h3 id="steps">Steps</h3>
+
+<p>Assuming <code class="language-plaintext highlighter-rouge">dataHostPathData</code> is <code class="language-plaintext highlighter-rouge">/var/lib/rook</code>, and the <code class="language-plaintext highlighter-rouge">CephCluster</code> trying to adopt is named <code class="language-plaintext highlighter-rouge">rook-ceph</code>.</p>
+
+<ol>
+  <li>Make sure the old Kubernetes cluster is completely torn down and the new Kubernetes cluster is up and running without Rook Ceph.</li>
+  <li>Backup <code class="language-plaintext highlighter-rouge">/var/lib/rook</code> in all the Rook Ceph nodes to a different directory. Backups will be used later.</li>
+  <li>Pick a <code class="language-plaintext highlighter-rouge">/var/lib/rook/rook-ceph/rook-ceph.config</code> from any previous Rook Ceph node and save the old cluster <code class="language-plaintext highlighter-rouge">fsid</code> from its content.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">/var/lib/rook</code> from all the Rook Ceph nodes.</li>
+  <li>Add identical <code class="language-plaintext highlighter-rouge">CephCluster</code> descriptor to the new Kubernetes cluster, especially identical <code class="language-plaintext highlighter-rouge">spec.storage.config</code> and <code class="language-plaintext highlighter-rouge">spec.storage.nodes</code>, except <code class="language-plaintext highlighter-rouge">mon.count</code>, which should be set to <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li>Add identical <code class="language-plaintext highlighter-rouge">CephFilesystem</code> <code class="language-plaintext highlighter-rouge">CephBlockPool</code> <code class="language-plaintext highlighter-rouge">CephNFS</code> <code class="language-plaintext highlighter-rouge">CephObjectStore</code> descriptors (if any) to the new Kubernetes cluster.</li>
+  <li>Install Rook Ceph in the new Kubernetes cluster.</li>
+  <li>Watch the operator logs with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph logs -f rook-ceph-operator-xxxxxxx</code>, and wait until the orchestration has settled.</li>
+  <li><strong>STATE</strong>: Now the cluster will have <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code>, <code class="language-plaintext highlighter-rouge">rook-ceph-mgr-a</code>, and all the auxiliary pods up and running, and zero (hopefully) <code class="language-plaintext highlighter-rouge">rook-ceph-osd-ID-xxxxxx</code> running. <code class="language-plaintext highlighter-rouge">ceph -s</code> output should report 1 mon, 1 mgr running, and all of the OSDs down, all PGs are in <code class="language-plaintext highlighter-rouge">unknown</code> state. Rook should not start any OSD daemon since all devices belongs to the old cluster (which have a different <code class="language-plaintext highlighter-rouge">fsid</code>).</li>
+  <li>
+    <p>Run <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph exec -it rook-ceph-mon-a-xxxxxxxx bash</code> to enter the <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code> pod,</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mon-a# <span class="nb">cat</span> /etc/ceph/keyring-store/keyring  <span class="c"># save this keyring content for later use</span>
+ mon-a# <span class="nb">exit</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Stop the Rook operator by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit deploy/rook-ceph-operator</code> and set <code class="language-plaintext highlighter-rouge">replicas</code> to <code class="language-plaintext highlighter-rouge">0</code>.</li>
+  <li>Stop cluster daemons by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph delete deploy/X</code> where X is every deployment in namespace <code class="language-plaintext highlighter-rouge">rook-ceph</code>, except <code class="language-plaintext highlighter-rouge">rook-ceph-operator</code> and <code class="language-plaintext highlighter-rouge">rook-ceph-tools</code>.</li>
+  <li>
+    <p>Save the <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code> address with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph get cm/rook-ceph-mon-endpoints -o yaml</code> in the new Kubernetes cluster for later use.</p>
+  </li>
+  <li>SSH to the host where <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code> in the new Kubernetes cluster resides.
+    <ol>
+      <li>Remove <code class="language-plaintext highlighter-rouge">/var/lib/rook/mon-a</code></li>
+      <li>Pick a healthy <code class="language-plaintext highlighter-rouge">rook-ceph-mon-ID</code> directory (<code class="language-plaintext highlighter-rouge">/var/lib/rook/mon-ID</code>) in the previous backup, copy to <code class="language-plaintext highlighter-rouge">/var/lib/rook/mon-a</code>. <code class="language-plaintext highlighter-rouge">ID</code> is any healthy mon node ID of the old cluster.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">/var/lib/rook/mon-a/keyring</code> with the saved keyring, preserving only the <code class="language-plaintext highlighter-rouge">[mon.]</code> section, remove <code class="language-plaintext highlighter-rouge">[client.admin]</code> section.</li>
+      <li>
+        <p>Run <code class="language-plaintext highlighter-rouge">docker run -it --rm -v /var/lib/rook:/var/lib/rook ceph/ceph:v14.2.1-20190430 bash</code>. The Docker image tag should match the Ceph version used in the Rook cluster. The <code class="language-plaintext highlighter-rouge">/etc/ceph/ceph.conf</code> file needs to exist for <code class="language-plaintext highlighter-rouge">ceph-mon</code> to work.</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> container# <span class="nb">touch</span> /etc/ceph/ceph.conf
+ container# <span class="nb">cd</span> /var/lib/rook
+ container# ceph-mon <span class="nt">--extract-monmap</span> monmap <span class="nt">--mon-data</span> ./mon-a/data  <span class="c"># Extract monmap from old ceph-mon db and save as monmap</span>
+ container# monmaptool <span class="nt">--print</span> monmap  <span class="c"># Print the monmap content, which reflects the old cluster ceph-mon configuration.</span>
+ container# monmaptool <span class="nt">--rm</span> a monmap  <span class="c"># Delete `a` from monmap.</span>
+ container# monmaptool <span class="nt">--rm</span> b monmap  <span class="c"># Repeat, and delete `b` from monmap.</span>
+ container# monmaptool <span class="nt">--rm</span> c monmap  <span class="c"># Repeat this pattern until all the old ceph-mons are removed</span>
+ container# monmaptool <span class="nt">--rm</span> d monmap
+ container# monmaptool <span class="nt">--rm</span> e monmap
+ container# monmaptool <span class="nt">--addv</span> a <span class="o">[</span>v2:10.77.2.216:3300,v1:10.77.2.216:6789] monmap   <span class="c"># Replace it with the rook-ceph-mon-a address you got from previous command.</span>
+ container# ceph-mon <span class="nt">--inject-monmap</span> monmap <span class="nt">--mon-data</span> ./mon-a/data  <span class="c"># Replace monmap in ceph-mon db with our modified version.</span>
+ container# <span class="nb">rm </span>monmap
+ container# <span class="nb">exit</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>Tell Rook to run as old cluster by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit secret/rook-ceph-mon</code> and changing <code class="language-plaintext highlighter-rouge">fsid</code> to the original <code class="language-plaintext highlighter-rouge">fsid</code>. Note that the <code class="language-plaintext highlighter-rouge">fsid</code> is base64 encoded and must not contain a trailing carriage return. For example:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">echo</span> <span class="nt">-n</span> a811f99a-d865-46b7-8f2c-f94c064e4356 | <span class="nb">base64</span>  <span class="c"># Replace with the fsid from your old cluster.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Disable authentication by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit cm/rook-config-override</code> and adding content below:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">data</span><span class="pi">:</span>
+ <span class="na">config</span><span class="pi">:</span> <span class="pi">|</span>
+     <span class="s">[global]</span>
+     <span class="s">auth cluster required = none</span>
+     <span class="s">auth service required = none</span>
+     <span class="s">auth client required = none</span>
+     <span class="s">auth supported = none</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Bring the Rook Ceph operator back online by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit deploy/rook-ceph-operator</code> and set <code class="language-plaintext highlighter-rouge">replicas</code> to <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li>Watch the operator logs with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph logs -f rook-ceph-operator-xxxxxxx</code>, and wait until the orchestration has settled.</li>
+  <li><strong>STATE</strong>: Now the new cluster should be up and running with authentication disabled. <code class="language-plaintext highlighter-rouge">ceph -s</code> should report 1 mon &amp; 1 mgr &amp; all of the OSDs up and running, and all PGs in either <code class="language-plaintext highlighter-rouge">active</code> or <code class="language-plaintext highlighter-rouge">degraded</code> state.</li>
+  <li>
+    <p>Run <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph exec -it rook-ceph-tools-XXXXXXX bash</code> to enter tools pod:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> tools#</span><span class="w"> </span>vi key
+<span class="go"> [paste keyring content saved before, preserving only `[client admin]` section]
+</span><span class="gp"> tools#</span><span class="w"> </span>ceph auth import <span class="nt">-i</span> key
+<span class="gp"> tools#</span><span class="w"> </span><span class="nb">rm </span>key
+</code></pre></div>    </div>
+  </li>
+  <li>Re-enable authentication by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit cm/rook-config-override</code> and removing auth configuration added in previous steps.</li>
+  <li>Stop the Rook operator by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit deploy/rook-ceph-operator</code> and set <code class="language-plaintext highlighter-rouge">replicas</code> to <code class="language-plaintext highlighter-rouge">0</code>.</li>
+  <li>Shut down entire new cluster by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph delete deploy/X</code> where X is every deployment in namespace <code class="language-plaintext highlighter-rouge">rook-ceph</code>, except <code class="language-plaintext highlighter-rouge">rook-ceph-operator</code> and <code class="language-plaintext highlighter-rouge">rook-ceph-tools</code>, again. This time OSD daemons are present and should be removed too.</li>
+  <li>Bring the Rook Ceph operator back online by running <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit deploy/rook-ceph-operator</code> and set <code class="language-plaintext highlighter-rouge">replicas</code> to <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li>Watch the operator logs with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph logs -f rook-ceph-operator-xxxxxxx</code>, and wait until the orchestration has settled.</li>
+  <li><strong>STATE</strong>: Now the new cluster should be up and running with authentication enabled. <code class="language-plaintext highlighter-rouge">ceph -s</code> output should not change much comparing to previous steps.</li>
+</ol>
+
+<h2 id="backing-up-and-restoring-a-cluster-based-on-pvcs-into-a-new-kubernetes-cluster">Backing up and restoring a cluster based on PVCs into a new Kubernetes cluster</h2>
+
+<p>It is possible to migrate/restore an rook/ceph cluster from an exising Kubernetes cluster to a new one without resorting to SSH access or ceph tooling. This allows doing the migration using standard kubernetes resources only. This guide assumes the following</p>
+<ol>
+  <li>You have a CephCluster that uses PVCs to persist mon and osd data. Let’s call it the “old cluster”</li>
+  <li>You can restore the PVCs as-is in the new cluster. Usually this is done by taking regular snapshots of the PVC volumes and using a tool that can re-create PVCs from these snapshots in the underlying cloud provider. Velero is one such tool. (https://github.com/vmware-tanzu/velero)</li>
+  <li>You have regular backups of the secrets and configmaps in the rook-ceph namespace. Velero provides this functionality too.</li>
+</ol>
+
+<p>Do the following in the new cluster:</p>
+<ol>
+  <li>Stop the rook operator by scaling the deployment <code class="language-plaintext highlighter-rouge">rook-ceph-operator</code> down to zero: <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas 0</code>
+and deleting the other deployments. An example command to do this is <code class="language-plaintext highlighter-rouge">k -n rook-ceph delete deployment -l operator!=rook</code></li>
+  <li>Restore the rook PVCs to the new cluster.</li>
+  <li>Copy the keyring and fsid secrets from the old cluster: <code class="language-plaintext highlighter-rouge">rook-ceph-mgr-a-keyring</code>, <code class="language-plaintext highlighter-rouge">rook-ceph-mon</code>, <code class="language-plaintext highlighter-rouge">rook-ceph-mons-keyring</code>, <code class="language-plaintext highlighter-rouge">rook-ceph-osd-0-keyring</code>, …</li>
+  <li>Delete mon services and copy them from the old cluster: <code class="language-plaintext highlighter-rouge">rook-ceph-mon-a</code>, <code class="language-plaintext highlighter-rouge">rook-ceph-mon-b</code>, … Note that simply re-applying won’t work because the goal here is to restore the <code class="language-plaintext highlighter-rouge">clusterIP</code> in each service and this field is immutable in <code class="language-plaintext highlighter-rouge">Service</code> resources.</li>
+  <li>Copy the endpoints configmap from the old cluster: <code class="language-plaintext highlighter-rouge">rook-ceph-mon-endpoints</code></li>
+  <li>Scale the rook operator up again : <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas 1</code></li>
+  <li>Wait until the reconciliation is over.</li>
+</ol>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.4/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.4/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.4/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.4/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.4/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.4/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.4/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.4/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.4/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.4/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.4/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.4/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.4/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.4/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.4/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.4/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.4/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.4/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.4/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.4/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.4/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.4/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.4/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.4/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.4/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.4/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.4/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.4/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.4/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.4/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.4/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.4/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.4/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.4/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.4/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.4/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.4/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.4/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.4/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.4/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.4/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.4/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.4/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.4/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.4/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.4/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.4/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.4/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.4/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.4/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.4/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.4/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.4/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.4/ceph-disaster-recovery.html",
+      true,
+      true
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.4/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.4/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.4/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,1219 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.8/ceph-advanced-configuration.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.8</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-advanced-configuration.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-advanced-configuration.html" class="active">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-advanced-configuration.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-advanced-configuration.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-advanced-configuration.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-advanced-configuration.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-advanced-configuration.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-advanced-configuration.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-advanced-configuration.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-advanced-configuration.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-advanced-configuration.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-advanced-configuration.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-advanced-configuration.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-advanced-configuration.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-advanced-configuration.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-advanced-configuration.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-advanced-configuration.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.8 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      
+<h1 id="advanced-configuration">Advanced Configuration</h1>
+
+<p>These examples show how to perform advanced configuration tasks on your Rook
+storage cluster.</p>
+
+<ul>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#using-alternate-namespaces">Using alternate namespaces</a></li>
+  <li><a href="#deploying-a-second-cluster">Deploying a second cluster</a></li>
+  <li><a href="#log-collection">Log Collection</a></li>
+  <li><a href="#osd-information">OSD Information</a></li>
+  <li><a href="#separate-storage-groups">Separate Storage Groups</a></li>
+  <li><a href="#configuring-pools">Configuring Pools</a></li>
+  <li><a href="#custom-cephconf-settings">Custom ceph.conf Settings</a></li>
+  <li><a href="#osd-crush-settings">OSD CRUSH Settings</a></li>
+  <li><a href="#osd-dedicated-network">OSD Dedicated Network</a></li>
+  <li><a href="#phantom-osd-removal">Phantom OSD Removal</a></li>
+  <li><a href="#auto-expansion-of-osds">Auto Expansion of OSDs</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Most of the examples make use of the <code class="language-plaintext highlighter-rouge">ceph</code> client command.  A quick way to use
+the Ceph client suite is from a <a href="/docs/rook/v1.8/ceph-toolbox.html">Rook Toolbox container</a>.</p>
+
+<p>The Kubernetes based examples assume Rook OSD pods are in the <code class="language-plaintext highlighter-rouge">rook-ceph</code> namespace.
+If you run them in a different namespace, modify <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph [...]</code> to fit
+your situation.</p>
+
+<h2 id="using-alternate-namespaces">Using alternate namespaces</h2>
+
+<p>If you wish to deploy the Rook Operator and/or Ceph clusters to namespaces other than the default
+<code class="language-plaintext highlighter-rouge">rook-ceph</code>, the manifests are commented to allow for easy <code class="language-plaintext highlighter-rouge">sed</code> replacements. Change
+<code class="language-plaintext highlighter-rouge">ROOK_CLUSTER_NAMESPACE</code> to tailor the manifests for additional Ceph clusters. You can choose
+to also change <code class="language-plaintext highlighter-rouge">ROOK_OPERATOR_NAMESPACE</code> to create a new Rook Operator for each Ceph cluster (don’t
+forget to set <code class="language-plaintext highlighter-rouge">ROOK_CURRENT_NAMESPACE_ONLY</code>), or you can leave it at the same value for every
+Ceph cluster if you only wish to have one Operator manage all Ceph clusters.</p>
+
+<p>This will help you manage namespaces more easily, but you should still make sure the resources are
+configured to your liking.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>deploy/examples
+
+<span class="nb">export </span><span class="nv">ROOK_OPERATOR_NAMESPACE</span><span class="o">=</span><span class="s2">"rook-ceph"</span>
+<span class="nb">export </span><span class="nv">ROOK_CLUSTER_NAMESPACE</span><span class="o">=</span><span class="s2">"rook-ceph"</span>
+
+<span class="nb">sed</span> <span class="nt">-i</span>.bak <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2">:.*# namespace:operator/</span><span class="se">\1</span><span class="s2">: </span><span class="nv">$ROOK_OPERATOR_NAMESPACE</span><span class="s2"> # namespace:operator/g"</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2">:.*# namespace:cluster/</span><span class="se">\1</span><span class="s2">: </span><span class="nv">$ROOK_CLUSTER_NAMESPACE</span><span class="s2"> # namespace:cluster/g"</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*serviceaccount</span><span class="se">\)</span><span class="s2">:.*:</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2"> # serviceaccount:namespace:operator/</span><span class="se">\1</span><span class="s2">:</span><span class="nv">$ROOK_OPERATOR_NAMESPACE</span><span class="s2">:</span><span class="se">\2</span><span class="s2"> # serviceaccount:namespace:operator/g"</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*serviceaccount</span><span class="se">\)</span><span class="s2">:.*:</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2"> # serviceaccount:namespace:cluster/</span><span class="se">\1</span><span class="s2">:</span><span class="nv">$ROOK_CLUSTER_NAMESPACE</span><span class="s2">:</span><span class="se">\2</span><span class="s2"> # serviceaccount:namespace:cluster/g"</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2">: [-_A-Za-z0-9]*</span><span class="se">\.\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2"> # driver:namespace:operator/</span><span class="se">\1</span><span class="s2">: </span><span class="nv">$ROOK_OPERATOR_NAMESPACE</span><span class="s2">.</span><span class="se">\2</span><span class="s2"> # driver:namespace:operator/g"</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="s2">"s/</span><span class="se">\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2">: [-_A-Za-z0-9]*</span><span class="se">\.\(</span><span class="s2">.*</span><span class="se">\)</span><span class="s2"> # driver:namespace:cluster/</span><span class="se">\1</span><span class="s2">: </span><span class="nv">$ROOK_CLUSTER_NAMESPACE</span><span class="s2">.</span><span class="se">\2</span><span class="s2"> # driver:namespace:cluster/g"</span> <span class="se">\</span>
+  common.yaml operator.yaml cluster.yaml <span class="c"># add other files or change these as desired for your config</span>
+
+<span class="c"># You need to use `apply` for all Ceph clusters after the first if you have only one Operator</span>
+kubectl apply <span class="nt">-f</span> common.yaml <span class="nt">-f</span> operator.yaml <span class="nt">-f</span> cluster.yaml <span class="c"># add other files as desired for yourconfig</span>
+</code></pre></div></div>
+
+<h2 id="deploying-a-second-cluster">Deploying a second cluster</h2>
+
+<p>If you wish to create a new CephCluster in a different namespace than <code class="language-plaintext highlighter-rouge">rook-ceph</code> while using a single operator to manage both clusters execute the following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>deploy/examples
+
+<span class="nv">NAMESPACE</span><span class="o">=</span>rook-ceph-secondary envsubst &lt; common-second-cluster.yaml | kubectl create <span class="nt">-f</span> -
+</code></pre></div></div>
+
+<p>This will create all the necessary RBACs as well as the new namespace. The script assumes that <code class="language-plaintext highlighter-rouge">common.yaml</code> was already created.
+When you create the second CephCluster CR, use the same <code class="language-plaintext highlighter-rouge">NAMESPACE</code> and the operator will configure the second cluster.</p>
+
+<h2 id="log-collection">Log Collection</h2>
+
+<p>All Rook logs can be collected in a Kubernetes environment with the following command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">for p in $</span><span class="o">(</span>kubectl <span class="nt">-n</span> rook-ceph get pods <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[*].metadata.name}'</span><span class="o">)</span>
+<span class="go">do
+</span><span class="gp">    for c in $</span><span class="o">(</span>kubectl <span class="nt">-n</span> rook-ceph get pod <span class="k">${</span><span class="nv">p</span><span class="k">}</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.containers[*].name}'</span><span class="o">)</span>
+<span class="go">    do
+</span><span class="gp">        echo "BEGIN logs from pod: $</span><span class="o">{</span>p<span class="o">}</span> <span class="k">${</span><span class="nv">c</span><span class="k">}</span><span class="s2">"
+</span><span class="gp">        kubectl -n rook-ceph logs -c $</span><span class="s2">{c} </span><span class="k">${</span><span class="nv">p</span><span class="k">}</span><span class="s2">
+</span><span class="gp">        echo "END logs from pod: $</span><span class="s2">{p} </span><span class="k">${</span><span class="nv">c</span><span class="k">}</span><span class="s2">"</span>
+<span class="go">    done
+done
+</span></code></pre></div></div>
+
+<p>This gets the logs for every container in every Rook pod and then compresses them into a <code class="language-plaintext highlighter-rouge">.gz</code> archive
+for easy sharing.  Note that instead of <code class="language-plaintext highlighter-rouge">gzip</code>, you could instead pipe to <code class="language-plaintext highlighter-rouge">less</code> or to a single text file.</p>
+
+<h2 id="osd-information">OSD Information</h2>
+
+<p>Keeping track of OSDs and their underlying storage devices can be
+difficult. The following scripts will clear things up quickly.</p>
+
+<h3 id="kubernetes">Kubernetes</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Get OSD Pods
+<span class="gp">#</span><span class="w"> </span>This uses the example/default cluster name <span class="s2">"rook"</span>
+<span class="gp">OSD_PODS=$</span><span class="o">(</span>kubectl get pods <span class="nt">--all-namespaces</span> <span class="nt">-l</span> <span class="se">\</span>
+  <span class="nv">app</span><span class="o">=</span>rook-ceph-osd,rook_cluster<span class="o">=</span>rook-ceph <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[*].metadata.name}'</span><span class="o">)</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Find node and drive associations from OSD pods
+<span class="gp">for pod in $</span><span class="o">(</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">OSD_PODS</span><span class="k">}</span><span class="o">)</span>
+<span class="go">do
+</span><span class="gp"> echo "Pod:  $</span><span class="o">{</span>pod<span class="o">}</span><span class="s2">"
+</span><span class="gp"> echo "Node: $</span><span class="s2">(kubectl -n rook-ceph get pod </span><span class="k">${</span><span class="nv">pod</span><span class="k">}</span><span class="s2"> -o jsonpath='{.spec.nodeName}')"</span>
+<span class="gp"> kubectl -n rook-ceph exec $</span><span class="o">{</span>pod<span class="o">}</span> <span class="nt">--</span> sh <span class="nt">-c</span> <span class="s1">'\
+  for i in /var/lib/ceph/osd/ceph-*; do
+</span><span class="gp">    [ -f $</span><span class="s1">{i}/ready ] || continue
+</span><span class="gp">    echo -ne "-$</span><span class="s1">(basename ${i}) "
+</span><span class="gp">    echo $</span><span class="s1">(lsblk -n -o NAME,SIZE ${i}/block 2&gt; /dev/null || \
+    findmnt -n -v -o SOURCE,SIZE -T ${i}) $(cat ${i}/type)
+</span><span class="go">  done | sort -V
+  echo'
+done
+</span></code></pre></div></div>
+
+<p>The output should look something like this.</p>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pod:  osd-m2fz2
+Node: node1.zbrbdl
+-osd0  sda3  557.3G  bluestore
+-osd1  sdf3  110.2G  bluestore
+-osd2  sdd3  277.8G  bluestore
+-osd3  sdb3  557.3G  bluestore
+-osd4  sde3  464.2G  bluestore
+-osd5  sdc3  557.3G  bluestore
+
+Pod:  osd-nxxnq
+Node: node3.zbrbdl
+-osd6   sda3  110.7G  bluestore
+-osd17  sdd3  1.8T    bluestore
+-osd18  sdb3  231.8G  bluestore
+-osd19  sdc3  231.8G  bluestore
+
+Pod:  osd-tww1h
+Node: node2.zbrbdl
+-osd7   sdc3  464.2G  bluestore
+-osd8   sdj3  557.3G  bluestore
+-osd9   sdf3  66.7G   bluestore
+-osd10  sdd3  464.2G  bluestore
+-osd11  sdb3  147.4G  bluestore
+-osd12  sdi3  557.3G  bluestore
+-osd13  sdk3  557.3G  bluestore
+-osd14  sde3  66.7G   bluestore
+-osd15  sda3  110.2G  bluestore
+-osd16  sdh3  135.1G  bluestore
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="separate-storage-groups">Separate Storage Groups</h2>
+
+<blockquote>
+  <p><strong>DEPRECATED</strong>: Instead of manually needing to set this, the <code class="language-plaintext highlighter-rouge">deviceClass</code> property can be used on Pool structures in <code class="language-plaintext highlighter-rouge">CephBlockPool</code>, <code class="language-plaintext highlighter-rouge">CephFilesystem</code> and <code class="language-plaintext highlighter-rouge">CephObjectStore</code> CRD objects.</p>
+</blockquote>
+
+<p>By default Rook/Ceph puts all storage under one replication rule in the CRUSH
+Map which provides the maximum amount of storage capacity for a cluster.  If you
+would like to use different storage endpoints for different purposes, you’ll
+have to create separate storage groups.</p>
+
+<p>In the following example we will separate SSD drives from spindle-based drives,
+a common practice for those looking to target certain workloads onto faster
+(database) or slower (file archive) storage.</p>
+
+<h2 id="configuring-pools">Configuring Pools</h2>
+
+<h3 id="placement-group-sizing">Placement Group Sizing</h3>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Since Ceph Nautilus (v14.x), you can use the Ceph MGR <code class="language-plaintext highlighter-rouge">pg_autoscaler</code>
+module to auto scale the PGs as needed. If you want to enable this feature,
+please refer to <a href="/docs/rook/v1.8/ceph-configuration.html#default-pg-and-pgp-counts">Default PG and PGP counts</a>.</p>
+</blockquote>
+
+<p>The general rules for deciding how many PGs your pool(s) should contain is:</p>
+
+<ul>
+  <li>Less than 5 OSDs set pg_num to 128</li>
+  <li>Between 5 and 10 OSDs set pg_num to 512</li>
+  <li>Between 10 and 50 OSDs set pg_num to 1024</li>
+</ul>
+
+<p>If you have more than 50 OSDs, you need to understand the tradeoffs and how to
+calculate the pg_num value by yourself. For calculating pg_num yourself please
+make use of <a href="http://ceph.com/pgcalc/">the pgcalc tool</a>.</p>
+
+<p>If you’re already using a pool it is generally safe to <a href="#setting-pg-count">increase its PG
+count</a> on-the-fly. Decreasing the PG count is not
+recommended on a pool that is in use. The safest way to decrease the PG count
+is to back-up the data, <a href="#deleting-a-pool">delete the pool</a>, and <a href="#creating-a-pool">recreate
+it</a>.  With backups you can try a few potentially unsafe
+tricks for live pools, documented
+<a href="http://cephnotes.ksperis.com/blog/2015/04/15/ceph-pool-migration">here</a>.</p>
+
+<h3 id="setting-pg-count">Setting PG Count</h3>
+
+<p>Be sure to read the <a href="#placement-group-sizing">placement group sizing</a> section
+before changing the number of PGs.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Set the number of PGs <span class="k">in </span>the rbd pool to 512
+<span class="go">ceph osd pool set rbd pg_num 512
+</span></code></pre></div></div>
+
+<h2 id="custom-cephconf-settings">Custom ceph.conf Settings</h2>
+
+<blockquote>
+  <p><strong>WARNING</strong>: The advised method for controlling Ceph configuration is to manually use the Ceph CLI
+or the Ceph dashboard because this offers the most flexibility. It is highly recommended that this
+only be used when absolutely necessary and that the <code class="language-plaintext highlighter-rouge">config</code> be reset to an empty string if/when the
+configurations are no longer necessary. Configurations in the config file will make the Ceph cluster
+less configurable from the CLI and dashboard and may make future tuning or debugging difficult.</p>
+</blockquote>
+
+<p>Setting configs via Ceph’s CLI requires that at least one mon be available for the configs to be
+set, and setting configs via dashboard requires at least one mgr to be available. Ceph may also have
+a small number of very advanced settings that aren’t able to be modified easily via CLI or
+dashboard. In order to set configurations before monitors are available or to set problematic
+configuration settings, the <code class="language-plaintext highlighter-rouge">rook-config-override</code> ConfigMap exists, and the <code class="language-plaintext highlighter-rouge">config</code> field can be
+set with the contents of a <code class="language-plaintext highlighter-rouge">ceph.conf</code> file. The contents will be propagated to all mon, mgr, OSD,
+MDS, and RGW daemons as an <code class="language-plaintext highlighter-rouge">/etc/ceph/ceph.conf</code> file.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Rook performs no validation on the config, so the  validity of the settings is the
+user’s responsibility.</p>
+</blockquote>
+
+<p>If the <code class="language-plaintext highlighter-rouge">rook-config-override</code> ConfigMap is created before the cluster is started, the Ceph daemons
+will automatically pick up the settings. If you add the settings to the ConfigMap after the cluster
+has been initialized, each daemon will need to be restarted where you want the settings applied:</p>
+
+<ul>
+  <li>mons: ensure all three mons are online and healthy before restarting each mon pod, one at a time.</li>
+  <li>mgrs: the pods are stateless and can be restarted as needed, but note that this will disrupt the
+Ceph dashboard during restart.</li>
+  <li>OSDs: restart your the pods by deleting them, one at a time, and running <code class="language-plaintext highlighter-rouge">ceph -s</code>
+between each restart to ensure the cluster goes back to “active/clean” state.</li>
+  <li>RGW: the pods are stateless and can be restarted as needed.</li>
+  <li>MDS: the pods are stateless and can be restarted as needed.</li>
+</ul>
+
+<p>After the pod restart, the new settings should be in effect. Note that if the ConfigMap in the Ceph
+cluster’s namespace is created before the cluster is created, the daemons will pick up the settings
+at first launch.</p>
+
+<p>To automate the restart of the Ceph daemon pods, you will need to trigger an update to the pod specs.
+The simplest way to trigger the update is to add <a href="/docs/rook/v1.8/ceph-cluster-crd.html#annotations-and-labels">annotations or labels</a>
+to the CephCluster CR for the daemons you want to restart. The operator will then proceed with a rolling
+update, similar to any other update to the cluster.</p>
+
+<h3 id="example">Example</h3>
+
+<p>In this example we will set the default pool <code class="language-plaintext highlighter-rouge">size</code> to two, and tell OSD
+daemons not to change the weight of OSDs on startup.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Modify Ceph settings carefully. You are leaving the sandbox tested by Rook.
+Changing the settings could result in unhealthy daemons or even data loss if used incorrectly.</p>
+</blockquote>
+
+<p>When the Rook Operator creates a cluster, a placeholder ConfigMap is created that
+will allow you to override Ceph configuration settings. When the daemon pods are started, the
+settings specified in this ConfigMap will be merged with the default settings
+generated by Rook.</p>
+
+<p>The default override settings are blank. Cutting out the extraneous properties,
+we would see the following defaults after creating a cluster:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get ConfigMap rook-config-override -o yaml
+</span></code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-config-override</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<p>To apply your desired configuration, you will need to update this ConfigMap. The next time the
+daemon pod(s) start, they will use the updated configs.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph edit configmap rook-config-override
+</span></code></pre></div></div>
+
+<p>Modify the settings and save. Each line you add should be indented from the <code class="language-plaintext highlighter-rouge">config</code> property as such:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-config-override</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">[global]</span>
+    <span class="s">osd crush update on start = false</span>
+    <span class="s">osd pool default size = 2</span>
+</code></pre></div></div>
+
+<h2 id="osd-crush-settings">OSD CRUSH Settings</h2>
+
+<p>A useful view of the <a href="http://docs.ceph.com/docs/master/rados/operations/crush-map/">CRUSH Map</a>
+is generated with the following command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd tree
+</span></code></pre></div></div>
+
+<p>In this section we will be tweaking some of the values seen in the output.</p>
+
+<h3 id="osd-weight">OSD Weight</h3>
+
+<p>The CRUSH weight controls the ratio of data that should be distributed to each
+OSD.  This also means a higher or lower amount of disk I/O operations for an OSD
+with higher/lower weight, respectively.</p>
+
+<p>By default OSDs get a weight relative to their storage capacity, which maximizes
+overall cluster capacity by filling all drives at the same rate, even if drive
+sizes vary.  This should work for most use-cases, but the following situations
+could warrant weight changes:</p>
+
+<ul>
+  <li>Your cluster has some relatively slow OSDs or nodes. Lowering their weight can
+reduce the impact of this bottleneck.</li>
+  <li>You’re using bluestore drives provisioned with Rook v0.3.1 or older.  In this
+case you may notice OSD weights did not get set relative to their storage
+capacity.  Changing the weight can fix this and maximize cluster capacity.</li>
+</ul>
+
+<p>This example sets the weight of osd.0 which is 600GiB</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd crush reweight osd.0 .600
+</span></code></pre></div></div>
+
+<h3 id="osd-primary-affinity">OSD Primary Affinity</h3>
+
+<p>When pools are set with a size setting greater than one, data is replicated
+between nodes and OSDs.  For every chunk of data a Primary OSD is selected to be
+used for reading that data to be sent to clients.  You can control how likely it
+is for an OSD to become a Primary using the Primary Affinity setting.  This is
+similar to the OSD weight setting, except it only affects reads on the storage
+device, not capacity or writes.</p>
+
+<p>In this example we will make sure <code class="language-plaintext highlighter-rouge">osd.0</code> is only selected as Primary if all
+other OSDs holding replica data are unavailable:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd primary-affinity osd.0 0
+</span></code></pre></div></div>
+
+<h2 id="osd-dedicated-network">OSD Dedicated Network</h2>
+
+<p>It is possible to configure ceph to leverage a dedicated network for the OSDs to
+communicate across. A useful overview is the <a href="http://docs.ceph.com/docs/master/rados/configuration/network-config-ref/#ceph-networks">CEPH Networks</a>
+section of the Ceph documentation. If you declare a cluster network, OSDs will
+route heartbeat, object replication and recovery traffic over the cluster
+network. This may improve performance compared to using a single network.</p>
+
+<p>Two changes are necessary to the configuration to enable this capability:</p>
+
+<h3 id="use-hostnetwork-in-the-rook-ceph-cluster-configuration">Use hostNetwork in the rook ceph cluster configuration</h3>
+
+<p>Enable the <code class="language-plaintext highlighter-rouge">hostNetwork</code> setting in the <a href="/docs/rook/v1.8/ceph-cluster-crd.html#samples">Ceph Cluster CRD configuration</a>.
+For example,</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">host</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>IMPORTANT: Changing this setting is not supported in a running Rook cluster. Host networking
+should be configured when the cluster is first created.</p>
+</blockquote>
+
+<h3 id="define-the-subnets-to-use-for-public-and-private-osd-networks">Define the subnets to use for public and private OSD networks</h3>
+
+<p>Edit the <code class="language-plaintext highlighter-rouge">rook-config-override</code> configmap to define the custom network
+configuration:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph edit configmap rook-config-override
+</span></code></pre></div></div>
+
+<p>In the editor, add a custom configuration to instruct ceph which subnet is the
+public network and which subnet is the private network. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">[global]</span>
+    <span class="s">public network =  10.0.7.0/24</span>
+    <span class="s">cluster network = 10.0.10.0/24</span>
+    <span class="s">public addr = ""</span>
+    <span class="s">cluster addr = ""</span>
+</code></pre></div></div>
+
+<p>After applying the updated rook-config-override configmap, it will be necessary
+to restart the OSDs by deleting the OSD pods in order to apply the change.
+Restart the OSD pods by deleting them, one at a time, and running ceph -s
+between each restart to ensure the cluster goes back to “active/clean” state.</p>
+
+<h2 id="phantom-osd-removal">Phantom OSD Removal</h2>
+
+<p>If you have OSDs in which are not showing any disks, you can remove those “Phantom OSDs” by following the instructions below.
+To check for “Phantom OSDs”, you can run:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd tree
+</span></code></pre></div></div>
+
+<p>An example output looks like this:</p>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID  CLASS WEIGHT  TYPE NAME STATUS REWEIGHT PRI-AFF
+-1       57.38062 root default
+-13        7.17258     host node1.example.com
+2   hdd  3.61859         osd.2                up  1.00000 1.00000
+-7              0     host node2.example.com   down    0    1.00000
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The host <code class="language-plaintext highlighter-rouge">node2.example.com</code> in the output has no disks, so it is most likely a “Phantom OSD”.</p>
+
+<p>Now to remove it, use the ID in the first column of the output and replace <code class="language-plaintext highlighter-rouge">&lt;ID&gt;</code> with it. In the example output above the ID would be <code class="language-plaintext highlighter-rouge">-7</code>.
+The commands are:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph osd out &lt;ID&gt;
+<span class="gp">$</span><span class="w"> </span>ceph osd crush remove osd.&lt;ID&gt;
+<span class="gp">$</span><span class="w"> </span>ceph auth del osd.&lt;ID&gt;
+<span class="gp">$</span><span class="w"> </span>ceph osd <span class="nb">rm</span> &lt;ID&gt;
+</code></pre></div></div>
+
+<p>To recheck that the Phantom OSD was removed, re-run the following command and check if the OSD with the ID doesn’t show up anymore:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd tree
+</span></code></pre></div></div>
+
+<h2 id="auto-expansion-of-osds">Auto Expansion of OSDs</h2>
+
+<h3 id="prerequisites-1">Prerequisites</h3>
+
+<p>1) A <a href="/docs/rook/v1.8/ceph-cluster-crd.html#pvc-based-cluster">PVC-based cluster</a> deployed in dynamic provisioning environment with a <code class="language-plaintext highlighter-rouge">storageClassDeviceSet</code>.</p>
+
+<p>2) Create the Rook <a href="/docs/rook/v1.8/ceph-toolbox.html">Toolbox</a>.</p>
+
+<blockquote>
+  <p>Note: <a href="/docs/rook/v1.8/ceph-monitoring.html#prometheus-operator">Prometheus Operator</a> and <a href="/docs/rook/v1.8/ceph-monitoring.html#prometheus-instances">Prometheus Instances</a> are Prerequisites that are created by the auto-grow-storage script.</p>
+</blockquote>
+
+<h3 id="to-scale-osds-vertically">To scale OSDs Vertically</h3>
+
+<p>Run the following script to auto-grow the size of OSDs on a PVC-based Rook-Ceph cluster whenever the OSDs have reached the storage near-full threshold.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">tests/scripts/auto-grow-storage.sh size  --max maxSize --growth-rate percent
+</span></code></pre></div></div>
+<blockquote>
+  <p>growth-rate percentage represents the percent increase you want in the OSD capacity and maxSize represent the maximum disk size.</p>
+</blockquote>
+
+<p>For example, if you need to increase the size of OSD by 30% and max disk size is 1Ti</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">./auto-grow-storage.sh size  --max 1Ti --growth-rate 30
+</span></code></pre></div></div>
+
+<h3 id="to-scale-osds-horizontally">To scale OSDs Horizontally</h3>
+
+<p>Run the following script to auto-grow the number of OSDs on a PVC-based Rook-Ceph cluster whenever the OSDs have reached the storage near-full threshold.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">tests/scripts/auto-grow-storage.sh count --max maxCount --count rate
+</span></code></pre></div></div>
+<blockquote>
+  <p>Count of OSD represents the number of OSDs you need to add and maxCount represents the number of disks a storage cluster will support.</p>
+</blockquote>
+
+<p>For example, if you need to increase the number of OSDs by 3 and maxCount is 10</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">./auto-grow-storage.sh count --max 10 --count 3
+</span></code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.8/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.8/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.8/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.8/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.8/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.8/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.8/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.8/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.8/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.8/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.8/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.8/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.8/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.8/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.8/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.8/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.8/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.8/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.8/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.8/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.8/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/v1.8/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.8/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.8/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.8/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.8/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.8/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.8/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.8/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.8/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.8/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.8/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolumeGroup CRD",
+      "/docs/rook/v1.8/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/v1.8/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.8/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.8/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.8/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.8/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.8/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.8/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.8/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.8/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.8/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.8/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.8/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.8/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.8/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.8/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.8/ceph-advanced-configuration.html",
+      true,
+      true
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.8/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.8/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.8/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/v1.8/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.8/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

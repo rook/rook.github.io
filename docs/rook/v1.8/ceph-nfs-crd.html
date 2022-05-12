@@ -1,0 +1,1162 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.8/ceph-nfs-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.8</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-nfs-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-nfs-crd.html" class="active">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-nfs-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-nfs-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-nfs-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-nfs-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-nfs-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-nfs-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-nfs-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-nfs-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-nfs-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-nfs-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-nfs-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-nfs-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-nfs-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-nfs-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-nfs-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.8 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-nfs-server-crd">Ceph NFS Server CRD</h1>
+
+<h2 id="overview">Overview</h2>
+<p>Rook allows exporting NFS shares of a CephFilesystem or CephObjectStore through the CephNFS custom
+resource definition. This will spin up a cluster of
+<a href="https://github.com/nfs-ganesha/nfs-ganesha">NFS Ganesha</a> servers that coordinate with one another
+via shared RADOS objects. The servers will be configured for NFSv4.1+ access only, as serving
+earlier protocols can inhibit responsiveness after a server restart.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: We do not recommend using NFS in Ceph v16.2.0 through v16.2.6. If you are using Ceph
+v15, we encourage you to upgrade directly to Ceph Pacific v16.2.7.
+<a href="#upgrading-from-ceph-v15-to-v16">Upgrade steps are outlined below.</a></p>
+</blockquote>
+
+<h2 id="samples">Samples</h2>
+<p>The following sample assumes Ceph v16 and will create a two-node active-active cluster of NFS
+Ganesha gateways.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephNFS</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-nfs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="c1"># For Ceph v15, the rados block is required. It is ignored for Ceph v16.</span>
+  <span class="na">rados</span><span class="pi">:</span>
+    <span class="c1"># RADOS pool where NFS configs are stored.</span>
+    <span class="c1"># In this example the data pool for the "myfs" filesystem is used.</span>
+    <span class="c1"># If using the object store example, the data pool would be "my-store.rgw.buckets.data".</span>
+    <span class="c1"># Note that this has nothing to do with where exported file systems or object stores live.</span>
+    <span class="na">pool</span><span class="pi">:</span> <span class="s">myfs-data0</span>
+    <span class="c1"># RADOS namespace where NFS client recovery data is stored in the pool.</span>
+    <span class="na">namespace</span><span class="pi">:</span> <span class="s">nfs-ns</span>
+
+  <span class="c1"># Settings for the NFS server</span>
+  <span class="na">server</span><span class="pi">:</span>
+    <span class="c1"># the number of active NFS servers</span>
+    <span class="na">active</span><span class="pi">:</span> <span class="m">2</span>
+    <span class="c1"># A key/value list of annotations</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+    <span class="c1">#  key: value</span>
+    <span class="c1"># where to run the NFS server</span>
+    <span class="na">placement</span><span class="pi">:</span>
+    <span class="c1">#  nodeAffinity:</span>
+    <span class="c1">#    requiredDuringSchedulingIgnoredDuringExecution:</span>
+    <span class="c1">#      nodeSelectorTerms:</span>
+    <span class="c1">#      - matchExpressions:</span>
+    <span class="c1">#        - key: role</span>
+    <span class="c1">#          operator: In</span>
+    <span class="c1">#          values:</span>
+    <span class="c1">#          - mds-node</span>
+    <span class="c1">#  tolerations:</span>
+    <span class="c1">#  - key: mds-node</span>
+    <span class="c1">#    operator: Exists</span>
+    <span class="c1">#  podAffinity:</span>
+    <span class="c1">#  podAntiAffinity:</span>
+    <span class="c1">#  topologySpreadConstraints:</span>
+
+    <span class="c1"># The requests and limits set here allow the ganesha pod(s) to use half of one CPU core and 1 gigabyte of memory</span>
+    <span class="na">resources</span><span class="pi">:</span>
+    <span class="c1">#  limits:</span>
+    <span class="c1">#    cpu: "500m"</span>
+    <span class="c1">#    memory: "1024Mi"</span>
+    <span class="c1">#  requests:</span>
+    <span class="c1">#    cpu: "500m"</span>
+    <span class="c1">#    memory: "1024Mi"</span>
+    <span class="c1"># the priority class to set to influence the scheduler's pod preemption</span>
+    <span class="na">priorityClassName</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h2 id="nfs-settings">NFS Settings</h2>
+
+<h3 id="rados-settings">RADOS Settings</h3>
+<p>NFS configuration is stored in a Ceph pool so that it is highly available and protected. How that is
+configured changes depending on the Ceph version. Configuring the pool is done via the <code class="language-plaintext highlighter-rouge">rados</code> config.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Do not use <a href="/docs/rook/v1.8/ceph-pool-crd.html#erasure-coded">erasure coded (EC) pools</a> for NFS.
+NFS-Ganesha uses OMAP which is not supported by Ceph’s erasure coding.</p>
+</blockquote>
+
+<h4 id="for-ceph-v16-or-newer">For Ceph v16 or newer</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">poolConfig</code>: (optional) The pool settings to use for the RADOS pool.
+It matches the <a href="/docs/rook/v1.8/ceph-block.html">CephBlockPool</a> specification.
+The settings will be applied to a pool named <code class="language-plaintext highlighter-rouge">.nfs</code> on Ceph v16.2.7 or newer.</li>
+</ul>
+
+<h4 id="for-ceph-v15">For Ceph v15</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pool</code>: (mandatory) The Ceph pool where NFS configuration is stored.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: (mandatory) The namespace in the <code class="language-plaintext highlighter-rouge">pool</code> where configuration objects will be stored.</li>
+</ul>
+
+<p>Rook ignores both <code class="language-plaintext highlighter-rouge">pool</code> and <code class="language-plaintext highlighter-rouge">namespace</code> (<a href="#for-ceph-v15">see above</a>) settings when running Ceph v16
+or newer.</p>
+
+<h2 id="creating-exports">Creating Exports</h2>
+<p>When a CephNFS is first created, all NFS daemons within the CephNFS cluster will share a
+configuration with no exports defined.</p>
+
+<h3 id="for-ceph-v16-or-newer-1">For Ceph v16 or newer</h3>
+<p>For Ceph v16.2.0 through v16.2.6, exports cannot be managed through the Ceph dashboard, and
+newly-created Ceph command line tools are lacking. We highly recommend using Ceph v16.2.7 or higher
+with NFS, which fixes bugs and streamlines export management, allowing exports to be created via the
+Ceph Dashboard and the Ceph CLI. With v16.2.7 or higher, the Ceph dashboard and Ceph CLI will be
+able to manage the same NFS exports interchangeably as desired.</p>
+
+<h4 id="using-the-ceph-dashboard">Using the Ceph Dashboard</h4>
+<p>Exports can be created via the
+<a href="https://docs.ceph.com/en/latest/mgr/dashboard/#nfs-ganesha-management">Ceph dashboard</a> for Ceph v16
+as well. To enable and use the Ceph dashboard in Rook, see <a href="/docs/rook/v1.8/ceph-dashboard.html">here</a>.</p>
+
+<h4 id="using-the-ceph-cli">Using the Ceph CLI</h4>
+<p>The Ceph CLI can be used from the Rook toolbox pod to create and manage NFS exports. To do so, first
+ensure the necessary Ceph mgr modules are enabled and that the Ceph orchestrator backend is set to
+Rook.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph mgr module enable rook
+ceph mgr module enable nfs
+ceph orch set backend rook
+</span></code></pre></div></div>
+
+<p><a href="https://docs.ceph.com/en/latest/mgr/nfs/#export-management">Ceph’s NFS CLI</a> can create NFS exports
+that are backed by <a href="https://docs.ceph.com/en/latest/cephfs/nfs/">CephFS</a> (a CephFilesystem) or
+<a href="https://docs.ceph.com/en/latest/radosgw/nfs/">Ceph Object Gateway</a> (a CephObjectStore).
+<code class="language-plaintext highlighter-rouge">cluster_id</code> or <code class="language-plaintext highlighter-rouge">cluster-name</code> in the Ceph NFS docs normally refers to the name of the NFS cluster,
+which is the CephNFS name in the Rook context.</p>
+
+<p>For creating an NFS export for the CephNFS and CephFilesystem example manifests, the below command
+can be used. This creates an export for the <code class="language-plaintext highlighter-rouge">/test</code> pseudo path.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph nfs export create cephfs my-nfs /test myfs
+</span></code></pre></div></div>
+
+<p>The below command will list the current NFS exports for the example CephNFS cluster, which will give
+the output shown for the current example.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph nfs export ls my-nfs
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
+  "/test"
+]
+</code></pre></div></div>
+
+<p>The simple <code class="language-plaintext highlighter-rouge">/test</code> export’s info can be listed as well. Notice from the example that only NFS
+protocol v4 via TCP is supported.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph nfs export info my-nfs /test
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "export_id": 1,
+  "path": "/",
+  "cluster_id": "my-nfs",
+  "pseudo": "/test",
+  "access_type": "RW",
+  "squash": "none",
+  "security_label": true,
+  "protocols": [
+    4
+  ],
+  "transports": [
+    "TCP"
+  ],
+  "fsal": {
+    "name": "CEPH",
+    "user_id": "nfs.my-nfs.1",
+    "fs_name": "myfs"
+  },
+  "clients": []
+}
+</code></pre></div></div>
+
+<p>If you are done managing NFS exports and don’t need the Ceph orchestrator module enabled for
+anything else, it may be preferable to disable the Rook and NFS mgr modules to free up a small
+amount of RAM in the Ceph mgr Pod.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph mgr module disable nfs
+ceph mgr module disable rook
+</span></code></pre></div></div>
+
+<h3 id="mounting-exports">Mounting exports</h3>
+<p>Each CephNFS server has a unique Kubernetes Service. This is because NFS clients can’t readily
+handle NFS failover. CephNFS services are named with the pattern
+<code class="language-plaintext highlighter-rouge">rook-ceph-nfs-&lt;cephnfs-name&gt;-&lt;id&gt;</code> <code class="language-plaintext highlighter-rouge">&lt;id&gt;</code> is a unique letter ID (e.g., a, b, c, etc.) for a given
+NFS server. For example, <code class="language-plaintext highlighter-rouge">rook-ceph-nfs-my-nfs-a</code>.</p>
+
+<p>For each NFS client, choose an NFS service to use for the connection. With NFS v4, you can mount all
+exports at once to a mount location.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -t nfs4 -o proto=tcp &lt;nfs-service-ip&gt;:/ &lt;mount-location&gt;
+</code></pre></div></div>
+
+<h3 id="for-ceph-v15-1">For Ceph v15</h3>
+<p>Exports can be created via the
+<a href="https://docs.ceph.com/en/octopus/mgr/dashboard/#dashboard-nfs-ganesha-management">Ceph dashboard</a>
+for Ceph v15. To enable and use the Ceph dashboard in Rook, see <a href="/docs/rook/v1.8/ceph-dashboard.html">here</a>.</p>
+
+<p>Enable the creation of NFS exports in the dashboard for a given cephfs or object gateway pool by
+running the following command in the toolbox container:</p>
+<ul>
+  <li><a href="https://docs.ceph.com/en/octopus/mgr/dashboard/#configuring-nfs-ganesha-in-the-dashboard">For a single CephNFS cluster</a>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ceph dashboard set-ganesha-clusters-rados-pool-namespace &lt;pool&gt;</span><span class="o">[</span>/&lt;namespace&gt;]
+</code></pre></div>    </div>
+  </li>
+  <li><a href="https://docs.ceph.com/en/octopus/mgr/dashboard/#support-for-multiple-nfs-ganesha-clusters">For multiple CephNFS clusters</a>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ceph dashboard set-ganesha-clusters-rados-pool-namespace &lt;cephnfs-name&gt;</span>:&lt;pool&gt;[/&lt;namespace&gt;]<span class="o">(</span>,&lt;cephnfs-name&gt;:&lt;pool&gt;[/&lt;namespace&gt;]<span class="o">)</span><span class="k">*</span>
+</code></pre></div>    </div>
+    <p>For each of the multiple entries above, <code class="language-plaintext highlighter-rouge">cephnfs-name</code> is the name given to CephNFS resource by the
+manifest’s <code class="language-plaintext highlighter-rouge">metadata.name</code>: <code class="language-plaintext highlighter-rouge">my-nfs</code> for the example earlier in this document. <code class="language-plaintext highlighter-rouge">pool</code> and
+<code class="language-plaintext highlighter-rouge">namespace</code> are the same configured via the CephNFS spec’s <code class="language-plaintext highlighter-rouge">rados</code> block.</p>
+  </li>
+</ul>
+
+<p>You should now be able to create exports from the
+<a href="https://docs.ceph.com/en/octopus/mgr/dashboard/#ceph-dashboard">Ceph dashboard</a>.</p>
+
+<p><strong>You may need to enable exports created by the dashboard before they will work!</strong></p>
+
+<p>Creating exports via the dashboard does not necessarily enable them. Newer versions of Ceph v15
+enable the exports automatically, but not all. To ensure the exports are created automatically, use
+Ceph v15.2.15 or higher. Otherwise, you must take the manual steps below to ensure the exports are
+enabled.</p>
+
+<p>To enable exports, we are going to modify the Ceph RADOS object (stored in Ceph) that defines the
+configuration shared by all NFS daemons.</p>
+
+<p>Please note that <code class="language-plaintext highlighter-rouge">&lt;pool&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;namespace&gt;</code> will continue to refer to the configured <code class="language-plaintext highlighter-rouge">rados</code> spec’s
+<code class="language-plaintext highlighter-rouge">pool</code> and <code class="language-plaintext highlighter-rouge">namespace</code> for a particular CephNFS cluster.</p>
+
+<p>List the shared configuration objects in a Ceph pool with this command from the Ceph toolbox.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rados --pool &lt;pool&gt;</span><span class="w"> </span><span class="nt">--namespace</span> &lt;namespace&gt; <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>The output may look something like below after you have created two exports. Here we have used the
+<code class="language-plaintext highlighter-rouge">my-nfs</code> example CephNFS.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf-nfs.my-nfs
+export-1
+export-2
+grace
+rec-0000000000000002:my-nfs.a
+</code></pre></div></div>
+
+<p>The configuration of NFS daemons, and enabling exports, is controlled by the <code class="language-plaintext highlighter-rouge">conf-nfs.my-nfs</code>
+object in this example. The object name follows the <code class="language-plaintext highlighter-rouge">conf-nfs.&lt;cephnfs-name&gt;</code> pattern.</p>
+
+<p>Get the contents of the config file, which may be empty as in this example.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rados --pool &lt;pool&gt;</span><span class="w"> </span><span class="nt">--namespace</span> &lt;namespace&gt; get conf-nfs.my-nfs my-nfs.conf
+<span class="go">cat my-nfs.conf
+</span></code></pre></div></div>
+
+<p>Modify the <code class="language-plaintext highlighter-rouge">my-nfs.conf</code> file above to add URLs for enabling exports.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-1"
+%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-2"
+</code></pre></div></div>
+
+<p>Then write the modified file to the RADOS config object.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rados --pool &lt;pool&gt;</span><span class="w"> </span><span class="nt">--namespace</span> &lt;namespace&gt; put conf-nfs.my-nfs my-nfs.conf
+</code></pre></div></div>
+
+<p>Verify the changes are saved by getting the config again, just as before.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rados --pool &lt;pool&gt;</span><span class="w"> </span><span class="nt">--namespace</span> &lt;namespace&gt; get conf-nfs.my-nfs my-nfs.conf
+<span class="go">cat my-nfs.conf
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-1"
+%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-2"
+</code></pre></div></div>
+
+<h2 id="upgrading-from-ceph-v15-to-v16">Upgrading from Ceph v15 to v16</h2>
+<p>We do not recommend using NFS in Ceph v16.2.0 through v16.2.6 due to bugs in Ceph’s NFS
+implementation. If you are using Ceph v15, we encourage you to upgrade directly to Ceph v16.2.7.</p>
+
+<h3 id="prep">Prep</h3>
+<p>To upgrade, first follow the <a href="/docs/rook/v1.8/ceph-upgrade.html#ceph-version-upgrades">usual Ceph upgrade steps</a>. When
+the upgrade completes, this will result in NFS exports that no longer work. The dashboard’s NFS
+management will also be broken. We must now migrate the NFS exports to Ceph’s new management method.</p>
+
+<p>We will do all work from the toolbox pod. Exec into an interactive session there.</p>
+
+<p>First, unset the previous dashboard configuration with the below command.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph dashboard set-ganesha-clusters-rados-pool-namespace <span class="s2">""</span>
+</code></pre></div></div>
+
+<p>Also ensure the necessary Ceph mgr modules are enabled and that the Ceph orchestrator backend is set
+to Rook.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph mgr module enable rook
+ceph mgr module enable nfs
+ceph orch set backend rook
+</span></code></pre></div></div>
+
+<h3 id="step-1">Step 1</h3>
+<p>Pick a CephNFS to work with and make a note of the <code class="language-plaintext highlighter-rouge">spec.rados.pool</code> and <code class="language-plaintext highlighter-rouge">spec.rados.namespace</code>. If
+the <code class="language-plaintext highlighter-rouge">pool</code> is not set, it is <code class="language-plaintext highlighter-rouge">.nfs</code>. We will refer to these as pool/<code class="language-plaintext highlighter-rouge">&lt;pool&gt;</code> and
+namespace/<code class="language-plaintext highlighter-rouge">&lt;namespace&gt;</code> for the remainder of the steps. Also note the name of the CephNFS resource,
+which will be referred to as CephNFS name or <code class="language-plaintext highlighter-rouge">&lt;cephnfs-name&gt;</code>.</p>
+
+<h3 id="step-2">Step 2</h3>
+<p>List the exports defined in the pool.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rados <span class="nt">--pool</span> &lt;pool&gt; <span class="nt">--namespace</span> &lt;namespace&gt; <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>This may look something like below.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grace
+rec-0000000000000002:my-nfs.a
+export-1
+export-2
+conf-nfs.my-nfs
+</code></pre></div></div>
+
+<h3 id="step-3">Step 3</h3>
+<p>For each export above, save the export to an <code class="language-plaintext highlighter-rouge">&lt;export&gt;.conf</code> file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXPORT="export-1" # "export-2", "export-3", etc.
+rados --pool &lt;pool&gt; --namespace &lt;namespace&gt; get "$EXPORT" "/tmp/$EXPORT.conf"
+</code></pre></div></div>
+
+<p>The file should contain content similar to what is shown here.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat /tmp/export-1.conf
+EXPORT {
+    export_id = 1;
+    path = "/";
+    pseudo = "/test";
+    access_type = "RW";
+    squash = "no_root_squash";
+    protocols = 4;
+    transports = "TCP";
+    FSAL {
+        name = "CEPH";
+        user_id = "admin";
+        filesystem = "myfs";
+        secret_access_key = "AQAyr69hwddJERAAE9WdFCmY10fqehzK3kabFw==";
+    }
+
+}
+</code></pre></div></div>
+
+<h3 id="step-4">Step 4</h3>
+<p>We will now import each export into Ceph’s new format. Perform this step for each export you wish to
+migrate.</p>
+
+<p>First remove the <code class="language-plaintext highlighter-rouge">FSAL</code> configuration block’s <code class="language-plaintext highlighter-rouge">user_id</code> and <code class="language-plaintext highlighter-rouge">secret_access_key</code> configuration items.
+It is sufficient to delete the lines in the <code class="language-plaintext highlighter-rouge">/tmp/&lt;export&gt;.conf</code> file using <code class="language-plaintext highlighter-rouge">vi</code> or some other
+editor. The file should look similar to below when the edit is finished.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat /tmp/&lt;export&gt;.conf
+EXPORT {
+    export_id = 1;
+    path = "/";
+    pseudo = "/test";
+    access_type = "RW";
+    squash = "no_root_squash";
+    protocols = 4;
+    transports = "TCP";
+    FSAL {
+        name = "CEPH";
+        filesystem = "myfs";
+    }
+
+}
+</code></pre></div></div>
+
+<p>Now that the old user and access key are removed, import the export. There should be no errors, but
+if there are, follow the error message instructions to proceed.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph nfs <span class="nb">export </span>apply &lt;cephnfs-name&gt; <span class="nt">-i</span> /tmp/&lt;<span class="nb">export</span><span class="o">&gt;</span>.conf
+</code></pre></div></div>
+
+<h3 id="step-5">Step 5</h3>
+<p>Once all exports have been migrated for the current CephNFS, it is good to verify the exports. Use
+<code class="language-plaintext highlighter-rouge">ceph nfs export ls &lt;cephnfs-name&gt;</code> to list all exports (identified by the pseudo path), and use
+<code class="language-plaintext highlighter-rouge">ceph nfs export info &lt;cephnfs-name&gt; &lt;export-pseudo&gt;</code> to inspect the configuration. An export
+configuration may look something like below. The <a href="#using-the-ceph-cli">v16 CLI section above</a> shows
+this in more detail.</p>
+
+<h3 id="step-6">Step 6</h3>
+<p>Repeat these <a href="#step-1">steps</a> for each other CephNFS.</p>
+
+<p>Clean up all <code class="language-plaintext highlighter-rouge">&lt;export&gt;.conf</code> files before moving onto subsequent CephNFSes to avoid confusion.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm -f /tmp/export-*.conf
+</code></pre></div></div>
+
+<h3 id="wrap-up">Wrap-up</h3>
+<p>Once you are finished migrating all CephNFSes, the migration is complete. If you wish to use the
+Ceph dashboard to manage exports, you should now be able to find them all listed there.</p>
+
+<p>If you are done managing NFS exports via the CLI and don’t need the Ceph orchestrator module enabled
+for anything else, it may be preferable to disable the Rook and NFS mgr modules to free up a small
+amount of RAM in the Ceph mgr Pod.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph mgr module disable nfs
+ceph mgr module disable rook
+</span></code></pre></div></div>
+
+<h2 id="scaling-the-active-server-count">Scaling the active server count</h2>
+<p>It is possible to scale the size of the cluster up or down by modifying the <code class="language-plaintext highlighter-rouge">spec.server.active</code>
+field. Scaling the cluster size up can be done at will. Once the new server comes up, clients can be
+assigned to it immediately.</p>
+
+<p>The CRD always eliminates the highest index servers first, in reverse order from how they were
+started. Scaling down the cluster requires that clients be migrated from servers that will be
+eliminated to others. That process is currently a manual one and should be performed before reducing
+the size of the cluster.</p>
+
+<h2 id="advanced-configuration">Advanced configuration</h2>
+<p>All CephNFS daemons are configured using shared configuration objects stored in Ceph. In general,
+users should only need to modify the configuration object. Exports can be created via the simpler
+Ceph-provided means documented above.</p>
+
+<p>For configuration and advanced usage, the format for these objects is documented in the
+<a href="https://github.com/nfs-ganesha/nfs-ganesha/wiki">NFS Ganesha</a> project.</p>
+
+<p>Use Ceph’s <code class="language-plaintext highlighter-rouge">rados</code> tool from the toolbox to interact with the configuration object. The below
+command will get you started by dumping the contents of the config object to stdout. The output may
+look something like the example shown.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rados --pool &lt;pool&gt;</span><span class="w"> </span><span class="nt">--namespace</span> &lt;namespace&gt; get conf-nfs.&lt;cephnfs-name&gt; -
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-1"
+%url "rados://&lt;pool&gt;/&lt;namespace&gt;/export-2"
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">rados ls</code> and <code class="language-plaintext highlighter-rouge">rados put</code> are other commands you will want to work with the other shared
+configuration objects.</p>
+
+<p>Of note, it is possible to pre-populate the NFS configuration and export objects prior to starting
+NFS servers.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.8/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.8/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.8/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.8/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.8/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.8/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.8/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.8/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.8/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.8/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.8/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.8/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.8/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.8/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.8/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.8/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.8/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.8/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.8/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.8/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.8/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/v1.8/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.8/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.8/ceph-nfs-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.8/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.8/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.8/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.8/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.8/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.8/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.8/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.8/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolumeGroup CRD",
+      "/docs/rook/v1.8/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/v1.8/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.8/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.8/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.8/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.8/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.8/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.8/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.8/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.8/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.8/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.8/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.8/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.8/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.8/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.8/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.8/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.8/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.8/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.8/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/v1.8/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.8/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

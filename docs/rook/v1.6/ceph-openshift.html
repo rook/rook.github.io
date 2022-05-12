@@ -1,0 +1,897 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.6/ceph-openshift.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.6</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-openshift.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-openshift.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-openshift.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-openshift.html" class="active">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-openshift.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-openshift.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-openshift.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-openshift.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-openshift.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-openshift.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-openshift.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-openshift.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-openshift.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-openshift.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-openshift.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-openshift.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-openshift.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.6 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      
+<h1 id="openshift">OpenShift</h1>
+
+<p><a href="https://www.openshift.com/">OpenShift</a> adds a number of security and other enhancements to Kubernetes. In particular, <a href="https://blog.openshift.com/understanding-service-accounts-sccs/">security context constraints</a> allow the cluster admin to define exactly which permissions are allowed to pods running in the cluster. You will need to define those permissions that allow the Rook pods to run.</p>
+
+<p>The settings for Rook in OpenShift are described below, and are also included in the <a href="https://github.com/rook/rook/blob/release-1.6/cluster/examples/kubernetes/ceph">example yaml files</a>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">operator-openshift.yaml</code>: Creates the security context constraints and starts the operator deployment</li>
+  <li><code class="language-plaintext highlighter-rouge">object-openshift.yaml</code>: Creates an object store with rgw listening on a valid port number for OpenShift</li>
+</ul>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>To create an OpenShift cluster, the commands basically include:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">oc create -f crds.yaml -f common.yaml
+oc create -f operator-openshift.yaml
+oc create -f cluster.yaml
+</span></code></pre></div></div>
+
+<h2 id="rook-privileges">Rook Privileges</h2>
+
+<p>To orchestrate the storage platform, Rook requires the following access in the cluster:</p>
+
+<ul>
+  <li>Create <code class="language-plaintext highlighter-rouge">hostPath</code> volumes, for persistence by the Ceph mon and osd pods</li>
+  <li>Run pods in <code class="language-plaintext highlighter-rouge">privileged</code> mode, for access to <code class="language-plaintext highlighter-rouge">/dev</code> and <code class="language-plaintext highlighter-rouge">hostPath</code> volumes</li>
+  <li>Host networking for the Rook agent and clusters that require host networking</li>
+  <li>Ceph OSDs require host PIDs for communication on the same node</li>
+</ul>
+
+<h2 id="security-context-constraints">Security Context Constraints</h2>
+
+<p>Before starting the Rook operator or cluster, create the security context constraints needed by the Rook pods. The following yaml is found in <code class="language-plaintext highlighter-rouge">operator-openshift.yaml</code> under <code class="language-plaintext highlighter-rouge">/cluster/examples/kubernetes/ceph</code>.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Older versions of OpenShift may require <code class="language-plaintext highlighter-rouge">apiVersion: v1</code>.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">SecurityContextConstraints</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">security.openshift.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">allowPrivilegedContainer</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">allowHostNetwork</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">allowHostDirVolumePlugin</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">priority</span><span class="pi">:</span>
+<span class="na">allowedCapabilities</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">allowHostPorts</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowHostPID</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">allowHostIPC</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">readOnlyRootFilesystem</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">requiredDropCapabilities</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">defaultAddCapabilities</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">runAsUser</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+<span class="na">seLinuxContext</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">MustRunAs</span>
+<span class="na">fsGroup</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">MustRunAs</span>
+<span class="na">supplementalGroups</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+<span class="na">allowedFlexVolumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ceph.rook.io/rook"</span>
+  <span class="pi">-</span> <span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ceph.rook.io/rook-ceph"</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">configMap</span>
+  <span class="pi">-</span> <span class="s">downwardAPI</span>
+  <span class="pi">-</span> <span class="s">emptyDir</span>
+  <span class="pi">-</span> <span class="s">flexVolume</span>
+  <span class="pi">-</span> <span class="s">hostPath</span>
+  <span class="pi">-</span> <span class="s">persistentVolumeClaim</span>
+  <span class="pi">-</span> <span class="s">projected</span>
+  <span class="pi">-</span> <span class="s">secret</span>
+<span class="na">users</span><span class="pi">:</span>
+  <span class="c1"># A user needs to be added for each rook service account.</span>
+  <span class="c1"># This assumes running in the default sample "rook-ceph" namespace.</span>
+  <span class="c1"># If other namespaces or service accounts are configured, they need to be updated here.</span>
+  <span class="pi">-</span> <span class="s">system:serviceaccount:rook-ceph:rook-ceph-system</span>
+  <span class="pi">-</span> <span class="s">system:serviceaccount:rook-ceph:default</span>
+  <span class="pi">-</span> <span class="s">system:serviceaccount:rook-ceph:rook-ceph-mgr</span>
+  <span class="pi">-</span> <span class="s">system:serviceaccount:rook-ceph:rook-ceph-osd</span>
+</code></pre></div></div>
+
+<p>Important to note is that if you plan on running Rook in namespaces other than the default <code class="language-plaintext highlighter-rouge">rook-ceph</code>, the example scc will need to be modified to accommodate for your namespaces where the Rook pods are running.</p>
+
+<p>To create the scc you will need a privileged account:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">oc login -u system:admin
+</span></code></pre></div></div>
+
+<p>We will create the security context constraints with the operator in the next section.</p>
+
+<h2 id="rook-settings">Rook Settings</h2>
+
+<p>There are some Rook settings that also need to be adjusted to work in OpenShift.</p>
+
+<h3 id="operator-settings">Operator Settings</h3>
+
+<p>There is an environment variable that needs to be set in the operator spec that will allow Rook to run in OpenShift clusters.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ROOK_HOSTPATH_REQUIRES_PRIVILEGED</code>: Must be set to <code class="language-plaintext highlighter-rouge">true</code>. Writing to the hostPath is required for the Ceph mon and osd pods. Given the restricted permissions in OpenShift with SELinux, the pod must be running privileged in order to write to the hostPath volume.</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ROOK_HOSTPATH_REQUIRES_PRIVILEGED</span>
+  <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+</code></pre></div></div>
+
+<p>Now create the security context constraints and the operator:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">oc create -f operator-openshift.yaml
+</span></code></pre></div></div>
+
+<h3 id="cluster-settings">Cluster Settings</h3>
+
+<p>The cluster settings in <code class="language-plaintext highlighter-rouge">cluster.yaml</code> are largely isolated from the differences in OpenShift. There is perhaps just one to take note of:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dataDirHostPath</code>: Ensure that it points to a valid, writable path on the host systems.</li>
+</ul>
+
+<h3 id="object-store-settings">Object Store Settings</h3>
+
+<p>In OpenShift, ports less than 1024 cannot be bound. In the <a href="/docs/rook/v1.6/ceph-object.html">object store CRD</a>, ensure the port is modified to meet this requirement.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gateway</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+</code></pre></div></div>
+
+<p>You can expose a different port such as <code class="language-plaintext highlighter-rouge">80</code> by creating a service.</p>
+
+<p>A sample object store can be created with these settings:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">oc create -f object-openshift.yaml
+</span></code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.6/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.6/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.6/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.6/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.6/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.6/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.6/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.6/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.6/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.6/ceph-openshift.html",
+      true,
+      true
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.6/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.6/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.6/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.6/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.6/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.6/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.6/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.6/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.6/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.6/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.6/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.6/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.6/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.6/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.6/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.6/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.6/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.6/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.6/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.6/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.6/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.6/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.6/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.6/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.6/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.6/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.6/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.6/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.6/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.6/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.6/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.6/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.6/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.6/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.6/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.6/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.6/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.6/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.6/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.6/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.6/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.6/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.6/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

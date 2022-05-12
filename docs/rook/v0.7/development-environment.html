@@ -1,0 +1,688 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v0.7/development-environment.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v0.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/development-environment.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/development-environment.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/development-environment.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/development-environment.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/development-environment.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/development-environment.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/development-environment.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/development-environment.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/development-environment.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/development-environment.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/development-environment.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/development-environment.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/development-environment.html" class="active">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/development-environment.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/development-environment.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/development-environment.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/development-environment.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v0.7 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="multi-node-test-environment">Multi-Node Test Environment</h1>
+
+<h2 id="setup-expectation">Setup expectation</h2>
+
+<p>There are a bunch of pre-requisites to be able to deploy the following environment. Such as:</p>
+
+<ul>
+  <li>A Linux workstation (CentOS or Fedora)</li>
+  <li>KVM/QEMU installation</li>
+</ul>
+
+<p>For other Linux distribution, there is no guarantee the following will work.
+However adapting commands (apt/yum/dnf) could just work.</p>
+
+<h2 id="prerequisites-installation">Prerequisites installation</h2>
+
+<p>On your host machine, execute <code class="language-plaintext highlighter-rouge">tests/scripts/multi-node/rpm-system-prerequisites.sh</code>.</p>
+
+<h2 id="deploy-kubernetes-with-kubespray">Deploy Kubernetes with Kubespray</h2>
+
+<p>Clone it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/kubernetes-incubator/kubespray
+<span class="nb">cd </span>kubespray
+</code></pre></div></div>
+
+<p>In order to successfully deploy Kubernetes with Kubespray, you must have this code: https://github.com/kubernetes-incubator/kubespray/pull/2153 and https://github.com/kubernetes-incubator/kubespray/pull/2271.</p>
+
+<p>Edit <code class="language-plaintext highlighter-rouge">inventory/group_vars/k8s-cluster.yml</code> with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker_options: <span class="s2">"--insecure-registry=172.17.8.1:5000 --insecure-registry= --graph=  "</span>
+</code></pre></div></div>
+
+<p>FYI: <code class="language-plaintext highlighter-rouge">172.17.8.1</code> is the libvirt bridge IP, so it’s reachable from all your virtual machines.
+This means a registry running on the host machine is reachable from the virtual machines running the Kubernetes cluster.</p>
+
+<p>Create Vagrant’s variable directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>vagrant/
+</code></pre></div></div>
+
+<p>Put <code class="language-plaintext highlighter-rouge">tests/scripts/multi-node/config.rb</code> in <code class="language-plaintext highlighter-rouge">vagrant/</code>. You can adapt it at will.
+Feel free to adapt <code class="language-plaintext highlighter-rouge">num_instances</code>.</p>
+
+<p>Deploy!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vagrant up <span class="nt">--no-provision</span> <span class="p">;</span> vagrant provision
+</code></pre></div></div>
+
+<p>Go grab a coffee:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY RECAP *********************************************************************
+k8s-01                     : ok=351  changed=111  unreachable=0    failed=0
+k8s-02                     : ok=230  changed=65   unreachable=0    failed=0
+k8s-03                     : ok=230  changed=65   unreachable=0    failed=0
+k8s-04                     : ok=229  changed=65   unreachable=0    failed=0
+k8s-05                     : ok=229  changed=65   unreachable=0    failed=0
+k8s-06                     : ok=229  changed=65   unreachable=0    failed=0
+k8s-07                     : ok=229  changed=65   unreachable=0    failed=0
+k8s-08                     : ok=229  changed=65   unreachable=0    failed=0
+k8s-09                     : ok=229  changed=65   unreachable=0    failed=0
+
+Friday 12 January 2018  10:25:45 +0100 (0:00:00.017)       0:17:24.413 ********
+===============================================================================
+download : container_download | Download containers if pull is required or told to always pull (all nodes) - 192.44s
+kubernetes/preinstall : Update package management cache (YUM) --------- 178.26s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) - 102.24s
+docker : ensure docker packages are installed -------------------------- 57.20s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 52.33s
+kubernetes/preinstall : Install packages requirements ------------------ 25.18s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 23.74s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 18.90s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 15.39s
+kubernetes/master : Master | wait for the apiserver to be running ------ 12.44s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 11.83s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 11.66s
+kubernetes/node : install | Copy kubelet from hyperkube container ------ 11.44s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 11.41s
+download : container_download | Download containers if pull is required or told to always pull (all nodes) -- 11.00s
+docker : Docker | pause while Docker restarts -------------------------- 10.22s
+kubernetes/secrets : Check certs | check if a cert already exists on node --- 6.05s
+kubernetes-apps/network_plugin/flannel : Flannel | Wait for flannel subnet.env file presence --- 5.33s
+kubernetes/master : Master | wait for kube-scheduler -------------------- 5.30s
+kubernetes/master : Copy kubectl from hyperkube container --------------- 4.77s
+[leseb@tarox kubespray]$
+[leseb@tarox kubespray]$
+[leseb@tarox kubespray]$ vagrant ssh k8s-01
+Last login: Fri Jan 12 09:22:18 2018 from 192.168.121.1
+
+[vagrant@k8s-01 ~]$ kubectl get nodes
+NAME      STATUS    ROLES         AGE       VERSION
+k8s-01    Ready     master,node   2m        v1.9.0+coreos.0
+k8s-02    Ready     node          2m        v1.9.0+coreos.0
+k8s-03    Ready     node          2m        v1.9.0+coreos.0
+k8s-04    Ready     node          2m        v1.9.0+coreos.0
+k8s-05    Ready     node          2m        v1.9.0+coreos.0
+k8s-06    Ready     node          2m        v1.9.0+coreos.0
+k8s-07    Ready     node          2m        v1.9.0+coreos.0
+k8s-08    Ready     node          2m        v1.9.0+coreos.0
+k8s-09    Ready     node          2m        v1.9.0+coreos.0
+</code></pre></div></div>
+
+<h2 id="development-workflow-on-the-host">Development workflow on the host</h2>
+
+<p>Everything should happen on the host, your development environment will reside on the host machine NOT inside the virtual machines running the Kubernetes cluster.</p>
+
+<p>Now, please refer to <a href="https://rook.io/docs/rook/master/development-flow.html">https://rook.io/docs/rook/master/development-flow.html</a> to setup your development environment (go, git etc).</p>
+
+<p>At this stage, Rook should be cloned on your host.</p>
+
+<p>From your Rook repository (should be $GOPATH/src/github.com/rook) location execute <code class="language-plaintext highlighter-rouge">bash tests/scripts/multi-node/build-rook.sh</code>.
+During its execution, <code class="language-plaintext highlighter-rouge">build-rook.sh</code> will purge all running Rook pods from the cluster, so that your latest container image can be deployed.
+Furthermore, <strong>all Ceph data and config will be purged</strong> as well.
+Ensure that you are done with all existing state on your test cluster before executing <code class="language-plaintext highlighter-rouge">build-rook.sh</code> as it will clear everything.</p>
+
+<p>Each time you build and deploy with <code class="language-plaintext highlighter-rouge">build-rook.sh</code>, the virtual machines (k8s-0X) will pull the new container image and run your new Rook code.
+You can run <code class="language-plaintext highlighter-rouge">bash tests/scripts/multi-node/build-rook.sh</code> as many times as you want to rebuild your new rook image and redeploy a cluster that is running your new code.</p>
+
+<p>From here, resume your dev, change your code and test it by running <code class="language-plaintext highlighter-rouge">bash tests/scripts/multi-node/build-rook.sh</code>.</p>
+
+<h2 id="teardown">Teardown</h2>
+
+<p>Typically, to flush your environment you will run the following from within kubespray’s git repository.
+This action will be performed on the host:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>user@host-machine kubespray]<span class="nv">$ </span>vagrant destroy <span class="nt">-f</span>
+</code></pre></div></div>
+
+<p>Also, if you were using <code class="language-plaintext highlighter-rouge">kubectl</code> on that host machine, you can resurrect your old configuration by renaming <code class="language-plaintext highlighter-rouge">$HOME/.kube/config.before.rook.$TIMESTAMP</code> with <code class="language-plaintext highlighter-rouge">$HOME/.kube/config</code>.</p>
+
+<p>If you were not using <code class="language-plaintext highlighter-rouge">kubectl</code>, feel free to simply remove <code class="language-plaintext highlighter-rouge">$HOME/.kube/config.rook</code>.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v0.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v0.7/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v0.7/teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v0.7/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Flex Volume Configuration",
+      "/docs/rook/v0.7/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBAC Security",
+      "/docs/rook/v0.7/rbac.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v0.7/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage",
+      "/docs/rook/v0.7/storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v0.7/block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v0.7/object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.7/filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Custom Resources",
+      "/docs/rook/v0.7/crds.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster",
+      "/docs/rook/v0.7/cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pool",
+      "/docs/rook/v0.7/pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store",
+      "/docs/rook/v0.7/object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.7/filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v0.7/monitoring.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v0.7/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Operator",
+      "/docs/rook/v0.7/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v0.7/upgrade.html",
+      false,
+      false
+    );
+  
+    add(
+      "Tools",
+      "/docs/rook/v0.7/tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v0.7/toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Rook Client",
+      "/docs/rook/v0.7/client.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v0.7/advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v0.7/common-problems.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v0.7/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v0.7/development-environment.html",
+      true,
+      true
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

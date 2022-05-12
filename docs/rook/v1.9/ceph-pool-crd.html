@@ -1,0 +1,1079 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.9/ceph-pool-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.9</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-pool-crd.html" class="active">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-pool-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-pool-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-pool-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-pool-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-pool-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-pool-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-pool-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-pool-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-pool-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-pool-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-pool-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-pool-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-pool-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-pool-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-pool-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-pool-crd.md">Edit on GitHub</a>
+    </div>
+    
+    <div class="docs-text">
+      
+<h1 id="ceph-block-pool-crd">Ceph Block Pool CRD</h1>
+
+<p>Rook allows creation and customization of storage pools through the custom resource definitions (CRDs). The following settings are available for pools.</p>
+
+<h2 id="samples">Samples</h2>
+
+<h3 id="replicated">Replicated</h3>
+
+<p>For optimal performance, while also adding redundancy, this sample will configure Ceph to make three full copies of the data on multiple nodes.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: This sample requires <em>at least 1 OSD per node</em>, with each OSD located on <em>3 different nodes</em>.</p>
+</blockquote>
+
+<p>Each OSD must be located on a different node, because the <a href="/docs/rook/v1.9/ceph-pool-crd.html#spec"><code class="language-plaintext highlighter-rouge">failureDomain</code></a> is set to <code class="language-plaintext highlighter-rouge">host</code> and the <code class="language-plaintext highlighter-rouge">replicated.size</code> is set to <code class="language-plaintext highlighter-rouge">3</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">replicapool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">host</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">deviceClass</span><span class="pi">:</span> <span class="s">hdd</span>
+</code></pre></div></div>
+
+<h4 id="hybrid-storage-pools">Hybrid Storage Pools</h4>
+<p>Hybrid storage is a combination of two different storage tiers. For example, SSD and HDD.
+This helps to improve the read performance of cluster by placing, say, 1st copy of data on the higher performance tier (SSD or NVME) and remaining replicated copies on lower cost tier (HDDs).</p>
+
+<p><strong>WARNING</strong> Hybrid storage pools are likely to suffer from lower availability if a node goes down. The data across the two
+tiers may actually end up on the same node, instead of being spread across unique nodes (or failure domains) as expected.
+Instead of using hybrid pools, consider configuring <a href="https://docs.ceph.com/en/latest/rados/operations/crush-map/#primary-affinity">primary affinity</a> from the toolbox.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">replicapool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">host</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">hybridStorage</span><span class="pi">:</span>
+      <span class="na">primaryDeviceClass</span><span class="pi">:</span> <span class="s">ssd</span>
+      <span class="na">secondaryDeviceClass</span><span class="pi">:</span> <span class="s">hdd</span>
+</code></pre></div></div>
+<blockquote>
+  <p><strong>IMPORTANT</strong>: The device classes <code class="language-plaintext highlighter-rouge">primaryDeviceClass</code> and <code class="language-plaintext highlighter-rouge">secondaryDeviceClass</code> must have at least one OSD associated with them or else the pool creation will fail.</p>
+</blockquote>
+
+<h3 id="erasure-coded">Erasure Coded</h3>
+
+<p>This sample will lower the overall storage capacity requirement, while also adding redundancy by using <a href="#erasure-coding">erasure coding</a>.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: This sample requires <em>at least 3 bluestore OSDs</em>.</p>
+</blockquote>
+
+<p>The OSDs can be located on a single Ceph node or spread across multiple nodes, because the <a href="/docs/rook/v1.9/ceph-pool-crd.html#spec"><code class="language-plaintext highlighter-rouge">failureDomain</code></a> is set to <code class="language-plaintext highlighter-rouge">osd</code> and the <code class="language-plaintext highlighter-rouge">erasureCoded</code> chunk settings require at least 3 different OSDs (2 <code class="language-plaintext highlighter-rouge">dataChunks</code> + 1 <code class="language-plaintext highlighter-rouge">codingChunks</code>).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ecpool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">osd</span>
+  <span class="na">erasureCoded</span><span class="pi">:</span>
+    <span class="na">dataChunks</span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">codingChunks</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">deviceClass</span><span class="pi">:</span> <span class="s">hdd</span>
+</code></pre></div></div>
+
+<p>High performance applications typically will not use erasure coding due to the performance overhead of creating and distributing the chunks in the cluster.</p>
+
+<p>When creating an erasure-coded pool, it is highly recommended to create the pool when you have <strong>bluestore OSDs</strong> in your cluster
+(see the <a href="/docs/rook/v1.9/ceph-cluster-crd.html#osd-configuration-settings">OSD configuration settings</a>. Filestore OSDs have
+<a href="http://docs.ceph.com/docs/master/rados/operations/erasure-code/#erasure-coding-with-overwrites">limitations</a> that are unsafe and lower performance.</p>
+
+<h3 id="mirroring">Mirroring</h3>
+
+<p>RADOS Block Device (RBD) mirroring is a process of asynchronous replication of Ceph block device images between two or more Ceph clusters.
+Mirroring ensures point-in-time consistent replicas of all changes to an image, including reads and writes, block device resizing, snapshots, clones and flattening.
+It is generally useful when planning for Disaster Recovery.
+Mirroring is for clusters that are geographically distributed and stretching a single cluster is not possible due to high latencies.</p>
+
+<p>The following will enable mirroring of the pool at the image level:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">replicapool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">mirroring</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s">image</span>
+    <span class="c1"># schedule(s) of snapshot</span>
+    <span class="na">snapshotSchedules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">interval</span><span class="pi">:</span> <span class="s">24h</span> <span class="c1"># daily snapshots</span>
+        <span class="na">startTime</span><span class="pi">:</span> <span class="s">14:00:00-05:00</span>
+</code></pre></div></div>
+
+<p>Once mirroring is enabled, Rook will by default create its own <a href="https://docs.ceph.com/docs/master/rbd/rbd-mirroring/#bootstrap-peers">bootstrap peer token</a> so that it can be used by another cluster.
+The bootstrap peer token can be found in a Kubernetes Secret. The name of the Secret is present in the Status field of the CephBlockPool CR:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">status</span><span class="pi">:</span>
+  <span class="na">info</span><span class="pi">:</span>
+    <span class="na">rbdMirrorBootstrapPeerSecretName</span><span class="pi">:</span> <span class="s">pool-peer-token-replicapool</span>
+</code></pre></div></div>
+
+<p>This secret can then be fetched like so:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get secret -n rook-ceph pool-peer-token-replicapool -o jsonpath='{.data.token}'|base64 -d
+</span></code></pre></div></div>
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJmc2lkIjoiOTFlYWUwZGQtMDZiMS00ZDJjLTkxZjMtMTMxMWM5ZGYzODJiIiwiY2xpZW50X2lkIjoicmJkLW1pcnJvci1wZWVyIiwia2V5IjoiQVFEN1psOWZ3V1VGRHhBQWdmY0gyZi8xeUhYeGZDUTU5L1N0NEE9PSIsIm1vbl9ob3N0IjoiW3YyOjEwLjEwMS4xOC4yMjM6MzMwMCx2MToxMC4xMDEuMTguMjIzOjY3ODldIn0=
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The secret must be decoded. The result will be another base64 encoded blob that you will import in the destination cluster:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">external-cluster-console #</span><span class="w"> </span>rbd mirror pool peer bootstrap import &lt;token file path&gt;
+</code></pre></div></div>
+
+<p>See the official rbd mirror documentation on <a href="https://docs.ceph.com/docs/master/rbd/rbd-mirroring/#bootstrap-peers">how to add a bootstrap peer</a>.</p>
+
+<h3 id="data-spread-across-subdomains">Data spread across subdomains</h3>
+
+<p>Imagine the following topology with datacenters containing racks and then hosts:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── datacenter-1
+│   ├── rack-1
+│   │   ├── host-1
+│   │   ├── host-2
+│   └── rack-2
+│       ├── host-3
+│       ├── host-4
+└── datacenter-2
+    ├── rack-3
+    │   ├── host-5
+    │   ├── host-6
+    └── rack-4
+        ├── host-7
+        └── host-8
+</code></pre></div></div>
+
+<p>As an administrator I would like to place 4 copies across both datacenter where each copy inside a datacenter is across a rack.
+This can be achieved by the following:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">replicapool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">4</span>
+    <span class="na">replicasPerFailureDomain</span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">subFailureDomain</span><span class="pi">:</span> <span class="s">rack</span>
+</code></pre></div></div>
+
+<h2 id="pool-settings">Pool Settings</h2>
+
+<h3 id="metadata">Metadata</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the pool to create.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The namespace of the Rook cluster where the pool is created.</li>
+</ul>
+
+<h3 id="spec">Spec</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">replicated</code>: Settings for a replicated pool. If specified, <code class="language-plaintext highlighter-rouge">erasureCoded</code> settings must not be specified.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">size</code>: The desired number of copies to make of the data in the pool.</li>
+      <li><code class="language-plaintext highlighter-rouge">requireSafeReplicaSize</code>: set to false if you want to create a pool with size 1, setting pool size 1 could lead to data loss without recovery. Make sure you are <em>ABSOLUTELY CERTAIN</em> that is what you want.</li>
+      <li><code class="language-plaintext highlighter-rouge">replicasPerFailureDomain</code>: Sets up the number of replicas to place in a given failure domain. For instance, if the failure domain is a datacenter (cluster is
+stretched) then you will have 2 replicas per datacenter where each replica ends up on a different host. This gives you a total of 4 replicas and for this, the <code class="language-plaintext highlighter-rouge">size</code> must be set to 4. The default is 1.</li>
+      <li><code class="language-plaintext highlighter-rouge">subFailureDomain</code>: Name of the CRUSH bucket representing a sub-failure domain. In a stretched configuration this option represent the “last” bucket where replicas will end up being written. Imagine the cluster is stretched across two datacenters, you can then have 2 copies per datacenter and each copy on a different CRUSH bucket. The default is “host”.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">erasureCoded</code>: Settings for an erasure-coded pool. If specified, <code class="language-plaintext highlighter-rouge">replicated</code> settings must not be specified. See below for more details on <a href="#erasure-coding">erasure coding</a>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">dataChunks</code>: Number of chunks to divide the original object into</li>
+      <li><code class="language-plaintext highlighter-rouge">codingChunks</code>: Number of coding chunks to generate</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">failureDomain</code>: The failure domain across which the data will be spread. This can be set to a value of either <code class="language-plaintext highlighter-rouge">osd</code> or <code class="language-plaintext highlighter-rouge">host</code>, with <code class="language-plaintext highlighter-rouge">host</code> being the default setting. A failure domain can also be set to a different type (e.g. <code class="language-plaintext highlighter-rouge">rack</code>), if the OSDs are created on nodes with the supported <a href="/docs/rook/v1.9/ceph-cluster-crd.html#osd-topology">topology labels</a>. If the <code class="language-plaintext highlighter-rouge">failureDomain</code> is changed on the pool, the operator will create a new CRUSH rule and update the pool.
+  If a <code class="language-plaintext highlighter-rouge">replicated</code> pool of size <code class="language-plaintext highlighter-rouge">3</code> is configured and the <code class="language-plaintext highlighter-rouge">failureDomain</code> is set to <code class="language-plaintext highlighter-rouge">host</code>, all three copies of the replicated data will be placed on OSDs located on <code class="language-plaintext highlighter-rouge">3</code> different Ceph hosts. This case is guaranteed to tolerate a failure of two hosts without a loss of data. Similarly, a failure domain set to <code class="language-plaintext highlighter-rouge">osd</code>, can tolerate a loss of two OSD devices.</p>
+
+    <p>If erasure coding is used, the data and coding chunks are spread across the configured failure domain.</p>
+
+    <blockquote>
+      <p><strong>NOTE</strong>: Neither Rook, nor Ceph, prevent the creation of a cluster where the replicated data (or Erasure Coded chunks) can be written safely. By design, Ceph will delay checking for suitable OSDs until a write request is made and this write can hang if there are not sufficient OSDs to satisfy the request.</p>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">deviceClass</code>: Sets up the CRUSH rule for the pool to distribute data only on the specified device class. If left empty or unspecified, the pool will use the cluster’s default CRUSH root, which usually distributes data over all OSDs, regardless of their class.</li>
+  <li><code class="language-plaintext highlighter-rouge">crushRoot</code>: The root in the crush map to be used by the pool. If left empty or unspecified, the default root will be used. Creating a crush hierarchy for the OSDs currently requires the Rook toolbox to run the Ceph tools described <a href="http://docs.ceph.com/docs/master/rados/operations/crush-map/#modifying-the-crush-map">here</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">enableRBDStats</code>: Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false. For more info see the <a href="https://docs.ceph.com/docs/master/mgr/prometheus/#rbd-io-statistics">ceph documentation</a>.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">name</code>: The name of Ceph pools is based on the <code class="language-plaintext highlighter-rouge">metadata.name</code> of the CephBlockPool CR. Some built-in Ceph pools
+require names that are incompatible with K8s resource names. These special pools can be configured
+by setting this <code class="language-plaintext highlighter-rouge">name</code> to override the name of the Ceph pool that is created instead of using the <code class="language-plaintext highlighter-rouge">metadata.name</code> for the pool.
+Only the following pool names are supported: <code class="language-plaintext highlighter-rouge">device_health_metrics</code>, <code class="language-plaintext highlighter-rouge">.nfs</code>, and <code class="language-plaintext highlighter-rouge">.mgr</code>. See the example
+<a href="https://github.com/rook/rook/blob/release-1.9/deploy/examples/pool-builtin-mgr.yaml">builtin mgr pool</a>.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">parameters</code>: Sets any <a href="https://docs.ceph.com/docs/master/rados/operations/pools/#set-pool-values">parameters</a> listed to the given pool
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">target_size_ratio:</code> gives a hint (%) to Ceph in terms of expected consumption of the total cluster capacity of a given pool, for more info see the <a href="https://docs.ceph.com/docs/master/rados/operations/placement-groups/#specifying-expected-pool-size">ceph documentation</a></li>
+      <li><code class="language-plaintext highlighter-rouge">compression_mode</code>: Sets up the pool for inline compression when using a Bluestore OSD. If left unspecified does not setup any compression mode for the pool. Values supported are the same as Bluestore inline compression <a href="https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#inline-compression">modes</a>, such as <code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">passive</code>, <code class="language-plaintext highlighter-rouge">aggressive</code>, and <code class="language-plaintext highlighter-rouge">force</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mirroring</code>: Sets up mirroring of the pool
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enabled</code>: whether mirroring is enabled on that pool (default: false)</li>
+      <li><code class="language-plaintext highlighter-rouge">mode</code>: mirroring mode to run, possible values are “pool” or “image” (required). Refer to the <a href="https://docs.ceph.com/docs/master/rbd/rbd-mirroring/#enable-mirroring">mirroring modes Ceph documentation</a> for more details.</li>
+      <li><code class="language-plaintext highlighter-rouge">snapshotSchedules</code>: schedule(s) snapshot at the <strong>pool</strong> level. <strong>Only</strong> supported as of Ceph Octopus (v15) release. One or more schedules are supported.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">interval</code>: frequency of the snapshots. The interval can be specified in days, hours, or minutes using d, h, m suffix respectively.</li>
+          <li><code class="language-plaintext highlighter-rouge">startTime</code>: optional, determines at what time the snapshot process starts, specified using the ISO 8601 time format.</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">peers</code>: to configure mirroring peers. See the prerequisite <a href="/docs/rook/v1.9/ceph-rbd-mirror-crd.html">RBD Mirror documentation</a> first.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">secretNames</code>:  a list of peers to connect to. Currently <strong>only a single</strong> peer is supported where a peer represents a Ceph cluster.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">statusCheck</code>: Sets up pool mirroring status
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">mirror</code>: displays the mirroring status
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">disabled</code>: whether to enable or disable pool mirroring status</li>
+          <li><code class="language-plaintext highlighter-rouge">interval</code>: time interval to refresh the mirroring status (default 60s)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">quotas</code>: Set byte and object quotas. See the <a href="https://docs.ceph.com/en/latest/rados/operations/pools/#set-pool-quotas">ceph documentation</a> for more info.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">maxSize</code>: quota in bytes as a string with quantity suffixes (e.g. “10Gi”)</li>
+      <li><code class="language-plaintext highlighter-rouge">maxObjects</code>: quota in objects as an integer
+        <blockquote>
+          <p><strong>NOTE</strong>: A value of 0 disables the quota.</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="add-specific-pool-properties">Add specific pool properties</h3>
+
+<p>With <code class="language-plaintext highlighter-rouge">poolProperties</code> you can set any pool property:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">parameters</span><span class="pi">:</span>
+    <span class="s">&lt;name of the parameter&gt;</span><span class="pi">:</span> <span class="s">&lt;parameter value&gt;</span>
+</code></pre></div></div>
+
+<p>For instance:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">parameters</span><span class="pi">:</span>
+    <span class="na">min_size</span><span class="pi">:</span> <span class="m">1</span>
+</code></pre></div></div>
+
+<h3 id="erasure-coding">Erasure Coding</h3>
+
+<p><a href="http://docs.ceph.com/docs/master/rados/operations/erasure-code/">Erasure coding</a> allows you to keep your data safe while reducing the storage overhead. Instead of creating multiple replicas of the data,
+erasure coding divides the original data into chunks of equal size, then generates extra chunks of that same size for redundancy.</p>
+
+<p>For example, if you have an object of size 2MB, the simplest erasure coding with two data chunks would divide the object into two chunks of size 1MB each (data chunks). One more chunk (coding chunk) of size 1MB will be generated. In total, 3MB will be stored in the cluster. The object will be able to suffer the loss of any one of the chunks and still be able to reconstruct the original object.</p>
+
+<p>The number of data and coding chunks you choose will depend on your resiliency to loss and how much storage overhead is acceptable in your storage cluster.
+Here are some examples to illustrate how the number of chunks affects the storage and loss toleration.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data chunks (k)</th>
+      <th>Coding chunks (m)</th>
+      <th>Total storage</th>
+      <th>Losses Tolerated</th>
+      <th>OSDs required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1.5x</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>2x</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2</td>
+      <td>1.5x</td>
+      <td>2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>4</td>
+      <td>1.25x</td>
+      <td>4</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <code class="language-plaintext highlighter-rouge">failureDomain</code> must be also be taken into account when determining the number of chunks. The failure domain determines the level in the Ceph CRUSH hierarchy where the chunks must be uniquely distributed. This decision will impact whether node losses or disk losses are tolerated. There could also be performance differences of placing the data across nodes or osds.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">host</code>: All chunks will be placed on unique hosts</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: All chunks will be placed on unique OSDs</li>
+</ul>
+
+<p>If you do not have a sufficient number of hosts or OSDs for unique placement the pool can be created, writing to the pool will hang.</p>
+
+<p>Rook currently only configures two levels in the CRUSH map. It is also possible to configure other levels such as <code class="language-plaintext highlighter-rouge">rack</code> with by adding <a href="/docs/rook/v1.9/ceph-cluster-crd.html#osd-topology">topology labels</a> to the nodes.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.9/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.9/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.9/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.9/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.9/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.9/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.9/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.9/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.9/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.9/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.9/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.9/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.9/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.9/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.9/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.9/ceph-pool-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.9/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.9/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.9/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.9/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/v1.9/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.9/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.9/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.9/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.9/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.9/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.9/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.9/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.9/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirror CRD",
+      "/docs/rook/v1.9/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Filesystem Mirror CRD",
+      "/docs/rook/v1.9/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolume Group CRD",
+      "/docs/rook/v1.9/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "RADOS Namespace CRD",
+      "/docs/rook/v1.9/ceph-pool-radosnamespace.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/v1.9/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.9/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.9/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.9/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.9/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.9/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.9/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.9/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.9/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.9/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.9/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.9/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.9/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.9/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.9/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.9/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.9/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/v1.9/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.9/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

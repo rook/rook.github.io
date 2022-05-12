@@ -1,0 +1,1077 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.4/ceph-dashboard.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.4</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-dashboard.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-dashboard.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-dashboard.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-dashboard.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-dashboard.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-dashboard.html" class="active">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-dashboard.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-dashboard.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-dashboard.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-dashboard.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-dashboard.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-dashboard.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-dashboard.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-dashboard.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-dashboard.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-dashboard.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-dashboard.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.4 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-dashboard">Ceph Dashboard</h1>
+
+<p>The dashboard is a very helpful tool to give you an overview of the status of your Ceph cluster, including overall health,
+status of the mon quorum, status of the mgr, osd, and other Ceph daemons, view pools and PG status, show logs for the daemons,
+and more. Rook makes it simple to enable the dashboard.</p>
+
+<p><img src="/docs/rook/v1.4/media/ceph-dashboard.png" alt="The Ceph dashboard" /></p>
+
+<h2 id="enable-the-ceph-dashboard">Enable the Ceph Dashboard</h2>
+
+<p>The <a href="http://docs.ceph.com/docs/mimic/mgr/dashboard/">dashboard</a> can be enabled with settings in the CephCluster CRD. The CephCluster CRD must have the dashboard <code class="language-plaintext highlighter-rouge">enabled</code> setting set to <code class="language-plaintext highlighter-rouge">true</code>.
+This is the default setting in the example manifests.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">spec</span><span class="pi">:</span>
+    <span class="na">dashboard</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>The Rook operator will enable the ceph-mgr dashboard module. A service object will be created to expose that port inside the Kubernetes cluster. Rook will
+enable port 8443 for https access.</p>
+
+<p>This example shows that port 8443 was configured.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get service
+NAME                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+</span><span class="gp">rook-ceph-mgr                ClusterIP   10.108.111.192   &lt;none&gt;</span><span class="w">        </span>9283/TCP         3h
+<span class="gp">rook-ceph-mgr-dashboard      ClusterIP   10.110.113.240   &lt;none&gt;</span><span class="w">        </span>8443/TCP         3h
+</code></pre></div></div>
+
+<p>The first service is for reporting the <a href="/docs/rook/v1.4/ceph-monitoring.html">Prometheus metrics</a>, while the latter service is for the dashboard.
+If you are on a node in the cluster, you will be able to connect to the dashboard by using either the
+DNS name of the service at <code class="language-plaintext highlighter-rouge">https://rook-ceph-mgr-dashboard-https:8443</code> or by connecting to the cluster IP,
+in this example at <code class="language-plaintext highlighter-rouge">https://10.110.113.240:8443</code>.</p>
+
+<blockquote>
+  <p><strong>IMPORTANT:</strong> Please note the dashboard will only be enabled for the first Ceph object store created by Rook.</p>
+</blockquote>
+
+<h3 id="login-credentials">Login Credentials</h3>
+
+<p>After you connect to the dashboard you will need to login for secure access. Rook creates a default user named
+<code class="language-plaintext highlighter-rouge">admin</code> and generates a secret called <code class="language-plaintext highlighter-rouge">rook-ceph-dashboard-admin-password</code> in the namespace where the Rook Ceph cluster is running.
+To retrieve the generated password, you can run the following:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode &amp;&amp; echo
+</span></code></pre></div></div>
+
+<h2 id="configure-the-dashboard">Configure the Dashboard</h2>
+
+<p>The following dashboard configuration settings are supported:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">spec</span><span class="pi">:</span>
+    <span class="na">dashboard</span><span class="pi">:</span>
+      <span class="na">urlPrefix</span><span class="pi">:</span> <span class="s">/ceph-dashboard</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">8443</span>
+      <span class="na">ssl</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">urlPrefix</code> If you are accessing the dashboard via a reverse proxy, you may
+wish to serve it under a URL prefix.  To get the dashboard to use hyperlinks
+that include your prefix, you can set the <code class="language-plaintext highlighter-rouge">urlPrefix</code> setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">port</code> The port that the dashboard is served on may be changed from the
+default using the <code class="language-plaintext highlighter-rouge">port</code> setting. The corresponding K8s service exposing the
+port will automatically be updated.</li>
+  <li><code class="language-plaintext highlighter-rouge">ssl</code> The dashboard may be served without SSL (useful for when you deploy the
+dashboard behind a proxy already served using SSL) by setting the <code class="language-plaintext highlighter-rouge">ssl</code> option
+to be false.</li>
+</ul>
+
+<h2 id="viewing-the-dashboard-external-to-the-cluster">Viewing the Dashboard External to the Cluster</h2>
+
+<p>Commonly you will want to view the dashboard from outside the cluster. For example, on a development machine with the
+cluster running inside minikube you will want to access the dashboard from the host.</p>
+
+<p>There are several ways to expose a service that will depend on the environment you are running in.
+You can use an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress Controller</a> or <a href="https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types">other methods</a> for exposing services such as
+NodePort, LoadBalancer, or ExternalIPs.</p>
+
+<h3 id="node-port">Node Port</h3>
+
+<p>The simplest way to expose the service in minikube or similar environment is using the NodePort to open a port on the
+VM that can be accessed by the host. To create a service with the NodePort, save this yaml as <code class="language-plaintext highlighter-rouge">dashboard-external-https.yaml</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-mgr-dashboard-external-https</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">rook-ceph-mgr</span>
+    <span class="na">rook_cluster</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">dashboard</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">8443</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8443</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">rook-ceph-mgr</span>
+    <span class="na">rook_cluster</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">sessionAffinity</span><span class="pi">:</span> <span class="s">None</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+</code></pre></div></div>
+
+<p>Now create the service:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f dashboard-external-https.yaml
+</span></code></pre></div></div>
+
+<p>You will see the new service <code class="language-plaintext highlighter-rouge">rook-ceph-mgr-dashboard-external-https</code> created:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get service
+<span class="go">NAME                                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+</span><span class="gp">rook-ceph-mgr                           ClusterIP   10.108.111.192   &lt;none&gt;</span><span class="w">        </span>9283/TCP         4h
+<span class="gp">rook-ceph-mgr-dashboard                 ClusterIP   10.110.113.240   &lt;none&gt;</span><span class="w">        </span>8443/TCP         4h
+<span class="gp">rook-ceph-mgr-dashboard-external-https  NodePort    10.101.209.6     &lt;none&gt;</span><span class="w">        </span>8443:31176/TCP   4h
+</code></pre></div></div>
+
+<p>In this example, port <code class="language-plaintext highlighter-rouge">31176</code> will be opened to expose port <code class="language-plaintext highlighter-rouge">8443</code> from the ceph-mgr pod. Find the ip address
+of the VM. If using minikube, you can run <code class="language-plaintext highlighter-rouge">minikube ip</code> to find the ip address.
+Now you can enter the URL in your browser such as <code class="language-plaintext highlighter-rouge">https://192.168.99.110:31176</code> and the dashboard will appear.</p>
+
+<h3 id="load-balancer">Load Balancer</h3>
+
+<p>If you have a cluster on a cloud provider that supports load balancers,
+you can create a service that is provisioned with a public hostname.
+The yaml is the same as <code class="language-plaintext highlighter-rouge">dashboard-external-https.yaml</code> except for the following property:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+<span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>
+</code></pre></div></div>
+
+<p>Now create the service:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f dashboard-loadbalancer.yaml
+</span></code></pre></div></div>
+
+<p>You will see the new service <code class="language-plaintext highlighter-rouge">rook-ceph-mgr-dashboard-loadbalancer</code> created:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get service
+<span class="go">NAME                                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)             AGE
+</span><span class="gp">rook-ceph-mgr                            ClusterIP      172.30.11.40     &lt;none&gt;</span><span class="w">                                                                    </span>9283/TCP            4h
+<span class="gp">rook-ceph-mgr-dashboard                  ClusterIP      172.30.203.185   &lt;none&gt;</span><span class="w">                                                                    </span>8443/TCP            4h
+<span class="go">rook-ceph-mgr-dashboard-loadbalancer     LoadBalancer   172.30.27.242    a7f23e8e2839511e9b7a5122b08f2038-1251669398.us-east-1.elb.amazonaws.com   8443:32747/TCP      4h
+</span></code></pre></div></div>
+
+<p>Now you can enter the URL in your browser such as <code class="language-plaintext highlighter-rouge">https://a7f23e8e2839511e9b7a5122b08f2038-1251669398.us-east-1.elb.amazonaws.com:8443</code> and the dashboard will appear.</p>
+
+<h3 id="ingress-controller">Ingress Controller</h3>
+
+<p>If you have a cluster with an <a href="https://kubernetes.github.io/ingress-nginx/">nginx Ingress Controller</a>
+and a Certificate Manager (e.g. <a href="https://cert-manager.readthedocs.io/">cert-manager</a>) then you can create an
+Ingress like the one below. This example achieves four things:</p>
+
+<ol>
+  <li>Exposes the dashboard on the Internet (using an reverse proxy)</li>
+  <li>Issues an valid TLS Certificate for the specified domain name (using <a href="https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment">ACME</a>)</li>
+  <li>Tells the reverse proxy that the dashboard itself uses HTTPS</li>
+  <li>Tells the reverse proxy that the dashboard itself does not have a valid certificate (it is self-signed)</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">extensions/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Ingress</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-mgr-dashboard</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="s">kubernetes.io/ingress.class</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nginx"</span>
+    <span class="s">kubernetes.io/tls-acme</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="s">nginx.ingress.kubernetes.io/backend-protocol</span><span class="pi">:</span> <span class="s2">"</span><span class="s">HTTPS"</span>
+    <span class="s">nginx.ingress.kubernetes.io/server-snippet</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">proxy_ssl_verify off;</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">tls</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">rook-ceph.example.com</span>
+     <span class="na">secretName</span><span class="pi">:</span> <span class="s">rook-ceph.example.com</span>
+  <span class="na">rules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">host</span><span class="pi">:</span> <span class="s">rook-ceph.example.com</span>
+    <span class="na">http</span><span class="pi">:</span>
+      <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
+        <span class="na">backend</span><span class="pi">:</span>
+          <span class="na">serviceName</span><span class="pi">:</span> <span class="s">rook-ceph-mgr-dashboard</span>
+          <span class="na">servicePort</span><span class="pi">:</span> <span class="s">https-dashboard</span>
+</code></pre></div></div>
+
+<p>Customise the Ingress resource to match your cluster. Replace the example domain name <code class="language-plaintext highlighter-rouge">rook-ceph.example.com</code>
+with a domain name that will resolve to your Ingress Controller (creating the DNS entry if required).</p>
+
+<p>Now create the Ingress:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f dashboard-ingress-https.yaml
+</span></code></pre></div></div>
+
+<p>You will see the new Ingress <code class="language-plaintext highlighter-rouge">rook-ceph-mgr-dashboard</code> created:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get ingress
+<span class="go">NAME                      HOSTS                      ADDRESS   PORTS     AGE
+rook-ceph-mgr-dashboard   rook-ceph.example.com      80, 443   5m
+</span></code></pre></div></div>
+
+<p>And the new Secret for the TLS certificate:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get secret rook-ceph.example.com
+<span class="go">NAME                       TYPE                DATA      AGE
+rook-ceph.example.com      kubernetes.io/tls   2         4m
+</span></code></pre></div></div>
+
+<p>You can now browse to <code class="language-plaintext highlighter-rouge">https://rook-ceph.example.com/</code> to log into the dashboard.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.4/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.4/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.4/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.4/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.4/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.4/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.4/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.4/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.4/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.4/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.4/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.4/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.4/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.4/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.4/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.4/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.4/ceph-dashboard.html",
+      true,
+      true
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.4/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.4/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.4/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.4/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.4/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.4/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.4/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.4/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.4/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.4/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.4/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.4/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.4/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.4/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.4/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.4/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.4/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.4/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.4/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.4/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.4/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.4/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.4/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.4/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.4/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.4/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.4/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.4/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.4/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.4/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.4/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.4/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.4/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.4/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.4/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.4/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.4/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.4/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.4/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.4/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.4/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.4/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.4/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.4/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.4/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.4/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.4/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

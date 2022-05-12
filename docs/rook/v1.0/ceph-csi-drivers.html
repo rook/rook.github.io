@@ -1,0 +1,1246 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.0/ceph-csi-drivers.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.0</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-csi-drivers.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-csi-drivers.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-csi-drivers.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-csi-drivers.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-csi-drivers.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-csi-drivers.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-csi-drivers.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-csi-drivers.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-csi-drivers.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-csi-drivers.html" class="active">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-csi-drivers.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-csi-drivers.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-csi-drivers.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-csi-drivers.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-csi-drivers.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-csi-drivers.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-csi-drivers.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.0 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="running-ceph-csi-drivers-with-rook">Running Ceph CSI drivers with Rook</h1>
+
+<p>Here is a guide on how to use Rook to deploy ceph-csi drivers on a Kubernetes
+cluster.</p>
+
+<ul>
+  <li><a href="#csi-drivers-enablement">Enable CSI drivers</a></li>
+  <li><a href="#Test-RBD-CSI-Driver">Test RBD CSI driver</a></li>
+  <li><a href="#Test-CephFs-CSI-Driver">Test CephFS CSI driver</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li>a Kubernetes v1.13+ is needed in order to support CSI Spec 1.0.</li>
+  <li><code class="language-plaintext highlighter-rouge">--allow-privileged</code> flag set to true in
+<a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>
+and your <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/">API
+server</a></li>
+  <li>An up and running Rook instance (see <a href="https://github.com/rook/rook/blob/v1.0/Documentation/ceph-quickstart.md">Rook - Ceph quickstart
+guide</a>)</li>
+</ol>
+
+<h2 id="csi-drivers-enablement">CSI Drivers Enablement</h2>
+
+<h3 id="create-rbac-used-by-csi-drivers-in-the-same-namespace-as-rook-ceph-operator">Create RBAC used by CSI drivers in the same namespace as Rook Ceph Operator</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>create rbac. Since rook operator is not permitted to create rbac rules,
+<span class="gp">#</span><span class="w"> </span>these rules have to be created outside of operator
+<span class="go">kubectl apply -f cluster/examples/kubernetes/ceph/csi/rbac/rbd/
+kubectl apply -f cluster/examples/kubernetes/ceph/csi/rbac/cephfs/
+</span></code></pre></div></div>
+
+<h3 id="start-rook-ceph-operator">Start Rook Ceph Operator</h3>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl apply -f cluster/examples/kubernetes/ceph/operator-with-csi.yaml
+</span></code></pre></div></div>
+
+<h3 id="verify-csi-drivers-and-operator-are-up-and-running">Verify CSI drivers and Operator are up and running</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># kubectl get all -n rook-ceph</span>
+NAME                                       READY   STATUS      RESTARTS   AGE
+pod/csi-cephfsplugin-nd5tv                 2/2     Running     1          4m5s
+pod/csi-cephfsplugin-provisioner-0         2/2     Running     0          4m5s
+pod/csi-rbdplugin-provisioner-0            4/4     Running     1          4m5s
+pod/csi-rbdplugin-wr78j                    2/2     Running     1          4m5s
+pod/rook-ceph-agent-bf772                  1/1     Running     0          7m57s
+pod/rook-ceph-mgr-a-7f86bb4968-wdd4l       1/1     Running     0          5m28s
+pod/rook-ceph-mon-a-648b78fc99-jthsz       1/1     Running     0          6m1s
+pod/rook-ceph-mon-b-6f55c9b6fc-nlp4r       1/1     Running     0          5m55s
+pod/rook-ceph-mon-c-69f4f466d5-4q2jk       1/1     Running     0          5m45s
+pod/rook-ceph-operator-7464bd774c-scb5c    1/1     Running     0          4m7s
+pod/rook-ceph-osd-0-7bfdf45977-n5tt9       1/1     Running     0          2m8s
+pod/rook-ceph-osd-1-88f95577d-27jk4        1/1     Running     0          2m8s
+pod/rook-ceph-osd-2-674b4dcd4c-5wzz9       1/1     Running     0          2m8s
+pod/rook-ceph-osd-3-58f6467f6b-q5wwf       1/1     Running     0          2m8s
+pod/rook-discover-6t644                    1/1     Running     0          7m57s
+
+NAME                                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>    AGE
+service/csi-cephfsplugin-provisioner   ClusterIP   10.100.46.135    &lt;none&gt;        1234/TCP   4m5s
+service/csi-rbdplugin-provisioner      ClusterIP   10.110.210.40    &lt;none&gt;        1234/TCP   4m5s
+service/rook-ceph-mgr                  ClusterIP   10.104.191.254   &lt;none&gt;        9283/TCP   5m13s
+service/rook-ceph-mgr-dashboard        ClusterIP   10.97.152.26     &lt;none&gt;        8443/TCP   5m13s
+service/rook-ceph-mon-a                ClusterIP   10.108.83.214    &lt;none&gt;        6789/TCP   6m4s
+service/rook-ceph-mon-b                ClusterIP   10.104.64.44     &lt;none&gt;        6789/TCP   5m56s
+service/rook-ceph-mon-c                ClusterIP   10.103.170.196   &lt;none&gt;        6789/TCP   5m45s
+
+NAME                              DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/csi-cephfsplugin   1         1         1       1            1           &lt;none&gt;          4m5s
+daemonset.apps/csi-rbdplugin      1         1         1       1            1           &lt;none&gt;          4m5s
+daemonset.apps/rook-ceph-agent    1         1         1       1            1           &lt;none&gt;          7m57s
+daemonset.apps/rook-discover      1         1         1       1            1           &lt;none&gt;          7m57s
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/rook-ceph-mgr-a      1/1     1            1           5m28s
+deployment.apps/rook-ceph-mon-a      1/1     1            1           6m2s
+deployment.apps/rook-ceph-mon-b      1/1     1            1           5m55s
+deployment.apps/rook-ceph-mon-c      1/1     1            1           5m45s
+deployment.apps/rook-ceph-operator   1/1     1            1           10m
+deployment.apps/rook-ceph-osd-0      1/1     1            1           2m8s
+deployment.apps/rook-ceph-osd-1      1/1     1            1           2m8s
+deployment.apps/rook-ceph-osd-2      1/1     1            1           2m8s
+deployment.apps/rook-ceph-osd-3      1/1     1            1           2m8s
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/rook-ceph-mgr-a-7f86bb4968      1         1         1       5m28s
+replicaset.apps/rook-ceph-mon-a-648b78fc99      1         1         1       6m1s
+replicaset.apps/rook-ceph-mon-b-6f55c9b6fc      1         1         1       5m55s
+replicaset.apps/rook-ceph-mon-c-69f4f466d5      1         1         1       5m45s
+replicaset.apps/rook-ceph-operator-6c49994c4f   0         0         0       10m
+replicaset.apps/rook-ceph-operator-7464bd774c   1         1         1       4m7s
+replicaset.apps/rook-ceph-osd-0-7bfdf45977      1         1         1       2m8s
+replicaset.apps/rook-ceph-osd-1-88f95577d       1         1         1       2m8s
+replicaset.apps/rook-ceph-osd-2-674b4dcd4c      1         1         1       2m8s
+replicaset.apps/rook-ceph-osd-3-58f6467f6b      1         1         1       2m8s
+
+NAME                                            READY   AGE
+statefulset.apps/csi-cephfsplugin-provisioner   1/1     4m5s
+statefulset.apps/csi-rbdplugin-provisioner      1/1     4m5s
+</code></pre></div></div>
+
+<p>Once the plugin is successfully deployed, test it by running the following example.</p>
+
+<h1 id="test-rbd-csi-driver">Test RBD CSI Driver</h1>
+
+<h2 id="create-rbd-storageclass">Create RBD StorageClass</h2>
+
+<p>This
+<a href="../cluster/examples/kubernetes/ceph/csi/example/rbd/storageclass.yaml">storageclass</a>
+expects a pool named <code class="language-plaintext highlighter-rouge">rbd</code> in your Ceph cluster. You can create this pool using
+<a href="https://github.com/rook/rook/blob/v1.0/Documentation/ceph-pool-crd.md">rook pool
+CRD</a>.</p>
+
+<p>Please update <code class="language-plaintext highlighter-rouge">monitors</code> to reflect the Ceph monitors.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/storageclass.yaml
+</span></code></pre></div></div>
+
+<h2 id="create-rbd-secret">Create RBD Secret</h2>
+
+<p>Create a Secret that matches <code class="language-plaintext highlighter-rouge">adminid</code> or <code class="language-plaintext highlighter-rouge">userid</code> specified in the
+<a href="../cluster/examples/kubernetes/ceph/csi/example/rbd/storageclass.yaml">storageclass</a>.</p>
+
+<p>Find a Ceph operator pod (in the following example, the pod is
+<code class="language-plaintext highlighter-rouge">rook-ceph-operator-7464bd774c-scb5c</code>) and create a Ceph user for that pool called
+<code class="language-plaintext highlighter-rouge">kubernetes</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> <span class="nt">-n</span> rook-ceph rook-ceph-operator-7464bd774c-scb5c <span class="nt">--</span> bash <span class="nt">-c</span> <span class="s2">"ceph -c /var/lib/rook/rook-ceph/rook-ceph.config auth get-or-create-key client.kubernetes mon </span><span class="se">\"</span><span class="s2">allow profile rbd</span><span class="se">\"</span><span class="s2"> osd </span><span class="se">\"</span><span class="s2">profile rbd pool=rbd</span><span class="se">\"</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Then create a Secret using admin and <code class="language-plaintext highlighter-rouge">kubernetes</code> keyrings:</p>
+
+<p>In <a href="../cluster/examples/kubernetes/ceph/csi/example/rbd/secret.yaml">secret</a>,
+you need your Ceph admin/user password encoded in base64.</p>
+
+<p>Run <code class="language-plaintext highlighter-rouge">ceph auth ls</code> in your rook ceph operator pod, to encode the key of your
+admin/user run <code class="language-plaintext highlighter-rouge">echo -n KEY|base64</code>
+and replace <code class="language-plaintext highlighter-rouge">BASE64-ENCODED-PASSWORD</code> by your encoded key.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> <span class="nt">-n</span> rook-ceph rook-ceph-operator-6c49994c4f-pwqcx /bin/sh
+sh-4.2# ceph auth <span class="nb">ls
+</span>installed auth entries:
+
+osd.0
+	key: AQA3pa1cN/fODBAAc/jIm5IQDClm+dmekSmSlg<span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.1
+	key: <span class="nv">AQBXpa1cTjuYNRAAkohlInoYAa6A3odTRDhnAg</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.2
+	key: <span class="nv">AQB4pa1cvJidLRAALZyAtuOwArO8JZfy7Y5pFg</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.3
+	key: <span class="nv">AQCcpa1cFFQRHRAALBYhqO3m0FRA9pxTOFT2eQ</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+client.admin
+	key: <span class="nv">AQD0pK1cqcBDCBAAdXNXfgAambPz5qWpsq0Mmw</span><span class="o">==</span>
+	auid: 0
+	caps: <span class="o">[</span>mds] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mgr] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mon] allow <span class="k">*</span>
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+client.bootstrap-mds
+	key: <span class="nv">AQD6pK1crJyZCxAA1UTGwtyFv3YYFcBmhWHyoQ</span><span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-mds
+client.bootstrap-mgr
+	key: AQD6pK1c2KaZCxAATWi/I3i0/XEesSipy/HeIA<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-mgr
+client.bootstrap-osd
+	key: AQD6pK1cwa+ZCxAA7XKXRyLQpaHZ+lRXeUk8xQ<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-osd
+client.bootstrap-rbd
+	key: AQD6pK1cULmZCxAA4++Ch/iRKa52297/rbHP+w<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-rbd
+client.bootstrap-rgw
+	key: <span class="nv">AQD6pK1cbMKZCxAAGKj5HaMoEl41LHqEafcfPA</span><span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-rgw
+mgr.a
+	key: AQAZpa1chl+DAhAAYyolLBrkht+0sH0HljkFIg<span class="o">==</span>
+	caps: <span class="o">[</span>mds] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mon] allow <span class="k">*</span>
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+
+<span class="c">#encode admin/user key</span>
+sh-4.2# <span class="nb">echo</span> <span class="nt">-n</span> <span class="nv">AQD0pK1cqcBDCBAAdXNXfgAambPz5qWpsq0Mmw</span><span class="o">==</span>|base64
+<span class="nv">QVFEMHBLMWNxY0JEQ0JBQWRYTlhmZ0FhbWJQejVxV3BzcTBNbXc9PQ</span><span class="o">==</span>
+<span class="c">#or</span>
+sh-4.2# ceph auth get-key client.admin|base64
+<span class="nv">QVFEMHBLMWNxY0JEQ0JBQWRYTlhmZ0FhbWJQejVxV3BzcTBNbXc9PQ</span><span class="o">==</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/secret.yaml
+</span></code></pre></div></div>
+
+<h2 id="create-rbd-persistentvolumeclaim">Create RBD PersistentVolumeClaim</h2>
+
+<p>Make sure your <code class="language-plaintext highlighter-rouge">storageClassName</code> is the name of the StorageClass previously
+defined in storageclass.yaml</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/pvc.yaml
+</span></code></pre></div></div>
+
+<h2 id="verify-rbd-pvc-has-successfully-been-created">Verify RBD PVC has successfully been created</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># kubectl get pvc</span>
+<span class="s">NAME      STATUS   VOLUME                 CAPACITY   ACCESS MODES   STORAGECLASS   AGE</span>
+<span class="s">rbd-pvc   Bound    pvc-c20495c0d5de11e8   1Gi        RWO            csi-rbd        21s</span>
+</code></pre></div></div>
+
+<p>If your PVC status isn’t <code class="language-plaintext highlighter-rouge">Bound</code>, check the csi-rbdplugin logs to see what’s
+preventing the PVC from being up and bound.</p>
+
+<h2 id="create-rbd-demo-pod">Create RBD demo Pod</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/pod.yaml
+</span></code></pre></div></div>
+
+<p>When running <code class="language-plaintext highlighter-rouge">rbd list block --pool [yourpool]</code> in one of your Ceph pods you
+should see the created PVC:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rbd list block --pool rbd</span>
+pvc-c20495c0d5de11e8
+</code></pre></div></div>
+
+<h2 id="additional-features">Additional features</h2>
+
+<h3 id="rbd-snapshots">RBD Snapshots</h3>
+
+<p>Since this feature is still in <a href="https://kubernetes.io/blog/2018/10/09/introducing-volume-snapshot-alpha-for-kubernetes/">alpha
+stage</a>
+(k8s 1.12+), make sure to enable <code class="language-plaintext highlighter-rouge">VolumeSnapshotDataSource</code> feature gate in
+your Kubernetes cluster.</p>
+
+<h4 id="create-rbd-snapshot-class">create RBD snapshot-class</h4>
+
+<p>You need to create the <code class="language-plaintext highlighter-rouge">SnapshotClass</code>. The purpose of a <code class="language-plaintext highlighter-rouge">SnapshotClass</code> is
+defined in <a href="https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/">the kubernetes
+documentation</a>.
+In short, as the documentation describes it:</p>
+<blockquote>
+  <p>Just like StorageClass provides a way for administrators to describe the
+“classes” of storage they offer when provisioning a volume,
+VolumeSnapshotClass provides a way to describe the “classes” of storage when
+provisioning a volume snapshot.</p>
+</blockquote>
+
+<p>In <a href="cluster/examples/kubernetes/ceph/csi/example/rbd/snapshotclass.yaml">snapshotClass</a>,
+the <code class="language-plaintext highlighter-rouge">csi.storage.k8s.io/snapshotter-secret-name</code> parameter should reference the
+name of the secret created for the rbdplugin. The <code class="language-plaintext highlighter-rouge">monitors</code> are a comma
+separated list of your Ceph monitors and <code class="language-plaintext highlighter-rouge">pool</code> to reflect the Ceph pool name.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/snapshotclass.yaml
+</span></code></pre></div></div>
+
+<h4 id="create-volumesnapshot">create volumesnapshot</h4>
+
+<p>In <a href="cluster/examples/kubernetes/ceph/csi/example/rbd/snapshot.yaml">snapshot</a>,
+<code class="language-plaintext highlighter-rouge">snapshotClassName</code> should be the name of the <code class="language-plaintext highlighter-rouge">VolumeSnapshotClass</code> previously
+created. The source name should be the name of the PVC you created earlier.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/snapshot.yaml
+</span></code></pre></div></div>
+
+<h4 id="verify-rbd-snapshot-has-successfully-been-created">Verify RBD Snapshot has successfully been created</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># kubectl get volumesnapshotclass</span>
+NAME                      AGE
+csi-rbdplugin-snapclass   4s
+<span class="c"># kubectl get volumesnapshot</span>
+NAME               AGE
+rbd-pvc-snapshot   6s
+</code></pre></div></div>
+
+<p>In one of your Ceph pod, run <code class="language-plaintext highlighter-rouge">rbd snap ls [name-of-your-pvc]</code>.
+The output should be similar to this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rbd snap ls pvc-c20495c0d5de11e8</span>
+SNAPID NAME                                                                      SIZE TIMESTAMP
+     4 csi-rbd-pvc-c20495c0d5de11e8-snap-4c0b455b-d5fe-11e8-bebb-525400123456 1024 MB Mon Oct 22 13:28:03 2018
+</code></pre></div></div>
+
+<h4 id="restore-the-snapshot-to-a-new-pvc">Restore the snapshot to a new PVC</h4>
+
+<p>In
+<a href="cluster/examples/kubernetes/ceph/csi/example/rbd/pvc-restore.yaml">pvc-restore</a>,
+<code class="language-plaintext highlighter-rouge">dataSource</code> should be the name of the <code class="language-plaintext highlighter-rouge">VolumeSnapshot</code> previously
+created. The kind should be the <code class="language-plaintext highlighter-rouge">VolumeSnapshot</code>.</p>
+
+<p>Create a new PVC from the snapshot</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/rbd/pvc-restore.yaml
+</span></code></pre></div></div>
+
+<h4 id="verify-rbd-clone-pvc-has-successfully-been-created">Verify RBD clone PVC has successfully been created</h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># kubectl get pvc</span>
+<span class="s">NAME              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE</span>
+<span class="s">rbd-pvc           Bound    pvc-84294e34-577a-11e9-b34f-525400581048   1Gi        RWO            csi-rbd        34m</span>
+<span class="s">rbd-pvc-restore   Bound    pvc-575537bf-577f-11e9-b34f-525400581048   1Gi        RWO            csi-rbd        8s</span>
+</code></pre></div></div>
+
+<h2 id="rbd-resource-cleanup">RBD resource Cleanup</h2>
+
+<p>To clean your cluster of the resources created by this example, run the following:</p>
+
+<p>if you have tested snapshot, delete snapshotclass, snapshot and pvc-restore
+created to test snapshot feature</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/pvc-restore.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/snapshot.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/snapshotclass.yaml
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/pod.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/pvc.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/secret.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/rbd/storageclass.yaml
+</span></code></pre></div></div>
+
+<h1 id="test-cephfs-csi-driver">Test CephFS CSI Driver</h1>
+
+<h2 id="create-cephfs-storageclass">Create CephFS StorageClass</h2>
+
+<p>This
+<a href="../cluster/examples/kubernetes/ceph/csi/example/cephfs/storageclass.yaml">storageclass</a>
+expect a pool named <code class="language-plaintext highlighter-rouge">cephfs_data</code> in your Ceph cluster. You can create this
+pool using <a href="https://github.com/rook/rook/blob/v1.0/Documentation/ceph-filesystem-crd.md">rook file-system
+CRD</a>.</p>
+
+<p>Please update <code class="language-plaintext highlighter-rouge">monitors</code> to reflect the Ceph monitors.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/cephfs/storageclass.yaml
+</span></code></pre></div></div>
+
+<h2 id="create-cephfs-secret">Create CephFS Secret</h2>
+
+<p>Create a Secret that matches <code class="language-plaintext highlighter-rouge">provisionVolume</code> type specified in the <a href="../cluster/examples/kubernetes/ceph/csi/example/cephfs/storageclass.yaml">storageclass</a>.</p>
+
+<p>In <a href="../cluster/examples/kubernetes/ceph/csi/example/cephfs/secret.yaml">secret</a>
+you need your Ceph admin/user ID and password encoded in base64. Encode
+admin/user ID in base64 format and replace <code class="language-plaintext highlighter-rouge">BASE64-ENCODED-USER</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$echo</span> <span class="nt">-n</span> admin|base64
+<span class="nv">YWRtaW4</span><span class="o">=</span>
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">ceph auth ls</code> in your rook ceph operator pod, to encode the key of your
+admin/user run <code class="language-plaintext highlighter-rouge">echo -n KEY|base64</code>
+and replace <code class="language-plaintext highlighter-rouge">BASE64-ENCODED-PASSWORD</code> by your encoded key.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> <span class="nt">-n</span> rook-ceph rook-ceph-operator-6c49994c4f-pwqcx /bin/sh
+sh-4.2# ceph auth <span class="nb">ls
+</span>installed auth entries:
+
+osd.0
+	key: AQA3pa1cN/fODBAAc/jIm5IQDClm+dmekSmSlg<span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.1
+	key: <span class="nv">AQBXpa1cTjuYNRAAkohlInoYAa6A3odTRDhnAg</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.2
+	key: <span class="nv">AQB4pa1cvJidLRAALZyAtuOwArO8JZfy7Y5pFg</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+osd.3
+	key: <span class="nv">AQCcpa1cFFQRHRAALBYhqO3m0FRA9pxTOFT2eQ</span><span class="o">==</span>
+	caps: <span class="o">[</span>mgr] allow profile osd
+	caps: <span class="o">[</span>mon] allow profile osd
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+client.admin
+	key: <span class="nv">AQD0pK1cqcBDCBAAdXNXfgAambPz5qWpsq0Mmw</span><span class="o">==</span>
+	auid: 0
+	caps: <span class="o">[</span>mds] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mgr] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mon] allow <span class="k">*</span>
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+client.bootstrap-mds
+	key: <span class="nv">AQD6pK1crJyZCxAA1UTGwtyFv3YYFcBmhWHyoQ</span><span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-mds
+client.bootstrap-mgr
+	key: AQD6pK1c2KaZCxAATWi/I3i0/XEesSipy/HeIA<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-mgr
+client.bootstrap-osd
+	key: AQD6pK1cwa+ZCxAA7XKXRyLQpaHZ+lRXeUk8xQ<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-osd
+client.bootstrap-rbd
+	key: AQD6pK1cULmZCxAA4++Ch/iRKa52297/rbHP+w<span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-rbd
+client.bootstrap-rgw
+	key: <span class="nv">AQD6pK1cbMKZCxAAGKj5HaMoEl41LHqEafcfPA</span><span class="o">==</span>
+	caps: <span class="o">[</span>mon] allow profile bootstrap-rgw
+mgr.a
+	key: AQAZpa1chl+DAhAAYyolLBrkht+0sH0HljkFIg<span class="o">==</span>
+	caps: <span class="o">[</span>mds] allow <span class="k">*</span>
+	caps: <span class="o">[</span>mon] allow <span class="k">*</span>
+	caps: <span class="o">[</span>osd] allow <span class="k">*</span>
+
+<span class="c">#encode admin/user key</span>
+sh-4.2#echo <span class="nt">-n</span> <span class="nv">AQD0pK1cqcBDCBAAdXNXfgAambPz5qWpsq0Mmw</span><span class="o">==</span>|base64
+<span class="nv">QVFEMHBLMWNxY0JEQ0JBQWRYTlhmZ0FhbWJQejVxV3BzcTBNbXc9PQ</span><span class="o">==</span>
+<span class="c">#or</span>
+sh-4.2#ceph auth get-key client.admin|base64
+<span class="nv">QVFEMHBLMWNxY0JEQ0JBQWRYTlhmZ0FhbWJQejVxV3BzcTBNbXc9PQ</span><span class="o">==</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/cephfs/secret.yaml
+</span></code></pre></div></div>
+
+<h2 id="create-cephfs-persistentvolumeclaim">Create CephFS PersistentVolumeClaim</h2>
+
+<p>In <a href="../cluster/examples/kubernetes/ceph/csi/example/cephfs/pvc.yaml">pvc</a>,
+make sure your <code class="language-plaintext highlighter-rouge">storageClassName</code> is the name of the <code class="language-plaintext highlighter-rouge">StorageClass</code> previously
+defined in <code class="language-plaintext highlighter-rouge">storageclass.yaml</code></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/cephfs/pvc.yaml
+</span></code></pre></div></div>
+
+<h2 id="verify-cephfs-pvc-has-successfully-been-created">Verify CephFS PVC has successfully been created</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># kubectl get pvc</span>
+NAME          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+cephfs-pvc   Bound    pvc-6bc76846-3a4a-11e9-971d-525400c2d871   1Gi        RWO            csi-cephfs     25s
+
+</code></pre></div></div>
+
+<p>If your PVC status isn’t <code class="language-plaintext highlighter-rouge">Bound</code>, check the csi-cephfsplugin logs to see what’s
+preventing the PVC from being up and bound.</p>
+
+<h2 id="create-cephfs-demo-pod">Create CephFS demo Pod</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/csi/example/cephfs/pod.yaml
+</span></code></pre></div></div>
+
+<p>Once the PVC is attached to the pod, pod creation process will continue</p>
+
+<h2 id="cephfs-resource-cleanup">CephFS resource Cleanup</h2>
+
+<p>To clean your cluster of the resources created by this example, run the
+following:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/cephfs/pod.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/cephfs/pvc.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/cephfs/secret.yaml
+kubectl delete -f cluster/examples/kubernetes/ceph/csi/example/cephfs/storageclass.yaml
+</span></code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.0/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.0/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.0/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.0/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.0/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.0/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.0/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.0/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.0/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph cluster Pod Security Policies",
+      "/docs/rook/v1.0/ceph-psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.0/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.0/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.0/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.0/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.0/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.0/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.0/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.0/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.0/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.0/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.0/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.0/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.0/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.0/ceph-csi-drivers.html",
+      true,
+      true
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.0/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.0/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.0/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.0/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.0/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.0/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.0/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.0/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.0/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.0/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.0/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.0/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.0/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.0/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.0/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.0/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.0/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.0/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.0/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.0/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.0/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.0/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.0/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.0/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.0/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.0/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

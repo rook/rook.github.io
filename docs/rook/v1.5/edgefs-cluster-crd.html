@@ -1,0 +1,1547 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.5/edgefs-cluster-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.5</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/edgefs-cluster-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/edgefs-cluster-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/edgefs-cluster-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/edgefs-cluster-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/edgefs-cluster-crd.html" class="active">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/edgefs-cluster-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/edgefs-cluster-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/edgefs-cluster-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/edgefs-cluster-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/edgefs-cluster-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/edgefs-cluster-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/edgefs-cluster-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/edgefs-cluster-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/edgefs-cluster-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/edgefs-cluster-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/edgefs-cluster-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/edgefs-cluster-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.5 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="edgefs-cluster-crd">EdgeFS Cluster CRD</h1>
+
+<p><a href="https://github.com/rook/rook/issues/5823#issuecomment-703834989">Deprecated</a></p>
+
+<p>Rook allows creation and customization of storage clusters through the custom resource definitions (CRDs).</p>
+
+<h2 id="sample">Sample</h2>
+
+<p>To get you started, here is a simple example of a CRD to configure a EdgeFS cluster with just one local per-host directory /data:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/data</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>   <span class="c1"># use only for test deployments</span>
+</code></pre></div></div>
+
+<p>or if you have raw block devices provisioned, it can dynamically detect, format and utilize all raw devices on all nodes with simple CRD as below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/data</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>   <span class="c1"># use only for test deployments</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>or if you want to just install it on <strong>single node1, single SSD device /dev/sdb</strong>, use this sample:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/data</span>
+  <span class="na">sysRepCount</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">device"</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">useAllSSD</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+      <span class="na">useMetadataOffload</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">node1"</span>
+      <span class="na">devices</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+</code></pre></div></div>
+
+<p>or if you want to just install it on <strong>single node1, single directory /media</strong>, use this sample:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/data</span>
+  <span class="na">sysRepCount</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">device"</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">directories</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/media</span>   <span class="c1"># global for all nodes, cannot be per-node!</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">node1"</span>
+</code></pre></div></div>
+
+<p>In addition to the CRD, you will also need to create a namespace, role, and role binding as seen in the <a href="#common-cluster-resources">common cluster resources</a> below.</p>
+
+<h2 id="settings">Settings</h2>
+
+<p>Settings can be specified at the global level to apply to the cluster as a whole, while other settings can be specified at more fine-grained levels, e.g. individual nodes.  If any setting is unspecified, a suitable default will be used automatically.</p>
+
+<h3 id="cluster-metadata">Cluster metadata</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name that will be used internally for the EdgeFS cluster. Most commonly the name is the same as the namespace since multiple clusters are not supported in the same namespace.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The Kubernetes namespace that will be created for the Rook cluster. The services, pods, and other resources created by the operator will be added to this namespace. The common scenario is to create a single Rook cluster. If multiple clusters are created, they must not have conflicting devices or host paths.</li>
+  <li><code class="language-plaintext highlighter-rouge">edgefsImageName</code>: EdgeFS image to use. If not specified then <code class="language-plaintext highlighter-rouge">edgefs/edgefs:latest</code> is used. We recommend to specify particular image version for production use, for example <code class="language-plaintext highlighter-rouge">edgefs/edgefs:1.2.124</code>.</li>
+</ul>
+
+<h3 id="cluster-settings">Cluster Settings</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dataDirHostPath</code>: The path on the host (<a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath">hostPath</a>) where config and data should be stored for each of the services. If the directory does not exist, it will be created. Because this directory persists on the host, it will remain after pods are deleted. If <code class="language-plaintext highlighter-rouge">storage</code> settings not provided then provisioned hostPath will also be used as a storage device for Target pods (automatic provisioning via <code class="language-plaintext highlighter-rouge">rtlfs</code>).
+    <ul>
+      <li>On <strong>Minikube</strong> environments, use <code class="language-plaintext highlighter-rouge">/data/rook</code>. Minikube boots into a tmpfs but it provides some <a href="https://github.com/kubernetes/minikube/blob/master/docs/persistent_volumes.md">directories</a> where files can be persisted across reboots. Using one of these directories will ensure that Rook’s data and configuration files are persisted and that enough storage space is available.</li>
+      <li><strong>WARNING</strong>: For test scenarios, if you delete a cluster and start a new cluster on the same hosts, the path used by <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> must be deleted. Otherwise, stale information and other config will remain from the previous cluster and the new target will fail to start.
+If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/#emptydir">empty dir docs</a>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">dataVolumeSize</code>: Alternative to <code class="language-plaintext highlighter-rouge">dataDirHostPath</code>. If defined then Cluster CRD operator will disregard <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> setting and instead will automatically claim persistent volume. If <code class="language-plaintext highlighter-rouge">storage</code> settings not provided then provisioned volume will also be used as a storage device for Target pods (automatic provisioning via <code class="language-plaintext highlighter-rouge">rtlfs</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">sysRepCount</code>: overrides the default (3) system replication count value. Can be set to 1 or 2 for a cluster with limited number of failure domains. For example, a single node setup with two disks can provide up to 2 replicas per chunk and requires <code class="language-plaintext highlighter-rouge">sysRepCount</code> to be set to 1 or 2.</li>
+  <li><code class="language-plaintext highlighter-rouge">failureDomain</code>: identifies the way chunk replicas are distributed across cluster’s disks. The <code class="language-plaintext highlighter-rouge">device</code> domain requires each replicas to resides on different disks, the <code class="language-plaintext highlighter-rouge">host</code> domains implies one replica per node and the <code class="language-plaintext highlighter-rouge">zone</code> domain is for one replica per zone. If <code class="language-plaintext highlighter-rouge">failureDomain</code> option isn’t specified, then the failure domain is set to <code class="language-plaintext highlighter-rouge">host</code> or <code class="language-plaintext highlighter-rouge">zone</code> depending on nodes config (see below). The <code class="language-plaintext highlighter-rouge">failureDomain</code> allows to specify the failure domain explicitly. For example, a single-node cluster with multiple nodes requires the <code class="language-plaintext highlighter-rouge">failureDomain</code> set to <code class="language-plaintext highlighter-rouge">device</code> if the <code class="language-plaintext highlighter-rouge">sysRepCount</code> &gt; 1.</li>
+  <li><code class="language-plaintext highlighter-rouge">dashboard</code>: This specification may be used to override and enable additional <a href="/docs/rook/v1.5/edgefs-ui.html">EdgeFS UI Dashboard</a> functionality.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">localAddr</code>: Specifies local IP address to be used as Kubernetes external IP.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">network</code>: <a href="#network-configuration-settings">network configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">devicesResurrectMode</code>: When enabled, this mode attempts to recreate cluster based on previous CRD definition. If this flag set to one of the parameters, then operator will only adjust networking. Often used when clean up of old devices is needed. Only applicable when used with <code class="language-plaintext highlighter-rouge">dataDirHostPath</code>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">restore</code>: Attempt to restart and restore previously enabled cluster CRD.</li>
+      <li><code class="language-plaintext highlighter-rouge">restoreZap</code>: Attempt to re-initialize previously selected <code class="language-plaintext highlighter-rouge">devices</code> prior to restore. By default cluster assumes that selected devices have no logical partitions and considered empty.</li>
+      <li><code class="language-plaintext highlighter-rouge">restoreZapWait</code>: Attempt to cleanup previously selected <code class="language-plaintext highlighter-rouge">devices</code> and wait for cluster delete. This is useful when clean up of old devices is needed. Additional containers count should be specified if cluster was originally created with a total per-node capacity that exceeding <code class="language-plaintext highlighter-rouge">maxContainerCapacity</code> option, e.g., <code class="language-plaintext highlighter-rouge">devicesResurrectMode: "restoreZapWait: 2"</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">serviceAccount</code>: The service account under which the EdgeFS pods will run that will give access to ConfigMaps in the cluster’s namespace. If not set, the default of <code class="language-plaintext highlighter-rouge">rook-edgefs-cluster</code> will be used.</li>
+  <li><code class="language-plaintext highlighter-rouge">chunkCacheSize</code>: Limit amount of memory allocated for dynamic chunk cache. By default Target pod uses up to 75% of available memory as chunk caching area. This option can influence this allocation strategy.</li>
+  <li><code class="language-plaintext highlighter-rouge">placement</code>: <a href="#placement-configuration-settings">placement configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">resourceProfile</code>: Cluster segment wide resource utilization profile (Memory and CPU). Can be <code class="language-plaintext highlighter-rouge">embedded</code> or <code class="language-plaintext highlighter-rouge">performance</code> (default). In case of <code class="language-plaintext highlighter-rouge">performance</code> each Target pod requires at least 8Gi of memory and 4 CPU cores in terms of to operate efficiently. If <code class="language-plaintext highlighter-rouge">resources</code> limits are set to less then 8Gi of memory then operator will automatically set profile to <code class="language-plaintext highlighter-rouge">embedded</code>. In <code class="language-plaintext highlighter-rouge">embedded</code> profile case, Target pod requires 1Gi of memory and 2 CPU cores, where memory allocation is split between number of PLevels (see <code class="language-plaintext highlighter-rouge">rtPLevelOverride</code> option) with 64Mi minimally per one PLevel, 64Mi for Target pod itself and the rest for chunk cache (see <code class="language-plaintext highlighter-rouge">chunkCacheSize</code> option) that allocates up to 75% of available memory.</li>
+  <li><code class="language-plaintext highlighter-rouge">resources</code>: <a href="#cluster-wide-resources-configuration-settings">resources configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">storage</code>: Storage selection and configuration that will be used across the cluster.  Note that these settings can be overridden for specific nodes.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useAllNodes</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating if all nodes in the cluster should be used for storage according to the cluster level storage selection and configuration values.
+If individual nodes are specified under the <code class="language-plaintext highlighter-rouge">nodes</code> field below, then <code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">nodes</code>: Names of individual nodes in the cluster that should have their storage included in accordance with either the cluster level configuration specified above or any node specific overrides described in the next section below.
+<code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> to use specific nodes and their config.</li>
+      <li><a href="#storage-selection-settings">storage selection settings</a></li>
+      <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">skipHostPrepare</code>: By default all nodes selected for EdgeFS deployment will be automatically configured via preparation jobs. If this option set to <code class="language-plaintext highlighter-rouge">true</code> node configuration will be skipped.</li>
+  <li><code class="language-plaintext highlighter-rouge">trlogProcessingInterval</code>: Controls for how many seconds cluster would aggregate object modifications prior to processing it by accounting, bucket updates, ISGW Links and notifications components. Has to be defined in seconds and must be composite of 60, i.e. 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30. Default is 10. Recommended range is 2 - 20. This is cluster wide setting and cannot be easily changed after cluster is created. Any new node added has to reflect exactly the same setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">trlogKeepDays</code>: Controls for how many days cluster need to keep transaction log interval batches with version manifest references. If you planning to have cluster disconnected from ISGW downlinks for longer period time, consider to increase this value. Default is 3. This is cluster wide setting and cannot be easily changed after cluster is created. The value can be fractional, e.g. 1.1 or 0.1</li>
+  <li><code class="language-plaintext highlighter-rouge">maxContainerCapacity</code>: Overrides default total disks capacity per target container. Default is “132Ti”.</li>
+  <li><code class="language-plaintext highlighter-rouge">useHostLocalTime</code>: Force usage of the host’s /etc/localtime inside EdgeFS containers. Default is <code class="language-plaintext highlighter-rouge">false</code>.</li>
+</ul>
+
+<h4 id="node-updates">Node Updates</h4>
+
+<p>Nodes can be added and removed over time by updating the Cluster CRD, for example with <code class="language-plaintext highlighter-rouge">kubectl -n rook-edgefs edit cluster.edgefs.rook.io rook-edgefs</code>.
+This will bring up your default text editor and allow you to add and remove storage nodes from the cluster.
+This feature is only available when <code class="language-plaintext highlighter-rouge">useAllNodes</code> has been set to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<h3 id="node-settings">Node Settings</h3>
+
+<p>In addition to the cluster level settings specified above, each individual node can also specify configuration to override the cluster level settings and defaults.
+If a node does not specify any configuration then it will inherit the cluster level settings.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the node, which should match its <code class="language-plaintext highlighter-rouge">kubernetes.io/hostname</code> label.</li>
+  <li><code class="language-plaintext highlighter-rouge">config</code>: Config settings applied to all VDEVs on the node unless overridden by <code class="language-plaintext highlighter-rouge">devices</code> or <code class="language-plaintext highlighter-rouge">directories</code>. See the <a href="#storage-configuration-settings">config settings</a> below.</li>
+  <li><a href="#storage-selection-settings">storage selection settings</a></li>
+  <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+</ul>
+
+<h3 id="storage-selection-settings">Storage Selection Settings</h3>
+
+<p>Below are the settings available, both at the cluster and individual node level, for selecting which storage resources will be included in the cluster.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useAllDevices</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating whether all devices found on nodes in the cluster should be automatically consumed by Targets. This is recommended for controlled environments where you will not risk formatting of devices with existing data. When <code class="language-plaintext highlighter-rouge">true</code>, all devices will be used except those with partitions created or a local filesystem. This can be overridden by <code class="language-plaintext highlighter-rouge">deviceFilter</code>. <strong>warning</strong> Don’t set this option to <code class="language-plaintext highlighter-rouge">true</code> for RTKVS disk backend.</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceFilter</code>: A regular expression that allows selection of devices to be consumed by target.  If individual devices have been specified for a node then this filter will be ignored.  This field uses <a href="https://golang.org/pkg/regexp/syntax/">golang regular expression syntax</a>. For example:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sdb</code>: Only selects the <code class="language-plaintext highlighter-rouge">sdb</code> device if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^sd.</code>: Selects all devices starting with <code class="language-plaintext highlighter-rouge">sd</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^sd[a-d]</code>: Selects devices starting with <code class="language-plaintext highlighter-rouge">sda</code>, <code class="language-plaintext highlighter-rouge">sdb</code>, <code class="language-plaintext highlighter-rouge">sdc</code>, and <code class="language-plaintext highlighter-rouge">sdd</code> if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^s</code>: Selects all devices that start with <code class="language-plaintext highlighter-rouge">s</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^[^r]</code>: Selects all devices that do <em>not</em> start with <code class="language-plaintext highlighter-rouge">r</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">devices</code>: A list of individual device names belonging to this node to include in the storage cluster. Mixing of <code class="language-plaintext highlighter-rouge">devices</code> and <code class="language-plaintext highlighter-rouge">directories</code> on the same node isn’t supported.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the device (e.g., <code class="language-plaintext highlighter-rouge">sda</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">fullpath</code>: The full path to the device (e.g., <code class="language-plaintext highlighter-rouge">/dev/disk/by-id/scsi-35000c5008335c83f</code>). If specified then <code class="language-plaintext highlighter-rouge">name</code> can be omitted.</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Device-specific config settings. See the <a href="#target-configuration-settings">config settings</a> below.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">directories</code>:  A list of directory paths on the nodes that will be included in the storage cluster. Note that using two directories on the same physical device can cause a negative performance impact. Since EdgeFS is leveraging StatefulSet, directories can only be defined at cluster level. Mixing of <code class="language-plaintext highlighter-rouge">devices</code> and <code class="language-plaintext highlighter-rouge">directories</code> on the same node isn’t supported unless <code class="language-plaintext highlighter-rouge">rtkvs</code> disk engine is used. ** note **: For the <code class="language-plaintext highlighter-rouge">rtkvs</code> disk engine, at least one directory needs to be provided in order to store some small amount of metadata. For performance reasons, it would be better to have one directory per disk.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">path</code>: The path on disk of the directory (e.g., <code class="language-plaintext highlighter-rouge">/rook/storage-dir</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Directory-specific config settings. See the <a href="#target-configuration-settings">config settings</a> below.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="storage-configuration-settings">Storage Configuration Settings</h3>
+
+<p>The following storage selection settings are specific to EdgeFS and do not apply to other backends. All variables are key-value pairs represented as strings. While EdgeFS supports multiple backends, it is not recommended to mix them within same cluster. In case of <code class="language-plaintext highlighter-rouge">devices</code> (physical or emulated raw disks), EdgeFS will automatically use <code class="language-plaintext highlighter-rouge">rtrd</code> backend unless <code class="language-plaintext highlighter-rouge">useRtkvsBackend</code> is specified. In the latter case, the <code class="language-plaintext highlighter-rouge">rtkvs</code> engine will be chosen. In all other cases <code class="language-plaintext highlighter-rouge">rtlfs</code> (local filesystem) will be used.</p>
+
+<blockquote>
+  <p><strong>IMPORTANT</strong>: Keys needs to be case-sensitive and values has to be provided as strings.</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useRtkvsBackend</code>: forces the cluster use the <code class="language-plaintext highlighter-rouge">rtkvs</code> disk engine and setting’s value selects a key-value backend to be used. At the moment there is only backend named the <code class="language-plaintext highlighter-rouge">kvssd</code> for Samsung’s KV SSD. The usage of <code class="language-plaintext highlighter-rouge">rtkvs</code> engine implies definition of one or several <code class="language-plaintext highlighter-rouge">device.name</code> or <code class="language-plaintext highlighter-rouge">device.fullpath</code> settings which have to point to backend’s disk entries (see cluster_kvsdd.yaml).</li>
+  <li><code class="language-plaintext highlighter-rouge">walMode</code>: allows to enable/disable the Write-Ahead log (WAL). For <code class="language-plaintext highlighter-rouge">rtlfs</code> and <code class="language-plaintext highlighter-rouge">rtkvs</code> there are two options: <code class="language-plaintext highlighter-rouge">on</code> to enable or <code class="language-plaintext highlighter-rouge">off</code> to disable. It’s better to keep it <code class="language-plaintext highlighter-rouge">on</code> unless <code class="language-plaintext highlighter-rouge">useAllSSD</code> or <code class="language-plaintext highlighter-rouge">useRtkvsBackend</code> are used. For <code class="language-plaintext highlighter-rouge">rtkvs</code>, there is an extra option: <code class="language-plaintext highlighter-rouge">metadata</code> which implies usage of WAL for data types which aren’t stored on <code class="language-plaintext highlighter-rouge">rtkvs</code> backend (a KVSSD).</li>
+  <li><code class="language-plaintext highlighter-rouge">useMetadataOffload</code>: Dynamically detect appropriate SSD/NVMe device to use for the metadata on each node. Performance can be improved by using a low latency device as the metadata device, while other spinning platter (HDD) devices on a node are used to store data. Typical and recommended proportion is in range of 1:1 - 1:6. Default is false. Applicable only to <code class="language-plaintext highlighter-rouge">rtrd</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">useMetadataMask</code>: Defines what parts of metadata needs to be stored on offloaded devices. Default is 0xff, offload all metadata. To save SSD/NVMe capacity, set it to 0x7d to offload all except second level manifests. Applicable only to <code class="language-plaintext highlighter-rouge">rtrd</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">useBCache</code>: When <code class="language-plaintext highlighter-rouge">useMetadataOffload</code> is true, enable use of BCache. Default is false. Applicable only to <code class="language-plaintext highlighter-rouge">rtrd</code> and when host has “bcache” kernel module preloaded.</li>
+  <li><code class="language-plaintext highlighter-rouge">useBCacheWB</code>:  When <code class="language-plaintext highlighter-rouge">useMetadataOffload</code> and <code class="language-plaintext highlighter-rouge">useBCache</code> is true, this option can enable use of BCache write-back cache. By default BCache only used as read cache in front of HDD. Applicable only to <code class="language-plaintext highlighter-rouge">rtrd</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">useAllSSD</code>: When set to true, only SSD/NVMe non rotational devices will be used. Default is false and if <code class="language-plaintext highlighter-rouge">useMetadataOffload</code> not defined then only rotational devices (HDDs) will be picked up during node provisioning phase. Is not applicable to <code class="language-plaintext highlighter-rouge">rtkvs</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">rtPLevelOverride</code>:  In case of large devices or directories, it will be automatically partitioned into smaller parts around 500GB each. In case of embedded use cases, lowering the value would allow to operate with smaller memory footprint devices at the cost of performance. This option allows partitioning number override. Default is automatic. Typical and recommended range is 1 - 32. For <code class="language-plaintext highlighter-rouge">rtkvs</code> recommended plevel is 16.</li>
+  <li><code class="language-plaintext highlighter-rouge">hddReadAhead</code>: For all HDD or hybrid (SSD/HDD) use cases, adjusting hddReadAhead may provide significant boost in performance. Set to a value higher then 0, in KBs. Not applicable to <code class="language-plaintext highlighter-rouge">rtkvs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mdReserved</code>: For hybrid (SSD/HDD) use case, adjusting mdReserved can be necessary when combined with BCache read/write caches. Allowed range 10-99% of automatically calcuated slice. Not applicable to <code class="language-plaintext highlighter-rouge">rtkvs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">rtVerifyChid</code>:  Verify transferred or read payload. Payload can be data or metadata chunk of flexible size between 4K and 8MB. EdgeFS uses SHA-3 variant to cryptographically sign each chunk and uses it for self validation, self healing and FlexHash addressing. In case of low CPU systems verification after networking transfer prior to write can be disabled by setting this parameter to 0. In case of high CPU systems, verification after read but before networking transfer can be enabled by setting this parameter to 2. Default is 1, i.e. verify after networking transfer only. Setting it to 0 may improve CPU utilization at the cost of reduced availability. However, for objects with 3 or more replicas, availability isn’t going to be visibly affected.</li>
+  <li><code class="language-plaintext highlighter-rouge">lmdbPageSize</code>: Defines default LMDB page size in bytes. Default is 16384. For capacity (all HDD) or hybrid (HDD/SSD) systems consider to increase this value to 32768 to achieve higher throughput performance. For all SSD and small database workloads, consider to decrease this to 8192 to achieve lower latency and higher IOPS. Please be advised that smaller values MAY cause fragmentation. Acceptable values are 4096, 8192, 16384 and 32768. Not applicable to <code class="language-plaintext highlighter-rouge">rtkvs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">lmdbMdPageSize</code>: Defines SSD metadata offload LMDB page size in bytes. Default is 8192. For large amount of small objects or files, consider to decrease this to 4096 to achieve better SSD capacity utilization. Acceptable values are 4096, 8192, 16384 and 32768. Not applicable to <code class="language-plaintext highlighter-rouge">rtkvs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sync</code>: Defines default behavior of write operations at device or directory level. Acceptable values are 0, 1 (default), 2, 3.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">0</code>: No syncing will happen. Highest performance possible and good for HPC scratch types of deployments. This option will still sustain crash of pods or software bugs. It will not sustain server power loss an may cause node / device level inconsistency.</li>
+      <li><code class="language-plaintext highlighter-rouge">1</code>: Default method. Will guarantee node / device consistency in case of power loss with reduced durability.</li>
+      <li><code class="language-plaintext highlighter-rouge">2</code>: Provides better durability in case of power loss at the cost of extra metadata syncing.</li>
+      <li><code class="language-plaintext highlighter-rouge">3</code>: Most durable and reliable option at the cost of significant performance impact.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">maxSizeGB</code>: For <code class="language-plaintext highlighter-rouge">rtlfs</code>, defines maximum allowed size to use per directory in gigabytes. For <code class="language-plaintext highlighter-rouge">rtkvs</code> this is the maximum space the disk’s metadata table can occupy.</li>
+  <li><code class="language-plaintext highlighter-rouge">zone</code>: Enables the node’s failure domain number. Default value is 0 (no zoning). Zoning number is a logical failure domain tagging mechanism and if enabled then it has to be set for all the nodes in the cluster. See also, the <code class="language-plaintext highlighter-rouge">failureDomain</code></li>
+  <li><code class="language-plaintext highlighter-rouge">noIP4Frag</code>: When set to <code class="language-plaintext highlighter-rouge">true</code> it prevents sending fragmented UDP traffic. <strong>IMPORTANT</strong>: maximum data chunk size will be redused significantly.</li>
+  <li><code class="language-plaintext highlighter-rouge">sysMaxChunkSize</code>: Set maximum allowed data chunk size expressed in bytes. Must be a power of two value. Default is 1M.</li>
+  <li><code class="language-plaintext highlighter-rouge">payloadS3URL</code>: When set, it activates payload data chunk forwarding to an external S3 server. The value is an URL of the S3 bucket the payload chunks will be put to. Example: http://s3.aws-region.amazonaws.com/bucket. Only applicable for RTRD (raw disk) engine. Disabled by default.</li>
+  <li><code class="language-plaintext highlighter-rouge">payloadS3Region</code>: S3 server region. Default is <code class="language-plaintext highlighter-rouge">us-east-1</code>. Only applicable when the <code class="language-plaintext highlighter-rouge">payloadS3URL</code> is set.</li>
+  <li><code class="language-plaintext highlighter-rouge">payloadS3MinKb</code>: a minimal payload chunk size to trigger the forwarding to the S3 bucket. Data chunks smaller than this value will be stored locally. Only applicable when the <code class="language-plaintext highlighter-rouge">payloadS3URL</code> is set.</li>
+  <li><code class="language-plaintext highlighter-rouge">payloadS3CapacityGB</code>: capacity of the external S3 bucket expressed in GB. This is an artificial value used to report accurate usage summary and to limit storage size. Only applicable when the <code class="language-plaintext highlighter-rouge">payloadS3URL</code> is set.</li>
+  <li><code class="language-plaintext highlighter-rouge">payloadS3Secret</code>: name of a Kubernetes secret to be used as an external S3 bucket credential. The secret needs to be pre-creted before deployment of the EdgeFS cluster and resides in the same namespace as the cluster. Secret’s key need to be set to <code class="language-plaintext highlighter-rouge">cred</code> and value format is as follow: <code class="language-plaintext highlighter-rouge">&lt;aws_key&gt;,&lt;aws_secret&gt;</code>. See an example in the s3PayloadSecret.yaml</li>
+</ul>
+
+<h3 id="placement-configuration-settings">Placement Configuration Settings</h3>
+
+<p>Placement configuration for the cluster services. It includes the following keys: <code class="language-plaintext highlighter-rouge">mgr</code>, <code class="language-plaintext highlighter-rouge">target</code> and <code class="language-plaintext highlighter-rouge">all</code>. Each service will have its placement configuration generated by merging the generic configuration under <code class="language-plaintext highlighter-rouge">all</code> with the most specific one (which will override any attributes).</p>
+
+<p>A Placement configuration is specified (according to the Kubernetes PodSpec) as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nodeAffinity</code>: Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature">NodeAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAffinity</code>: Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAntiAffinity</code>: Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAntiAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">tolerations</code>: list of Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Toleration</a></li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">mgr</code> pod does not allow <code class="language-plaintext highlighter-rouge">Pod</code> affinity or anti-affinity. This is because of the mgrs having built-in anti-affinity with each other through the operator. The operator chooses which nodes are to run a mgr on. Each mgr is then tied to a node with a node selector using a hostname.</p>
+
+<h3 id="network-configuration-settings">Network Configuration Settings</h3>
+
+<p>Configure the network that will be enabled for the cluster and services. This is optional and if not defined then the cluster default network’s <code class="language-plaintext highlighter-rouge">eth0</code> will be used to construct cluster bucket network.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">provider</code>: Specifies the network provider that will be used to connect the network interface. You can choose between <code class="language-plaintext highlighter-rouge">host</code>, and <code class="language-plaintext highlighter-rouge">multus</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">selectors</code>: List the network selector that will be used associated by a key. The available keys are <code class="language-plaintext highlighter-rouge">server</code> and <code class="language-plaintext highlighter-rouge">broker</code>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">server</code>: Specifies data daemon host’s networking interface name or multus’s network attachment selection annotation.</li>
+      <li><code class="language-plaintext highlighter-rouge">broker</code>: Specifies broker daemon host’s networking interface name or multus’s network attachment selection annotation.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For <code class="language-plaintext highlighter-rouge">multus</code> network provider, an already working cluster with multus networking is required. Network attachment definition that later will be attached to the cluster needs to be created before the Cluster CRD.
+You can add the multus network attachment selection annotation selecting the created network attachment definition on <code class="language-plaintext highlighter-rouge">selectors</code>. Make sure to define the interface name that will be assigned by multus and choose only one syntax either the short or JSON form to define all the available keys.</p>
+
+<h3 id="cluster-wide-resources-configuration-settings">Cluster-wide Resources Configuration Settings</h3>
+
+<p>Resources should be specified so that the rook components are handled after <a href="https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/">Kubernetes Pod Quality of Service classes</a>.
+This allows to keep rook components running when for example a node runs out of memory and the rook components are not killed depending on their Quality of Service class.</p>
+
+<p>You can set resource requests/limits for rook components through the <a href="#resource-requirementslimits">Resource Requirements/Limits</a> structure in the following keys:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: Set resource requests/limits for Mgrs.</li>
+  <li><code class="language-plaintext highlighter-rouge">target</code>: Set resource requests/limits for Targets.</li>
+</ul>
+
+<h3 id="resource-requirementslimits">Resource Requirements/Limits</h3>
+
+<p>For more information on resource requests/limits see the official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Kubernetes - Managing Compute Resources for Containers</a>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">requests</code>: Requests for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Request for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">limits</code>: Limits for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Limit for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="kubernetes-node-labeling-and-selection">Kubernetes node labeling and selection</h3>
+
+<p>By default each Kubernetes node, available to deploy EdgeFS over it, will be treated as “target” EdgeFS instance. But cluster administrator able to label node as “gateway” node, such node will have no devices prepared for EdgeFS and will be used as EdgeFS dedicated service node.
+To mark a node as a “gateway”, the administrator can add a specific label to a node.
+Label format: <code class="language-plaintext highlighter-rouge">&lt;edgefs-namespace&gt;-nodetype=gateway</code>, where <code class="language-plaintext highlighter-rouge">edgefs-namespace</code> is current namespace for EdgeFS cluster deployment, by default is <code class="language-plaintext highlighter-rouge">rook-edgefs</code>.
+Example: <code class="language-plaintext highlighter-rouge">kubectl label node "k8s node name" rook-edgefs-nodetype=gateway</code></p>
+
+<h2 id="samples">Samples</h2>
+
+<p>Here are several samples for configuring EdgeFS clusters. Each of the samples must also include the namespace and corresponding access granted for management by the EdgeFS operator. See the <a href="#common-cluster-resources">common cluster resources</a> below.</p>
+
+<h3 id="storage-configuration-all-devices-all-ssdnvmes">Storage configuration: All devices, All SSD/NVMes.</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">location</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">useAllSSD</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-specific-devices">Storage Configuration: Specific devices</h3>
+
+<p>Individual nodes and their config can be specified so that only the named nodes below will be used as storage resources.
+Each node’s ‘name’ field should match their ‘kubernetes.io/hostname’ label.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">location</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">rtVerifyChid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0"</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">devices</span><span class="pi">:</span>             <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+      <span class="na">config</span><span class="pi">:</span>         <span class="c1"># configuration can be specified at the node level which overrides the cluster level config</span>
+        <span class="na">rtPLevelOverride</span><span class="pi">:</span> <span class="m">8</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.301"</span>
+      <span class="na">deviceFilter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">^sd."</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-samsungs-kv-ssd">Storage Configuration: Samsung’s KV SSD</h3>
+
+<p>A single nodes configuration with 2 KV SSDs. The host’s /media directory should have at least 64GB of free space for metadata.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:1.2.0</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/edgefs</span>
+  <span class="na">sysRepCount</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">device"</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">directories</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/media</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">useRtkvsBackend</span><span class="pi">:</span> <span class="s">kvssd</span>
+      <span class="na">rtPLevelOverride</span><span class="pi">:</span> <span class="s2">"</span><span class="s">16"</span>
+      <span class="na">maxSizeGB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">32"</span>
+      <span class="na">sync</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0"</span>
+      <span class="na">walMode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">off"</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">node1"</span>
+      <span class="na">devices</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">fullpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/dev/disk/by-id/nvme-SAMSUNG_MZQLB3T8HALS-000AZ_S3VJNY0J600450"</span>
+      <span class="pi">-</span> <span class="na">fullpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/dev/disk/by-id/nvme-SAMSUNG_MZQLB3T8HALS-000AZ_S3VJNY0K303383"</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-payload-forwarding-to-s3">Storage Configuration: payload forwarding to S3</h3>
+
+<p>A 4-nodes configuration with S3 payload forwarding enabled. Follow the next steps:</p>
+<ol>
+  <li>Create an EdgeFS namespace, default name is “rook-edgefs”: <code class="language-plaintext highlighter-rouge">kubectl create ns rook-edgefs</code></li>
+  <li>Create a S3 payload <a href="https://kubernetes.io/docs/concepts/configuration/secret">secrets</a> in the EdgeFS namespace:</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">node185-s3payload-secret</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">Opaque</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">cred</span><span class="pi">:</span> <span class="s">bm9kZTEsbm9kZTEK</span>  <span class="c1"># aws key/secret made by a command "echo node1,node1 | base64"</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">node186-s3payload-secret</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">Opaque</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">cred</span><span class="pi">:</span> <span class="s">bm9kZTIsbm9kZTIK</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">cluster-s3payload-secret</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">Opaque</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">cred</span><span class="pi">:</span> <span class="s">Y2x1c3RlcixjbHVzdGVyCg==</span>
+</code></pre></div></div>
+<ol>
+  <li>Create EdgeFS cluster:</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:1.2.0</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/edgefs</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">useAllSSD</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>  <span class="c1"># allSSD is a preferable configuration</span>
+      <span class="na">useMetadataOffload</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>  <span class="c1"># useMetadataOffload is not allowed</span>
+      <span class="na">payloadS3URL</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://http://s3.us-west-1.amazonaws.com/bucket</span><span class="nv">  </span><span class="s">#</span><span class="nv"> </span><span class="s">Default</span><span class="nv"> </span><span class="s">S3</span><span class="nv"> </span><span class="s">bucket</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">nodes</span>
+      <span class="s">payloadS3Region:</span><span class="nv"> </span><span class="s">"us-west-1"</span>
+      <span class="na">payloadS3MinKb</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128"</span> <span class="c1"># Payloads larger than 128K will got to S3 bucket</span>
+      <span class="na">payloadS3CapacityGB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># S3 bucket capacity is 1TB</span>
+      <span class="na">payloadS3Secret</span><span class="pi">:</span> <span class="s2">"</span><span class="s">cluster-s3payload-secret"</span> <span class="c1"># Secter for default S3 bucket</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">node183</span> <span class="c1"># node level storage configuration</span>
+      <span class="na">devices</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">node184</span> <span class="c1"># node level storage configuration</span>
+      <span class="na">devices</span><span class="pi">:</span> <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">node185</span> <span class="c1"># node level storage configuration</span>
+      <span class="na">devices</span><span class="pi">:</span> <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+      <span class="na">config</span><span class="pi">:</span> <span class="c1"># configuration can be specified at the node level which overrides the cluster level config</span>
+        <span class="na">payloadS3URL</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://s3.asia.amazonaws.com/bucket185"</span>
+        <span class="na">payloadS3Region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">asia"</span>
+        <span class="na">payloadS3Capacity</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1099511627776"</span>
+        <span class="na">payloadS3Secret</span><span class="pi">:</span> <span class="s2">"</span><span class="s">node185-s3payload-secret"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">node186</span> <span class="c1"># node level storage configuration</span>
+      <span class="na">devices</span><span class="pi">:</span> <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+      <span class="na">config</span><span class="pi">:</span> <span class="c1"># configuration can be specified at the node level which overrides the cluster level config</span>
+        <span class="na">payloadS3URL</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://s3.asia.amazonaws.com/bucket186"</span>
+        <span class="na">payloadS3Region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">asia"</span>
+        <span class="na">payloadS3Capacity</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1099511627776"</span>
+        <span class="na">payloadS3Secret</span><span class="pi">:</span> <span class="s2">"</span><span class="s">node186-s3payload-secret"</span>
+</code></pre></div></div>
+
+<h3 id="node-affinity">Node Affinity</h3>
+
+<p>To control where various services will be scheduled by Kubernetes, use the placement configuration sections below.
+The example under ‘all’ would have all services scheduled on Kubernetes nodes labeled with ‘role=storage’ and
+tolerate taints with a key of ‘storage-node’.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">placement</span><span class="pi">:</span>
+    <span class="na">all</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+        <span class="na">requiredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span>
+          <span class="na">nodeSelectorTerms</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">matchExpressions</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">role</span>
+              <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span>
+              <span class="na">values</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">storage-node</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">storage-node</span>
+        <span class="na">operator</span><span class="pi">:</span> <span class="s">Exists</span>
+    <span class="na">mgr</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="na">target</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h3 id="resource-requestslimits">Resource requests/Limits</h3>
+
+<p>To control how many resources the rook components can request/use, you can set requests and limits in Kubernetes for them.
+You can override these requests/limits for Targts per node when using <code class="language-plaintext highlighter-rouge">useAllNodes: false</code> in the <code class="language-plaintext highlighter-rouge">node</code> item in the <code class="language-plaintext highlighter-rouge">nodes</code> list.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="c1"># cluster level resource requests/limits configuration</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+</code></pre></div></div>
+
+<h3 id="network-configuration-multus-network">Network Configuration: Multus network</h3>
+
+<p>An example on how to configure the cluster network to use multus network. Here, a NetworkAttachmentDefinition named flannel on rook-edgefs namespace is assumed.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">edgefsImageName</span><span class="pi">:</span> <span class="s">edgefs/edgefs:latest</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">multus</span>
+    <span class="na">selectors</span><span class="pi">:</span>
+      <span class="na">server</span><span class="pi">:</span> <span class="s">flannel@net1</span>
+      <span class="na">broker</span><span class="pi">:</span> <span class="s">flannel@net2</span>
+</code></pre></div></div>
+
+<h2 id="common-cluster-resources">Common Cluster Resources</h2>
+
+<p>Each EdgeFS cluster must be created in a namespace and also give access to the Rook operator to manage the cluster in the namespace. Creating the namespace and these controls must be added to each of the examples previously shown.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="nn">---</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">configmaps"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">watch"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">create"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">update"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">delete"</span> <span class="pi">]</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pods"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span> <span class="pi">]</span>
+<span class="nn">---</span>
+<span class="c1"># Allow the operator to create resources in this cluster's namespace</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster-mgmt</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster-mgmt</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-system</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs-system</span>
+<span class="nn">---</span>
+<span class="c1"># Allow the pods in this namespace to work with configmaps</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PodSecurityPolicy</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">privileged</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">fsGroup</span><span class="pi">:</span>
+    <span class="na">rule</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+  <span class="na">privileged</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">runAsUser</span><span class="pi">:</span>
+    <span class="na">rule</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+  <span class="na">seLinux</span><span class="pi">:</span>
+    <span class="na">rule</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+  <span class="na">supplementalGroups</span><span class="pi">:</span>
+    <span class="na">rule</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">*'</span>
+  <span class="na">allowedCapabilities</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">*'</span>
+  <span class="na">hostPID</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">hostIPC</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">privileged-psp-user</span>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">apps</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">podsecuritypolicies</span>
+  <span class="na">resourceNames</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">privileged</span>
+  <span class="na">verbs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">use</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRoleBinding</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-system-psp</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">privileged-psp-user</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-edgefs-system</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs-system</span>
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.5/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.5/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.5/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.5/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.5/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.5/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.5/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.5/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.5/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.5/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.5/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.5/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.5/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.5/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.5/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.5/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.5/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.5/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.5/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.5/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.5/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.5/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.5/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.5/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.5/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.5/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.5/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.5/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.5/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.5/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.5/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/edgefs-cluster-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.5/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.5/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.5/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.5/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.5/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.5/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.5/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.5/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.5/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.5/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.5/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.5/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.5/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.5/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.5/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.5/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.5/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.5/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.5/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.5/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.5/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.5/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.5/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.5/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.5/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.5/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.5/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.5/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

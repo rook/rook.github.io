@@ -1,0 +1,2556 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.7/ceph-cluster-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.7</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-cluster-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-cluster-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-cluster-crd.html" class="active">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-cluster-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-cluster-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-cluster-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-cluster-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-cluster-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-cluster-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-cluster-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-cluster-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-cluster-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-cluster-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-cluster-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-cluster-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-cluster-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.7 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-cluster-crd">Ceph Cluster CRD</h1>
+
+<p>Rook allows creation and customization of storage clusters through the custom resource definitions (CRDs).
+There are primarily three different modes in which to create your cluster.</p>
+
+<ol>
+  <li>Specify <a href="#host-based-cluster">host paths and raw devices</a></li>
+  <li>Dynamically provision storage underneath Rook by specifying the storage class Rook should use to consume storage <a href="#pvc-based-cluster">via PVCs</a></li>
+  <li>Create a <a href="#stretch-cluster">Stretch cluster</a> that distributes Ceph mons across three zones, while storage (OSDs) is only configured in two zones</li>
+</ol>
+
+<p>Following is an example for each of these approaches. More examples are included <a href="#samples">later in this doc</a>.</p>
+
+<h2 id="host-based-cluster">Host-based Cluster</h2>
+
+<p>To get you started, here is a simple example of a CRD to configure a Ceph cluster with all nodes and all devices.
+The Ceph persistent data is stored directly on a host path (Ceph Mons) and on raw devices (Ceph OSDs).</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: In addition to your CephCluster object, you need to create the namespace, service accounts, and RBAC rules for the namespace you are going to create the CephCluster in.
+These resources are defined in the example <code class="language-plaintext highlighter-rouge">common.yaml</code>.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="c1"># see the "Cluster Settings" section below for more details on which image of ceph to run</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">onlyApplyOSDPlacement</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<h2 id="pvc-based-cluster">PVC-based Cluster</h2>
+
+<p>In a “PVC-based cluster”, the Ceph persistent data is stored on volumes requested from a storage class of your choice.
+This type of cluster is recommended in a cloud environment where volumes can be dynamically created and also
+in clusters where a local PV provisioner is available.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Kubernetes version 1.13.0 or greater is required to provision OSDs on PVCs.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="c1"># see the "Cluster Settings" section below for more details on which image of ceph to run</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+  <span class="na">storage</span><span class="pi">:</span>
+   <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">encrypted</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+    <span class="na">onlyApplyOSDPlacement</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<p>For a more advanced scenario, such as adding a dedicated device you can refer to the <a href="#dedicated-metadata-and-wal-device-for-osd-on-pvc">dedicated metadata device for OSD on PVC section</a>.</p>
+
+<h2 id="stretch-cluster">Stretch Cluster</h2>
+
+<p>For environments that only have two failure domains available where data can be replicated, consider
+the case where one failure domain is down and the data is still fully available in the
+remaining failure domain. To support this scenario, Ceph has recently integrated support for “stretch” clusters.</p>
+
+<p>Rook requires three zones. Two zones (A and B) will each run all types of Rook pods, which we call the “data” zones.
+Two mons run in each of the two data zones, while two replicas of the data are in each zone for a total of four data replicas.
+The third zone (arbiter) runs a single mon. No other Rook or Ceph daemons need to be run in the arbiter zone.</p>
+
+<p>For this example, we assume the desired failure domain is a zone. Another failure domain can also be specified with a
+known <a href="#osd-topology">topology node label</a> which is already being used for OSD failure domains.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="c1"># Five mons must be created for stretch mode</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">5</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">stretchCluster</span><span class="pi">:</span>
+      <span class="na">failureDomainLabel</span><span class="pi">:</span> <span class="s">topology.kubernetes.io/zone</span>
+      <span class="na">subFailureDomain</span><span class="pi">:</span> <span class="s">host</span>
+      <span class="na">zones</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">a</span>
+        <span class="na">arbiter</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">b</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">c</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="c1"># Stretch cluster is supported in Ceph Pacific or newer.</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+    <span class="na">allowUnsupported</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># Either storageClassDeviceSets or the storage section can be specified for creating OSDs.</span>
+  <span class="c1"># This example uses all devices for simplicity.</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+  <span class="c1"># OSD placement is expected to include the non-arbiter zones</span>
+  <span class="na">placement</span><span class="pi">:</span>
+    <span class="na">osd</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+        <span class="na">requiredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span>
+          <span class="na">nodeSelectorTerms</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">matchExpressions</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">topology.kubernetes.io/zone</span>
+              <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span>
+              <span class="na">values</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">b</span>
+              <span class="pi">-</span> <span class="s">c</span>
+</code></pre></div></div>
+
+<p>For more details, see the <a href="https://github.com/rook/rook/blob/master/design/ceph/ceph-stretch-cluster.md">Stretch Cluster design doc</a>.</p>
+
+<h2 id="settings">Settings</h2>
+
+<p>Settings can be specified at the global level to apply to the cluster as a whole, while other settings can be specified at more fine-grained levels.  If any setting is unspecified, a suitable default will be used automatically.</p>
+
+<h3 id="cluster-metadata">Cluster metadata</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name that will be used internally for the Ceph cluster. Most commonly the name is the same as the namespace since multiple clusters are not supported in the same namespace.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The Kubernetes namespace that will be created for the Rook cluster. The services, pods, and other resources created by the operator will be added to this namespace. The common scenario is to create a single Rook cluster. If multiple clusters are created, they must not have conflicting devices or host paths.</li>
+</ul>
+
+<h3 id="cluster-settings">Cluster Settings</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">external</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enable</code>: if <code class="language-plaintext highlighter-rouge">true</code>, the cluster will not be managed by Rook but via an external entity. This mode is intended to connect to an existing cluster. In this case, Rook will only consume the external cluster. However, Rook will be able to deploy various daemons in Kubernetes such as object gateways, mds and nfs if an image is provided and will refuse otherwise. If this setting is enabled <strong>all</strong> the other options will be ignored except <code class="language-plaintext highlighter-rouge">cephVersion.image</code> and <code class="language-plaintext highlighter-rouge">dataDirHostPath</code>. See <a href="#external-cluster">external cluster configuration</a>. If <code class="language-plaintext highlighter-rouge">cephVersion.image</code> is left blank, Rook will refuse the creation of extra CRs like object, file and nfs.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">cephVersion</code>: The version information for launching the ceph daemons.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">image</code>: The image used for running the ceph daemons. For example, <code class="language-plaintext highlighter-rouge">quay.io/ceph/ceph:v15.2.12</code> or <code class="language-plaintext highlighter-rouge">v16.2.6</code>. For more details read the <a href="#ceph-container-images">container images section</a>.
+For the latest ceph images, see the <a href="https://hub.docker.com/r/ceph/ceph/tags/">Ceph DockerHub</a>.
+To ensure a consistent version of the image is running across all nodes in the cluster, it is recommended to use a very specific image version.
+Tags also exist that would give the latest version, but they are only recommended for test environments. For example, the tag <code class="language-plaintext highlighter-rouge">v14</code> will be updated each time a new nautilus build is released.
+Using the <code class="language-plaintext highlighter-rouge">v14</code> or similar tag is not recommended in production because it may lead to inconsistent versions of the image running across different nodes in the cluster.</li>
+      <li><code class="language-plaintext highlighter-rouge">allowUnsupported</code>: If <code class="language-plaintext highlighter-rouge">true</code>, allow an unsupported major version of the Ceph release. Currently <code class="language-plaintext highlighter-rouge">nautilus</code>, <code class="language-plaintext highlighter-rouge">octopus</code>, and <code class="language-plaintext highlighter-rouge">pacific</code> are supported. Future versions such as <code class="language-plaintext highlighter-rouge">quincy</code> would require this to be set to <code class="language-plaintext highlighter-rouge">true</code>. Should be set to <code class="language-plaintext highlighter-rouge">false</code> in production.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">dataDirHostPath</code>: The path on the host (<a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath">hostPath</a>) where config and data should be stored for each of the services. If the directory does not exist, it will be created. Because this directory persists on the host, it will remain after pods are deleted. Following paths and any of their subpaths <strong>must not be used</strong>: <code class="language-plaintext highlighter-rouge">/etc/ceph</code>, <code class="language-plaintext highlighter-rouge">/rook</code> or <code class="language-plaintext highlighter-rouge">/var/log/ceph</code>.
+    <ul>
+      <li>On <strong>Minikube</strong> environments, use <code class="language-plaintext highlighter-rouge">/data/rook</code>. Minikube boots into a tmpfs but it provides some <a href="https://github.com/kubernetes/minikube/blob/master/site/content/en/docs/handbook/persistent_volumes.md#a-note-on-mounts-persistence-and-minikube-hosts">directories</a> where files can be persisted across reboots. Using one of these directories will ensure that Rook’s data and configuration files are persisted and that enough storage space is available.</li>
+      <li><strong>WARNING</strong>: For test scenarios, if you delete a cluster and start a new cluster on the same hosts, the path used by <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> must be deleted. Otherwise, stale keys and other config will remain from the previous cluster and the new mons will fail to start.
+If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/#emptydir">empty dir docs</a>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">skipUpgradeChecks</code>: if set to true Rook won’t perform any upgrade checks on Ceph daemons during an upgrade. Use this at <strong>YOUR OWN RISK</strong>, only if you know what you’re doing. To understand Rook’s upgrade process of Ceph, read the <a href="/docs/rook/v1.7/ceph-upgrade.html#ceph-version-upgrades">upgrade doc</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">continueUpgradeAfterChecksEvenIfNotHealthy</code>: if set to true Rook will continue the OSD daemon upgrade process even if the PGs are not clean, or continue with the MDS upgrade even the file system is not healthy.</li>
+  <li><code class="language-plaintext highlighter-rouge">dashboard</code>: Settings for the Ceph dashboard. To view the dashboard in your browser see the <a href="/docs/rook/v1.7/ceph-dashboard.html">dashboard guide</a>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enabled</code>: Whether to enable the dashboard to view cluster status</li>
+      <li><code class="language-plaintext highlighter-rouge">urlPrefix</code>: Allows to serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)</li>
+      <li><code class="language-plaintext highlighter-rouge">port</code>: Allows to change the default port where the dashboard is served</li>
+      <li><code class="language-plaintext highlighter-rouge">ssl</code>: Whether to serve the dashboard via SSL, ignored on Ceph versions older than <code class="language-plaintext highlighter-rouge">13.2.2</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">monitoring</code>: Settings for monitoring Ceph using Prometheus. To enable monitoring on your cluster see the <a href="/docs/rook/v1.7/ceph-monitoring.html#prometheus-alerts">monitoring guide</a>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enabled</code>: Whether to enable prometheus based monitoring for this cluster</li>
+      <li><code class="language-plaintext highlighter-rouge">externalMgrEndpoints</code>: external cluster manager endpoints</li>
+      <li><code class="language-plaintext highlighter-rouge">externalMgrPrometheusPort</code>: external prometheus manager module port. See <a href="#external-cluster">external cluster configuration</a> for more details.</li>
+      <li><code class="language-plaintext highlighter-rouge">rulesNamespace</code>: Namespace to deploy prometheusRule. If empty, namespace of the cluster will be used.
+  Recommended:
+        <ul>
+          <li>If you have a single Rook Ceph cluster, set the <code class="language-plaintext highlighter-rouge">rulesNamespace</code> to the same namespace as the cluster or keep it empty.</li>
+          <li>If you have multiple Rook Ceph clusters in the same Kubernetes cluster, choose the same namespace to set <code class="language-plaintext highlighter-rouge">rulesNamespace</code> for all the clusters (ideally, namespace with prometheus deployed). Otherwise, you will get duplicate alerts with duplicate alert definitions.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">network</code>: For the network settings for the cluster, refer to the <a href="#network-configuration-settings">network configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: contains mon related options <a href="#mon-settings">mon settings</a>
+For more details on the mons and when to choose a number other than <code class="language-plaintext highlighter-rouge">3</code>, see the <a href="/docs/rook/v1.7/ceph-mon-health.html">mon health doc</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: manager top level section
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">count</code>: set number of ceph managers between <code class="language-plaintext highlighter-rouge">1</code> to <code class="language-plaintext highlighter-rouge">2</code>. The default value is 1. This is only needed if two ceph managers are needed.
+If there are two managers, it is important for all mgr services point to the active mgr and not the passive mgr. Therefore, Rook will
+automatically update all services (in the cluster namespace) that have a label <code class="language-plaintext highlighter-rouge">app=rook-ceph-mgr</code> with a selector pointing to the
+active mgr. This commonly applies to services for the dashboard or the prometheus metrics collector.</li>
+      <li><code class="language-plaintext highlighter-rouge">modules</code>: is the list of Ceph manager modules to enable</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">crashCollector</code>: The settings for crash collector daemon(s).
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">disable</code>: is set to <code class="language-plaintext highlighter-rouge">true</code>, the crash collector will not run on any node where a Ceph daemon runs</li>
+      <li><code class="language-plaintext highlighter-rouge">daysToRetain</code>: specifies the number of days to keep crash entries in the Ceph cluster. By default the entries are kept indefinitely.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">logCollector</code>: The settings for log collector daemon.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enabled</code>: if set to <code class="language-plaintext highlighter-rouge">true</code>, the log collector will run as a side-car next to each Ceph daemon. The Ceph configuration option <code class="language-plaintext highlighter-rouge">log_to_file</code> will be turned on, meaning Ceph daemons will log on files in addition to still logging to container’s stdout. These logs will be rotated. (default: false)</li>
+      <li><code class="language-plaintext highlighter-rouge">periodicity</code>: how often to rotate daemon’s log. (default: 24h). Specified with a time suffix which may be ‘h’ for hours or ‘d’ for days. <strong>Rotating too often will slightly impact the daemon’s performance since the signal briefly interrupts the program.</strong></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">annotations</code>: <a href="#annotations-and-labels">annotations configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">labels</code>: <a href="#annotations-and-labels">labels configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">placement</code>: <a href="#placement-configuration-settings">placement configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">resources</code>: <a href="#cluster-wide-resources-configuration-settings">resources configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">priorityClassNames</code>: <a href="#priority-class-names-configuration-settings">priority class names configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">storage</code>: Storage selection and configuration that will be used across the cluster.  Note that these settings can be overridden for specific nodes.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useAllNodes</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating if all nodes in the cluster should be used for storage according to the cluster level storage selection and configuration values.
+If individual nodes are specified under the <code class="language-plaintext highlighter-rouge">nodes</code> field, then <code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">nodes</code>: Names of individual nodes in the cluster that should have their storage included in accordance with either the cluster level configuration specified above or any node specific overrides described in the next section below.
+<code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> to use specific nodes and their config.
+See <a href="#node-settings">node settings</a> below.</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Config settings applied to all OSDs on the node unless overridden by <code class="language-plaintext highlighter-rouge">devices</code>. See the <a href="#osd-configuration-settings">config settings</a> below.</li>
+      <li><a href="#storage-selection-settings">storage selection settings</a></li>
+      <li><a href="#storage-class-device-sets">Storage Class Device Sets</a></li>
+      <li><code class="language-plaintext highlighter-rouge">onlyApplyOSDPlacement</code>: Whether the placement specific for OSDs is merged with the <code class="language-plaintext highlighter-rouge">all</code> placement. If <code class="language-plaintext highlighter-rouge">false</code>, the OSD placement will be merged with the <code class="language-plaintext highlighter-rouge">all</code> placement. If true, the <code class="language-plaintext highlighter-rouge">OSD placement will be applied</code> and the <code class="language-plaintext highlighter-rouge">all</code> placement will be ignored. The placement for OSDs is computed from several different places depending on the type of OSD:
+        <ul>
+          <li>For non-PVCs: <code class="language-plaintext highlighter-rouge">placement.all</code> and <code class="language-plaintext highlighter-rouge">placement.osd</code></li>
+          <li>For PVCs: <code class="language-plaintext highlighter-rouge">placement.all</code> and inside the storageClassDeviceSet from the <code class="language-plaintext highlighter-rouge">placement</code> or <code class="language-plaintext highlighter-rouge">preparePlacement</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">disruptionManagement</code>: The section for configuring management of daemon disruptions
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">managePodBudgets</code>: if <code class="language-plaintext highlighter-rouge">true</code>, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically via the strategy outlined in the <a href="https://github.com/rook/rook/blob/master/design/ceph/ceph-managed-disruptionbudgets.md">design</a>. The operator will block eviction of OSDs by default and unblock them safely when drains are detected.</li>
+      <li><code class="language-plaintext highlighter-rouge">osdMaintenanceTimeout</code>: is a duration in minutes that determines how long an entire failureDomain like <code class="language-plaintext highlighter-rouge">region/zone/host</code> will be held in <code class="language-plaintext highlighter-rouge">noout</code> (in addition to the default DOWN/OUT interval) when it is draining. This is only relevant when  <code class="language-plaintext highlighter-rouge">managePodBudgets</code> is <code class="language-plaintext highlighter-rouge">true</code>. The default value is <code class="language-plaintext highlighter-rouge">30</code> minutes.</li>
+      <li><code class="language-plaintext highlighter-rouge">manageMachineDisruptionBudgets</code>: if <code class="language-plaintext highlighter-rouge">true</code>, the operator will create and manage MachineDisruptionBudgets to ensure OSDs are only fenced when the cluster is healthy. Only available on OpenShift.</li>
+      <li><code class="language-plaintext highlighter-rouge">machineDisruptionBudgetNamespace</code>: the namespace in which to watch the MachineDisruptionBudgets.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">removeOSDsIfOutAndSafeToRemove</code>: If <code class="language-plaintext highlighter-rouge">true</code> the operator will remove the OSDs that are down and whose data has been restored to other OSDs. In Ceph terms, the OSDs are <code class="language-plaintext highlighter-rouge">out</code> and <code class="language-plaintext highlighter-rouge">safe-to-destroy</code> when they are removed.</li>
+  <li><code class="language-plaintext highlighter-rouge">cleanupPolicy</code>: <a href="#cleanup-policy">cleanup policy settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">security</code>: <a href="#security">security settings</a></li>
+</ul>
+
+<h3 id="ceph-container-images">Ceph container images</h3>
+
+<p>Official releases of Ceph Container images are available from <a href="https://hub.docker.com/r/ceph">Docker Hub</a>.</p>
+
+<p>These are general purpose Ceph container with all necessary daemons and dependencies installed.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>TAG</th>
+      <th>MEANING</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>vRELNUM</td>
+      <td>Latest release in this series (e.g., <em>v14</em> = Nautilus)</td>
+    </tr>
+    <tr>
+      <td>vRELNUM.Y</td>
+      <td>Latest stable release in this stable series (e.g., v14.2)</td>
+    </tr>
+    <tr>
+      <td>vRELNUM.Y.Z</td>
+      <td>A specific release (e.g., v14.2.5)</td>
+    </tr>
+    <tr>
+      <td>vRELNUM.Y.Z-YYYYMMDD</td>
+      <td>A specific build (e.g., v14.2.5-20191203)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A specific will contain a specific release of Ceph as well as security fixes from the Operating System.</p>
+
+<h3 id="mon-settings">Mon Settings</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">count</code>: Set the number of mons to be started. The number must be between <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">9</code>. The recommended value is most commonly <code class="language-plaintext highlighter-rouge">3</code>.
+For highest availability, an odd number of mons should be specified.
+For higher durability in case of mon loss, an even number can be specified although availability may be lower.
+To maintain quorum a majority of mons must be up. For example, if there are three mons, two must be up.
+If there are four mons, three must be up. If there are two mons, both must be up.
+If quorum is lost, see the <a href="/docs/rook/v1.7/ceph-disaster-recovery.html#restoring-mon-quorum">disaster recovery guide</a> to restore quorum from a single mon.</li>
+  <li><code class="language-plaintext highlighter-rouge">allowMultiplePerNode</code>: Whether to allow the placement of multiple mons on a single node. Default is <code class="language-plaintext highlighter-rouge">false</code> for production. Should only be set to <code class="language-plaintext highlighter-rouge">true</code> in test environments.</li>
+  <li><code class="language-plaintext highlighter-rouge">volumeClaimTemplate</code>: A <code class="language-plaintext highlighter-rouge">PersistentVolumeSpec</code> used by Rook to create PVCs
+for monitor storage. This field is optional, and when not provided, HostPath
+volume mounts are used.  The current set of fields from template that are used
+are <code class="language-plaintext highlighter-rouge">storageClassName</code> and the <code class="language-plaintext highlighter-rouge">storage</code> resource request and limit. The
+default storage size request for new PVCs is <code class="language-plaintext highlighter-rouge">10Gi</code>. Ensure that associated
+storage class is configured to use <code class="language-plaintext highlighter-rouge">volumeBindingMode: WaitForFirstConsumer</code>.
+This setting only applies to new monitors that are created when the requested
+number of monitors increases, or when a monitor fails and is recreated. An
+<a href="#using-pvc-storage-for-monitors">example CRD configuration is provided below</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">stretchCluster</code>: The stretch cluster settings that define the zones (or other failure domain labels) across which to configure the cluster.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">failureDomainLabel</code>: The label that is expected on each node where the cluster is expected to be deployed. The labels must be found
+in the list of well-known <a href="#osd-topology">topology labels</a>.</li>
+      <li><code class="language-plaintext highlighter-rouge">subFailureDomain</code>: With a zone, the data replicas must be spread across OSDs in the subFailureDomain. The default is <code class="language-plaintext highlighter-rouge">host</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">zones</code>: The failure domain names where the Mons and OSDs are expected to be deployed. There must be <strong>three zones</strong> specified in the list.
+This element is always named <code class="language-plaintext highlighter-rouge">zone</code> even if a non-default <code class="language-plaintext highlighter-rouge">failureDomainLabel</code> is specified. The elements have two values:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the zone, which is the value of the domain label.</li>
+          <li><code class="language-plaintext highlighter-rouge">arbiter</code>: Whether the zone is expected to be the arbiter zone which only runs a single mon. Exactly one zone must be labeled <code class="language-plaintext highlighter-rouge">true</code>.
+The two zones that are not the arbiter zone are expected to have OSDs deployed.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>If these settings are changed in the CRD the operator will update the number of mons during a periodic check of the mon health, which by default is every 45 seconds.</p>
+
+<p>To change the defaults that the operator uses to determine the mon health and whether to failover a mon, refer to the <a href="#health-settings">health settings</a>. The intervals should be small enough that you have confidence the mons will maintain quorum, while also being long enough to ignore network blips where mons are failed over too often.</p>
+
+<h3 id="mgr-settings">Mgr Settings</h3>
+
+<p>You can use the cluster CR to enable or disable any manager module. This can be configured like so:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mgr</span><span class="pi">:</span>
+  <span class="na">modules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">&lt;name of the module&gt;</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>Some modules will have special configuration to ensure the module is fully functional after being enabled. Specifically:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pg_autoscaler</code>: Rook will configure all new pools with PG autoscaling by setting: <code class="language-plaintext highlighter-rouge">osd_pool_default_pg_autoscale_mode = on</code></li>
+</ul>
+
+<h3 id="network-configuration-settings">Network Configuration Settings</h3>
+
+<p>If not specified, the default SDN will be used.
+Configure the network that will be enabled for the cluster and services.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">provider</code>: Specifies the network provider that will be used to connect the network interface. You can choose between <code class="language-plaintext highlighter-rouge">host</code>, and <code class="language-plaintext highlighter-rouge">multus</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">selectors</code>: List the network selector(s) that will be used associated by a key.</li>
+  <li><code class="language-plaintext highlighter-rouge">ipFamily</code>: Specifies the network stack Ceph daemons should listen on.</li>
+  <li><code class="language-plaintext highlighter-rouge">dualStack</code>: Specifies that Ceph daemon should listen on both IPv4 and IPv6 network stacks.</li>
+</ul>
+
+<blockquote>
+  <p><strong>NOTE:</strong> Changing networking configuration after a Ceph cluster has been deployed is NOT
+supported and will result in a non-functioning cluster.</p>
+</blockquote>
+
+<h4 id="host-networking">Host Networking</h4>
+
+<p>To use host networking, set <code class="language-plaintext highlighter-rouge">provider: host</code>.</p>
+
+<h4 id="multus">Multus</h4>
+
+<p>Rook supports addition of public and cluster network for ceph using Multus</p>
+
+<p>The selector keys are required to be <code class="language-plaintext highlighter-rouge">public</code> and <code class="language-plaintext highlighter-rouge">cluster</code> where each represent:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public</code>: client communications with the cluster (reads/writes)</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster</code>: internal Ceph replication network</li>
+</ul>
+
+<p>If you want to learn more, please read</p>
+<ul>
+  <li><a href="https://docs.ceph.com/docs/master/rados/configuration/network-config-ref/">Ceph Networking reference</a>.</li>
+  <li><a href="https://intel.github.io/multus-cni/doc/how-to-use.html">Multus documentation</a></li>
+</ul>
+
+<p>Based on the configuration, the operator will do the following:</p>
+
+<ol>
+  <li>If only the <code class="language-plaintext highlighter-rouge">public</code> selector is specified, all communication will happen on that network
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">multus</span>
+    <span class="na">selectors</span><span class="pi">:</span>
+<span class="err"> </span><span class="na">public</span><span class="pi">:</span> <span class="s">rook-ceph/rook-public-nw</span>
+</code></pre></div>    </div>
+  </li>
+  <li>If only the <code class="language-plaintext highlighter-rouge">cluster</code> selector is specified, the internal cluster traffic* will happen on that network. All other traffic to mons, OSDs, and other daemons will be on the default network.
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">multus</span>
+    <span class="na">selectors</span><span class="pi">:</span>
+<span class="err"> </span><span class="na">cluster</span><span class="pi">:</span> <span class="s">rook-ceph/rook-cluster-nw</span>
+</code></pre></div>    </div>
+  </li>
+  <li>If both <code class="language-plaintext highlighter-rouge">public</code> and <code class="language-plaintext highlighter-rouge">cluster</code> selectors are specified the first one will run all the communication network and the second the internal cluster network*
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">multus</span>
+    <span class="na">selectors</span><span class="pi">:</span>
+<span class="err"> </span><span class="na">public</span><span class="pi">:</span> <span class="s">rook-ceph/rook-public-nw</span>
+ <span class="na">cluster</span><span class="pi">:</span> <span class="s">rook-ceph/rook-cluster-nw</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>* Internal cluster traffic includes OSD heartbeats, data replication, and data recovery</p>
+
+<p>Only OSD pods will have both Public and Cluster networks attached. The rest of the Ceph component pods and CSI pods will only have the Public network attached.
+Rook Ceph Operator will not have any networks attached as it proxies the required commands via a sidecar container in the mgr pod.</p>
+
+<p>In order to work, each selector value must match a <code class="language-plaintext highlighter-rouge">NetworkAttachmentDefinition</code> object name in Multus.</p>
+
+<p>For <code class="language-plaintext highlighter-rouge">multus</code> network provider, an already working cluster with Multus networking is required. Network attachment definition that later will be attached to the cluster needs to be created before the Cluster CRD.
+The Network attachment definitions should be using whereabouts cni.
+If Rook cannot find the provided Network attachment definition it will fail running the Ceph OSD pods.
+You can add the Multus network attachment selection annotation selecting the created network attachment definition on <code class="language-plaintext highlighter-rouge">selectors</code>.</p>
+
+<p>A valid NetworkAttachmentDefinition will look like following:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">k8s.cni.cncf.io/v1"</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">NetworkAttachmentDefinition</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-public-nw</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span>
+      <span class="s">"cniVersion":</span><span class="nv"> </span><span class="s">"0.3.0",</span>
+      <span class="s">"name":</span><span class="nv"> </span><span class="s">"public-nad",</span>
+      <span class="s">"type":</span><span class="nv"> </span><span class="s">"macvlan",</span>
+      <span class="s">"master":</span><span class="nv"> </span><span class="s">"ens5",</span>
+      <span class="s">"mode":</span><span class="nv"> </span><span class="s">"bridge",</span>
+      <span class="s">"ipam":</span><span class="nv"> </span><span class="s">{</span>
+        <span class="s">"type":</span><span class="nv"> </span><span class="s">"whereabouts",</span>
+        <span class="s">"range":</span><span class="nv"> </span><span class="s">"192.168.1.0/24"</span>
+      <span class="s">}</span>
+    <span class="s">}'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Ensure that <code class="language-plaintext highlighter-rouge">master</code> matches the network interface of the host that you want to use.</li>
+  <li>Ipam type <code class="language-plaintext highlighter-rouge">whereabouts</code> is required because it makes sure that all the pods get a unique IP address from the multus network.</li>
+  <li>The NetworkAttachmentDefinition should be referenced along with the namespace in which it is present like <code class="language-plaintext highlighter-rouge">public: &lt;namespace&gt;/&lt;name of NAD&gt;</code>.
+e.g., the network attachment definition are in <code class="language-plaintext highlighter-rouge">default</code> namespace:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">public</span><span class="pi">:</span> <span class="s">default/rook-public-nw</span>
+  <span class="na">cluster</span><span class="pi">:</span> <span class="s">default/rook-cluster-nw</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>This format is required in order to use the NetworkAttachmentDefinition across namespaces.</li>
+      <li>In Openshift, to use a NetworkAttachmentDefinition (NAD) across namespaces, the NAD must be deployed in the <code class="language-plaintext highlighter-rouge">default</code> namespace. The NAD is then referenced with the namespace: <code class="language-plaintext highlighter-rouge">default/rook-public-nw</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="known-issues-with-multus">Known issues with multus</h4>
+<p>When a CephFS/RBD volume is mounted in a Pod using cephcsi and then the CSI CephFS/RBD plugin is restarted or terminated (e.g. by restarting or deleting its DaemonSet), all operations on the volume become blocked, even after restarting the CSI pods. The only workaround is to restart the node where the cephcsi plugin pod was restarted.
+This issue is tracked <a href="https://github.com/rook/rook/issues/8085">here</a>.</p>
+
+<h4 id="ipfamily">IPFamily</h4>
+
+<p>Provide single-stack IPv4 or IPv6 protocol to assign corresponding addresses to pods and services. This field is optional. Possible inputs are IPv6 and IPv4. Empty value will be treated as IPv4. Kubernetes version should be at least v1.13 to run IPv6. Dual-stack is supported as of ceph Pacific.
+To turn on dual stack see the <a href="#network-configuration-settings">network configuration section</a>.</p>
+
+<h3 id="node-settings">Node Settings</h3>
+
+<p>In addition to the cluster level settings specified above, each individual node can also specify configuration to override the cluster level settings and defaults.
+If a node does not specify any configuration then it will inherit the cluster level settings.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the node, which should match its <code class="language-plaintext highlighter-rouge">kubernetes.io/hostname</code> label.</li>
+  <li><code class="language-plaintext highlighter-rouge">config</code>: Config settings applied to all OSDs on the node unless overridden by <code class="language-plaintext highlighter-rouge">devices</code>. See the <a href="#osd-configuration-settings">config settings</a> below.</li>
+  <li><a href="#storage-selection-settings">storage selection settings</a></li>
+</ul>
+
+<p>When <code class="language-plaintext highlighter-rouge">useAllNodes</code> is set to <code class="language-plaintext highlighter-rouge">true</code>, Rook attempts to make Ceph cluster management as hands-off as
+possible while still maintaining reasonable data safety. If a usable node comes online, Rook will
+begin to use it automatically. To maintain a balance between hands-off usability and data safety,
+Nodes are removed from Ceph as OSD hosts only (1) if the node is deleted from Kubernetes itself or
+(2) if the node has its taints or affinities modified in such a way that the node is no longer
+usable by Rook. Any changes to taints or affinities, intentional or unintentional, may affect the
+data reliability of the Ceph cluster. In order to help protect against this somewhat, deletion of
+nodes by taint or affinity modifications must be “confirmed” by deleting the Rook-Ceph operator pod
+and allowing the operator deployment to restart the pod.</p>
+
+<p>For production clusters, we recommend that <code class="language-plaintext highlighter-rouge">useAllNodes</code> is set to <code class="language-plaintext highlighter-rouge">false</code> to prevent the Ceph
+cluster from suffering reduced data reliability unintentionally due to a user mistake. When
+<code class="language-plaintext highlighter-rouge">useAllNodes</code> is set to <code class="language-plaintext highlighter-rouge">false</code>, Rook relies on the user to be explicit about when nodes are added
+to or removed from the Ceph cluster. Nodes are only added to the Ceph cluster if the node is added
+to the Ceph cluster resource. Similarly, nodes are only removed if the node is removed from the Ceph
+cluster resource.</p>
+
+<h4 id="node-updates">Node Updates</h4>
+
+<p>Nodes can be added and removed over time by updating the Cluster CRD, for example with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit cephcluster rook-ceph</code>.
+This will bring up your default text editor and allow you to add and remove storage nodes from the cluster.
+This feature is only available when <code class="language-plaintext highlighter-rouge">useAllNodes</code> has been set to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<h3 id="storage-selection-settings">Storage Selection Settings</h3>
+
+<p>Below are the settings for host-based cluster. This type of cluster can specify devices for OSDs, both at the cluster and individual node level, for selecting which storage resources will be included in the cluster.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useAllDevices</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating whether all devices found on nodes in the cluster should be automatically consumed by OSDs. <strong>Not recommended</strong> unless you have a very controlled environment where you will not risk formatting of devices with existing data. When <code class="language-plaintext highlighter-rouge">true</code>, all devices/partitions will be used. Is overridden by <code class="language-plaintext highlighter-rouge">deviceFilter</code> if specified.</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceFilter</code>: A regular expression for short kernel names of devices (e.g. <code class="language-plaintext highlighter-rouge">sda</code>) that allows selection of devices to be consumed by OSDs.  If individual devices have been specified for a node then this filter will be ignored.  This field uses <a href="https://golang.org/pkg/regexp/syntax/">golang regular expression syntax</a>. For example:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sdb</code>: Only selects the <code class="language-plaintext highlighter-rouge">sdb</code> device if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^sd.</code>: Selects all devices starting with <code class="language-plaintext highlighter-rouge">sd</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^sd[a-d]</code>: Selects devices starting with <code class="language-plaintext highlighter-rouge">sda</code>, <code class="language-plaintext highlighter-rouge">sdb</code>, <code class="language-plaintext highlighter-rouge">sdc</code>, and <code class="language-plaintext highlighter-rouge">sdd</code> if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^s</code>: Selects all devices that start with <code class="language-plaintext highlighter-rouge">s</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^[^r]</code>: Selects all devices that do <em>not</em> start with <code class="language-plaintext highlighter-rouge">r</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">devicePathFilter</code>: A regular expression for device paths (e.g. <code class="language-plaintext highlighter-rouge">/dev/disk/by-path/pci-0:1:2:3-scsi-1</code>) that allows selection of devices to be consumed by OSDs.  If individual devices or <code class="language-plaintext highlighter-rouge">deviceFilter</code> have been specified for a node then this filter will be ignored.  This field uses <a href="https://golang.org/pkg/regexp/syntax/">golang regular expression syntax</a>. For example:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">^/dev/sd.</code>: Selects all devices starting with <code class="language-plaintext highlighter-rouge">sd</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^/dev/disk/by-path/pci-.*</code>: Selects all devices which are connected to PCI bus</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">devices</code>: A list of individual device names belonging to this node to include in the storage cluster.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the device (e.g., <code class="language-plaintext highlighter-rouge">sda</code>), or full udev path (e.g. <code class="language-plaintext highlighter-rouge">/dev/disk/by-id/ata-ST4000DM004-XXXX</code> - this will not change after reboots).</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Device-specific config settings. See the <a href="#osd-configuration-settings">config settings</a> below</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Host-based cluster only supports raw device and partition. Be sure to see the
+<a href="/docs/rook/v1.7/quickstart.html#prerequisites">Ceph quickstart doc prerequisites</a> for additional considerations.</p>
+
+<p>Below are the settings for a PVC-based cluster.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">storageClassDeviceSets</code>: Explained in <a href="#storage-class-device-sets">Storage Class Device Sets</a></li>
+</ul>
+
+<h3 id="storage-class-device-sets">Storage Class Device Sets</h3>
+
+<p>The following are the settings for Storage Class Device Sets which can be configured to create OSDs that are backed by block mode PVs.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A name for the set.</li>
+  <li><code class="language-plaintext highlighter-rouge">count</code>: The number of devices in the set.</li>
+  <li><code class="language-plaintext highlighter-rouge">resources</code>: The CPU and RAM requests/limits for the devices. (Optional)</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">placement</code>: The placement criteria for the devices. (Optional) Default is no placement criteria.</p>
+
+    <p>The syntax is the same as for <a href="#placement-configuration-settings">other placement configuration</a>. It supports <code class="language-plaintext highlighter-rouge">nodeAffinity</code>, <code class="language-plaintext highlighter-rouge">podAffinity</code>, <code class="language-plaintext highlighter-rouge">podAntiAffinity</code> and <code class="language-plaintext highlighter-rouge">tolerations</code> keys.</p>
+
+    <p>It is recommended to configure the placement such that the OSDs will be as evenly spread across nodes as possible. At a minimum, anti-affinity should be added so at least one OSD will be placed on each available nodes.</p>
+
+    <p>However, if there are more OSDs than nodes, this anti-affinity will not be effective. Another placement scheme to consider is to add labels to the nodes in such a way that the OSDs can be grouped on those nodes, create multiple storageClassDeviceSets, and add node affinity to each of the device sets that will place the OSDs in those sets of nodes.</p>
+
+    <p>Rook will automatically add required nodeAffinity to the OSD daemons to match the topology labels that are found
+on the nodes where the OSD prepare jobs ran. To ensure data durability, the OSDs are required to run in the same
+topology that the Ceph CRUSH map expects. For example, if the nodes are labeled with rack topology labels, the
+OSDs will be constrained to a certain rack. Without the topology labels, Rook will not constrain the OSDs beyond
+what is required by the PVs, for example to run in the zone where provisioned. See the <a href="#osd-topology">OSD Topology</a>
+section for the related labels.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">preparePlacement</code>: The placement criteria for the preparation of the OSD devices. Creating OSDs is a two-step process and the prepare job may require different placement than the OSD daemons. If the <code class="language-plaintext highlighter-rouge">preparePlacement</code> is not specified, the <code class="language-plaintext highlighter-rouge">placement</code> will instead be applied for consistent placement for the OSD prepare jobs and OSD deployments. The <code class="language-plaintext highlighter-rouge">preparePlacement</code> is only useful for <code class="language-plaintext highlighter-rouge">portable</code> OSDs in the device sets. OSDs that are not portable will be tied to the host where the OSD prepare job initially runs.
+    <ul>
+      <li>For example, provisioning may require topology spread constraints across zones, but the OSD daemons may require constraints across hosts within the zones.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">portable</code>: If <code class="language-plaintext highlighter-rouge">true</code>, the OSDs will be allowed to move between nodes during failover. This requires a storage class that supports portability (e.g. <code class="language-plaintext highlighter-rouge">aws-ebs</code>, but not the local storage provisioner). If <code class="language-plaintext highlighter-rouge">false</code>, the OSDs will be assigned to a node permanently. Rook will configure Ceph’s CRUSH map to support the portability.</li>
+  <li><code class="language-plaintext highlighter-rouge">tuneDeviceClass</code>: For example, Ceph cannot detect AWS volumes as HDDs from the storage class “gp2”, so you can improve Ceph performance by setting this to true.</li>
+  <li><code class="language-plaintext highlighter-rouge">tuneFastDeviceClass</code>: For example, Ceph cannot detect Azure disks as SSDs from the storage class “managed-premium”, so you can improve Ceph performance by setting this to true..</li>
+  <li><code class="language-plaintext highlighter-rouge">volumeClaimTemplates</code>: A list of PVC templates to use for provisioning the underlying storage devices.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">resources.requests.storage</code>: The desired capacity for the underlying storage devices.</li>
+      <li><code class="language-plaintext highlighter-rouge">storageClassName</code>: The StorageClass to provision PVCs from. Default would be to use the cluster-default StorageClass. This StorageClass should provide a raw block device, multipath device, or logical volume. Other types are not supported. If you want to use logical volume, please see <a href="/docs/rook/v1.7/ceph-common-issues.html#lvm-metadata-can-be-corrupted-with-osd-on-lv-backed-pvc">known issue of OSD on LV-backed PVC</a></li>
+      <li><code class="language-plaintext highlighter-rouge">volumeMode</code>: The volume mode to be set for the PVC. Which should be Block</li>
+      <li><code class="language-plaintext highlighter-rouge">accessModes</code>: The access mode for the PVC to be bound by OSD.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">schedulerName</code>: Scheduler name for OSD pod placement. (Optional)</li>
+  <li><code class="language-plaintext highlighter-rouge">encrypted</code>: whether to encrypt all the OSDs in a given storageClassDeviceSet</li>
+</ul>
+
+<h3 id="osd-configuration-settings">OSD Configuration Settings</h3>
+
+<p>The following storage selection settings are specific to Ceph and do not apply to other backends. All variables are key-value pairs represented as strings.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">metadataDevice</code>: Name of a device to use for the metadata of OSDs on each node.  Performance can be improved by using a low latency device (such as SSD or NVMe) as the metadata device, while other spinning platter (HDD) devices on a node are used to store data. Provisioning will fail if the user specifies a <code class="language-plaintext highlighter-rouge">metadataDevice</code> but that device is not used as a metadata device by Ceph. Notably, <code class="language-plaintext highlighter-rouge">ceph-volume</code> will not use a device of the same device class (HDD, SSD, NVMe) as OSD devices for metadata, resulting in this failure.</li>
+  <li><code class="language-plaintext highlighter-rouge">databaseSizeMB</code>:  The size in MB of a bluestore database. Include quotes around the size.</li>
+  <li><code class="language-plaintext highlighter-rouge">walSizeMB</code>:  The size in MB of a bluestore write ahead log (WAL). Include quotes around the size.</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceClass</code>: The <a href="https://ceph.io/community/new-luminous-crush-device-classes/">CRUSH device class</a> to use for this selection of storage devices. (By default, if a device’s class has not already been set, OSDs will automatically set a device’s class to either <code class="language-plaintext highlighter-rouge">hdd</code>, <code class="language-plaintext highlighter-rouge">ssd</code>, or <code class="language-plaintext highlighter-rouge">nvme</code>  based on the hardware properties exposed by the Linux kernel.) These storage classes can then be used to select the devices backing a storage pool by specifying them as the value of <a href="/docs/rook/v1.7/ceph-pool-crd.html#spec">the pool spec’s <code class="language-plaintext highlighter-rouge">deviceClass</code> field</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">initialWeight</code>: The initial OSD weight in TiB units. By default, this value is derived from OSD’s capacity.</li>
+  <li><code class="language-plaintext highlighter-rouge">primaryAffinity</code>: The <a href="https://docs.ceph.com/en/latest/rados/operations/crush-map/#primary-affinity">primary-affinity</a> value of an OSD, within range <code class="language-plaintext highlighter-rouge">[0, 1]</code> (default: <code class="language-plaintext highlighter-rouge">1</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">osdsPerDevice</code>**: The number of OSDs to create on each device. High performance devices such as NVMe can handle running multiple OSDs. If desired, this can be overridden for each node and each device.</li>
+  <li><code class="language-plaintext highlighter-rouge">encryptedDevice</code>**: Encrypt OSD volumes using dmcrypt (“true” or “false”). By default this option is disabled. See <a href="http://docs.ceph.com/docs/master/ceph-volume/lvm/encryption/">encryption</a> for more information on encryption in Ceph.</li>
+  <li><code class="language-plaintext highlighter-rouge">crushRoot</code>: The value of the <code class="language-plaintext highlighter-rouge">root</code> CRUSH map label. The default is <code class="language-plaintext highlighter-rouge">default</code>. Generally, you should not need to change this. However, if any of your topology labels may have the value <code class="language-plaintext highlighter-rouge">default</code>, you need to change <code class="language-plaintext highlighter-rouge">crushRoot</code> to avoid conflicts, since CRUSH map values need to be unique.</li>
+</ul>
+
+<h3 id="annotations-and-labels">Annotations and Labels</h3>
+
+<p>Annotations and Labels can be specified so that the Rook components will have those annotations / labels added to them.</p>
+
+<p>You can set annotations / labels for Rook components for the list of key value pairs:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">all</code>: Set annotations / labels for all components</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: Set annotations / labels for MGRs</li>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: Set annotations / labels for mons</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: Set annotations / labels for OSDs</li>
+  <li><code class="language-plaintext highlighter-rouge">prepareosd</code>: Set annotations / labels for OSD Prepare Jobs</li>
+  <li><code class="language-plaintext highlighter-rouge">monitoring</code>: Set annotations / labels for service monitor</li>
+  <li><code class="language-plaintext highlighter-rouge">crashcollector</code>: Set annotations / labels for crash collectors
+When other keys are set, <code class="language-plaintext highlighter-rouge">all</code> will be merged together with the specific component.</li>
+</ul>
+
+<h3 id="placement-configuration-settings">Placement Configuration Settings</h3>
+
+<p>Placement configuration for the cluster services. It includes the following keys: <code class="language-plaintext highlighter-rouge">mgr</code>, <code class="language-plaintext highlighter-rouge">mon</code>, <code class="language-plaintext highlighter-rouge">arbiter</code>, <code class="language-plaintext highlighter-rouge">osd</code>, <code class="language-plaintext highlighter-rouge">cleanup</code>, and <code class="language-plaintext highlighter-rouge">all</code>.
+Each service will have its placement configuration generated by merging the generic configuration under <code class="language-plaintext highlighter-rouge">all</code> with the most specific one (which will override any attributes).</p>
+
+<p>In stretch clusters, if the <code class="language-plaintext highlighter-rouge">arbiter</code> placement is specified, that placement will only be applied to the arbiter.
+Neither will the <code class="language-plaintext highlighter-rouge">arbiter</code> placement be merged with the <code class="language-plaintext highlighter-rouge">all</code> placement to allow the arbiter to be fully independent of other daemon placement.
+The remaining mons will still use the <code class="language-plaintext highlighter-rouge">mon</code> and/or <code class="language-plaintext highlighter-rouge">all</code> sections.</p>
+
+<p><strong>NOTE:</strong> Placement of OSD pods is controlled using the <a href="#storage-class-device-sets">Storage Class Device Set</a>, not the general <code class="language-plaintext highlighter-rouge">placement</code> configuration.</p>
+
+<p>A Placement configuration is specified (according to the kubernetes PodSpec) as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nodeAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature">NodeAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAntiAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAntiAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">tolerations</code>: list of kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Toleration</a></li>
+  <li><code class="language-plaintext highlighter-rouge">topologySpreadConstraints</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/">TopologySpreadConstraints</a></li>
+</ul>
+
+<p>If you use <code class="language-plaintext highlighter-rouge">labelSelector</code> for <code class="language-plaintext highlighter-rouge">osd</code> pods, you must write two rules both for <code class="language-plaintext highlighter-rouge">rook-ceph-osd</code> and <code class="language-plaintext highlighter-rouge">rook-ceph-osd-prepare</code> like <a href="https://github.com/rook/rook/blob/master/cluster/examples/kubernetes/ceph/cluster-on-pvc.yaml#L68">the example configuration</a>. It comes from the design that there are these two pods for an OSD. For more detail, see the <a href="https://github.com/rook/rook/blob/master/design/ceph/dedicated-osd-pod.md">osd design doc</a> and <a href="https://github.com/rook/rook/issues/4582">the related issue</a>.</p>
+
+<p>The Rook Ceph operator creates a Job called <code class="language-plaintext highlighter-rouge">rook-ceph-detect-version</code> to detect the full Ceph version used by the given <code class="language-plaintext highlighter-rouge">cephVersion.image</code>. The placement from the <code class="language-plaintext highlighter-rouge">mon</code> section is used for the Job except for the <code class="language-plaintext highlighter-rouge">PodAntiAffinity</code> field.</p>
+
+<h3 id="cluster-wide-resources-configuration-settings">Cluster-wide Resources Configuration Settings</h3>
+
+<p>Resources should be specified so that the Rook components are handled after <a href="https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/">Kubernetes Pod Quality of Service classes</a>.
+This allows to keep Rook components running when for example a node runs out of memory and the Rook components are not killed depending on their Quality of Service class.</p>
+
+<p>You can set resource requests/limits for Rook components through the <a href="#resource-requirementslimits">Resource Requirements/Limits</a> structure in the following keys:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: Set resource requests/limits for mons</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: Set resource requests/limits for OSDs.
+This key applies for all OSDs regardless of their device classes. In case of need to apply resource requests/limits for OSDs with particular device class use specific osd keys below. If the memory resource is declared Rook will automatically set the OSD configuration <code class="language-plaintext highlighter-rouge">osd_memory_target</code> to the same value. This aims to ensure that the actual OSD memory consumption is consistent with the OSD pods’ resource declaration.</li>
+  <li><code class="language-plaintext highlighter-rouge">osd-&lt;deviceClass&gt;</code>: Set resource requests/limits for OSDs on a specific device class. Rook will automatically detect <code class="language-plaintext highlighter-rouge">hdd</code>,
+<code class="language-plaintext highlighter-rouge">ssd</code>, or <code class="language-plaintext highlighter-rouge">nvme</code> device classes. Custom device classes can also be set.</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: Set resource requests/limits for MGRs</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr-sidecar</code>: Set resource requests/limits for the MGR sidecar, which is only created when <code class="language-plaintext highlighter-rouge">mgr.count: 2</code>.
+The sidecar requires very few resources since it only executes every 15 seconds to query Ceph for the active
+mgr and update the mgr services if the active mgr changed.</li>
+  <li><code class="language-plaintext highlighter-rouge">prepareosd</code>: Set resource requests/limits for OSD prepare job</li>
+  <li><code class="language-plaintext highlighter-rouge">crashcollector</code>: Set resource requests/limits for crash. This pod runs wherever there is a Ceph pod running.
+It scrapes for Ceph daemon core dumps and sends them to the Ceph manager crash module so that core dumps are centralized and can be easily listed/accessed.
+You can read more about the <a href="https://docs.ceph.com/docs/master/mgr/crash/">Ceph Crash module</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">logcollector</code>: Set resource requests/limits for the log collector. When enabled, this container runs as side-car to each Ceph daemons.</li>
+  <li><code class="language-plaintext highlighter-rouge">cleanup</code>: Set resource requests/limits for cleanup job, responsible for wiping cluster’s data after uninstall</li>
+</ul>
+
+<p>In order to provide the best possible experience running Ceph in containers, Rook internally recommends minimum memory limits if resource limits are passed.
+If a user configures a limit or request value that is too low, Rook will still run the pod(s) and print a warning to the operator log.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: 1024MB</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: 512MB</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: 2048MB</li>
+  <li><code class="language-plaintext highlighter-rouge">prepareosd</code>: 50MB</li>
+  <li><code class="language-plaintext highlighter-rouge">crashcollector</code>: 60MB</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr-sidecar</code>: 100MB limit, 40MB requests</li>
+</ul>
+
+<blockquote>
+  <p><strong>HINT</strong> The resources for MDS daemons are not configured in the Cluster. Refer to the <a href="/docs/rook/v1.7/ceph-filesystem-crd.html">Ceph Filesystem CRD</a> instead.</p>
+</blockquote>
+
+<h3 id="resource-requirementslimits">Resource Requirements/Limits</h3>
+
+<p>For more information on resource requests/limits see the official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Kubernetes - Managing Compute Resources for Containers</a></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">requests</code>: Requests for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Request for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">limits</code>: Limits for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Limit for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="priority-class-names-configuration-settings">Priority Class Names Configuration Settings</h3>
+
+<p>Priority class names can be specified so that the Rook components will have those priority class names added to them.</p>
+
+<p>You can set priority class names for Rook components for the list of key value pairs:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">all</code>: Set priority class names for MGRs, Mons, OSDs.</li>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: Set priority class names for MGRs.</li>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: Set priority class names for Mons.</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: Set priority class names for OSDs.</li>
+</ul>
+
+<p>The specific component keys will act as overrides to <code class="language-plaintext highlighter-rouge">all</code>.</p>
+
+<h3 id="health-settings">Health settings</h3>
+
+<p>Rook-Ceph will monitor the state of the CephCluster on various components by default.
+The following CRD settings are available:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">healthCheck</code>: main ceph cluster health monitoring section</li>
+</ul>
+
+<p>Currently three health checks are implemented:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: health check on the ceph monitors, basically check whether monitors are members of the quorum. If after a certain timeout a given monitor has not joined the quorum back it will be failed over and replace by a new monitor.</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: health check on the ceph osds</li>
+  <li><code class="language-plaintext highlighter-rouge">status</code>: ceph health status check, periodically check the Ceph health state and reflects it in the CephCluster CR status field.</li>
+</ul>
+
+<p>The liveness probe of each daemon can also be controlled via <code class="language-plaintext highlighter-rouge">livenessProbe</code>, the setting is valid for <code class="language-plaintext highlighter-rouge">mon</code>, <code class="language-plaintext highlighter-rouge">mgr</code> and <code class="language-plaintext highlighter-rouge">osd</code>.
+Here is a complete example for both <code class="language-plaintext highlighter-rouge">daemonHealth</code> and <code class="language-plaintext highlighter-rouge">livenessProbe</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthCheck</span><span class="pi">:</span>
+  <span class="na">daemonHealth</span><span class="pi">:</span>
+    <span class="na">mon</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">45s</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="s">600s</span>
+    <span class="na">osd</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">60s</span>
+    <span class="na">status</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">livenessProbe</span><span class="pi">:</span>
+    <span class="na">mon</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">mgr</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">osd</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<p>The probe itself can also be overridden, refer to the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-command">Kubernetes documentation</a>.</p>
+
+<p>For example, you could change the <code class="language-plaintext highlighter-rouge">mgr</code> probe by applying:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthCheck</span><span class="pi">:</span>
+  <span class="na">livenessProbe</span><span class="pi">:</span>
+    <span class="na">mgr</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">probe</span><span class="pi">:</span>
+        <span class="na">httpGet</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
+          <span class="na">port</span><span class="pi">:</span> <span class="m">9283</span>
+        <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">3</span>
+        <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div>
+
+<p>Changing the liveness probe is an advanced operation and should rarely be necessary. If you want to change these settings then modify the desired settings.</p>
+
+<h2 id="status">Status</h2>
+
+<p>The operator is regularly configuring and checking the health of the cluster. The results of the configuration
+and health checks can be seen in the <code class="language-plaintext highlighter-rouge">status</code> section of the CephCluster CR.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl -n rook-ceph get CephCluster -o yaml
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="s">...</span>
+  <span class="s">status</span><span class="pi">:</span>
+    <span class="na">ceph</span><span class="pi">:</span>
+      <span class="na">health</span><span class="pi">:</span> <span class="s">HEALTH_OK</span>
+      <span class="na">lastChecked</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-03-02T21:22:11Z"</span>
+      <span class="na">capacity</span><span class="pi">:</span>
+        <span class="na">bytesAvailable</span><span class="pi">:</span> <span class="m">22530293760</span>
+        <span class="na">bytesTotal</span><span class="pi">:</span> <span class="m">25757220864</span>
+        <span class="na">bytesUsed</span><span class="pi">:</span> <span class="m">3226927104</span>
+        <span class="na">lastUpdated</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-03-02T21:22:11Z"</span>
+    <span class="na">message</span><span class="pi">:</span> <span class="s">Cluster created successfully</span>
+    <span class="na">phase</span><span class="pi">:</span> <span class="s">Ready</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">Created</span>
+    <span class="na">storage</span><span class="pi">:</span>
+      <span class="na">deviceClasses</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">hdd</span>
+    <span class="na">version</span><span class="pi">:</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+      <span class="na">version</span><span class="pi">:</span> <span class="s">16.2.6-0</span>
+    <span class="na">conditions</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">lastHeartbeatTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-03-02T21:22:11Z"</span>
+      <span class="na">lastTransitionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2021-03-02T21:21:09Z"</span>
+      <span class="na">message</span><span class="pi">:</span> <span class="s">Cluster created successfully</span>
+      <span class="na">reason</span><span class="pi">:</span> <span class="s">ClusterCreated</span>
+      <span class="na">status</span><span class="pi">:</span> <span class="s2">"</span><span class="s">True"</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">Ready</span>
+</code></pre></div></div>
+
+<h3 id="ceph-status">Ceph Status</h3>
+
+<p>Ceph is constantly monitoring the health of the data plane and reporting back if there are
+any warnings or errors. If everything is healthy from Ceph’s perspective, you will see
+<code class="language-plaintext highlighter-rouge">HEALTH_OK</code>.</p>
+
+<p>If Ceph reports any warnings or errors, the details will be printed to the status.
+If further troubleshooting is needed to resolve these issues, the toolbox will likely
+be needed where you can run <code class="language-plaintext highlighter-rouge">ceph</code> commands to find more details.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">capacity</code> of the cluster is reported, including bytes available, total, and used.
+The available space will be less that you may expect due to overhead in the OSDs.</p>
+
+<h3 id="conditions">Conditions</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">conditions</code> represent the status of the Rook operator.</p>
+<ul>
+  <li>If the cluster is fully configured and the operator is stable, the
+<code class="language-plaintext highlighter-rouge">Ready</code> condition is raised with <code class="language-plaintext highlighter-rouge">ClusterCreated</code> reason and no other conditions. The cluster
+will remain in the <code class="language-plaintext highlighter-rouge">Ready</code> condition after the first successful configuration since it
+is expected the storage is consumable from this point on. If there are issues preventing
+the storage layer from working, they are expected to show as Ceph health errors.</li>
+  <li>If the cluster is externally connected successfully, the <code class="language-plaintext highlighter-rouge">Ready</code> condition will have the reason <code class="language-plaintext highlighter-rouge">ClusterConnected</code>.</li>
+  <li>If the operator is currently being configured or the operator is checking for update,
+there will be a <code class="language-plaintext highlighter-rouge">Progressing</code> condition.</li>
+  <li>If there was a failure, the condition(s) status will be <code class="language-plaintext highlighter-rouge">false</code> and the <code class="language-plaintext highlighter-rouge">message</code> will
+give a summary of the error. See the operator log for more details.</li>
+</ul>
+
+<h3 id="other-status">Other Status</h3>
+
+<p>There are several other properties for the overall status including:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">message</code>, <code class="language-plaintext highlighter-rouge">phase</code>, and <code class="language-plaintext highlighter-rouge">state</code>: A summary of the overall current state of the cluster, which
+is somewhat duplicated from the conditions for backward compatibility.</li>
+  <li><code class="language-plaintext highlighter-rouge">storage.deviceClasses</code>: The names of the types of storage devices that Ceph discovered
+in the cluster. These types will be <code class="language-plaintext highlighter-rouge">ssd</code> or <code class="language-plaintext highlighter-rouge">hdd</code> unless they have been overridden
+with the <code class="language-plaintext highlighter-rouge">crushDeviceClass</code> in the <code class="language-plaintext highlighter-rouge">storageClassDeviceSets</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">version</code>: The version of the Ceph image currently deployed.</li>
+</ul>
+
+<h2 id="samples">Samples</h2>
+
+<p>Here are several samples for configuring Ceph clusters. Each of the samples must also include the namespace and corresponding access granted for management by the Ceph operator. See the <a href="#common-cluster-resources">common cluster resources</a> below.</p>
+
+<h3 id="storage-configuration-all-devices">Storage configuration: All devices</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">metadataDevice</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+      <span class="na">osdsPerDevice</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-specific-devices">Storage Configuration: Specific devices</h3>
+
+<p>Individual nodes and their config can be specified so that only the named nodes below will be used as storage resources.
+Each node’s ‘name’ field should match their ‘kubernetes.io/hostname’ label.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">metadataDevice</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">devices</span><span class="pi">:</span>             <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span> <span class="c1"># Whole storage device</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc1"</span> <span class="c1"># One specific partition. Should not have a file system on it.</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/dev/disk/by-id/ata-ST4000DM004-XXXX"</span> <span class="c1"># both device name and explicit udev links are supported</span>
+      <span class="na">config</span><span class="pi">:</span>         <span class="c1"># configuration can be specified at the node level which overrides the cluster level config</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.301"</span>
+      <span class="na">deviceFilter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">^sd."</span>
+</code></pre></div></div>
+
+<h3 id="node-affinity">Node Affinity</h3>
+
+<p>To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
+The example under ‘all’ would have all services scheduled on kubernetes nodes labeled with ‘role=storage-node’ and
+tolerate taints with a key of ‘storage-node’.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="c1"># enable the ceph dashboard for viewing cluster status</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">placement</span><span class="pi">:</span>
+    <span class="na">all</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+        <span class="na">requiredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span>
+          <span class="na">nodeSelectorTerms</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">matchExpressions</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">role</span>
+              <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span>
+              <span class="na">values</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">storage-node</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">storage-node</span>
+        <span class="na">operator</span><span class="pi">:</span> <span class="s">Exists</span>
+    <span class="na">mgr</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="na">mon</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="na">osd</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h3 id="resource-requestslimits">Resource Requests/Limits</h3>
+
+<p>To control how many resources the Rook components can request/use, you can set requests and limits in Kubernetes for them.
+You can override these requests/limits for OSDs per node when using <code class="language-plaintext highlighter-rouge">useAllNodes: false</code> in the <code class="language-plaintext highlighter-rouge">node</code> item in the <code class="language-plaintext highlighter-rouge">nodes</code> list.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Before setting resource requests/limits, please take a look at the Ceph documentation for recommendations for each component: <a href="http://docs.ceph.com/docs/master/start/hardware-recommendations/">Ceph - Hardware Recommendations</a>.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="c1"># enable the ceph dashboard for viewing cluster status</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level resource requests/limits configuration</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+</code></pre></div></div>
+
+<h3 id="osd-topology">OSD Topology</h3>
+
+<p>The topology of the cluster is important in production environments where you want your data spread across failure domains. The topology
+can be controlled by adding labels to the nodes. When the labels are found on a node at first OSD deployment, Rook will add them to
+the desired level in the <a href="https://docs.ceph.com/en/latest/rados/operations/crush-map/">CRUSH map</a>.</p>
+
+<p>The complete list of labels in hierarchy order from highest to lowest is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>topology.kubernetes.io/region
+topology.kubernetes.io/zone
+topology.rook.io/datacenter
+topology.rook.io/room
+topology.rook.io/pod
+topology.rook.io/pdu
+topology.rook.io/row
+topology.rook.io/rack
+topology.rook.io/chassis
+</code></pre></div></div>
+
+<p>For example, if the following labels were added to a node:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl label node mynode topology.kubernetes.io/zone=zone1
+kubectl label node mynode topology.rook.io/rack=zone1-rack1
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>For versions previous to K8s 1.17, use the topology key: failure-domain.beta.kubernetes.io/zone or region</p>
+</blockquote>
+
+<p>These labels would result in the following hierarchy for OSDs on that node (this command can be run in the Rook toolbox):</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd tree
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID CLASS WEIGHT  TYPE NAME                 STATUS REWEIGHT PRI-AFF
+-1       0.01358 root default
+-5       0.01358     zone zone1
+-4       0.01358         rack rack1
+-3       0.01358             host mynode
+0   hdd 0.00679                 osd.0         up  1.00000 1.00000
+1   hdd 0.00679                 osd.1         up  1.00000 1.00000
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Ceph requires unique names at every level in the hierarchy (CRUSH map). For example, you cannot have two racks
+with the same name that are in different zones. Racks in different zones must be named uniquely.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">host</code> is added automatically to the hierarchy by Rook. The host cannot be specified with a topology label.
+All topology labels are optional.</p>
+
+<blockquote>
+  <p><strong>HINT</strong> When setting the node labels prior to <code class="language-plaintext highlighter-rouge">CephCluster</code> creation, these settings take immediate effect. However, applying this to an already deployed <code class="language-plaintext highlighter-rouge">CephCluster</code> requires removing each node from the cluster first and then re-adding it with new configuration to take effect. Do this node by node to keep your data safe! Check the result with <code class="language-plaintext highlighter-rouge">ceph osd tree</code> from the <a href="/docs/rook/v1.7/ceph-toolbox.html">Rook Toolbox</a>. The OSD tree should display the hierarchy for the nodes that already have been re-added.</p>
+</blockquote>
+
+<p>To utilize the <code class="language-plaintext highlighter-rouge">failureDomain</code> based on the node labels, specify the corresponding option in the <a href="/docs/rook/v1.7/ceph-pool-crd.html">CephBlockPool</a></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephBlockPool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">replicapool</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">rack</span>  <span class="c1"># this matches the topology labels on nodes</span>
+  <span class="na">replicated</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div>
+
+<p>This configuration will split the replication of volumes across unique
+racks in the data center setup.</p>
+
+<h3 id="using-pvc-storage-for-monitors">Using PVC storage for monitors</h3>
+
+<p>In the CRD specification below three monitors are created each using a 10Gi PVC
+created by Rook using the <code class="language-plaintext highlighter-rouge">local-storage</code> storage class.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">local-storage</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">metadataDevice</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+      <span class="na">osdsPerDevice</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span>
+</code></pre></div></div>
+
+<h3 id="using-storageclassdevicesets">Using StorageClassDeviceSets</h3>
+
+<p>In the CRD specification below, 3 OSDs (having specific placement and resource values) and 3 mons with each using a 10Gi PVC, are created by Rook using the <code class="language-plaintext highlighter-rouge">local-storage</code> storage class.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">mon</span><span class="pi">:</span>
+    <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+    <span class="na">allowMultiplePerNode</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">local-storage</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span>
+    <span class="na">allowUnsupported</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4Gi"</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4Gi"</span>
+      <span class="na">placement</span><span class="pi">:</span>
+        <span class="na">podAntiAffinity</span><span class="pi">:</span>
+          <span class="na">preferredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">weight</span><span class="pi">:</span> <span class="m">100</span>
+            <span class="na">podAffinityTerm</span><span class="pi">:</span>
+              <span class="na">labelSelector</span><span class="pi">:</span>
+                <span class="na">matchExpressions</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">rook.io/cluster"</span>
+                  <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span>
+                  <span class="na">values</span><span class="pi">:</span>
+                    <span class="pi">-</span> <span class="s">cluster1</span>
+              <span class="na">topologyKey</span><span class="pi">:</span> <span class="s2">"</span><span class="s">topology.kubernetes.io/zone"</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">local-storage</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div></div>
+
+<h3 id="dedicated-metadata-and-wal-device-for-osd-on-pvc">Dedicated metadata and wal device for OSD on PVC</h3>
+
+<p>In the simplest case, Ceph OSD BlueStore consumes a single (primary) storage device.
+BlueStore is the engine used by the OSD to store data.</p>
+
+<p>The storage device is normally used as a whole, occupying the full device that is managed directly by BlueStore.
+It is also possible to deploy BlueStore across additional devices such as a DB device.
+This device can be used for storing BlueStore’s internal metadata.
+BlueStore (or rather, the embedded RocksDB) will put as much metadata as it can on the DB device to improve performance.
+If the DB device fills up, metadata will spill back onto the primary device (where it would have been otherwise).
+Again, it is only helpful to provision a DB device if it is faster than the primary device.</p>
+
+<p>You can have multiple <code class="language-plaintext highlighter-rouge">volumeClaimTemplates</code> where each might either represent a device or a metadata device.
+So just taking the <code class="language-plaintext highlighter-rouge">storage</code> section this will give something like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">storage</span><span class="pi">:</span>
+   <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">metadata</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="c1"># Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">io1</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>NOTE</strong>: Note that Rook only supports three naming convention for a given template:</p>
+</blockquote>
+
+<ul>
+  <li>“data”: represents the main OSD block device, where your data is being stored.</li>
+  <li>“metadata”: represents the metadata (including block.db and block.wal) device used to store the Ceph Bluestore database for an OSD.</li>
+  <li>“wal”: represents the block.wal device used to store the Ceph Bluestore database for an OSD. If this device is set, “metadata” device will refer specifically to block.db device.
+It is recommended to use a faster storage class for the metadata or wal device, with a slower device for the data.
+Otherwise, having a separate metadata device will not improve the performance.</li>
+</ul>
+
+<p>The bluestore partition has the following reference combinations supported by the ceph-volume utility:</p>
+
+<ul>
+  <li>
+    <p>A single “data” device.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>A “data” device and a “metadata” device.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">metadata</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="c1"># Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">io1</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>A “data” device and a “wal” device.
+A WAL device can be used for BlueStore’s internal journal or write-ahead log (block.wal), it is only useful to use a WAL device if the device is faster than the primary device (data device).
+There is no separate “metadata” device in this case, the data of main OSD block and block.db located in “data” device.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">wal</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="c1"># Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">io1</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>A “data” device, a “metadata” device and a “wal” device.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">storageClassDeviceSets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">set1</span>
+      <span class="na">count</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">portable</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">volumeClaimTemplates</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">data</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">10Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">gp2</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">metadata</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="c1"># Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">io1</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="pi">-</span> <span class="na">metadata</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">wal</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="c1"># Find the right size https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+          <span class="c1"># IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, io1)</span>
+          <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">io1</span>
+          <span class="na">volumeMode</span><span class="pi">:</span> <span class="s">Block</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>To determine the size of the metadata block follow the <a href="https://docs.ceph.com/docs/master/rados/configuration/bluestore-config-ref/#sizing">official Ceph sizing guide</a>.</p>
+
+<p>With the present configuration, each OSD will have its main block allocated a 10GB device as well a 5GB device to act as a bluestore database.</p>
+
+<h3 id="external-cluster">External cluster</h3>
+
+<p><strong>The minimum supported Ceph version for the External Cluster is Luminous 12.2.x.</strong></p>
+
+<p>The features available from the external cluster will vary depending on the version of Ceph. The following table shows the minimum version of Ceph for some of the features:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>FEATURE</th>
+      <th>CEPH VERSION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dynamic provisioning RBD</td>
+      <td>12.2.X</td>
+    </tr>
+    <tr>
+      <td>Configure extra CRDs (object, file, nfs)<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></td>
+      <td>13.2.3</td>
+    </tr>
+    <tr>
+      <td>Dynamic provisioning CephFS</td>
+      <td>14.2.3</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="pre-requisites">Pre-requisites</h4>
+
+<p>In order to configure an external Ceph cluster with Rook, we need to inject some information in order to connect to that cluster.
+You can use the <code class="language-plaintext highlighter-rouge">cluster/examples/kubernetes/ceph/import-external-cluster.sh</code> script to achieve that.
+The script will look for the following populated environment variables:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">NAMESPACE</code>: the namespace where the configmap and secrets should be injected</li>
+  <li><code class="language-plaintext highlighter-rouge">ROOK_EXTERNAL_FSID</code>: the fsid of the external Ceph cluster, it can be retrieved via the <code class="language-plaintext highlighter-rouge">ceph fsid</code> command</li>
+  <li><code class="language-plaintext highlighter-rouge">ROOK_EXTERNAL_CEPH_MON_DATA</code>: is a common-separated list of running monitors IP address along with their ports, e.g: <code class="language-plaintext highlighter-rouge">a=172.17.0.4:3300,b=172.17.0.5:3300,c=172.17.0.6:3300</code>. You don’t need to specify all the monitors, you can simply pass one and the Operator will discover the rest. The name of the monitor is the name that appears in the <code class="language-plaintext highlighter-rouge">ceph status</code> output.</li>
+</ul>
+
+<p>Now, we need to give Rook a key to connect to the cluster in order to perform various operations such as health cluster check, CSI keys management etc…
+It is recommended to generate keys with minimal access so the admin key does not need to be used by the external cluster.
+In this case, the admin key is only needed to generate the keys that will be used by the external cluster.
+But if the admin key is to be used by the external cluster, set the following variable:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ROOK_EXTERNAL_ADMIN_SECRET</code>: <strong>OPTIONAL:</strong> the external Ceph cluster admin secret key, it can be retrieved via the <code class="language-plaintext highlighter-rouge">ceph auth get-key client.admin</code> command.</li>
+</ul>
+
+<blockquote>
+  <p><strong>WARNING</strong>: If you plan to create CRs (pool, rgw, mds, nfs) in the external cluster, you <strong>MUST</strong> inject the client.admin keyring as well as injecting <code class="language-plaintext highlighter-rouge">cluster-external-management.yaml</code></p>
+</blockquote>
+
+<p><strong>Example</strong>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">export NAMESPACE=rook-ceph-external
+export ROOK_EXTERNAL_FSID=3240b4aa-ddbc-42ee-98ba-4ea7b2a61514
+export ROOK_EXTERNAL_CEPH_MON_DATA=a=172.17.0.4:3300
+export ROOK_EXTERNAL_ADMIN_SECRET=AQC6Ylxdja+NDBAAB7qy9MEAr4VLLq4dCIvxtg==
+</span></code></pre></div></div>
+
+<p>If the Ceph admin key is not provided, the following script needs to be executed on a machine that can connect to the Ceph cluster using the Ceph admin key.
+On that machine, run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> cluster/examples/kubernetes/ceph/create-external-cluster-resources.sh
+</code></pre></div></div>
+
+<p>The script will source all the necessary environment variables for you. It assumes the namespace name is <code class="language-plaintext highlighter-rouge">rook-ceph-external</code>.
+This can be changed by running the script like (assuming namespace name is <code class="language-plaintext highlighter-rouge">foo</code> this time):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">ns</span><span class="o">=</span>foo <span class="nb">.</span> cluster/examples/kubernetes/ceph/create-external-cluster-resources.sh
+</code></pre></div></div>
+
+<p>When done you can execute: <code class="language-plaintext highlighter-rouge">import-external-cluster.sh</code> to inject them in your Kubernetes cluster.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: Since only Ceph admin key can create CRs in the external cluster, please make sure that rgw pools have been prepared. You can get existing pools by running <code class="language-plaintext highlighter-rouge">ceph osd pool ls</code>.</p>
+</blockquote>
+
+<p><strong>Example</strong>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ceph osd pool ls
+</span></code></pre></div></div>
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my-store.rgw.control
+my-store.rgw.meta
+my-store.rgw.log
+my-store.rgw.buckets.index
+my-store.rgw.buckets.non-ec
+my-store.rgw.buckets.data
+</code></pre></div>  </div>
+</blockquote>
+
+<p>In this example, you can simply export RGW_POOL_PREFIX before executing the script like this:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">export RGW_POOL_PREFIX=my-store
+</span></code></pre></div></div>
+
+<p>The script will automatically create users and keys with the lowest possible privileges and populate the necessary environment variables for <code class="language-plaintext highlighter-rouge">cluster/examples/kubernetes/ceph/import-external-cluster.sh</code> to work correctly.</p>
+
+<p>Finally, you can simply execute the script like this from a machine that has access to your Kubernetes cluster:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">bash cluster/examples/kubernetes/ceph/import-external-cluster.sh
+</span></code></pre></div></div>
+
+<h4 id="cephcluster-example-consumer">CephCluster example (consumer)</h4>
+
+<p>Assuming the above section has successfully completed, here is a CR example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-external</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph-external</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">external</span><span class="pi">:</span>
+    <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">crashCollector</span><span class="pi">:</span>
+    <span class="na">disable</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># optionally, the ceph-mgr IP address can be pass to gather metric from the prometheus exporter</span>
+  <span class="c1">#monitoring:</span>
+    <span class="c1">#enabled: true</span>
+    <span class="c1">#rulesNamespace: rook-ceph</span>
+    <span class="c1">#externalMgrEndpoints:</span>
+      <span class="c1">#- ip: 192.168.39.182</span>
+    <span class="c1">#externalMgrPrometheusPort: 9283</span>
+</code></pre></div></div>
+
+<p>Choose the namespace carefully, if you have an existing cluster managed by Rook, you have likely already injected <code class="language-plaintext highlighter-rouge">common.yaml</code>.
+Additionally, you now need to inject <code class="language-plaintext highlighter-rouge">common-external.yaml</code> too.</p>
+
+<p>You can now create it like this:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f cluster/examples/kubernetes/ceph/cluster-external.yaml
+</span></code></pre></div></div>
+
+<p>If the previous section has not been completed, the Rook Operator will still acknowledge the CR creation but will wait forever to receive connection information.</p>
+
+<blockquote>
+  <p><strong>WARNING</strong>: If no cluster is managed by the current Rook Operator, you need to inject <code class="language-plaintext highlighter-rouge">common.yaml</code>, then modify <code class="language-plaintext highlighter-rouge">cluster-external.yaml</code> and specify <code class="language-plaintext highlighter-rouge">rook-ceph</code> as <code class="language-plaintext highlighter-rouge">namespace</code>.</p>
+</blockquote>
+
+<p>If this is successful you will see the CepCluster status as connected.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get CephCluster -n rook-ceph-external
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                 DATADIRHOSTPATH   MONCOUNT   AGE    STATE       HEALTH
+rook-ceph-external   /var/lib/rook                162m   Connected   HEALTH_OK
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Before you create a StorageClass with this cluster you will need to create a Pool in your external Ceph Cluster.</p>
+
+<h4 id="example-storageclass-based-on-external-ceph-pool">Example StorageClass based on external Ceph Pool</h4>
+
+<p>In Ceph Cluster let us list the pools available:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">rados df
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POOL_NAME     USED OBJECTS CLONES COPIES MISSING_ON_PRIMARY UNFOUND DEGRADED RD_OPS  RD WR_OPS  WR USED COMPR UNDER COMPR
+replicated_2g  0 B       0      0      0                  0       0        0      0 0 B      0 0 B        0 B         0 B
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Here is an example StorageClass configuration that uses the <code class="language-plaintext highlighter-rouge">replicated_2g</code> pool from the external cluster:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">cat &lt;&lt; EOF | kubectl apply -f -
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: rook-ceph-block-ext
+# Change "rook-ceph" provisioner prefix to match the operator namespace if needed
+provisioner: rook-ceph.rbd.csi.ceph.com
+parameters:
+   # clusterID is the namespace where the rook cluster is running
+   clusterID: rook-ceph-external
+   # Ceph pool into which the RBD image shall be created
+   pool: replicated_2g
+
+   # RBD image format. Defaults to "2".
+   imageFormat: "2"
+
+   # RBD image features. Available for imageFormat: "2". CSI RBD currently supports only `layering` feature.
+   imageFeatures: layering
+
+   # The secrets contain Ceph admin credentials.
+   csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+   csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph-external
+   csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+   csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph-external
+   csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+   csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph-external
+
+   # Specify the filesystem type of the volume. If not specified, csi-provisioner
+   # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+   # in hyperconverged settings where the volume is mounted on the same node as the osds.
+   csi.storage.k8s.io/fstype: ext4
+
+# Delete the rbd volume when a PVC is deleted
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+EOF
+</code></pre></div>  </div>
+</blockquote>
+
+<p>You can now create a persistent volume based on this StorageClass.</p>
+
+<h4 id="cephcluster-example-management">CephCluster example (management)</h4>
+
+<p>The following CephCluster CR represents a cluster that will perform management tasks on the external cluster.
+It will not only act as a consumer but will also allow the deployment of other CRDs such as CephFilesystem or CephObjectStore.
+As mentioned above, you would need to inject the admin keyring for that.</p>
+
+<p>The corresponding YAML example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-external</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph-external</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">external</span><span class="pi">:</span>
+    <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">cephVersion</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/ceph/ceph:v16.2.6</span> <span class="c1"># Should match external cluster version</span>
+</code></pre></div></div>
+
+<h3 id="security">Security</h3>
+
+<p>Rook has the ability to encrypt OSDs of clusters running on PVC via the flag (<code class="language-plaintext highlighter-rouge">encrypted: true</code>) in your <code class="language-plaintext highlighter-rouge">storageClassDeviceSets</code> <a href="#pvc-based-cluster">template</a>.
+By default, the Key Encryption Keys (also known as Data Encryption Keys) are stored in a Kubernetes Secret.</p>
+
+<p>However, if a Key Management System exists Rook is capable of using it. HashiCorp Vault is the only KMS currently supported by Rook.
+Please refer to the next section.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">security</code> section contains settings related to encryption of the cluster.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">security</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">kms</code>: Key Management System settings
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">connectionDetails</code>: the list of parameters representing kms connection details</li>
+          <li><code class="language-plaintext highlighter-rouge">tokenSecretName</code>: the name of the Kubernetes Secret containing the kms authentication token</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="vault-kms">Vault KMS</h4>
+
+<p>In order for Rook to connect to Vault, you must configure the following in your <code class="language-plaintext highlighter-rouge">CephCluster</code> template:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">security</span><span class="pi">:</span>
+  <span class="na">kms</span><span class="pi">:</span>
+    <span class="c1"># name of the k8s config map containing all the kms connection details</span>
+    <span class="na">connectionDetails</span><span class="pi">:</span>
+      <span class="na">KMS_PROVIDER</span><span class="pi">:</span> <span class="s">vault</span>
+      <span class="na">VAULT_ADDR</span><span class="pi">:</span> <span class="s">https://vault.default.svc.cluster.local:8200</span>
+      <span class="na">VAULT_BACKEND_PATH</span><span class="pi">:</span> <span class="s">rook</span>
+      <span class="na">VAULT_SECRET_ENGINE</span><span class="pi">:</span> <span class="s">kv</span>
+    <span class="c1"># name of the k8s secret containing the kms authentication token</span>
+    <span class="na">tokenSecretName</span><span class="pi">:</span> <span class="s">rook-vault-token</span>
+</code></pre></div></div>
+
+<p>Note: Rook supports <strong>all</strong> the Vault <a href="https://www.vaultproject.io/docs/commands#environment-variables">environment variables</a>.</p>
+
+<p>The Kubernetes Secret <code class="language-plaintext highlighter-rouge">rook-vault-token</code> should contain:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-vault-token</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">token</span><span class="pi">:</span> <span class="s">&lt;TOKEN&gt;</span> <span class="c1"># base64 of a token to connect to Vault, for example: cy5GWXpsbzAyY2duVGVoRjhkWG5Bb3EyWjkK</span>
+</code></pre></div></div>
+
+<p>As part of the token, here is an example of a policy that can be used:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">path</span> <span class="s2">"rook/*"</span> <span class="p">{</span>
+  <span class="nx">capabilities</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"create"</span><span class="p">,</span> <span class="s2">"read"</span><span class="p">,</span> <span class="s2">"update"</span><span class="p">,</span> <span class="s2">"delete"</span><span class="p">,</span> <span class="s2">"list"</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="nx">path</span> <span class="s2">"sys/mounts"</span> <span class="p">{</span>
+<span class="nx">capabilities</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"read"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can write the policy like so and then create a token:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">vault policy write rook /tmp/rook.hcl
+vault token create -policy=rook
+</span></code></pre></div></div>
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key                  Value
+---                  -----
+token                s.FYzlo02cgnTehF8dXnAoq2Z9
+token_accessor       oMo7sAXQKbYtxU4HtO8k3pko
+token_duration       768h
+token_renewable      true
+token_policies       ["default" "rook"]
+identity_policies    []
+policies             ["default" "rook"]
+</code></pre></div>  </div>
+</blockquote>
+
+<p>In this example the backend path named <code class="language-plaintext highlighter-rouge">rook</code> is used it must be enabled in Vault with the following:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">vault secrets enable -path=rook kv
+</span></code></pre></div></div>
+
+<p>If a different path is used, the <code class="language-plaintext highlighter-rouge">VAULT_BACKEND_PATH</code> key in <code class="language-plaintext highlighter-rouge">connectionDetails</code> must be changed.</p>
+
+<p>Currently the token-based authentication is the only supported method.
+Later Rook is planning on supporting the <a href="https://www.vaultproject.io/docs/auth/kubernetes">Vault Kubernetes native authentication</a>.</p>
+
+<h5 id="tls-configuration">TLS configuration</h5>
+
+<p>This is an advanced but recommended configuration for production deployments, in this case the <code class="language-plaintext highlighter-rouge">vault-connection-details</code> will look like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">security</span><span class="pi">:</span>
+  <span class="na">kms</span><span class="pi">:</span>
+    <span class="c1"># name of the k8s config map containing all the kms connection details</span>
+    <span class="na">connectionDetails</span><span class="pi">:</span>
+      <span class="na">KMS_PROVIDER</span><span class="pi">:</span> <span class="s">vault</span>
+      <span class="na">VAULT_ADDR</span><span class="pi">:</span> <span class="s">https://vault.default.svc.cluster.local:8200</span>
+      <span class="na">VAULT_CACERT</span><span class="pi">:</span> <span class="s">&lt;name of the k8s secret containing the PEM-encoded CA certificate&gt;</span>
+      <span class="na">VAULT_CLIENT_CERT</span><span class="pi">:</span> <span class="s">&lt;name of the k8s secret containing the PEM-encoded client certificate&gt;</span>
+      <span class="na">VAULT_CLIENT_KEY</span><span class="pi">:</span> <span class="s">&lt;name of the k8s secret containing the PEM-encoded private key&gt;</span>
+    <span class="c1"># name of the k8s secret containing the kms authentication token</span>
+    <span class="na">tokenSecretName</span><span class="pi">:</span> <span class="s">rook-vault-token</span>
+</code></pre></div></div>
+
+<p>Each secret keys are expected to be:</p>
+
+<ul>
+  <li>VAULT_CACERT: <code class="language-plaintext highlighter-rouge">cert</code></li>
+  <li>VAULT_CLIENT_CERT: <code class="language-plaintext highlighter-rouge">cert</code></li>
+  <li>VAULT_CLIENT_KEY: <code class="language-plaintext highlighter-rouge">key</code></li>
+</ul>
+
+<p>For instance <code class="language-plaintext highlighter-rouge">VAULT_CACERT</code> Secret named <code class="language-plaintext highlighter-rouge">vault-tls-ca-certificate</code> will look like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vault-tls-ca-certificate</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">cert</span><span class="pi">:</span> <span class="s">&lt;PEM base64 encoded CA certificate&gt;</span>
+</code></pre></div></div>
+
+<p>Note: if you are using self-signed certificates (not known/approved by a proper CA) you must pass <code class="language-plaintext highlighter-rouge">VAULT_SKIP_VERIFY: true</code>.
+Communications will remain encrypted but the validity of the certificate will not be verified.</p>
+
+<h3 id="deleting-a-cephcluster">Deleting a CephCluster</h3>
+
+<p>During deletion of a CephCluster resource, Rook protects against accidental or premature destruction
+of user data by blocking deletion if there are any other Rook-Ceph Custom Resources that reference
+the CephCluster being deleted. Rook will warn about which other resources are blocking deletion in
+three ways until all blocking resources are deleted:</p>
+<ol>
+  <li>An event will be registered on the CephCluster resource</li>
+  <li>A status condition will be added to the CephCluster resource</li>
+  <li>An error will be added to the Rook-Ceph Operator log</li>
+</ol>
+
+<h4 id="cleanup-policy">Cleanup policy</h4>
+
+<p>Rook has the ability to cleanup resources and data that were deployed when a CephCluster is removed.
+The policy settings indicate which data should be forcibly deleted and in what way the data should be wiped.
+The <code class="language-plaintext highlighter-rouge">cleanupPolicy</code> has several fields:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">confirmation</code>: Only an empty string and <code class="language-plaintext highlighter-rouge">yes-really-destroy-data</code> are valid values for this field.
+If this setting is empty, the cleanupPolicy settings will be ignored and Rook will not cleanup any resources during cluster removal.
+To reinstall the cluster, the admin would then be required to follow the <a href="/docs/rook/v1.7/ceph-teardown.html">cleanup guide</a> to delete the data on hosts.
+If this setting is <code class="language-plaintext highlighter-rouge">yes-really-destroy-data</code>, the operator will automatically delete the data on hosts.
+Because this cleanup policy is destructive, after the confirmation is set to <code class="language-plaintext highlighter-rouge">yes-really-destroy-data</code>
+Rook will stop configuring the cluster as if the cluster is about to be destroyed.</li>
+  <li><code class="language-plaintext highlighter-rouge">sanitizeDisks</code>: sanitizeDisks represents advanced settings that can be used to delete data on drives.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">method</code>: indicates if the entire disk should be sanitized or simply ceph’s metadata. Possible choices are ‘quick’ (default) or ‘complete’</li>
+      <li><code class="language-plaintext highlighter-rouge">dataSource</code>: indicate where to get random bytes from to write on the disk. Possible choices are ‘zero’ (default) or ‘random’.
+Using random sources will consume entropy from the system and will take much more time then the zero source</li>
+      <li><code class="language-plaintext highlighter-rouge">iteration</code>: overwrite N times instead of the default (1). Takes an integer value</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">allowUninstallWithVolumes</code>: If set to true, then the cephCluster deletion doesn’t wait for the PVCs to be deleted. Default is false.</li>
+</ul>
+
+<p>To automate activation of the cleanup, you can use the following command. <strong>WARNING: DATA WILL BE PERMANENTLY DELETED</strong>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph patch cephcluster rook-ceph --type merge -p '{"spec":{"cleanupPolicy":{"confirmation":"yes-really-destroy-data"}}}'
+</span></code></pre></div></div>
+
+<p>Nothing will happen until the deletion of the CR is requested, so this can still be reverted.
+However, all new configuration by the operator will be blocked with this cleanup policy enabled.</p>
+
+<p>Rook waits for the deletion of PVs provisioned using the cephCluster before proceeding to delete the
+cephCluster. To force deletion of the cephCluster without waiting for the PVs to be deleted, you can
+set the allowUninstallWithVolumes to true under spec.CleanupPolicy.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Configure an object store, shared filesystem, or NFS resources in the local cluster to connect to the external Ceph cluster <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.7/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.7/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.7/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.7/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.7/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.7/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.7/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.7/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.7/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.7/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.7/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.7/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.7/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.7/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.7/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.7/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.7/ceph-cluster-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.7/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.7/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.7/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.7/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.7/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.7/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.7/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.7/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.7/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.7/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.7/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.7/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.7/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.7/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "FilesystemMirror CRD",
+      "/docs/rook/v1.7/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.7/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.7/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.7/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.7/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.7/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.7/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.7/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.7/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.7/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.7/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.7/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.7/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.7/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.7/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.7/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.7/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Flex Migration",
+      "/docs/rook/v1.7/flex-to-csi-migration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.7/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.7/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.7/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,1257 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.5/ceph-csi-troubleshooting.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.5</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-csi-troubleshooting.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-csi-troubleshooting.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-csi-troubleshooting.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-csi-troubleshooting.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-csi-troubleshooting.html" class="active">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-csi-troubleshooting.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-csi-troubleshooting.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-csi-troubleshooting.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-csi-troubleshooting.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-csi-troubleshooting.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-csi-troubleshooting.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-csi-troubleshooting.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-csi-troubleshooting.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-csi-troubleshooting.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-csi-troubleshooting.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-csi-troubleshooting.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-csi-troubleshooting.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.5 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="csi-common-issues">CSI Common Issues</h1>
+
+<p>Issues when provisioning volumes with the Ceph CSI driver can happen for many reasons such as:</p>
+
+<ul>
+  <li>Network connectivity between CSI pods and ceph</li>
+  <li>Cluster health issues</li>
+  <li>Slow operations</li>
+  <li>Kubernetes issues</li>
+  <li>Ceph-CSI configuration or bugs</li>
+</ul>
+
+<p>The following troubleshooting steps can help identify a number of issues.</p>
+
+<h3 id="block-rbd">Block (RBD)</h3>
+
+<p>If you are mounting block volumes (usually RWO), these are referred to as <code class="language-plaintext highlighter-rouge">RBD</code> volumes in Ceph.
+See the sections below for RBD if you are having block volume issues.</p>
+
+<h3 id="shared-filesystem-cephfs">Shared Filesystem (CephFS)</h3>
+
+<p>If you are mounting shared filesystem volumes (usually RWX), these are referred to as <code class="language-plaintext highlighter-rouge">CephFS</code> volumes in Ceph.
+See the sections below for CephFS if you are having filesystem volume issues.</p>
+
+<h2 id="network-connectivity">Network Connectivity</h2>
+
+<p>The Ceph monitors are the most critical component of the cluster to check first.
+Retrieve the mon endpoints from the services:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get svc <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>rook-ceph-mon
+<span class="go">
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+</span><span class="gp">rook-ceph-mon-a   ClusterIP   10.104.165.31   &lt;none&gt;</span><span class="w">        </span>6789/TCP,3300/TCP   18h
+<span class="gp">rook-ceph-mon-b   ClusterIP   10.97.244.93    &lt;none&gt;</span><span class="w">        </span>6789/TCP,3300/TCP   21s
+<span class="gp">rook-ceph-mon-c   ClusterIP   10.99.248.163   &lt;none&gt;</span><span class="w">        </span>6789/TCP,3300/TCP   8s
+</code></pre></div></div>
+
+<p>If host networking is enabled in the CephCluster CR, you will instead need to find the
+node IPs for the hosts where the mons are running.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">clusterIP</code> is the mon IP and <code class="language-plaintext highlighter-rouge">3300</code> is the port that will be used by Ceph-CSI to connect to the ceph cluster.
+These endpoints must be accessible by all clients in the cluster, including the CSI driver.</p>
+
+<p>If you are seeing issues provisioning the PVC then you need to check the network connectivity from the provisioner pods.</p>
+
+<ul>
+  <li>For CephFS PVCs, check network connectivity from the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin</code> container of the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-provisioner</code> pods</li>
+  <li>For Block PVCs, check network connectivity from the <code class="language-plaintext highlighter-rouge">csi-rbdplugin</code> container of the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-provisioner</code> pods</li>
+</ul>
+
+<p>For redundancy, there are two provisioner pods for each type. Make sure to test connectivity from all provisioner pods.</p>
+
+<p>Connect to the provisioner pods and verify the connection to the mon endpoints such as the following:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Connect to the csi-cephfsplugin container <span class="k">in </span>the provisioner pod
+<span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph <span class="nb">exec</span> <span class="nt">-ti</span> deploy/csi-cephfsplugin-provisioner <span class="nt">-c</span> csi-cephfsplugin <span class="nt">--</span> bash
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Test the network connection to the mon endpoint
+<span class="gp">$</span><span class="w"> </span>curl 10.104.165.31:3300 2&gt;/dev/null
+<span class="go">ceph v2
+</span></code></pre></div></div>
+
+<p>If you see the response “ceph v2”, the connection succeeded.
+If there is no response then there is a network issue connecting to the ceph cluster.</p>
+
+<p>Check network connectivity for all monitor IP’s and ports which are passed to ceph-csi.</p>
+
+<h2 id="ceph-health">Ceph Health</h2>
+
+<p>Sometimes an unhealthy Ceph cluster can contribute to the issues in creating or mounting the PVC.
+Check that your Ceph cluster is healthy by connecting to the <a href="/docs/rook/v1.5/ceph-toolbox.html">Toolbox</a> and
+running the <code class="language-plaintext highlighter-rouge">ceph</code> commands:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph health detail
+<span class="go">HEALTH_OK
+</span></code></pre></div></div>
+
+<h2 id="slow-operations">Slow Operations</h2>
+
+<p>Even slow ops in the ceph cluster can contribute to the issues. In the toolbox,
+make sure that no slow ops are present and the ceph cluster is healthy</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph <span class="nt">-s</span>
+<span class="go">  cluster:
+    id:     ba41ac93-3b55-4f32-9e06-d3d8c6ff7334
+    health: HEALTH_WARN
+            30 slow ops, oldest one blocked for 10624 sec, mon.a has slow ops
+</span></code></pre></div></div>
+
+<p>If Ceph is not healthy, check the following health for more clues:</p>
+
+<ul>
+  <li>The Ceph monitor logs for errors</li>
+  <li>The OSD logs for errors</li>
+  <li>Disk Health</li>
+  <li>Network Health</li>
+</ul>
+
+<h2 id="ceph-troubleshooting">Ceph Troubleshooting</h2>
+
+<h3 id="check-if-the-rbd-pool-exists">Check if the RBD Pool exists</h3>
+
+<p>Make sure the pool you have specified in the <code class="language-plaintext highlighter-rouge">storageclass.yaml</code> exists in the ceph cluster.</p>
+
+<p>Suppose the pool name mentioned in the <code class="language-plaintext highlighter-rouge">storageclass.yaml</code> is <code class="language-plaintext highlighter-rouge">replicapool</code>. It can be verified
+to exist in the toolbox:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph osd lspools
+<span class="go">1 device_health_metrics
+2 replicapool
+</span></code></pre></div></div>
+
+<p>If the pool is not in the list, create the <code class="language-plaintext highlighter-rouge">CephBlockPool</code> CR for the pool if you have not already.
+If you have already created the pool, check the Rook operator log for errors creating the pool.</p>
+
+<h3 id="check-if-the-filesystem-exists">Check if the Filesystem exists</h3>
+
+<p>For the shared filesystem (CephFS), check that the filesystem and pools you have specified in the <code class="language-plaintext highlighter-rouge">storageclass.yaml</code> exist in the Ceph cluster.</p>
+
+<p>Suppose the <code class="language-plaintext highlighter-rouge">fsName</code> name mentioned in the <code class="language-plaintext highlighter-rouge">storageclass.yaml</code> is <code class="language-plaintext highlighter-rouge">myfs</code>. It can be verified in the toolbox:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph fs <span class="nb">ls</span>
+<span class="go">name: myfs, metadata pool: myfs-metadata, data pools: [myfs-data0 ]
+</span></code></pre></div></div>
+
+<p>Now verify the <code class="language-plaintext highlighter-rouge">pool</code> mentioned in the <code class="language-plaintext highlighter-rouge">storageclass.yaml</code> exists, such as the example <code class="language-plaintext highlighter-rouge">myfs-data0</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph osd lspools
+<span class="go">
+1 device_health_metrics
+2 replicapool
+3 myfs-metadata0
+4 myfs-data0
+</span></code></pre></div></div>
+
+<p>The pool for the filesystem will have the suffix <code class="language-plaintext highlighter-rouge">-data0</code> compared the filesystem name that is created
+by the CephFilesystem CR.</p>
+
+<h3 id="subvolumegroups">subvolumegroups</h3>
+
+<p>If the subvolumegroup is not specified in the ceph-csi configmap (where you have passed the ceph monitor information),
+Ceph-CSI creates the default subvolumegroup with the name csi. Verify that the subvolumegroup
+exists:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ceph fs subvolumegroup <span class="nb">ls </span>myfs
+<span class="go">[
+    {
+        "name": "csi"
+    }
+]
+</span></code></pre></div></div>
+
+<p>If you don’t see any issues with your Ceph cluster, the following sections will start debugging the issue from the CSI side.</p>
+
+<h2 id="provisioning-volumes">Provisioning Volumes</h2>
+
+<p>At times the issue can also exist in the Ceph-CSI or the sidecar containers used in Ceph-CSI.</p>
+
+<p>Ceph-CSI has included number of sidecar containers in the provisioner pods such as:
+<code class="language-plaintext highlighter-rouge">csi-attacher</code>, <code class="language-plaintext highlighter-rouge">csi-resizer</code>, <code class="language-plaintext highlighter-rouge">csi-provisioner</code>, <code class="language-plaintext highlighter-rouge">csi-cephfsplugin</code>, <code class="language-plaintext highlighter-rouge">csi-snapshotter</code>, and <code class="language-plaintext highlighter-rouge">liveness-prometheus</code>.</p>
+
+<p>The CephFS provisioner core CSI driver container name is <code class="language-plaintext highlighter-rouge">csi-cephfsplugin</code> as one of the container names.
+For the RBD (Block) provisioner you will see <code class="language-plaintext highlighter-rouge">csi-rbdplugin</code> as the container name.</p>
+
+<p>Here is a summary of the sidecar containers:</p>
+
+<h3 id="csi-provisioner">csi-provisioner</h3>
+
+<p>The external-provisioner is a sidecar container that dynamically provisions volumes by calling <code class="language-plaintext highlighter-rouge">ControllerCreateVolume()</code>
+and <code class="language-plaintext highlighter-rouge">ControllerDeleteVolume()</code> functions of CSI drivers. More details about external-provisioner can be found here.</p>
+
+<p>If there is an issue with PVC Create or Delete, check the logs of the <code class="language-plaintext highlighter-rouge">csi-provisioner</code> sidecar container.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph logs deploy/csi-rbdplugin-provisioner <span class="nt">-c</span> csi-provisioner
+</code></pre></div></div>
+
+<h3 id="csi-resizer">csi-resizer</h3>
+
+<p>The CSI <code class="language-plaintext highlighter-rouge">external-resizer</code> is a sidecar container that watches the Kubernetes API server for PersistentVolumeClaim
+updates and triggers <code class="language-plaintext highlighter-rouge">ControllerExpandVolume</code> operations against a CSI endpoint if the user requested more storage
+on the PersistentVolumeClaim object. More details about external-provisioner can be found here.</p>
+
+<p>If any issue exists in PVC expansion you can check the logs of the <code class="language-plaintext highlighter-rouge">csi-resizer</code> sidecar container.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph logs deploy/csi-rbdplugin-provisioner <span class="nt">-c</span> csi-resizer
+</code></pre></div></div>
+
+<h3 id="csi-snapshotter">csi-snapshotter</h3>
+
+<p>The CSI external-snapshotter sidecar only watches for <code class="language-plaintext highlighter-rouge">VolumeSnapshotContent</code> create/update/delete events.
+It will talk to ceph-csi containers to create or delete snapshots. More details about external-snapshotter can
+be found <a href="https://github.com/kubernetes-csi/external-snapshotter">here</a>.</p>
+
+<p><strong>In Kubernetes 1.17 the volume snapshot feature was promoted to beta. In Kubernetes 1.20, the feature gate is enabled by default on standard Kubernetes deployments and cannot be turned off.</strong></p>
+
+<p>Make sure you have installed the correct snapshotter CRD version. If you have not installed the snapshotter
+controller, see the <a href="/docs/rook/v1.5/ceph-csi-snapshot.html">Snapshots guide</a>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get crd | <span class="nb">grep </span>snapshot
+<span class="go">
+volumesnapshotclasses.snapshot.storage.k8s.io    2021-01-25T11:19:38Z
+volumesnapshotcontents.snapshot.storage.k8s.io   2021-01-25T11:19:39Z
+volumesnapshots.snapshot.storage.k8s.io          2021-01-25T11:19:40Z
+</span></code></pre></div></div>
+
+<p>The above CRDs must have the matching version in your <code class="language-plaintext highlighter-rouge">snapshotclass.yaml</code> or <code class="language-plaintext highlighter-rouge">snapshot.yaml</code>.
+Otherwise, the <code class="language-plaintext highlighter-rouge">VolumeSnapshot</code> and <code class="language-plaintext highlighter-rouge">VolumesnapshotContent</code> will not be created.</p>
+
+<p>The snapshot controller is responsible for creating both <code class="language-plaintext highlighter-rouge">VolumeSnapshot</code> and
+<code class="language-plaintext highlighter-rouge">VolumesnapshotContent</code> object. If the objects are not getting created, you may need to
+check the logs of the snapshot-controller container.</p>
+
+<p>Rook only installs the snapshotter sidecar container, not the controller. It is recommended
+that Kubernetes distributors bundle and deploy the controller and CRDs as part of their Kubernetes cluster
+management process (independent of any CSI Driver).</p>
+
+<p>If your Kubernetes distribution does not bundle the snapshot controller, you may manually install these components.</p>
+
+<p>If any issue exists in the snapshot Create/Delete operation you can check the logs of the csi-snapshotter sidecar container.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph logs deploy/csi-rbdplugin-provisioner <span class="nt">-c</span> csi-snapshotter
+</code></pre></div></div>
+
+<p>If you see an error such as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRPC error: rpc error: code = Aborted desc = an operation with the given Volume ID
+0001-0009-rook-ceph-0000000000000001-8d0ba728-0e17-11eb-a680-ce6eecc894de already exists.
+</code></pre></div></div>
+
+<p>The issue typically is in the Ceph cluster or network connectivity. If the issue is
+in Provisioning the PVC Restarting the Provisioner pods help(for CephFS issue
+restart <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-provisioner-xxxxxx</code> CephFS Provisioner. For RBD, restart
+the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-provisioner-xxxxxx</code> pod. If the issue is in mounting the PVC,
+restart the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxxx</code> pod (for RBD) and the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-xxxxx</code> pod
+for CephFS issue.</p>
+
+<h2 id="mounting-the-volume-to-application-pods">Mounting the volume to application pods</h2>
+
+<p>When a user requests to create the application pod with PVC, there is a three-step process</p>
+
+<ul>
+  <li>CSI driver registration</li>
+  <li>Create volume attachment object</li>
+  <li>Stage and publish the volume</li>
+</ul>
+
+<h3 id="csi-driver-registration">csi-driver registration</h3>
+
+<p><code class="language-plaintext highlighter-rouge">csi-cephfsplugin-xxxx</code> or <code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxx</code> is a daemonset pod running on all the nodes
+ where your application gets scheduled. If the plugin pods are not running on the node where
+ your application is scheduled might cause the issue, make sure plugin pods are always running.</p>
+
+<p>Each plugin pod has two important containers: one is <code class="language-plaintext highlighter-rouge">driver-registrar</code> and <code class="language-plaintext highlighter-rouge">csi-rbdplugin</code> or
+<code class="language-plaintext highlighter-rouge">csi-cephfsplugin</code>. Sometimes there is also a <code class="language-plaintext highlighter-rouge">liveness-prometheus</code> container.</p>
+
+<h3 id="driver-registrar">driver-registrar</h3>
+
+<p>The node-driver-registrar is a sidecar container that registers the CSI driver with Kubelet.
+More details can be found <a href="https://github.com/kubernetes-csi/node-driver-registrar">here</a>.</p>
+
+<p>If any issue exists in attaching the PVC to the application pod check logs from driver-registrar
+sidecar container in plugin pod where your application pod is scheduled.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph logs deploy/csi-rbdplugin <span class="nt">-c</span> driver-registrar
+<span class="go">
+I0120 12:28:34.231761  124018 main.go:112] Version: v2.0.1
+I0120 12:28:34.233910  124018 connection.go:151] Connecting to unix:///csi/csi.sock
+I0120 12:28:35.242469  124018 node_register.go:55] Starting Registration Server at: /registration/rook-ceph.rbd.csi.ceph.com-reg.sock
+I0120 12:28:35.243364  124018 node_register.go:64] Registration Server started at: /registration/rook-ceph.rbd.csi.ceph.com-reg.sock
+I0120 12:28:35.243673  124018 node_register.go:86] Skipping healthz server because port set to: 0
+I0120 12:28:36.318482  124018 main.go:79] Received GetInfo call: &amp;InfoRequest{}
+I0120 12:28:37.455211  124018 main.go:89] Received NotifyRegistrationStatus call: &amp;RegistrationStatus{PluginRegistered:true,Error:,}
+E0121 05:19:28.658390  124018 connection.go:129] Lost connection to unix:///csi/csi.sock.
+E0125 07:11:42.926133  124018 connection.go:129] Lost connection to unix:///csi/csi.sock.
+</span></code></pre></div></div>
+
+<p>You should see the response <code class="language-plaintext highlighter-rouge">RegistrationStatus{PluginRegistered:true,Error:,}</code> in the logs to
+confirm that plugin is registered with kubelet.</p>
+
+<p>If you see a driver not found an error in the application pod describe output.
+Restarting the <code class="language-plaintext highlighter-rouge">csi-xxxxplugin-xxx</code> pod on the node may help.</p>
+
+<h2 id="volume-attachment">Volume Attachment</h2>
+
+<p>Each provisioner pod also has a sidecar container called <code class="language-plaintext highlighter-rouge">csi-attacher</code>.</p>
+
+<h3 id="csi-attacher">csi-attacher</h3>
+
+<p>The external-attacher is a sidecar container that attaches volumes to nodes by calling <code class="language-plaintext highlighter-rouge">ControllerPublish</code> and
+<code class="language-plaintext highlighter-rouge">ControllerUnpublish</code> functions of CSI drivers. It is necessary because the internal Attach/Detach controller
+running in Kubernetes controller-manager does not have any direct interfaces to CSI drivers. More details can
+be found <a href="https://github.com/kubernetes-csi/external-attacher">here</a>.</p>
+
+<p>If any issue exists in attaching the PVC to the application pod first check the volumettachment object created
+and also log from csi-attacher sidecar container in provisioner pod.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get volumeattachment
+<span class="go">NAME                                                                   ATTACHER                        PV                                         NODE       ATTACHED   AGE
+csi-75903d8a902744853900d188f12137ea1cafb6c6f922ebc1c116fd58e950fc92   rook-ceph.cephfs.csi.ceph.com   pvc-5c547d2a-fdb8-4cb2-b7fe-e0f30b88d454   minikube   true       4m26s
+
+</span><span class="gp">$</span><span class="w"> </span>kubectl logs po/csi-rbdplugin-provisioner-d857bfb5f-ddctl <span class="nt">-c</span> csi-attacher
+</code></pre></div></div>
+
+<h2 id="cephfs-stale-operations">CephFS Stale operations</h2>
+
+<p>Check for any stale mount commands on the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-xxxx</code> pod on the node where your application pod is scheduled.</p>
+
+<p>You need to exec in the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-xxxx</code> pod and grep for stale mount operators.</p>
+
+<p>Identify the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin-xxxx</code> pod running on the node where your application is scheduled with
+<code class="language-plaintext highlighter-rouge">kubectl get po -o wide</code> and match the node names.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nb">exec</span> <span class="nt">-it</span> csi-cephfsplugin-tfk2g <span class="nt">-c</span> csi-cephfsplugin <span class="nt">--</span> sh
+<span class="go">
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep mount
+<span class="go">root          67      60  0 11:55 pts/0    00:00:00 grep mount
+
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep ceph
+<span class="go">root           1       0  0 Jan20 ?        00:00:26 /usr/local/bin/cephcsi --nodeid=minikube --type=cephfs --endpoint=unix:///csi/csi.sock --v=0 --nodeserver=true --drivername=rook-ceph.cephfs.csi.ceph.com --pidlimit=-1 --metricsport=9091 --forcecephkernelclient=true --metricspath=/metrics --enablegrpcmetrics=true
+root          69      60  0 11:55 pts/0    00:00:00 grep ceph
+</span></code></pre></div></div>
+
+<p>If any commands are stuck check the <strong>dmesg</strong> logs from the node.
+Restarting the <code class="language-plaintext highlighter-rouge">csi-cephfsplugin</code> pod may also help sometimes.</p>
+
+<p>If you don’t see any stuck messages, confirm the network connectivity, Ceph health, and slow ops.</p>
+
+<h2 id="rbd-stale-operations">RBD Stale operations</h2>
+
+<p>Check for any stale <code class="language-plaintext highlighter-rouge">map/mkfs/mount</code> commands on the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxx</code> pod on the node where your application pod is scheduled.</p>
+
+<p>You need to exec in the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxx</code> pod and grep for stale operators like (<code class="language-plaintext highlighter-rouge">rbd map, rbd unmap, mkfs, mount</code> and <code class="language-plaintext highlighter-rouge">umount</code>).</p>
+
+<p>Identify the <code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxx</code> pod running on the node where your application is scheduled with
+<code class="language-plaintext highlighter-rouge">kubectl get po -o wide</code> and match the node names.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nb">exec</span> <span class="nt">-it</span> csi-rbdplugin-vh8d5 <span class="nt">-c</span> csi-rbdplugin <span class="nt">--</span> sh
+<span class="go">
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep map
+<span class="go">root     1297024 1296907  0 12:00 pts/0    00:00:00 grep map
+
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep mount
+<span class="go">root        1824       1  0 Jan19 ?        00:00:00 /usr/sbin/rpc.mountd
+ceph     1041020 1040955  1 07:11 ?        00:03:43 ceph-mgr --fsid=ba41ac93-3b55-4f32-9e06-d3d8c6ff7334 --keyring=/etc/ceph/keyring-store/keyring --log-to-stderr=true --err-to-stderr=true --mon-cluster-log-to-stderr=true --log-stderr-prefix=debug  --default-log-to-file=false --default-mon-cluster-log-to-file=false --mon-host=[v2:10.111.136.166:3300,v1:10.111.136.166:6789] --mon-initial-members=a --id=a --setuser=ceph --setgroup=ceph --client-mount-uid=0 --client-mount-gid=0 --foreground --public-addr=172.17.0.6
+root     1297115 1296907  0 12:00 pts/0    00:00:00 grep mount
+
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep mkfs
+<span class="go">root     1297291 1296907  0 12:00 pts/0    00:00:00 grep mkfs
+
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep umount
+<span class="go">root     1298500 1296907  0 12:01 pts/0    00:00:00 grep umount
+
+</span><span class="gp">sh-4.4#</span><span class="w"> </span>ps <span class="nt">-ef</span> |grep unmap
+<span class="go">root     1298578 1296907  0 12:01 pts/0    00:00:00 grep unmap
+</span></code></pre></div></div>
+
+<p>If any commands are stuck check the <strong>dmesg</strong> logs from the node.
+Restarting the <code class="language-plaintext highlighter-rouge">csi-rbdplugin</code> pod also may help sometimes.</p>
+
+<p>If you don’t see any stuck messages, confirm the network connectivity, Ceph health, and slow ops.</p>
+
+<h2 id="dmesg-logs">dmesg logs</h2>
+
+<p>Check the dmesg logs on the node where pvc mounting is failing or the <code class="language-plaintext highlighter-rouge">csi-rbdplugin</code> container of the
+<code class="language-plaintext highlighter-rouge">csi-rbdplugin-xxxx</code> pod on that node.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dmesg
+</code></pre></div></div>
+
+<h2 id="rbd-commands">RBD Commands</h2>
+
+<p>If nothing else helps, get the last executed command from the ceph-csi pod logs and run it manually inside
+the provisioner or plugin pod to see if there are errors returned even if they couldn’t be seen in the logs.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>rbd <span class="nb">ls</span> <span class="nt">--id</span><span class="o">=</span>csi-rbd-node <span class="nt">-m</span><span class="o">=</span>10.111.136.166:6789 <span class="nt">--key</span><span class="o">=</span>AQDpIQhg+v83EhAAgLboWIbl+FL/nThJzoI3Fg<span class="o">==</span>
+</code></pre></div></div>
+
+<p>Where <code class="language-plaintext highlighter-rouge">-m</code> is one of the mon endpoints and the <code class="language-plaintext highlighter-rouge">--key</code> is the key used by the CSI driver for accessing the Ceph cluster.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.5/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.5/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.5/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.5/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.5/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.5/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.5/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.5/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.5/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.5/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.5/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.5/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.5/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.5/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.5/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.5/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.5/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.5/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.5/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.5/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.5/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.5/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.5/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.5/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.5/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.5/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.5/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.5/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.5/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.5/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.5/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.5/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.5/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.5/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.5/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.5/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.5/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.5/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.5/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.5/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.5/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.5/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.5/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.5/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.5/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.5/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.5/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.5/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.5/ceph-csi-troubleshooting.html",
+      true,
+      true
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.5/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.5/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.5/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.5/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.5/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.5/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.5/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.5/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.5/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.5/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

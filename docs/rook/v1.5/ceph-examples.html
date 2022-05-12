@@ -1,0 +1,1007 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.5/ceph-examples.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.5</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-examples.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-examples.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-examples.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-examples.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-examples.html" class="active">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-examples.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-examples.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-examples.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-examples.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-examples.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-examples.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-examples.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-examples.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-examples.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-examples.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-examples.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-examples.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.5 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      
+<h1 id="ceph-examples">Ceph Examples</h1>
+
+<p>Configuration for Rook and Ceph can be configured in multiple ways to provide block devices, shared filesystem volumes or object storage in a kubernetes namespace. We have provided several examples to simplify storage setup, but remember there are many tunables and you will need to decide what settings work for your use case and environment.</p>
+
+<p>See the <strong><a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph">example yaml files</a></strong> folder for all the rook/ceph setup example spec files.</p>
+
+<h2 id="common-resources">Common Resources</h2>
+
+<p>The first step to deploy Rook is to create the CRDs and other common resources. The configuration for these resources will be the same for most deployments.
+The <a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml">crds.yaml</a> and
+<a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/common.yaml">common.yaml</a> sets these resources up.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f crds.yaml -f common.yaml
+</span></code></pre></div></div>
+
+<p>The examples all assume the operator and all Ceph daemons will be started in the same namespace. If you want to deploy the operator in a separate namespace, see the comments throughout <code class="language-plaintext highlighter-rouge">common.yaml</code>.</p>
+
+<h2 id="operator">Operator</h2>
+
+<p>After the common resources are created, the next step is to create the Operator deployment. Several spec file examples are provided in <a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/">this directory</a>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">operator.yaml</code>: The most common settings for production deployments
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">kubectl create -f operator.yaml</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">operator-openshift.yaml</code>: Includes all of the operator settings for running a basic Rook cluster in an OpenShift environment. You will also want to review the <a href="/docs/rook/v1.5/ceph-openshift.html">OpenShift Prerequisites</a> to confirm the settings.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">oc create -f operator-openshift.yaml</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Settings for the operator are configured through environment variables on the operator deployment. The individual settings are documented in <a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/operator.yaml">operator.yaml</a>.</p>
+
+<h2 id="cluster-crd">Cluster CRD</h2>
+
+<p>Now that your operator is running, let’s create your Ceph storage cluster. This CR contains the most critical settings
+that will influence how the operator configures the storage. It is important to understand the various ways to configure
+the cluster. These examples represent a very small set of the different ways to configure the storage.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cluster.yaml</code>: This file contains common settings for a production storage cluster. Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-test.yaml</code>: Settings for a test cluster where redundancy is not configured. Requires only a single node.</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-on-pvc.yaml</code>: This file contains common settings for backing the Ceph Mons and OSDs by PVs. Useful when running in cloud environments or where local PVs have been created for Ceph to consume.</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-with-drive-groups.yaml</code>: This file contains example configurations for creating advanced
+OSD layouts on nodes using Ceph Drive Groups.
+<a href="Documentation/ceph-cluster-crd.md#storage-selection-via-ceph-drive-groups">See docs for more</a></li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-external.yaml</code>: Connect to an <a href="/docs/rook/v1.5/ceph-cluster-crd.html#external-cluster">external Ceph cluster</a> with minimal access to monitor the health of the cluster and connect to the storage.</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-external-management.yaml</code>: Connect to an <a href="/docs/rook/v1.5/ceph-cluster-crd.html#external-cluster">external Ceph cluster</a> with the admin key of the external cluster to enable
+remote creation of pools and configure services such as an <a href="/docs/rook/v1.5/ceph-object.html">Object Store</a> or a <a href="/docs/rook/v1.5/ceph-filesystem.html">Shared Filesystem</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">cluster-stretched.yaml</code>: Create a cluster in “stretched” mode, with five mons stretched across three zones, and the OSDs across two zones. See the <a href="/docs/rook/v1.5/ceph-cluster-crd.html#stretch-cluster">Stretch documentation</a>.</li>
+</ul>
+
+<p>See the <a href="/docs/rook/v1.5/ceph-cluster-crd.html">Cluster CRD</a> topic for more details and more examples for the settings.</p>
+
+<h2 id="setting-up-consumable-storage">Setting up consumable storage</h2>
+
+<p>Now we are ready to setup <a href="https://ceph.com/ceph-storage/block-storage/">block</a>, <a href="https://ceph.com/ceph-storage/file-system/">shared filesystem</a> or <a href="https://ceph.com/ceph-storage/object-storage/">object storage</a> in the Rook Ceph cluster. These kinds of storage are respectively referred to as CephBlockPool, CephFilesystem and CephObjectStore in the spec files.</p>
+
+<h3 id="block-devices">Block Devices</h3>
+
+<p>Ceph can provide raw block device volumes to pods. Each example below sets up a storage class which can then be used to provision a block device in kubernetes pods. The storage class is defined with <a href="http://docs.ceph.com/docs/master/rados/operations/pools/">a pool</a> which defines the level of data redundancy in Ceph:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">storageclass.yaml</code>: This example illustrates replication of 3 for production scenarios and requires at least three worker nodes. Your data is replicated on three different kubernetes worker nodes and intermittent or long-lasting single node failures will not result in data unavailability or loss.</li>
+  <li><code class="language-plaintext highlighter-rouge">storageclass-ec.yaml</code>: Configures erasure coding for data durability rather than replication. <a href="http://docs.ceph.com/docs/master/rados/operations/erasure-code/">Ceph’s erasure coding</a> is more efficient than replication so you can get high reliability without the 3x replication cost of the preceding example (but at the cost of higher computational encoding and decoding costs on the worker nodes). Erasure coding requires at least three worker nodes. See the <a href="/docs/rook/v1.5/ceph-pool-crd.html#erasure-coded">Erasure coding</a> documentation for more details.</li>
+  <li><code class="language-plaintext highlighter-rouge">storageclass-test.yaml</code>: Replication of 1 for test scenarios and it requires only a single node. Do not use this for applications that store valuable data or have high-availability storage requirements, since a single node failure can result in data loss.</li>
+</ul>
+
+<p>The storage classes are found in different sub-directories depending on the driver:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">csi/rbd</code>: The CSI driver for block devices. This is the preferred driver going forward.</li>
+  <li><code class="language-plaintext highlighter-rouge">flex</code>: The flex driver will be deprecated in a future release to be determined.</li>
+</ul>
+
+<p>See the <a href="/docs/rook/v1.5/ceph-pool-crd.html">Ceph Pool CRD</a> topic for more details on the settings.</p>
+
+<h3 id="shared-filesystem">Shared Filesystem</h3>
+
+<p>Ceph filesystem (CephFS) allows the user to ‘mount’ a shared posix-compliant folder into one or more hosts (pods in the container world). This storage is similar to NFS shared storage or CIFS shared folders, as explained <a href="https://ceph.com/ceph-storage/file-system/">here</a>.</p>
+
+<p>File storage contains multiple pools that can be configured for different scenarios:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">filesystem.yaml</code>: Replication of 3 for production scenarios. Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">filesystem-ec.yaml</code>: Erasure coding for production scenarios. Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">filesystem-test.yaml</code>: Replication of 1 for test scenarios. Requires only a single node.</li>
+</ul>
+
+<p>Dynamic provisioning is possible with the CSI driver. The storage class for shared filesystems is found in the <code class="language-plaintext highlighter-rouge">csi/cephfs</code> directory.</p>
+
+<p>See the <a href="/docs/rook/v1.5/ceph-filesystem-crd.html">Shared Filesystem CRD</a> topic for more details on the settings.</p>
+
+<h3 id="object-storage">Object Storage</h3>
+
+<p>Ceph supports storing blobs of data called objects that support HTTP(s)-type get/put/post and delete semantics. This storage is similar to AWS S3 storage, for example.</p>
+
+<p>Object storage contains multiple pools that can be configured for different scenarios:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">object.yaml</code>: Replication of 3 for production scenarios.  Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">object-openshift.yaml</code>: Replication of 3 with rgw in a port range valid for OpenShift. Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">object-ec.yaml</code>: Erasure coding rather than replication for production scenarios. Requires at least three worker nodes.</li>
+  <li><code class="language-plaintext highlighter-rouge">object-test.yaml</code>: Replication of 1 for test scenarios. Requires only a single node.</li>
+</ul>
+
+<p>See the <a href="/docs/rook/v1.5/ceph-object-store-crd.html">Object Store CRD</a> topic for more details on the settings.</p>
+
+<h3 id="object-storage-user">Object Storage User</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">object-user.yaml</code>: Creates a simple object storage user and generates credentials for the S3 API</li>
+</ul>
+
+<h3 id="object-storage-buckets">Object Storage Buckets</h3>
+
+<p>The Ceph operator also runs an object store bucket provisioner which can grant access to existing buckets or dynamically provision new buckets.</p>
+
+<ul>
+  <li><a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/object-bucket-claim-retain.yaml">object-bucket-claim-retain.yaml</a> Creates a request for a new bucket by referencing a StorageClass which saves the bucket when the initiating OBC is deleted.</li>
+  <li><a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/object-bucket-claim-delete.yaml">object-bucket-claim-delete.yaml</a> Creates a request for a new bucket by referencing a StorageClass which deletes the bucket when the initiating OBC is deleted.</li>
+  <li><a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/storageclass-bucket-retain.yaml">storageclass-bucket-retain.yaml</a> Creates a new StorageClass which defines the Ceph Object Store, a region, and retains the bucket after the initiating OBC is deleted.</li>
+  <li><a href="https://github.com/rook/rook/blob/release-1.5/cluster/examples/kubernetes/ceph/storageclass-bucket-delete.yaml">storageclass-bucket-delete.yaml</a> Creates a new StorageClass which defines the Ceph Object Store, a region, and deletes the bucket after the initiating OBC is deleted.</li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.5/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.5/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.5/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.5/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network Filesystem (NFS)",
+      "/docs/rook/v1.5/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.5/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.5/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.5/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.5/ceph-prerequisites.html",
+      true,
+      false
+    );
+  
+    add(
+      "Admission Controller",
+      "/docs/rook/v1.5/admission-controller-usage.html",
+      true,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.5/ceph-examples.html",
+      true,
+      true
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.5/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.5/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.5/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.5/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.5/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.5/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.5/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.5/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.5/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.5/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.5/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.5/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.5/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.5/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.5/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.5/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.5/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBDMirror CRD",
+      "/docs/rook/v1.5/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.5/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.5/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.5/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.5/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Data Fabric",
+      "/docs/rook/v1.5/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.5/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.5/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.5/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out SMB CRD",
+      "/docs/rook/v1.5/edgefs-smb-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.5/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.5/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.5/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.5/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.5/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.5/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.5/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.5/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.5/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.5/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.5/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.5/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.5/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.5/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.5/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.5/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.5/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.5/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.5/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.5/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.5/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.5/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.5/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.5/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Configuration",
+      "/docs/rook/v1.5/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.5/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.5/storage-providers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.5/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

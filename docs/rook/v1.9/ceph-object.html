@@ -1,0 +1,1103 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.9/ceph-object.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.9</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-object.html" class="active">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-object.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-object.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-object.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-object.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-object.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-object.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-object.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-object.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-object.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-object.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-object.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-object.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-object.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-object.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-object.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-object.md">Edit on GitHub</a>
+    </div>
+    
+    <div class="docs-text">
+      <h1 id="object-storage">Object Storage</h1>
+
+<p>Object storage exposes an S3 API to the storage cluster for applications to put and get data.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>This guide assumes a Rook cluster as explained in the <a href="/docs/rook/v1.9/quickstart.html">Quickstart</a>.</p>
+
+<h2 id="configure-an-object-store">Configure an Object Store</h2>
+
+<p>Rook has the ability to either deploy an object store in Kubernetes or to connect to an external RGW service.
+Most commonly, the object store will be configured locally by Rook.
+Alternatively, if you have an existing Ceph cluster with Rados Gateways, see the
+<a href="#connect-to-an-external-object-store">external section</a> to consume it from Rook.</p>
+
+<h3 id="create-a-local-object-store">Create a Local Object Store</h3>
+
+<p>The below sample will create a <code class="language-plaintext highlighter-rouge">CephObjectStore</code> that starts the RGW service in the cluster with an S3 API.</p>
+
+<blockquote>
+  <p><strong>NOTE</strong>: This sample requires <em>at least 3 bluestore OSDs</em>, with each OSD located on a <em>different node</em>.</p>
+</blockquote>
+
+<p>The OSDs must be located on different nodes, because the <a href="/docs/rook/v1.9/ceph-pool-crd.html#spec"><code class="language-plaintext highlighter-rouge">failureDomain</code></a> is set to <code class="language-plaintext highlighter-rouge">host</code> and the <code class="language-plaintext highlighter-rouge">erasureCoded</code> chunk settings require at least 3 different OSDs (2 <code class="language-plaintext highlighter-rouge">dataChunks</code> + 1 <code class="language-plaintext highlighter-rouge">codingChunks</code>).</p>
+
+<p>See the <a href="/docs/rook/v1.9/ceph-object-store-crd.html#object-store-settings">Object Store CRD</a>, for more detail on the settings available for a <code class="language-plaintext highlighter-rouge">CephObjectStore</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephObjectStore</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-store</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">metadataPool</span><span class="pi">:</span>
+    <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">host</span>
+    <span class="na">replicated</span><span class="pi">:</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">dataPool</span><span class="pi">:</span>
+    <span class="na">failureDomain</span><span class="pi">:</span> <span class="s">host</span>
+    <span class="na">erasureCoded</span><span class="pi">:</span>
+      <span class="na">dataChunks</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="na">codingChunks</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">preservePoolsOnDelete</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">gateway</span><span class="pi">:</span>
+    <span class="na">sslCertificateRef</span><span class="pi">:</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="c1"># securePort: 443</span>
+    <span class="na">instances</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">healthCheck</span><span class="pi">:</span>
+    <span class="na">bucket</span><span class="pi">:</span>
+      <span class="na">disabled</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">60s</span>
+</code></pre></div></div>
+
+<p>After the <code class="language-plaintext highlighter-rouge">CephObjectStore</code> is created, the Rook operator will then create all the pools and other resources necessary to start the service. This may take a minute to complete.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create the object store
+<span class="go">kubectl create -f object.yaml
+
+</span><span class="gp">#</span><span class="w"> </span>To confirm the object store is configured, <span class="nb">wait </span><span class="k">for </span>the rgw pod to start
+<span class="go">kubectl -n rook-ceph get pod -l app=rook-ceph-rgw
+</span></code></pre></div></div>
+
+<h3 id="connect-to-an-external-object-store">Connect to an External Object Store</h3>
+
+<p>Rook can connect to existing RGW gateways to work in conjunction with the external mode of the <code class="language-plaintext highlighter-rouge">CephCluster</code> CRD.
+If you have an external <code class="language-plaintext highlighter-rouge">CephCluster</code> CR, you can instruct Rook to consume external gateways with the following:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephObjectStore</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">external-store</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">gateway</span><span class="pi">:</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+    <span class="na">externalRgwEndpoints</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">ip</span><span class="pi">:</span> <span class="s">192.168.39.182</span>
+  <span class="na">healthCheck</span><span class="pi">:</span>
+    <span class="na">bucket</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">60s</span>
+</code></pre></div></div>
+
+<p>You can use the existing <code class="language-plaintext highlighter-rouge">object-external.yaml</code> file.
+When ready the ceph-object-controller will output a message in the Operator log similar to this one:</p>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph-object-controller: ceph object store gateway service &gt;running at 10.100.28.138:8080
+</code></pre></div>  </div>
+</blockquote>
+
+<p>You can now get and access the store via:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get svc -l app=rook-ceph-rgw
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+rook-ceph-rgw-my-store   ClusterIP   10.100.28.138   &lt;none&gt;        8080/TCP   6h59m
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Any pod from your cluster can now access this endpoint:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl 10.100.28.138:8080
+</code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;&lt;Owner&gt;&lt;ID&gt;anonymous&lt;/ID&gt;&lt;DisplayName&gt;&lt;/DisplayName&gt;&lt;/Owner&gt;&lt;Buckets&gt;&lt;/Buckets&gt;&lt;/ListAllMyBucketsResult&gt;
+</code></pre></div>  </div>
+</blockquote>
+
+<p>It is also possible to use the internally registered DNS name:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">curl rook-ceph-rgw-my-store.rook-ceph:8080
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>&lt;ListAllMyBucketsResult <span class="nv">xmlns</span><span class="o">=</span><span class="s2">"http://s3.amazonaws.com/doc/2006-03-01/"</span><span class="o">&gt;</span>&lt;Owner&gt;&lt;ID&gt;anonymous&lt;/ID&gt;&lt;DisplayName&gt;&lt;/DisplayName&gt;&lt;/Owner&gt;&lt;Buckets&gt;&lt;/Buckets&gt;&lt;/ListAllMyBucketsResult&gt;
+</code></pre></div></div>
+
+<p>The DNS name is created  with the following schema <code class="language-plaintext highlighter-rouge">rook-ceph-rgw-$STORE_NAME.$NAMESPACE</code>.</p>
+
+<h2 id="create-a-bucket">Create a Bucket</h2>
+
+<p>Now that the object store is configured, next we need to create a bucket where a client can read and write objects. A bucket can be created by defining a storage class, similar to the pattern used by block and file storage.
+First, define the storage class that will allow object clients to create a bucket.
+The storage class defines the object storage system, the bucket retention policy, and other properties required by the administrator. Save the following as <code class="language-plaintext highlighter-rouge">storageclass-bucket-delete.yaml</code> (the example is named as such due to the <code class="language-plaintext highlighter-rouge">Delete</code> reclaim policy).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+   <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-bucket</span>
+<span class="c1"># Change "rook-ceph" provisioner prefix to match the operator namespace if needed</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">rook-ceph.ceph.rook.io/bucket</span>
+<span class="na">reclaimPolicy</span><span class="pi">:</span> <span class="s">Delete</span>
+<span class="na">parameters</span><span class="pi">:</span>
+  <span class="na">objectStoreName</span><span class="pi">:</span> <span class="s">my-store</span>
+  <span class="na">objectStoreNamespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+</code></pre></div></div>
+<p>If you’ve deployed the Rook operator in a namespace other than <code class="language-plaintext highlighter-rouge">rook-ceph</code>, change the prefix in the provisioner to match the namespace you used. For example, if the Rook operator is running in the namespace <code class="language-plaintext highlighter-rouge">my-namespace</code> the provisioner value should be <code class="language-plaintext highlighter-rouge">my-namespace.ceph.rook.io/bucket</code>.</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f storageclass-bucket-delete.yaml
+</span></code></pre></div></div>
+
+<p>Based on this storage class, an object client can now request a bucket by creating an Object Bucket Claim (OBC).
+When the OBC is created, the Rook-Ceph bucket provisioner will create a new bucket. Notice that the OBC
+references the storage class that was created above.
+Save the following as <code class="language-plaintext highlighter-rouge">object-bucket-claim-delete.yaml</code> (the example is named as such due to the <code class="language-plaintext highlighter-rouge">Delete</code> reclaim policy):</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">objectbucket.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ObjectBucketClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ceph-bucket</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">generateBucketName</span><span class="pi">:</span> <span class="s">ceph-bkt</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">rook-ceph-bucket</span>
+</code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f object-bucket-claim-delete.yaml
+</span></code></pre></div></div>
+
+<p>Now that the claim is created, the operator will create the bucket as well as generate other artifacts to enable access to the bucket. A secret and ConfigMap are created with the same name as the OBC and in the same namespace.
+The secret contains credentials used by the application pod to access the bucket.
+The ConfigMap contains bucket endpoint information and is also consumed by the pod.
+See the <a href="/docs/rook/v1.9/ceph-object-bucket-claim.html">Object Bucket Claim Documentation</a> for more details on the <code class="language-plaintext highlighter-rouge">CephObjectBucketClaims</code>.</p>
+
+<h3 id="client-connections">Client Connections</h3>
+
+<p>The following commands extract key pieces of information from the secret and configmap:”</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#config-map, secret, OBC will part of default if no specific name space mentioned</span>
+<span class="nb">export </span><span class="nv">AWS_HOST</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> default get cm ceph-bucket <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.BUCKET_HOST}'</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> default get cm ceph-bucket <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.BUCKET_PORT}'</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">BUCKET_NAME</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> default get cm ceph-bucket <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.BUCKET_NAME}'</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> default get secret ceph-bucket <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.AWS_ACCESS_KEY_ID}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> default get secret ceph-bucket <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.AWS_SECRET_ACCESS_KEY}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="si">)</span>
+</code></pre></div></div>
+
+<h2 id="consume-the-object-storage">Consume the Object Storage</h2>
+
+<p>Now that you have the object store configured and a bucket created, you can consume the
+object storage from an S3 client.</p>
+
+<p>This section will guide you through testing the connection to the <code class="language-plaintext highlighter-rouge">CephObjectStore</code> and uploading and downloading from it.
+Run the following commands after you have connected to the <a href="/docs/rook/v1.9/ceph-toolbox.html">Rook toolbox</a>.</p>
+
+<h3 id="connection-environment-variables">Connection Environment Variables</h3>
+
+<p>To simplify the s3 client commands, you will want to set the four environment variables for use by your client (ie. inside the toolbox).
+See above for retrieving the variables for a bucket created by an <code class="language-plaintext highlighter-rouge">ObjectBucketClaim</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AWS_HOST</span><span class="o">=</span>&lt;host&gt;
+<span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>&lt;port&gt;
+<span class="nb">export </span><span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>&lt;accessKey&gt;
+<span class="nb">export </span><span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>&lt;secretKey&gt;
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Host</code>: The DNS host name where the rgw service is found in the cluster. Assuming you are using the default <code class="language-plaintext highlighter-rouge">rook-ceph</code> cluster, it will be <code class="language-plaintext highlighter-rouge">rook-ceph-rgw-my-store.rook-ceph.svc</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">Port</code>: The endpoint where the rgw service is listening. Run <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph get svc rook-ceph-rgw-my-store</code>, to get the port.</li>
+  <li><code class="language-plaintext highlighter-rouge">Access key</code>: The user’s <code class="language-plaintext highlighter-rouge">access_key</code> as printed above</li>
+  <li><code class="language-plaintext highlighter-rouge">Secret key</code>: The user’s <code class="language-plaintext highlighter-rouge">secret_key</code> as printed above</li>
+</ul>
+
+<p>The variables for the user generated in this example might be:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AWS_HOST</span><span class="o">=</span>rook-ceph-rgw-my-store.rook-ceph.svc
+<span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>80
+<span class="nb">export </span><span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>XEZDB3UJ6X7HVBE7X7MA
+<span class="nb">export </span><span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>7yGIZON7EhFORz0I40BFniML36D2rl8CQQ5kXU6l
+</code></pre></div></div>
+
+<p>The access key and secret key can be retrieved as described in the section above on <a href="#client-connections">client connections</a> or
+below in the section <a href="#create-a-user">creating a user</a> if you are not creating the buckets with an <code class="language-plaintext highlighter-rouge">ObjectBucketClaim</code>.</p>
+
+<h3 id="configure-s5cmd">Configure s5cmd</h3>
+
+<p>To test the <code class="language-plaintext highlighter-rouge">CephObjectStore</code>, set the object store credentials in the toolbox pod for the <code class="language-plaintext highlighter-rouge">s5cmd</code> tool.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir ~/.aws
+</span><span class="gp">cat &gt;</span><span class="w"> </span>~/.aws/credentials <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+</span><span class="go">[default]
+</span><span class="gp">aws_access_key_id = $</span><span class="o">{</span>AWS_ACCESS_KEY_ID<span class="o">}</span>
+<span class="gp">aws_secret_access_key = $</span><span class="o">{</span>AWS_SECRET_ACCESS_KEY<span class="o">}</span>
+<span class="go">EOF
+</span></code></pre></div></div>
+
+<h3 id="put-or-get-an-object">PUT or GET an object</h3>
+
+<p>Upload a file to the newly created bucket</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">echo "Hello Rook" &gt;</span><span class="w"> </span>/tmp/rookObj
+<span class="gp">s5cmd --endpoint-url http://$</span>AWS_HOST:<span class="nv">$PORT</span> <span class="nb">cp</span> /tmp/rookObj s3://<span class="nv">$BUCKET_NAME</span>
+</code></pre></div></div>
+
+<p>Download and verify the file from the bucket</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">s5cmd --endpoint-url http://$</span>AWS_HOST:<span class="nv">$PORT</span> <span class="nb">cp </span>s3://<span class="nv">$BUCKET_NAME</span>/rookObj /tmp/rookObj-download
+<span class="go">cat /tmp/rookObj-download
+</span></code></pre></div></div>
+
+<h2 id="access-external-to-the-cluster">Access External to the Cluster</h2>
+
+<p>Rook sets up the object storage so pods will have access internal to the cluster. If your applications are running outside the cluster,
+you will need to setup an external service through a <code class="language-plaintext highlighter-rouge">NodePort</code>.</p>
+
+<p>First, note the service that exposes RGW internal to the cluster. We will leave this service intact and create a new service for external access.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get service rook-ceph-rgw-my-store
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                     CLUSTER-IP   EXTERNAL-IP   PORT(S)     AGE
+rook-ceph-rgw-my-store   10.3.0.177   &lt;none&gt;        80/TCP      2m
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Save the external service as <code class="language-plaintext highlighter-rouge">rgw-external.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-rgw-my-store-external</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">rook-ceph-rgw</span>
+    <span class="na">rook_cluster</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+    <span class="na">rook_object_store</span><span class="pi">:</span> <span class="s">my-store</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">rgw</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">rook-ceph-rgw</span>
+    <span class="na">rook_cluster</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+    <span class="na">rook_object_store</span><span class="pi">:</span> <span class="s">my-store</span>
+  <span class="na">sessionAffinity</span><span class="pi">:</span> <span class="s">None</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+</code></pre></div></div>
+
+<p>Now create the external service.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl create -f rgw-external.yaml
+</span></code></pre></div></div>
+
+<p>See both rgw services running and notice what port the external service is running on:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get service rook-ceph-rgw-my-store rook-ceph-rgw-my-store-external
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+rook-ceph-rgw-my-store            ClusterIP   10.104.82.228    &lt;none&gt;        80/TCP         4m
+rook-ceph-rgw-my-store-external   NodePort    10.111.113.237   &lt;none&gt;        80:31536/TCP   39s
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Internally the rgw service is running on port <code class="language-plaintext highlighter-rouge">80</code>. The external port in this case is <code class="language-plaintext highlighter-rouge">31536</code>. Now you can access the <code class="language-plaintext highlighter-rouge">CephObjectStore</code> from anywhere! All you need is the hostname for any machine in the cluster, the external port, and the user credentials.</p>
+
+<h2 id="create-a-user">Create a User</h2>
+
+<p>If you need to create an independent set of user credentials to access the S3 endpoint,
+create a <code class="language-plaintext highlighter-rouge">CephObjectStoreUser</code>. The user will be used to connect to the RGW service in the cluster using the S3 API.
+The user will be independent of any object bucket claims that you might have created in the earlier
+instructions in this document.</p>
+
+<p>See the <a href="/docs/rook/v1.9/ceph-object-store-user-crd.html">Object Store User CRD</a> for more detail on the settings available for a <code class="language-plaintext highlighter-rouge">CephObjectStoreUser</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">CephObjectStoreUser</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-user</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">store</span><span class="pi">:</span> <span class="s">my-store</span>
+  <span class="na">displayName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">my</span><span class="nv"> </span><span class="s">display</span><span class="nv"> </span><span class="s">name"</span>
+</code></pre></div></div>
+
+<p>When the <code class="language-plaintext highlighter-rouge">CephObjectStoreUser</code> is created, the Rook operator will then create the RGW user on the specified <code class="language-plaintext highlighter-rouge">CephObjectStore</code> and store the Access Key and Secret Key in a kubernetes secret in the same namespace as the <code class="language-plaintext highlighter-rouge">CephObjectStoreUser</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create the object store user
+<span class="go">kubectl create -f object-user.yaml
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>To confirm the object store user is configured, describe the secret
+<span class="go">kubectl -n rook-ceph describe secret rook-ceph-object-user-my-store-my-user
+</span></code></pre></div></div>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name:		rook-ceph-object-user-my-store-my-user
+Namespace:	rook-ceph
+Labels:			app=rook-ceph-rgw
+			      rook_cluster=rook-ceph
+			      rook_object_store=my-store
+Annotations:	&lt;none&gt;
+
+Type:	kubernetes.io/rook
+
+Data
+====
+AccessKey:	20 bytes
+SecretKey:	40 bytes
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The AccessKey and SecretKey data fields can be mounted in a pod as an environment variable. More information on consuming
+kubernetes secrets can be found in the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">K8s secret documentation</a></p>
+
+<p>To directly retrieve the secrets:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph get secret rook-ceph-object-user-my-store-my-user -o jsonpath='{.data.AccessKey}' | base64 --decode
+kubectl -n rook-ceph get secret rook-ceph-object-user-my-store-my-user -o jsonpath='{.data.SecretKey}' | base64 --decode
+</span></code></pre></div></div>
+
+<h2 id="object-multisite">Object Multisite</h2>
+
+<p>Multisite is a feature of Ceph that allows object stores to replicate its data over multiple Ceph clusters.</p>
+
+<p>Multisite also allows object stores to be independent and isloated from other object stores in a cluster.</p>
+
+<p>For more information on multisite please read the <a href="/docs/rook/v1.9/ceph-object-multisite.html">ceph multisite overview</a> for how to run it.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.9/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.9/quickstart.html",
+      false,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.9/pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "Authenticated Registries",
+      "/docs/rook/v1.9/authenticated-registry.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.9/pod-security-policies.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.9/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.9/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.9/ceph-openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.9/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.9/ceph-object.html",
+      true,
+      true
+    );
+  
+    add(
+      "Object Multisite",
+      "/docs/rook/v1.9/ceph-object-multisite.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem",
+      "/docs/rook/v1.9/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v1.9/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prometheus Monitoring",
+      "/docs/rook/v1.9/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.9/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.9/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.9/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Multisite CRDs",
+      "/docs/rook/v1.9/ceph-object-multisite-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.9/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.9/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Bucket Notifications",
+      "/docs/rook/v1.9/ceph-object-bucket-notifications.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared Filesystem CRD",
+      "/docs/rook/v1.9/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.9/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.9/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirroring",
+      "/docs/rook/v1.9/rbd-mirroring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Failover and Failback",
+      "/docs/rook/v1.9/async-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Snapshots",
+      "/docs/rook/v1.9/ceph-csi-snapshot.html",
+      true,
+      false
+    );
+  
+    add(
+      "Volume clone",
+      "/docs/rook/v1.9/ceph-csi-volume-clone.html",
+      true,
+      false
+    );
+  
+    add(
+      "Client CRD",
+      "/docs/rook/v1.9/ceph-client-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBD Mirror CRD",
+      "/docs/rook/v1.9/ceph-rbd-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Filesystem Mirror CRD",
+      "/docs/rook/v1.9/ceph-fs-mirror-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "SubVolume Group CRD",
+      "/docs/rook/v1.9/ceph-fs-subvolumegroup.html",
+      true,
+      false
+    );
+  
+    add(
+      "RADOS Namespace CRD",
+      "/docs/rook/v1.9/ceph-pool-radosnamespace.html",
+      true,
+      false
+    );
+  
+    add(
+      "Key Management System",
+      "/docs/rook/v1.9/ceph-kms.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.9/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.9/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.9/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.9/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.9/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v1.9/helm-ceph-cluster.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.9/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.9/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.9/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI Common Issues",
+      "/docs/rook/v1.9/ceph-csi-troubleshooting.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitor Health",
+      "/docs/rook/v1.9/ceph-mon-health.html",
+      true,
+      false
+    );
+  
+    add(
+      "OSD Management",
+      "/docs/rook/v1.9/ceph-osd-mgmt.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.9/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.9/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift Common Issues",
+      "/docs/rook/v1.9/ceph-openshift-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.9/ceph-disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.9/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Developer Environment",
+      "/docs/rook/v1.9/development-environment.html",
+      true,
+      false
+    );
+  
+    add(
+      "Storage Providers",
+      "/docs/rook/v1.9/storage-providers.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,1394 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.0/ceph-common-issues.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.0</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-common-issues.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-common-issues.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-common-issues.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-common-issues.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-common-issues.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-common-issues.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-common-issues.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-common-issues.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-common-issues.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-common-issues.html" class="active">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-common-issues.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-common-issues.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-common-issues.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-common-issues.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-common-issues.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-common-issues.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-common-issues.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.0 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-common-issues">Ceph Common Issues</h1>
+
+<p>Many of these problem cases are hard to summarize down to a short phrase that adequately describes the problem. Each problem will start with a bulleted list of symptoms. Keep in mind that all symptoms may not apply depending upon the configuration of the Rook. If the majority of the symptoms are seen there is a fair chance you are experiencing that problem.</p>
+
+<p>If after trying the suggestions found on this page and the problem is not resolved, the Rook team is very happy to help you troubleshoot the issues in their Slack channel. Once you have <a href="https://slack.rook.io">registered for the Rook Slack</a>, proceed to the General channel to ask for assistance.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#troubleshooting-techniques">Troubleshooting Techniques</a></li>
+  <li><a href="#pod-using-ceph-storage-is-not-running">Pod using Rook storage is not running</a></li>
+  <li><a href="#cluster-failing-to-service-requests">Cluster failing to service requests</a></li>
+  <li><a href="#monitors-are-the-only-pods-running">Monitors are the only pods running</a></li>
+  <li><a href="#pvcs-stay-in-pending-state">PVCs stay in pending state</a></li>
+  <li><a href="#osd-pods-are-failing-to-start">OSD pods are failing to start</a></li>
+  <li><a href="#osd-pods-are-not-created-on-my-devices">OSDs are not created on my devices</a></li>
+  <li><a href="#node-hangs-after-reboot">Node hangs after reboot</a></li>
+  <li><a href="#rook-agent-modprobe-exec-format-error">Rook Agent modprobe exec format error</a></li>
+  <li><a href="#rook-agent-rbd-module-missing-error">Rook Agent rbd module missing error</a></li>
+  <li><a href="#using-multiple-shared-filesystem-cephfs-is-attempted-on-a-kernel-version-older-than-47">Using multiple shared filesystem (CephFS) is attempted on a kernel version older than 4.7</a></li>
+  <li><a href="#activate-log-to-file-for-a-particular-ceph-daemon">Activate log to file for a particular Ceph daemon</a></li>
+</ul>
+
+<h1 id="troubleshooting-techniques">Troubleshooting Techniques</h1>
+<p>There are two main categories of information you will need to investigate issues in the cluster:</p>
+<ol>
+  <li>Kubernetes status and logs documented <a href="/docs/rook/v1.0/common-issues.html">here</a></li>
+  <li>Ceph status</li>
+</ol>
+
+<h2 id="ceph-tools">Ceph Tools</h2>
+<p>After you verify the basic health of the running pods, next you will want to run Ceph tools for status of the storage components. There are two ways to run the Ceph tools, either in the Rook toolbox or inside other Rook pods that are already running.</p>
+
+<ul>
+  <li>Logs on a specific node to find why a PVC is failing to mount:
+    <ul>
+      <li>Rook agent errors around the attach/detach: <code class="language-plaintext highlighter-rouge">kubectl logs -n rook-ceph &lt;rook-ceph-agent-pod&gt;</code></li>
+    </ul>
+  </li>
+  <li>See the <a href="/docs/rook/v1.0/ceph-advanced-configuration.html#log-collection">log collection topic</a> for a script that will help you gather the logs</li>
+  <li>Other artifacts:
+    <ul>
+      <li>The monitors that are expected to be in quorum: <code class="language-plaintext highlighter-rouge">kubectl -n &lt;cluster-namespace&gt; get configmap rook-ceph-mon-endpoints -o yaml | grep data</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="tools-in-the-rook-toolbox">Tools in the Rook Toolbox</h3>
+<p>The <a href="/docs/rook/v1.0/ceph-toolbox.html">rook-ceph-tools pod</a> provides a simple environment to run Ceph tools. Once the pod is up and running, connect to the pod to execute Ceph commands to evaluate that current state of the cluster.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> rook-ceph <span class="nb">exec</span> <span class="nt">-it</span> <span class="si">$(</span>kubectl <span class="nt">-n</span> rook-ceph get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> bash
+</code></pre></div></div>
+
+<h3 id="ceph-commands">Ceph Commands</h3>
+<p>Here are some common commands to troubleshoot the cluster.</p>
+<ul>
+  <li>ceph status</li>
+  <li>ceph osd status</li>
+  <li>ceph osd df</li>
+  <li>ceph osd utilization</li>
+  <li>ceph osd pool stats</li>
+  <li>ceph osd tree</li>
+  <li>ceph pg stat</li>
+</ul>
+
+<p>The first two status commands provide the overall cluster health. The normal state for cluster operations is HEALTH_OK, but will still function when the state is in a HEALTH_WARN state. If you are in a WARN state, then the cluster is in a condition that it may enter the HEALTH_ERROR state at which point <em>all</em> disk I/O operations are halted. If a HEALTH_WARN state is observed, then one should take action to prevent the cluster from halting when it enters the HEALTH_ERROR state.</p>
+
+<p>There are many Ceph sub-commands to look at and manipulate Ceph objects, well beyond the scope this document. See the <a href="">Ceph documentation</a> for more details of gathering information about the health of the cluster. In addition, there are other helpful hints and some best practices located in the <a href="advanced-configuration.md">Advanced Configuration section</a>. Of particular note there are scripts for collecting logs and gathering OSD information there.</p>
+
+<h1 id="pod-using-ceph-storage-is-not-running">Pod Using Ceph Storage Is Not Running</h1>
+
+<h2 id="symptoms">Symptoms</h2>
+<ul>
+  <li>The pod that is configured to use Rook storage is stuck in the <code class="language-plaintext highlighter-rouge">ContainerCreating</code> status</li>
+  <li><code class="language-plaintext highlighter-rouge">kubectl describe pod</code> for the pod mentions one or more of the following:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">PersistentVolumeClaim is not bound</code></li>
+      <li><code class="language-plaintext highlighter-rouge">timeout expired waiting for volumes to attach/mount</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph get pod</code> shows the rook-ceph-agent pods in a <code class="language-plaintext highlighter-rouge">CrashLoopBackOff</code> status</li>
+</ul>
+
+<h2 id="possible-solutions-summary">Possible Solutions Summary</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod is in a <code class="language-plaintext highlighter-rouge">CrashLoopBackOff</code> status because it cannot deploy its driver on a read-only filesystem: <a href="/docs/rook/v1.0/k8s-pre-reqs.html#flexvolume-configuration">Flexvolume configuration pre-reqs</a></li>
+  <li>Persistent Volume and/or Claim are failing to be created and bound: <a href="#volume-creation">Volume Creation</a></li>
+  <li><code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod is failing to mount and format the volume: <a href="#volume-mounting">Rook Agent Mounting</a></li>
+</ul>
+
+<h2 id="investigation-details">Investigation Details</h2>
+<p>If you see some of the symptoms above, it’s because the requested Rook storage for your pod is not being created and mounted successfully.
+In this walkthrough, we will be looking at the wordpress mysql example pod that is failing to start.
+To first confirm there is an issue, you can run commands similar to the following and you should see similar output (note that some of it has been omitted for brevity):</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>kubectl get pod
+<span class="go">NAME                              READY     STATUS              RESTARTS   AGE
+wordpress-mysql-918363043-50pjr   0/1       ContainerCreating   0          1h
+
+</span><span class="gp">&gt;</span><span class="w"> </span>kubectl describe pod wordpress-mysql-918363043-50pjr
+<span class="c">...
+</span><span class="go">Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----			-------------	--------	------			-------
+  1h		1h		3	default-scheduler			Warning		FailedScheduling	PersistentVolumeClaim is not bound: "mysql-pv-claim" (repeated 2 times)
+  1h		35s		36	kubelet, 172.17.8.101			Warning		FailedMount		Unable to mount volumes for pod "wordpress-mysql-918363043-50pjr_default(08d14e75-bd99-11e7-bc4c-001c428b9fc8)": timeout expired waiting for volumes to attach/mount for pod "default"/"wordpress-mysql-918363043-50pjr". list of unattached/unmounted volumes=[mysql-persistent-storage]
+  1h		35s		36	kubelet, 172.17.8.101			Warning		FailedSync		Error syncing pod
+</span></code></pre></div></div>
+
+<p>To troubleshoot this, let’s walk through the volume provisioning steps in order to confirm where the failure is happening.</p>
+
+<h3 id="ceph-agent-deployment">Ceph Agent Deployment</h3>
+<p>The <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pods are responsible for mapping and mounting the volume from the cluster onto the node that your pod will be running on.
+If the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod is not running then it cannot perform this function.
+Below is an example of the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pods failing to get to the <code class="language-plaintext highlighter-rouge">Running</code> status because they are in a <code class="language-plaintext highlighter-rouge">CrashLoopBackOff</code> status:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get pod
+<span class="go">NAME                                  READY     STATUS             RESTARTS   AGE
+rook-ceph-agent-ct5pj                 0/1       CrashLoopBackOff   16         59m
+rook-ceph-agent-zb6n9                 0/1       CrashLoopBackOff   16         59m
+rook-operator-2203999069-pmhzn        1/1       Running            0          59m
+</span></code></pre></div></div>
+<p>If you see this occurring, you can get more details about why the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pods are continuing to crash with the following command and its sample output:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get pod <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>rook-ceph-agent <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].lastState.terminated.message}{"\n"}{end}'</span>
+<span class="go">rook-ceph-agent-ct5pj	mkdir /usr/libexec/kubernetes: read-only file system
+rook-ceph-agent-zb6n9	mkdir /usr/libexec/kubernetes: read-only file system
+</span></code></pre></div></div>
+<p>From the output above, we can see that the agents were not able to bind mount to <code class="language-plaintext highlighter-rouge">/usr/libexec/kubernetes</code> on the host they are scheduled to run on.
+For some environments, this default path is read-only and therefore a better path must be provided to the agents.</p>
+
+<p>First, clean up the agent deployment with:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph delete daemonset rook-ceph-agent
+</span></code></pre></div></div>
+<p>Once the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pods are gone, <strong>follow the instructions in the <a href="/docs/rook/v1.0/k8s-pre-reqs.html#flexvolume-configuration">Flexvolume configuration pre-reqs</a></strong> to ensure a good value for <code class="language-plaintext highlighter-rouge">--volume-plugin-dir</code> has been provided to the Kubelet.
+After that has been configured, and the Kubelet has been restarted, start the agent pods up again by restarting <code class="language-plaintext highlighter-rouge">rook-operator</code>:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph delete pod -l app=rook-operator
+</span></code></pre></div></div>
+
+<h3 id="volume-creation">Volume Creation</h3>
+<p>The volume must first be created in the Rook cluster and then bound to a volume claim before it can be mounted to a pod.
+Let’s confirm that with the following commands and their output:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>kubectl get pv
+<span class="go">NAME                                       CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS     CLAIM                    STORAGECLASS   REASON    AGE
+pvc-9f273fbc-bdbf-11e7-bc4c-001c428b9fc8   20Gi       RWO           Delete          Bound      default/mysql-pv-claim   rook-ceph-block               25m
+
+</span><span class="gp">&gt;</span><span class="w"> </span>kubectl get pvc
+<span class="go">NAME             STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
+mysql-pv-claim   Bound     pvc-9f273fbc-bdbf-11e7-bc4c-001c428b9fc8   20Gi       RWO           rook-ceph-block     25m
+</span></code></pre></div></div>
+<p>Both your volume and its claim should be in the <code class="language-plaintext highlighter-rouge">Bound</code> status.
+If one or neither of them is not in the <code class="language-plaintext highlighter-rouge">Bound</code> status, then look for details of the issue in the <code class="language-plaintext highlighter-rouge">rook-operator</code> logs:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl -n rook-ceph logs `kubectl -n rook-ceph -l app=rook-operator get pods -o jsonpath='{.items[*].metadata.name}'`
+</span></code></pre></div></div>
+
+<p>If the volume is failing to be created, there should be details in the <code class="language-plaintext highlighter-rouge">rook-operator</code> log output, especially those tagged with <code class="language-plaintext highlighter-rouge">op-provisioner</code>.</p>
+
+<p>One common cause for the <code class="language-plaintext highlighter-rouge">rook-operator</code> failing to create the volume is when the <code class="language-plaintext highlighter-rouge">clusterNamespace</code> field of the <code class="language-plaintext highlighter-rouge">StorageClass</code> doesn’t match the <strong>namespace</strong> of the Rook cluster, as described in <a href="https://github.com/rook/rook/issues/1502">#1502</a>.
+In that scenario, the <code class="language-plaintext highlighter-rouge">rook-operator</code> log would show a failure similar to the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2018-03-28 18:58:32.041603 I | op-provisioner: creating volume with configuration {pool:replicapool clusterNamespace:rook-ceph fstype:}
+2018-03-28 18:58:32.041728 I | exec: Running command: rbd create replicapool/pvc-fd8aba49-32b9-11e8-978e-08002762c796 --size 20480 --cluster=rook --conf=/var/lib/rook/rook-ceph/rook.config --keyring=/var/lib/rook/rook-ceph/client.admin.keyring
+E0328 18:58:32.060893       5 controller.go:801] Failed to provision volume for claim "default/mysql-pv-claim" with StorageClass "rook-ceph-block": Failed to create rook block image replicapool/pvc-fd8aba49-32b9-11e8-978e-08002762c796: failed to create image pvc-fd8aba49-32b9-11e8-978e-08002762c796 in pool replicapool of size 21474836480: Failed to complete '': exit status 1. global_init: unable to open config file from search list /var/lib/rook/rook-ceph/rook.config
+. output:
+</code></pre></div></div>
+
+<p>The solution is to ensure that the <a href="https://github.com/rook/rook/blob/release-1.0/cluster/examples/kubernetes/ceph/storageclass.yaml#L20"><code class="language-plaintext highlighter-rouge">clusterNamespace</code></a> field matches the <strong>namespace</strong> of the Rook cluster when creating the <code class="language-plaintext highlighter-rouge">StorageClass</code>.</p>
+
+<h3 id="volume-mounting">Volume Mounting</h3>
+<p>The final step in preparing Rook storage for your pod is for the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod to mount and format it.
+If all the preceding sections have been successful or inconclusive, then take a look at the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod logs for further clues.
+You can determine which <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> is running on the same node that your pod is scheduled on by using the <code class="language-plaintext highlighter-rouge">-o wide</code> output, then you can get the logs for that <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod similar to the example below:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get pod <span class="nt">-o</span> wide
+<span class="go">NAME                                  READY     STATUS    RESTARTS   AGE       IP             NODE
+rook-ceph-agent-h6scx                 1/1       Running   0          9m        172.17.8.102   172.17.8.102
+rook-ceph-agent-mp7tn                 1/1       Running   0          9m        172.17.8.101   172.17.8.101
+rook-operator-2203999069-3tb68        1/1       Running   0          9m        10.32.0.7      172.17.8.101
+
+</span><span class="gp">&gt;</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph logs rook-ceph-agent-h6scx
+<span class="go">2017-10-30 23:07:06.984108 I | rook: starting Rook v0.5.0-241.g48ce6de.dirty with arguments '/usr/local/bin/rook agent'
+</span><span class="c">...
+</span></code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod logs, you may see a snippet similar to the following:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Failed to complete rbd: signal: interrupt.
+</span></code></pre></div></div>
+<p>In this case, the agent waited for the <code class="language-plaintext highlighter-rouge">rbd</code> command but it did not finish in a timely manner so the agent gave up and stopped it.
+This can happen for multiple reasons, but using <code class="language-plaintext highlighter-rouge">dmesg</code> will likely give you insight into the root cause.
+If <code class="language-plaintext highlighter-rouge">dmesg</code> shows something similar to below, then it means you have an old kernel that can’t talk to the cluster:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">libceph: mon2 10.205.92.13:6789 feature set mismatch, my 4a042a42 &lt; server's 2004a042a42, missing 20000000000
+</span></code></pre></div></div>
+<p>If <code class="language-plaintext highlighter-rouge">uname -a</code> shows that you have a kernel version older than <code class="language-plaintext highlighter-rouge">3.15</code>, you’ll need to perform <strong>one</strong> of the following:</p>
+<ul>
+  <li>Disable some Ceph features by starting the <a href="/docs/rook/v1.0/ceph-toolbox.html">rook toolbox</a> and running <code class="language-plaintext highlighter-rouge">ceph osd crush tunables bobtail</code></li>
+  <li>Upgrade your kernel to <code class="language-plaintext highlighter-rouge">3.15</code> or later.</li>
+</ul>
+
+<h3 id="filesystem-mounting">Filesystem Mounting</h3>
+
+<p>In the <code class="language-plaintext highlighter-rouge">rook-ceph-agent</code> pod logs, you may see a snippet similar to the following:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">2017-11-07 00:04:37.808870 I | rook-flexdriver: WARNING: The node kernel version is 4.4.0-87-generic, which do not support multiple ceph filesystems. The kernel version has to be at least 4.7. If you have multiple ceph filesystems, the result could be inconsistent
+</span></code></pre></div></div>
+
+<p>This will happen in kernels with versions older than 4.7, where the option <code class="language-plaintext highlighter-rouge">mds_namespace</code> is not supported. This option is used to specify a filesystem namespace.</p>
+
+<p>In this case, if there is only one filesystem in the Rook cluster, there should be no issues and the mount should succeed. If you have more than one filesystem, inconsistent results may arise and the filesystem mounted may not be the one you specified.</p>
+
+<p>If the issue is still not resolved from the steps above, please come chat with us on the <strong>#general</strong> channel of our <a href="https://slack.rook.io">Rook Slack</a>.
+We want to help you get your storage working and learn from those lessons to prevent users in the future from seeing the same issue.</p>
+
+<h1 id="cluster-failing-to-service-requests">Cluster failing to service requests</h1>
+
+<h2 id="symptoms-1">Symptoms</h2>
+<ul>
+  <li>Execution of the <code class="language-plaintext highlighter-rouge">ceph</code> command hangs</li>
+  <li>PersistentVolumes are not being created</li>
+  <li>Large amount of slow requests are blocking</li>
+  <li>Large amount of stuck requests are blocking</li>
+  <li>One or more MONs are restarting periodically</li>
+</ul>
+
+<h2 id="investigation">Investigation</h2>
+<p>Create a <a href="/docs/rook/v1.0/ceph-toolbox.html">rook-ceph-tools pod</a> to investigate the current state of CEPH. Here is an example of what one might see. In this case the <code class="language-plaintext highlighter-rouge">ceph status</code> command would just hang so a CTRL-C needed to be sent.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph <span class="nb">exec</span> <span class="nt">-it</span> <span class="si">$(</span>kubectl <span class="nt">-n</span> rook-ceph get pod <span class="nt">-l</span> <span class="s2">"app=rook-ceph-tools"</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> bash
+<span class="gp">root@rook-ceph-tools:/#</span><span class="w"> </span>ceph status
+<span class="go">^CCluster connection interrupted or timed out
+</span></code></pre></div></div>
+
+<p>Another indication is when one or more of the MON pods restart frequently. Note the ‘mon107’ that has only been up for 16 minutes in the following output.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl <span class="nt">-n</span> rook-ceph get all <span class="nt">-o</span> wide <span class="nt">--show-all</span>
+<span class="go">NAME                                 READY     STATUS    RESTARTS   AGE       IP               NODE
+po/rook-ceph-mgr0-2487684371-gzlbq   1/1       Running   0          17h       192.168.224.46   k8-host-0402
+po/rook-ceph-mon107-p74rj            1/1       Running   0          16m       192.168.224.28   k8-host-0402
+rook-ceph-mon1-56fgm                 1/1       Running   0          2d        192.168.91.135   k8-host-0404
+rook-ceph-mon2-rlxcd                 1/1       Running   0          2d        192.168.123.33   k8-host-0403
+rook-ceph-osd-bg2vj                  1/1       Running   0          2d        192.168.91.177   k8-host-0404
+rook-ceph-osd-mwxdm                  1/1       Running   0          2d        192.168.123.31   k8-host-0403
+</span></code></pre></div></div>
+
+<h2 id="solution">Solution</h2>
+<p>What is happening here is that the MON pods are restarting and one or more of the Ceph daemons are not getting configured with the proper cluster information. This is commonly the result of not specifying a value for <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> in your Cluster CRD.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> setting specifies a path on the local host for the CEPH daemons to store configuration and data. Setting this to a path like <code class="language-plaintext highlighter-rouge">/var/lib/rook</code>, reapplying your Cluster CRD and restarting all the CEPH daemons (MON, MGR, OSD, RGW) should solve this problem. After the CEPH daemons have been restarted, it is advisable to restart the <a href="./toolbox.md">rook-tool pod</a>.</p>
+
+<h1 id="monitors-are-the-only-pods-running">Monitors are the only pods running</h1>
+
+<h2 id="symptoms-2">Symptoms</h2>
+<ul>
+  <li>Rook operator is running</li>
+  <li>Either a single mon starts or the mons skip letters, specifically named <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">d</code>, and <code class="language-plaintext highlighter-rouge">f</code></li>
+  <li>No mgr, osd, or other daemons are created</li>
+</ul>
+
+<h2 id="investigation-1">Investigation</h2>
+<p>When the operator is starting a cluster, the operator will start one mon at a time and check that they are healthy before continuing to bring up all three mons.
+If the first mon is not detected healthy, the operator will continue to check until it is healthy. If the first mon fails to start, a second and then a third
+mon may attempt to start. However, they will never form quorum and the orchestration will be blocked from proceeding.</p>
+
+<p>The likely causes for the mon health not being detected:</p>
+<ul>
+  <li>The operator pod does not have network connectivity to the mon pod</li>
+  <li>The mon pod is failing to start</li>
+  <li>One or more mon pods are in running state, but are not able to form quorum</li>
+</ul>
+
+<h3 id="operator-fails-to-connect-to-the-mon">Operator fails to connect to the mon</h3>
+<p>First look at the logs of the operator to confirm if it is able to connect to the mons.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl -n rook-ceph logs -l app=rook-operator
+</code></pre></div></div>
+
+<p>Likely you will see an error similar to the following that the operator is timing out when connecting to the mon. The last command is <code class="language-plaintext highlighter-rouge">ceph mon_status</code>,
+followed by a timeout message five minutes later.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2018-01-21 21:47:32.375833 I | exec: Running command: ceph mon_status --cluster=rook --conf=/var/lib/rook/rook-ceph/rook.config --keyring=/var/lib/rook/rook-ceph/client.admin.keyring --format json --out-file /tmp/442263890
+2018-01-21 21:52:35.370533 I | exec: 2018-01-21 21:52:35.071462 7f96a3b82700  0 monclient(hunting): authenticate timed out after 300
+2018-01-21 21:52:35.071462 7f96a3b82700  0 monclient(hunting): authenticate timed out after 300
+2018-01-21 21:52:35.071524 7f96a3b82700  0 librados: client.admin authentication error (110) Connection timed out
+2018-01-21 21:52:35.071524 7f96a3b82700  0 librados: client.admin authentication error (110) Connection timed out
+[errno 110] error connecting to the cluster
+</code></pre></div></div>
+
+<p>The error would appear to be an authentication error, but it is misleading. The real issue is a timeout.</p>
+
+<h3 id="solution-1">Solution</h3>
+<p>If you see the timeout in the operator log, verify if the mon pod is running (see the next section).
+If the mon pod is running, check the network connectivity between the operator pod and the mon pod.
+A common issue is that the CNI is not configured correctly.</p>
+
+<h3 id="failing-mon-pod">Failing mon pod</h3>
+<p>Second we need to verify if the mon pod started successfully.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl -n rook-ceph get pod -l app=rook-ceph-mon
+NAME                                READY     STATUS               RESTARTS   AGE
+rook-ceph-mon-a-69fb9c78cd-58szd    1/1       CrashLoopBackOff     2          47s
+</code></pre></div></div>
+
+<p>If the mon pod is failing as in this example, you will need to look at the mon pod status or logs to determine the cause. If the pod is in a crash loop backoff state,
+you should see the reason by describing the pod.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># the pod shows a termination status that the keyring does not match the existing keyring
+$ kubectl -n rook-ceph describe pod -l mon=rook-ceph-mon0
+...
+    Last State:		Terminated
+      Reason:		Error
+      Message:		The keyring does not match the existing keyring in /var/lib/rook/rook-ceph-mon0/data/keyring.
+                    You may need to delete the contents of dataDirHostPath on the host from a previous deployment.
+...
+</code></pre></div></div>
+
+<p>See the solution in the next section regarding cleaning up the <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> on the nodes.</p>
+
+<h3 id="three-mons-named-a-d-and-f">Three mons named a, d, and f</h3>
+
+<p>If you see the three mons running with the names <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">d</code>, and <code class="language-plaintext highlighter-rouge">f</code>, they likely did not form quorum even though they are running.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                               READY   STATUS    RESTARTS   AGE
+rook-ceph-mon-a-7d9fd97d9b-cdq7g   1/1     Running   0          10m
+rook-ceph-mon-d-77df8454bd-r5jwr   1/1     Running   0          9m2s
+rook-ceph-mon-f-58b4f8d9c7-89lgs   1/1     Running   0          7m38s
+</code></pre></div></div>
+
+<h3 id="solution-2">Solution</h3>
+<p>This is a common problem reinitializing the Rook cluster when the local directory used for persistence has <strong>not</strong> been purged.
+This directory is the <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> setting in the cluster CRD and is typically set to <code class="language-plaintext highlighter-rouge">/var/lib/rook</code>.
+To fix the issue you will need to delete all components of Rook and then delete the contents of <code class="language-plaintext highlighter-rouge">/var/lib/rook</code> (or the directory specified by <code class="language-plaintext highlighter-rouge">dataDirHostPath</code>) on each of the hosts in the cluster.
+Then when the cluster CRD is applied to start a new cluster, the rook-operator should start all the pods as expected.</p>
+
+<p><strong>Important: Deleting the <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> folder is destructive to the storage. Only delete the folder if you are trying to permanently purge the Rook cluster.</strong></p>
+
+<p>See the <a href="/docs/rook/v1.0/ceph-teardown.html">Cleanup Guide</a> for more details.</p>
+
+<h1 id="pvcs-stay-in-pending-state">PVCs stay in pending state</h1>
+
+<h2 id="symptoms-3">Symptoms</h2>
+<ul>
+  <li>When you create a PVC based on a rook storage class, it stays pending indefinitely</li>
+</ul>
+
+<p>For the Wordpress example, you might see two PVCs in pending state.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl get pvc
+NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+mysql-pv-claim   Pending                                      rook-ceph-block   8s
+wp-pv-claim      Pending                                      rook-ceph-block   16s
+</code></pre></div></div>
+
+<h2 id="investigation-2">Investigation</h2>
+<p>There are two common causes for the PVCs staying in pending state:</p>
+<ol>
+  <li>There are no OSDs in the cluster</li>
+  <li>The operator is not running or is otherwise not responding to the request to create the block image</li>
+</ol>
+
+<h3 id="confirm-if-there-are-osds">Confirm if there are OSDs</h3>
+
+<p>To confirm if you have OSDs in your cluster, connect to the <a href="/docs/rook/v1.0/ceph-toolbox.html">Rook Toolbox</a> and run the <code class="language-plaintext highlighter-rouge">ceph status</code> command.
+You should see that you have at least one OSD <code class="language-plaintext highlighter-rouge">up</code> and <code class="language-plaintext highlighter-rouge">in</code>. The minimum number of OSDs required depends on the
+<code class="language-plaintext highlighter-rouge">replicated.size</code> setting in the pool created for the storage class. In a “test” cluster, only one OSD is required
+(see <code class="language-plaintext highlighter-rouge">storageclass-test.yaml</code>). In the production storage class example (<code class="language-plaintext highlighter-rouge">storageclass.yaml</code>), three OSDs would be required.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ceph status
+  cluster:
+    id:     a0452c76-30d9-4c1a-a948-5d8405f19a7c
+    health: HEALTH_OK
+
+  services:
+    mon: 3 daemons, quorum a,b,c (age 11m)
+    mgr: a(active, since 10m)
+    osd: 1 osds: 1 up (since 46s), 1 in (since 109m)
+</code></pre></div></div>
+
+<h3 id="osd-prepare-logs">OSD Prepare Logs</h3>
+
+<p>If you don’t see the expected number of OSDs, let’s investigate why they weren’t created.
+On each node where Rook looks for OSDs to configure, you will see an “osd prepare” pod.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl -n rook-ceph get pod -l app=rook-ceph-osd-prepare
+NAME                                   READY   STATUS      RESTARTS   AGE
+rook-ceph-osd-prepare-minikube-9twvk   0/2     Completed   0          30m
+</code></pre></div></div>
+
+<p>See the section on <a href="#osd-pods-are-not-created-on-my-devices">why OSDs are not getting created</a> to investigate the logs.</p>
+
+<h3 id="operator-unresponsiveness">Operator unresponsiveness</h3>
+<p>Lastly, if you have OSDs <code class="language-plaintext highlighter-rouge">up</code> and <code class="language-plaintext highlighter-rouge">in</code>, the next step is to confirm the operator is responding to the requests.
+Look in the Operator pod logs around the time when the PVC was created to confirm if the request is being raised.
+If the operator does not show requests to provision the block image, the operator may be stuck on some other operation.
+In this case, restart the operator pod to get things going again.</p>
+
+<h2 id="solution-3">Solution</h2>
+<p>If the “osd prepare” logs didn’t give you enough clues about why the OSDs were not being created,
+please review your <a href="eph-cluster-crd.html#storage-selection-settings">cluster.yaml</a> configuration.
+The common misconfigurations include:</p>
+<ul>
+  <li>If <code class="language-plaintext highlighter-rouge">useAllDevices: true</code>, Rook expects to find local devices attached to the nodes. If no devices are found, no OSDs will be created.</li>
+  <li>If <code class="language-plaintext highlighter-rouge">useAllDevices: false</code>, OSDs will only be created if <code class="language-plaintext highlighter-rouge">directories</code> or a <code class="language-plaintext highlighter-rouge">deviceFilter</code> are specified.</li>
+  <li>Only local devices attached to the nodes will be configurable by Rook. In other words, the devices must show up under <code class="language-plaintext highlighter-rouge">/dev</code>.
+    <ul>
+      <li>The devices must not have any partitions or filesystems on them. Rook will only configure raw devices. Partitions are not yet supported.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="osd-pods-are-failing-to-start">OSD pods are failing to start</h1>
+
+<h2 id="symptoms-4">Symptoms</h2>
+<ul>
+  <li>OSD pods are failing to start</li>
+  <li>You have started a cluster after tearing down another cluster</li>
+</ul>
+
+<h2 id="investigation-3">Investigation</h2>
+<p>When an OSD starts, the device or directory will be configured for consumption. If there is an error with the configuration, the pod will crash and you will see the CrashLoopBackoff
+status for the pod. Look in the osd pod logs for an indication of the failure.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl -n rook-ceph logs rook-ceph-osd-fl8fs
+...
+</code></pre></div></div>
+
+<p>One common case for failure is that you have re-deployed a test cluster and some state may remain from a previous deployment.
+If your cluster is larger than a few nodes, you may get lucky enough that the monitors were able to start and form quorum. However, now the OSDs pods may fail to start due to the
+old state. Looking at the OSD pod logs you will see an error about the file already existing.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl -n rook-ceph logs rook-ceph-osd-fl8fs
+...
+2017-10-31 20:13:11.187106 I | mkfs-osd0: 2017-10-31 20:13:11.186992 7f0059d62e00 -1 bluestore(/var/lib/rook/osd0) _read_fsid unparsable uuid
+2017-10-31 20:13:11.187208 I | mkfs-osd0: 2017-10-31 20:13:11.187026 7f0059d62e00 -1 bluestore(/var/lib/rook/osd0) _setup_block_symlink_or_file failed to create block symlink to /dev/disk/by-partuuid/651153ba-2dfc-4231-ba06-94759e5ba273: (17) File exists
+2017-10-31 20:13:11.187233 I | mkfs-osd0: 2017-10-31 20:13:11.187038 7f0059d62e00 -1 bluestore(/var/lib/rook/osd0) mkfs failed, (17) File exists
+2017-10-31 20:13:11.187254 I | mkfs-osd0: 2017-10-31 20:13:11.187042 7f0059d62e00 -1 OSD::mkfs: ObjectStore::mkfs failed with error (17) File exists
+2017-10-31 20:13:11.187275 I | mkfs-osd0: 2017-10-31 20:13:11.187121 7f0059d62e00 -1  ** ERROR: error creating empty object store in /var/lib/rook/osd0: (17) File exists
+</code></pre></div></div>
+
+<h2 id="solution-4">Solution</h2>
+<p>If the error is from the file that already exists, this is a common problem reinitializing the Rook cluster when the local directory used for persistence has <strong>not</strong> been purged.
+This directory is the <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> setting in the cluster CRD and is typically set to <code class="language-plaintext highlighter-rouge">/var/lib/rook</code>.
+To fix the issue you will need to delete all components of Rook and then delete the contents of <code class="language-plaintext highlighter-rouge">/var/lib/rook</code> (or the directory specified by <code class="language-plaintext highlighter-rouge">dataDirHostPath</code>) on each of the hosts in the cluster.
+Then when the cluster CRD is applied to start a new cluster, the rook-operator should start all the pods as expected.</p>
+
+<h1 id="osd-pods-are-not-created-on-my-devices">OSD pods are not created on my devices</h1>
+
+<h2 id="symptoms-5">Symptoms</h2>
+<ul>
+  <li>No OSD pods are started in the cluster</li>
+  <li>Devices are not configured with OSDs even though specified in the Cluster CRD</li>
+  <li>One OSD pod is started on each node instead of multiple pods for each device</li>
+</ul>
+
+<h2 id="investigation-4">Investigation</h2>
+<p>First, ensure that you have specified the devices correctly in the CRD.
+The <a href="/docs/rook/v1.0/ceph-cluster-crd.html#storage-selection-settings">Cluster CRD</a> has several ways to specify the devices that are to be consumed by the Rook storage:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useAllDevices: true</code>: Rook will consume all devices it determines to be available</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceFilter</code>: Consume all devices that match this regular expression</li>
+  <li><code class="language-plaintext highlighter-rouge">devices</code>: Explicit list of device names on each node to consume</li>
+</ul>
+
+<p>Second, if Rook determines that a device is not available (has existing partitions or a formatted file system), Rook will skip consuming the devices.
+If Rook is not starting OSDs on the devices you expect, Rook may have skipped it for this reason. To see if a device was skipped, view the OSD preparation log
+on the node where the device was skipped. Note that it is completely normal and expected for OSD prepare pod to be in the <code class="language-plaintext highlighter-rouge">completed</code> state.
+After the job is complete, Rook leaves the pod around in case the logs need to be investigated.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># get the prepare pods in the cluster
+$ kubectl -n rook-ceph get pod -l app=rook-ceph-osd-prepare
+NAME                                   READY     STATUS      RESTARTS   AGE
+rook-ceph-osd-prepare-node1-fvmrp      0/1       Completed   0          18m
+rook-ceph-osd-prepare-node2-w9xv9      0/1       Completed   0          22m
+rook-ceph-osd-prepare-node3-7rgnv      0/1       Completed   0          22m
+
+# view the logs for the node of interest in the "provision" container
+$ kubectl -n rook-ceph logs rook-ceph-osd-prepare-node1-fvmrp provision
+</code></pre></div></div>
+
+<p>Here are some key lines to look for in the log:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># A device will be skipped if Rook sees it has partitions or a filesystem
+2019-05-30 19:02:57.353171 W | cephosd: skipping device sda that is in use
+
+# A device is going to be configured
+2019-05-30 19:02:57.535598 I | cephosd: device sdc to be configured by ceph-volume
+
+# For each device configured you will see a report printed to the log
+2019-05-30 19:02:59.844642 I |   Type            Path                                                    LV Size         % of device
+2019-05-30 19:02:59.844651 I | ----------------------------------------------------------------------------------------------------
+2019-05-30 19:02:59.844677 I |   [data]          /dev/sdc                                                7.00 GB         100%
+</code></pre></div></div>
+
+<h2 id="solution-5">Solution</h2>
+<p>After you have either updated the CRD with the correct settings, or you have cleaned the partitions or file system from your devices,
+you can trigger the operator to analyze the devices again by restarting the operator. Each time the operator starts, it
+will ensure all the desired devices are configured. The operator does automatically deploy OSDs in most scenarios, but an operator restart
+will cover any scenarios that the operator doesn’t detect automatically.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Restart the operator to ensure devices are configured. A new pod will automatically be started when the current operator pod is deleted.
+$ kubectl -n rook-ceph delete pod -l app=rook-ceph-operator
+</code></pre></div></div>
+
+<h1 id="node-hangs-after-reboot">Node hangs after reboot</h1>
+
+<h2 id="symptoms-6">Symptoms</h2>
+<ul>
+  <li>After issuing a <code class="language-plaintext highlighter-rouge">reboot</code> command, node never returned online</li>
+  <li>Only a power cycle helps</li>
+</ul>
+
+<h2 id="solution-6">Solution</h2>
+<p>The node needs to be <a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">drained</a> before reboot. After the successful drain, the node can be rebooted as usual.</p>
+
+<p>Because <code class="language-plaintext highlighter-rouge">kubectl drain</code> command automatically marks the node as unschedulable (<code class="language-plaintext highlighter-rouge">kubectl cordon</code> effect), the node needs to be uncordoned once it’s back online.</p>
+
+<p>Drain the node:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-local-data
+</code></pre></div></div>
+
+<p>Uncordon the node:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl uncordon &lt;node-name&gt;
+</code></pre></div></div>
+
+<h1 id="rook-agent-modprobe-exec-format-error">Rook Agent modprobe exec format error</h1>
+<h2 id="symptoms-7">Symptoms</h2>
+<ul>
+  <li>PersistentVolumes from Ceph fail/timeout to mount</li>
+  <li>Rook Agent logs contain <code class="language-plaintext highlighter-rouge">modinfo: ERROR: could not get modinfo from 'rbd': Exec format error</code> lines</li>
+</ul>
+
+<h2 id="solution-7">Solution</h2>
+<p>If it is feasible to upgrade your kernel, you should upgrade to <code class="language-plaintext highlighter-rouge">4.x</code>, even better is &gt;= <code class="language-plaintext highlighter-rouge">4.7</code> due to a feature for CephFS added to the kernel.</p>
+
+<p>If you are unable to upgrade the kernel, you need to go to each host that will consume storage and run:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>modprobe rbd
+</code></pre></div></div>
+<p>This command inserts the <code class="language-plaintext highlighter-rouge">rbd</code> module into the kernel.</p>
+
+<p>To persist this fix, you need to add the <code class="language-plaintext highlighter-rouge">rbd</code> kernel module to either <code class="language-plaintext highlighter-rouge">/etc/modprobe.d/</code> or <code class="language-plaintext highlighter-rouge">/etc/modules-load.d/</code>.
+For both paths create a file called <code class="language-plaintext highlighter-rouge">rbd.conf</code> with the following content:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbd
+</code></pre></div></div>
+<p>Now when a host is restarted, the module should be loaded automatically.</p>
+
+<h1 id="rook-agent-rbd-module-missing-error">Rook Agent rbd module missing error</h1>
+<h2 id="symptoms-8">Symptoms</h2>
+<ul>
+  <li>Rook Agent in <code class="language-plaintext highlighter-rouge">Error</code> or <code class="language-plaintext highlighter-rouge">CrashLoopBackOff</code> status when deploying the Rook operator with <code class="language-plaintext highlighter-rouge">kubectl create -f operator.yaml</code>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$kubectl -n rook-ceph get pod
+NAME                                 READY     STATUS    RESTARTS   AGE
+rook-ceph-agent-gfrm5                0/1       Error     0          14s
+rook-ceph-operator-5f4866946-vmtff   1/1       Running   0          23s
+rook-discover-qhx6c                  1/1       Running   0          14s
+</code></pre></div>    </div>
+  </li>
+  <li>Rook Agent logs contain below messages:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2018-08-10 09:09:09.461798 I | exec: Running command: cat /lib/modules/4.15.2/modules.builtin
+2018-08-10 09:09:09.473858 I | exec: Running command: modinfo -F parm rbd
+2018-08-10 09:09:09.477215 N | ceph-volumeattacher: failed rbd single_major check, assuming it's unsupported: failed to check for rbd module single_major param: Failed to complete 'check kmod param': exit status 1. modinfo: ERROR: Module rbd not found.
+2018-08-10 09:09:09.477239 I | exec: Running command: modprobe rbd
+2018-08-10 09:09:09.480353 I | modprobe rbd: modprobe: FATAL: Module rbd not found.
+2018-08-10 09:09:09.480452 N | ceph-volumeattacher: failed to load kernel module rbd: failed to load kernel module rbd: Failed to complete 'modprobe rbd': exit status 1.
+failed to run rook ceph agent. failed to create volume manager: failed to load kernel module rbd: Failed to complete 'modprobe rbd': exit status 1.
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="solution-8">Solution</h2>
+<p>From the log message of Agent, we can see that the <code class="language-plaintext highlighter-rouge">rbd</code> kernel module is not available in the current system, neither as a builtin nor a loadable external kernel module.</p>
+
+<p>In this case, you have to <a href="https://www.linuxjournal.com/article/6568">re-configure and build</a> a new kernel to address this issue, there’re two options:</p>
+
+<ul>
+  <li>Re-configure your kernel to make sure the <code class="language-plaintext highlighter-rouge">CONFIG_BLK_DEV_RBD=y</code> in the <code class="language-plaintext highlighter-rouge">.config</code> file, then build the kernel.</li>
+  <li>Re-configure your kernel to make sure the <code class="language-plaintext highlighter-rouge">CONFIG_BLK_DEV_RBD=m</code> in the <code class="language-plaintext highlighter-rouge">.config</code> file, then build the kernel.</li>
+</ul>
+
+<p>Rebooting the system to use the new kernel, this issue should be fixed: the Agent will be in normal <code class="language-plaintext highlighter-rouge">running</code> status if everything was done correctly.</p>
+
+<h1 id="using-multiple-shared-filesystem-cephfs-is-attempted-on-a-kernel-version-older-than-47">Using multiple shared filesystem (CephFS) is attempted on a kernel version older than 4.7</h1>
+<h2 id="symptoms-9">Symptoms</h2>
+<ul>
+  <li>More than one shared filesystem (CephFS) has been created in the cluster</li>
+  <li>A pod attempts to mount any other shared filesystem besides the <strong>first</strong> one that was created</li>
+  <li>The pod incorrectly gets the first filesystem mounted instead of the intended filesystem</li>
+</ul>
+
+<h2 id="solution-9">Solution</h2>
+<p>The only solution to this problem is to upgrade your kernel to <code class="language-plaintext highlighter-rouge">4.7</code> or higher.
+This is due to a mount flag added in the kernel version <code class="language-plaintext highlighter-rouge">4.7</code> which allows to chose the filesystem by name.</p>
+
+<p>For additional info on the kernel version requirement for multiple shared filesystems (CephFS), see <a href="/docs/rook/v1.0/ceph-filesystem.html#kernel-version-requirement">Filesystem - Kernel version requirement</a>.</p>
+
+<h1 id="activate-log-to-file-for-a-particular-ceph-daemon">Activate log to file for a particular Ceph daemon</h1>
+
+<p>They are cases where looking at Kubernetes logs is not enough for diverse reasons, but just to name a few:</p>
+
+<ul>
+  <li>not everyone is familiar for Kubernetes logging and expects to find logs in traditional directories</li>
+  <li>logs get eaten (buffer limit from the log engine) and thus not requestable from Kubernetes</li>
+</ul>
+
+<p>So for each daemon, <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> is used to store logs, if logging is activated.
+Rook will bindmount <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> for every pod.
+As of Ceph Nautilus 14.2.1, it is possible to enable logging for a particular daemon on the fly.
+Let’s say you want to enable logging for <code class="language-plaintext highlighter-rouge">mon.a</code>, but only for this daemon.
+Using the toolbox or from inside the operator run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph config daemon mon.a log_to_file true
+</code></pre></div></div>
+
+<p>This will activate logging on the filesystem, you will be able to find logs in <code class="language-plaintext highlighter-rouge">dataDirHostPath/$NAMESPACE/log</code>, so typically this would mean <code class="language-plaintext highlighter-rouge">/var/lib/rook/rook-ceph/log</code>.
+You don’t need to restart the pod, the effect will be immediate.</p>
+
+<p>To disable the logging on file, simply set <code class="language-plaintext highlighter-rouge">log_to_file</code> to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>For Ceph Luminous/Mimic releases, <code class="language-plaintext highlighter-rouge">mon_cluster_log_file</code> and <code class="language-plaintext highlighter-rouge">cluster_log_file</code> can be set to
+<code class="language-plaintext highlighter-rouge">/var/log/ceph/XXXX</code> in the config override ConfigMap to enable logging. See the (Advanced
+Documentation)[Documentation/advanced-configuration.md#kubernetes] for information about how to use
+the config override ConfigMap.</p>
+
+<p>For Ceph Luminous/Mimic releases, <code class="language-plaintext highlighter-rouge">mon_cluster_log_file</code> and <code class="language-plaintext highlighter-rouge">cluster_log_file</code> can be set to <code class="language-plaintext highlighter-rouge">/var/log/ceph/XXXX</code> in the config override ConfigMap to enable logging. See the (Advanced Documentation)[advanced-configuration.md#custom-cephconf-settings] for information about how to use the config override ConfigMap.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.0/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.0/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.0/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.0/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.0/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.0/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.0/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.0/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.0/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph cluster Pod Security Policies",
+      "/docs/rook/v1.0/ceph-psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.0/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.0/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.0/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.0/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.0/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.0/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.0/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.0/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.0/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.0/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.0/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.0/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.0/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.0/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.0/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.0/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.0/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.0/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.0/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.0/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.0/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.0/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.0/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.0/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.0/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.0/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.0/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.0/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.0/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.0/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.0/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.0/ceph-common-issues.html",
+      true,
+      true
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.0/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.0/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.0/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.0/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.0/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.0/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.0/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.0/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

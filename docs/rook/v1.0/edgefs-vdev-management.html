@@ -1,0 +1,1134 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.0/edgefs-vdev-management.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.0</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/edgefs-vdev-management.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/edgefs-vdev-management.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/edgefs-vdev-management.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/edgefs-vdev-management.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/edgefs-vdev-management.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/edgefs-vdev-management.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/edgefs-vdev-management.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/edgefs-vdev-management.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/edgefs-vdev-management.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/edgefs-vdev-management.html" class="active">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/edgefs-vdev-management.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/edgefs-vdev-management.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/edgefs-vdev-management.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/edgefs-vdev-management.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/edgefs-vdev-management.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/edgefs-vdev-management.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/edgefs-vdev-management.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.0 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="edgefs-vdev-management">EdgeFS VDEV Management</h1>
+
+<p>EdgeFS can run on top of any block device. It can be a raw physical or virtual disk (RT-RD type). Or it can be a directory on a local file system (RT-LFS type).
+In case of a local file system, VDEV function will be emulated via memory-mapped files and as such, management of the files is a responsibility of underlying filesystem of choice. (e.g. ext4, xfs, zfs, etc).
+This document describes the management of VDEVs built on top of raw disks (RT-RD type).</p>
+
+<h2 id="edgefs-on-disk-organization">EdgeFS on-disk organization</h2>
+
+<p>EdgeFS converts underlying block devices (VDEVs) into a local high-performance, memory and SSD/NVMe optimized key-value databases.</p>
+
+<h3 id="persistent-data">Persistent data</h3>
+
+<p>The EdgeFS chunks a data object into one or several data chunk which are members of the <code class="language-plaintext highlighter-rouge">TT_CHUNK_PAYLOAD</code> data type that forms the first data type group: <em>the persistent data</em>. This group also includes a configuration data type called <code class="language-plaintext highlighter-rouge">TT_HASHCOUNT</code>.</p>
+
+<h3 id="persistent-metadata">Persistent metadata</h3>
+
+<p>To define an object assembly order there are two manifest metadata types: <code class="language-plaintext highlighter-rouge">TT_CHUNK_MANIFEST</code> and <code class="language-plaintext highlighter-rouge">TT_VERSION_MANIFEST</code>. If an object is EC-protected, then an additional entry of <code class="language-plaintext highlighter-rouge">TT_PARTIY_MANIFEST</code> metadata type will be added to each leaf manifest. Payload’s and manifest’s lifespan depends on the presence of a tiny object of <code class="language-plaintext highlighter-rouge">TT_VERIFIED_BACKREF</code> type that tracks de-duplication back references in background operations. All the objects are indexed by its name within a cluster namespace and the index is stored in a <code class="language-plaintext highlighter-rouge">TT_NAMEINDEX</code> metadata type. Types <code class="language-plaintext highlighter-rouge">TT_CHUNK_MANIFEST</code>, <code class="language-plaintext highlighter-rouge">TT_VERSION_MANIFEST</code>, <code class="language-plaintext highlighter-rouge">TT_PARTIY_MANIFEST</code>, <code class="language-plaintext highlighter-rouge">TT_VERIFIED_BACKREF</code> and <code class="language-plaintext highlighter-rouge">TT_NAMEINDEX</code> form the second group: <em>the persistent metadata</em>.</p>
+
+<h3 id="temporary-metadata">Temporary metadata</h3>
+
+<p>And the third group is <em>the temporary metadata</em>. It includes on-disk data queues whose entries are removed after being processed by server’s background jobs: <code class="language-plaintext highlighter-rouge">TT_VERIFICATION_QUEUE</code>, <code class="language-plaintext highlighter-rouge">TT_BATCH_QUEUE</code>, <code class="language-plaintext highlighter-rouge">TT_INCOMING_BATCH_QUEUE</code>, <code class="language-plaintext highlighter-rouge">TT_ENCODING_QUEUE</code>, <code class="language-plaintext highlighter-rouge">TT_REPLICATION_QUEUE</code> and <code class="language-plaintext highlighter-rouge">TT_TRANSACTION_LOG</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Persistent data</th>
+      <th>Persistent metadata</th>
+      <th>Temporary metadata</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>TT_CHUNK_PAYLOAD</em><br /><em>TT_HASHCOUNT</em></td>
+      <td><em>TT_CHUNK_MANIFEST</em><br /><em>TT_VERSION_MANIFEST</em><br /><em>TT_PARTIY_MANIFEST</em><br /><em>TT_VERIFIED_BACKREF</em><br /><em>TT_NAMEINDEX</em></td>
+      <td><em>TT_VERIFICATION_QUEUE</em><br /><em>TT_BATCH_QUEUE</em><br /><em>TT_INCOMING_BATCH_QUEUE</em><br /><em>TT_ENCODING_QUEUE</em><br /><em>TT_REPLICATION_QUEUE</em><br /><em>TT_TRANSACTION_LOG</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="consistency-considerations">Consistency considerations</h3>
+
+<p>Each VDEV in the cluster holds a certain number of entries of each data type. Damage of data table of different groups has a different impact on VDEV’s consistency. Usually, if a damaged data type belongs to <em>the temporary metadata</em>, then such data table can be dropped without a noticeable influence on the cluster. If a persistent data or persistent metadata gets corrupted, then impact will take place, however, it will never be vital for the cluster thanks to data protection approaches the EdgeFS implements: data redundancy or erasure coding. Moreover, the underlying device management layer also tries to reduce the cost of data loss by means of different techniques, like data sharding.</p>
+
+<p><em>IMPORTANT</em>: In EdgeFS design, loss of a data or metadata chunk generally do not affect front I/O performance due to unique dynamic placement and retrieval technique. Data placement or retrieval gets negotiated prior to each chunk I/O. This allows EdgeFS to select the most optimal location for I/O rather then hard-coded. With this, failing device(s) or temporary disconnected/busy devices will not affect overall local cluster performance.</p>
+
+<p>Stronger consistency/durability comes with a performance price and it highly depends on an use cases. EdgeFS provides needed flexibility of selecting most optimal consistency model via usage of <code class="language-plaintext highlighter-rouge">sync</code> parameter that defines default behavior of write operations at device or directory level. Acceptable values are 0, 1 (default), 2, 3:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">0</code>: No syncing will happen. Highest performance possible and good for HPC scratch types of deployments. This option will still sustain crash of pods or software bugs. It will not sustain server power loss an may cause node/device level inconsistency.</li>
+  <li><code class="language-plaintext highlighter-rouge">1</code>: Default method. Will guarantee node / device consistency in case of power loss with reduced durability.</li>
+  <li><code class="language-plaintext highlighter-rouge">2</code>: Provides better durability in case of power loss at the cost of extra metadata syncing.</li>
+  <li><code class="language-plaintext highlighter-rouge">3</code>: Most durable and reliable option at the cost of significant performance impact.</li>
+</ul>
+
+<h2 id="edgefs-rt-rd-architecture">EdgeFS RT-RD Architecture</h2>
+
+<p>The main metrics of the RT-RD device is a partition level (the <em>plevel</em>). The <em>plevel</em> defines a number of disk partitions user’s data will be split across: for each key-value pair, the key identifies the <em>plevel index</em>. The RT-RD splits entire raw HDD (or SSD) into several partitions. The following partition types are defined:</p>
+<ul>
+  <li>Main partitions. Resides on the HDD and used as the main data store. A number of partitions equal to disk <em>plevel</em>. In a all SSD or all HDD configurations, main partitions keep all data types.</li>
+  <li>Write-ahead-log (<em>WAL</em>) partitions. The <em>WAL</em> drastically improves write performance, especially for a hybrid (HDDs+SSD) configuration. There is one <em>WAL</em> partition per <em>plevel</em> Its location depends on configuration type. In a hybrid configuration, it’s on SSD, otherwise on the same disk as the corresponding <em>main</em> partition.</li>
+  <li>A metadata offload partition (<em>mdoffload</em>). For the hybrid configuration-only. One partition per an HDD. It is used to store temporary metadata, indexes and some persistent metadata types (optionally).</li>
+  <li>A configuration partition. A tiny partition per device which keeps a disk configuration options (a <em>metaloc entry</em>).</li>
+</ul>
+
+<p>Regardless of location, each partition keeps an instance of a key-value database (<em>the environment</em>) and a number sub-databases for different data types within the environment. A sub-database is referenced by its Data Base Identifier(<em>DBI</em>) which contains data type name as a part of the <em>DBI</em> and depends on the environment’s location. Along with 3 aforementioned data type categories, the RT-RD keeps an extra one for a hybrid device - the <em>mdoffload index</em>. The <em>mdoffload index</em> is used to improve the performance of GET operations that target the data types on HDD without data retrieval: chunk stat or an attribute get. A damaged <em>mdoffload index</em> can always be restored from data on HDD.</p>
+
+<p>Below is a data type to DBI mapping table</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Data type</th>
+      <th>DBI</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Persistent data</td>
+      <td>TT_CHUNK_PAYLOD</td>
+      <td>bd-part-TT_CHUNK_PAYLOAD-0</td>
+      <td>HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_HASHCOUNT</td>
+      <td>bd-part-TT_HASHCOUNT-0</td>
+      <td>HDD</td>
+    </tr>
+    <tr>
+      <td>Persistent metadata</td>
+      <td>TT_CHUNK_MANIFEST</td>
+      <td>TT_CHUNK_MANIFEST<br />bd-part-TT_CHUNK_MANIFEST-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_VERSION_MANIFEST</td>
+      <td>TT_VERSION_MANIFEST<br />bd-part-TT_VERSION_MANIFEST-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_PARITY_MANIFEST</td>
+      <td>TT_PARITY_MANIFEST<br />bd-part-TT_PARITY_MANIFEST-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_NAMEINDEX</td>
+      <td>TT_NAMEINDEX<br />bd-part-TT_NAMEINDEX-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_VERIFIED_BACKREF</td>
+      <td>TT_VERIFIED_BACKREF<br />bd-part-TT_VERIFIED_BACKREF-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td>Temporary metadata</td>
+      <td>TT_VERIFICATION_QUEUE</td>
+      <td>TT_VERIFICATION_QUEUE<br />bd-part-TT_VERIFICATION_QUEUE-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_BATCH_QUEUE</td>
+      <td>TT_BATCH_QUEUE<br />bd-part-TT_BATCH_QUEUE-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_INCOMING_BATCH_QUEUE</td>
+      <td>TT_INCOMING_BATCH_QUEUE<br />bd-part-TT_INCOMING_BATCH_QUEUE-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_ENCODING_QUEUE</td>
+      <td>TT_ENCODING_QUEUE<br />bd-part-TT_ENCODING_QUEUE-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_REPLICATION_QUEUE</td>
+      <td>TT_REPLICATION_QUEUE<br />bd-part-TT_REPLICATION_QUEUE-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TT_TRANSACTION_LOG</td>
+      <td>TT_TRANSACTION_LOG<br />bd-part-TT_TRANSACTION_LOG-0</td>
+      <td>SSD<br />HDD</td>
+    </tr>
+    <tr>
+      <td>Mdoffload index</td>
+      <td>-</td>
+      <td>keys-TT_CHUNK_MANIFEST<br />keys-TT_CHUNK_PAYLOAD<br />keys-TT_VERSION_MANIFEST</td>
+      <td>SSD<br />SSD<br />SSD</td>
+    </tr>
+    <tr>
+      <td>Mdoffload cache</td>
+      <td>-</td>
+      <td>mdcache-TT_CHUNK_MANIFEST<br />mdcache-TT_VERSION_MANIFEST</td>
+      <td>SSD<br />SSD</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So now you are informed enough to understand next paragraphs.</p>
+
+<h2 id="cluster-health-verification">Cluster Health Verification</h2>
+
+<p>Login to the toolbox as shown in this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl exec -it -n rook-edgefs 'kubectl get po --all-namespaces | awk '{print($2)}' |grep edgefs-mgr' -- env COLUMNS=$COLUMNS LINES=$LINES TERM=linux toolbox
+</code></pre></div></div>
+
+<p>To find out what device needs to go into the maintenance state, run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># efscli system status -v1
+ServerID CFAE1E62652370A93769378B2C862F23 ubuntu1632243:rook-edgefs-target-0 DEGRADED
+VDEVID D76242575CAA2662862CEEBC65D0B69F ata-ST1000NX0423_W470M48T ONLINE
+VDEVID B2BB69729BC3EB9ECE5F0DCB3DB4D0D6 ata-ST1000NX0423_W470NQ7A FAULTED
+VDEVID BB287F0C6747B1E59A85872B2C7F39B3 ata-ST1000NX0423_W470P9XJ ONLINE
+VDEVID 82F9A02F0D2A1BC44E6AF8D2B455189D ata-ST1000NX0423_W470M3JK ONLINE
+ServerID 1A0B10BCF8CB0E6D34451B4D3F84CE97 ubuntu1632240:rook-edgefs-target-1 ONLINE
+VDEVID 904ED942BD62FF4A997C4A23E2B8043B ata-ST1000NX0423_W470NLFR ONLINE
+...
+</code></pre></div></div>
+
+<p>From this command you will see that pod ‘rook-edgefs-target-0’ is in degraded state and device ‘ata-ST1000NX0423_W470NQ7A’ needs maintenance.</p>
+
+<h2 id="vdev-verification">VDEV Verification</h2>
+
+<p>Login to the affected target pod as shown in this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl exec -it -n rook-edgefs rook-edgefs-target-0 -- env COLUMNS=$COLUMNS LINES=$LINES TERM=linux toolbox
+</code></pre></div></div>
+
+<p>Make sure the disk is faulted:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># efscli device list
+
+NAME                        | VDEV ID                          | PATH     | STATUS
++---------------------------+----------------------------------+----------+--------+
+ata-ST1000NX0423_W470M3JK   | 82F9A02F0D2A1BC44E6AF8D2B455189D | /dev/sdb | ONLINE
+ata-ST1000NX0423_W470M48T   | D76242575CAA2662862CEEBC65D0B69F | /dev/sdc | ONLINE
+ata-ST1000NX0423_W470P9XJ   | BB287F0C6747B1E59A85872B2C7F39B3 | /dev/sdd | ONLINE
+ata-ST1000NX0423_W470NQ7A   | B2BB69729BC3EB9ECE5F0DCB3DB4D0D6 | /dev/sde | UNAVAILABLE
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">efscli device detach ata-ST1000NX0423_W470NQ7A</code> for detaching a disk. It will be marked a faulted and won’t be attached at the next ccow-daemon restart. Also, the preserved detached state can be cleared by a command <code class="language-plaintext highlighter-rouge">nezap --disk=diskID --restore-metaloc</code>.</p>
+
+<p>Once detached, related HDD/SSD partitions can be inspected/fixed by means of <code class="language-plaintext highlighter-rouge">efscli device check</code> command or zapped. When maintenance is done, the VDEV(s) can become operational again by invoking a command <code class="language-plaintext highlighter-rouge">efscli device attach</code>.</p>
+
+<p>Assuming that your disk is detached and your verification procedure can be initiated. The tool is accessible via <code class="language-plaintext highlighter-rouge">efscli device check</code> command. It provides an interactive user interface for device validation and recovery. Before getting started, a user needs to define a scratch area location. It will be used as a temporary store for environments being compacted or recovered. The scratch area can be defined in terms of data path within filesystem, a path to a raw disk (or its partition) in the /dev/ folder or raw disk/partition ID. User has to make sure the filesystem can provide enough free space to keep data from single <em>plevel</em>. The same requirement is for raw disk/partition size: at least 600GB, 1TB is recommended. A user can define the scratch area path in $(NEDGE_HOME)/etc/ccow/rt-rd.json as follow:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+</span><span class="nl">"scratch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/tmp.db"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Alternatively, the path can be specified by <code class="language-plaintext highlighter-rouge">-s &lt;path&gt;</code> flag. For example: <code class="language-plaintext highlighter-rouge">efscli device check -s /scratch.db ata-ST1000NX0423_W470NQ7A</code></p>
+
+<p>The following actions will be completely interactive and a user’s confirmation will be required before any important disk changes. The command output might look like follow. We split it into parts for convenience</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: checking disk /dev/sde. Stored metaloc record info:
+
+NAME      | TYPE | ID                              | PATH       | CAPACITY | USED | PSIZE | BCACHE | STATUS
++---------+------+---------------------------------+------------+----------+------+-------+--------+-----------+
+PLEVEL1   | Main | ata-ST1000NX0423_W470NQ7A-part1 | /dev/sde1  | 465.76G  | 0%   | 32k   | OFF    | None
+          | WAL  | scsi-35000c5003021f02f-part7    | /dev/sdf7  | 2.67G    |      | 4k    | n/a    | None
+PLEVEL2   | Main | ata-ST1000NX0423_W470NQ7A-part2 | /dev/sde2  | 465.76G  | 0%   | 32k   | OFF    | None
+          | WAL  | scsi-35000c5003021f02f-part8    | /dev/sdf8  | 2.67G    |      | 4k    | n/a    | None
+OFFLOAD   |      | scsi-35000c5003021f02f-part12   | /dev/sdf12 | 180.97G  | 0%   | 8k    | n/a    | CORRUPTED
+</code></pre></div></div>
+
+<p>The first table displays the VDEV configuration and its known errors (if any). In our example the VDEV is a hybrid one (The OFFLOAD partition signals that) with 2 <em>plevels</em> situated on the HDD /dev/sde. Main partitions are /dev/sde1 and /dev/sde2, WAL partitions are on SSD (/dev/sdf7 and /dev/sdf8) as well as the mdoffload partition /dev/sdf12. For each partition we see its capacity, utilization, logical paze size (internal for the key-value engine), bcache presence and healthy status. ‘None’ means the partition doesn’t have know errors. However, the /dev/sdf12 is marked as a ‘CORRUPTED’ and will be check by the verification algorithm. If there known errors are absent, then user will be asked for extended data validation of each partition. It’s important to mention, that if a VDEV is online and user wants to validate it, then such VDEV will be set READ-ONLY until validation is in progress. If there are any errors, then the VDEV will be detached for maintenance. However, in our case the problem is known and it requires further validation in order to find a proper recovery solution.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WARN: a fault record is detected for mdoffload (/dev/sdf12)
+INFO: disk ata-ST1000NX0423_W470NQ7A is UNAVAILABLE
+INFO: locking the device
+INFO: 1 partition(s) needs to be validated
+INFO: validating /dev/sdf12
+Progress: [==============================&gt;] 100%
+DBI NAME                   | ENTRIES | OPEN TEST | READ TEST          | CORRUPTED | WRITE TEST
++--------------------------+---------+-----------+--------------------+-----------+------------+
+TT_TRANSACTION_LOG         | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+keys-TT_VERSION_MANIFEST   | 28999   | PASSED    | PASSED             | N/A       | SKIPPED
+TT_BATCH_INCOMING_QUEUE    | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+TT_ENCODING_QUEUE          | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+TT_PARITY_MANIFEST         | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+TT_REPLICATION_QUEUE       | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+keys-TT_CHUNK_MANIFEST     | 56448   | PASSED    | PASSED             | N/A       | SKIPPED
+TT_BATCH_QUEUE             | 0       | PASSED    | PASSED             | N/A       | SKIPPED
+TT_VERIFIED_BACKREF        | 55403   | PASSED    | PASSED             | N/A       | SKIPPED
+keys-TT_CHUNK_PAYLOAD      | 212787  | PASSED    | KEY FORMAT ERROR   | N/A       | N/A
+TT_CHUNK_MANIFEST          | 56448   | PASSED    | CORRUPTED          | N/A       | N/A
+TT_NAMEINDEX               | 189     | PASSED    | PASSED             | N/A       | SKIPPED
+TT_VERIFICATION_QUEUE      | 29      | PASSED    | PASSED             | N/A       | SKIPPED
+TT_VERSION_MANIFEST        | 28999   | PASSED    | DB STRUCTURE ERROR | N/A       | N/A
+
+ERROR: the mdoffload environment got unrecoverable damages.
+ENTIRE device /dev/sdf12 needs to be formatted. All the data will be lost.
+Press 'Y' to start [y/n]: y
+</code></pre></div></div>
+
+<p>The validation is performed on a sub-database (DB) basis. For each DB there are up to 3 tests: open, read and modify. The last (modify) is disabled by default but can be activated in a policy file. The open and read tests are able to discover an overwhelming majority of structural errors without detaching a disk from ccow-daemon: if an environment is online, the user will be asked for permission to switch the device to read-only mode before any tests. The modify test requires the device to be set unavailable. Validation result is shown as a table for each DBI.</p>
+
+<p>The table has a column named ‘CORRUPTED’ which may show number key-value pairs whose value’s hash ID doesn’t match expected one. For certain data types, it’s acceptable to have a limited number of damaged entries. It’s a compromise between data lost cost and data integrity. Often we don’t want to mark the whole DB as faulted due to just a few damaged values which will be detected and removed by ccow-daemon soon or later.</p>
+
+<p>Further behaviour depends on validation results:</p>
+
+<ul>
+  <li>if there are no corrupted DB(s), the environment is considered healthy.</li>
+  <li>
+    <p>if there are damaged DB(s), then the behaviour depends on DB’s error handling policy. By default it implies the following:</p>
+  </li>
+  <li>if corrupted only temporary metadata or those data can be reconstructed (the <em>mdoffload index</em>), then a selective recovery will be suggested to the user. The selective recovery makes copies of non-damaged DBs only. Corrupted ones will be re-created or re-constructed when the device is attached.</li>
+  <li>Corrupted data or metadata table with sensitive data. In this case, a <em>plevel</em> or whole device needs to be formatted. All damaged environments will be added to a format queue that will be processed on the final stage.</li>
+</ul>
+
+<p>As we can see 3 DBs are corrupted. One of them (keys-TT_CHUNK_PAYLOAD) can be easily recovered (the <em>mdoffload index</em>), however <em>TT_NAMEINDEX</em> and <em>TT_VERSION_MANIFEST</em> cannot be reconstructed and they reside on a mdoffload partition. So the whole device needs to be formatted.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WARN: the entire device is about to be formatted.
+ALL the data on it will be LOST. Do you want to proceed? [y/n]: y
+INFO: formatting entire device ata-ST1000NX0423_W470NQ7A
+INFO: format done
+
+INFO: device examination summary:
+VALIDATED    | FORMATTED  | RECOVERED | COMPACTIFIED
++------------+------------+-----------+--------------+
+/dev/sdf12   | /dev/sde1  |           |
+             | /dev/sde2  |           |
+             | /dev/sdf12 |           |
+</code></pre></div></div>
+
+<p>A user confirmed and the VDEV has been formatted. Check is done. The VDEV can be put online by a command <code class="language-plaintext highlighter-rouge">efscli device attach ata-ST1000NX0423_W470NQ7A</code></p>
+
+<h2 id="vdev-replacement-procedure">VDEV Replacement Procedure</h2>
+
+<p>A command <code class="language-plaintext highlighter-rouge">efscli disk replace [-f] [-y] &lt;old-name&gt; &lt;new-name&gt;</code> performs on-the-fly disk substitution.
+The disk with name ‘old-name’ will be detached and disk with name ‘new-name’ will be configured and used instead of the old one. If the ‘new-disk’ has a partition table on it, then the command will fail unless the ‘-f’ flag is specified. When the flag set, the user will be asked for permission to destroy the partition table. The ‘-y’ flags forces destruction of the partition table without confirmation. The ‘replace’ command can be used when EdgeFS service is down. In this case, the new disk will be attached upon the next service start.</p>
+
+<p>Login to the affected target pod where disk needs to be replaced as shown in this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl exec -it -n rook-edgefs rook-edgefs-target-0 -- env COLUMNS=$COLUMNS LINES=$LINES TERM=linux toolbox
+</code></pre></div></div>
+
+<p>List available and unused disks:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># efscli device list -s
+NAME                        | VDEV ID                          | PATH     | STATUS
++---------------------------+----------------------------------+----------+-------------+
+ata-ST1000NX0423_W470M4BZ   |                                  | /dev/sda | UNUSED
+ata-ST1000NX0423_W470M3JK   | 147A81246937AEFF934D00C8DB92C4D3 | /dev/sdb | ONLINE
+ata-ST1000NX0423_W470M48T   | DCA10919B6F55A66A23BC5916642DD7E | /dev/sdc | ONLINE
+ata-ST1000NX0423_W470P9XJ   | C82B78AC845989DC731BF59FE705256A | /dev/sdd | ONLINE
+ata-ST1000NX0423_W470NQ7A   | BCA4C8F096DE96B4B350DF4F92E30F19 | /dev/sde | UNAVAILABLE
+</code></pre></div></div>
+
+<p>There is a device with an ‘UNUSED’ or ‘PARTITIONED’ status. The disk ST1000NX0423_W470M4BZ is not used and can replace a faulted one.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># efscli device replace ata-ST1000NX0423_W470NQ7A ata-ST1000NX0423_W470M4BZ
+
+INFO: Probbing disk ata-ST1000NX0423_W470M4BZ
+INFO: Attaching disk ata-ST1000NX0423_W470M4BZ
+INFO: The disk is replaced succefully
+</code></pre></div></div>
+
+<h2 id="vdev-server-recovery">VDEV server recovery</h2>
+
+<p>If a database partition gets corrupted, then there is a small probability for the VDEV container to enter an infinite restart loop. In order to prevent a container from restart use the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl exec -it -n rook-edgefs rook-edgefs-target-&lt;n&gt; -c auditd -- touch /opt/nedge/var/run/.edgefs-start-block-ccowd
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">rook-edgefs rook-edgefs-target-&lt;n&gt;</code> is the affected pod ID. Once command is done, you must be able to reach a toolbox console:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl exec -it -n rook-edgefs rook-edgefs rook-edgefs-target-&lt;n&gt; -- env COLUMNS=$COLUMNS LINES=$LINES TERM=linux toolbox
+</code></pre></div></div>
+
+<p>and run the <code class="language-plaintext highlighter-rouge">efscli device check ...</code> command. When you are done, before exiting the toolbox, do not forget to remove the file /opt/nedge/var/run/.edgefs-start-block-ccowd</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.0/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.0/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.0/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.0/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.0/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.0/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.0/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.0/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.0/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph cluster Pod Security Policies",
+      "/docs/rook/v1.0/ceph-psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.0/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.0/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.0/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.0/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.0/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.0/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.0/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.0/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.0/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.0/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.0/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.0/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.0/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.0/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.0/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.0/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.0/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.0/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.0/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.0/edgefs-isgw-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.0/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.0/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.0/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.0/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.0/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.0/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.0/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.0/edgefs-vdev-management.html",
+      true,
+      true
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.0/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.0/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.0/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.0/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.0/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.0/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.0/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.0/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.0/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.0/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.0/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.0/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.0/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.0/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.0/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.0/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.0/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

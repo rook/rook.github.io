@@ -1,0 +1,719 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v0.8/direct-tools.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v0.8</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/direct-tools.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/direct-tools.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/direct-tools.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/direct-tools.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/direct-tools.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/direct-tools.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/direct-tools.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/direct-tools.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/direct-tools.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/direct-tools.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/direct-tools.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/direct-tools.html" class="active">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/direct-tools.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/direct-tools.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/direct-tools.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/direct-tools.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/direct-tools.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v0.8 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="direct-tools">Direct Tools</h1>
+
+<p>Rook is designed with Kubernetes design principles from the ground up. This topic is going to escape the bounds of Kubernetes storage and show you how to
+use block and file storage directly from a pod without any of the Kubernetes magic. The purpose of this topic is to help you quickly test a new configuration,
+although it is not meant to be used in production. All of the benefits of Kubernetes storage including failover, detach, and attach will not be available.
+If your pod dies, your mount will die with it.</p>
+
+<h2 id="block-storage-tools">Block Storage Tools</h2>
+
+<p>After you have created a pool as described in the <a href="/docs/rook/v0.8/block.html">Block Storage</a> topic, you can create a block image and mount it directly in a pod.
+This example will show how the Ceph rbd volume can be mounted in the toolbox pod.</p>
+
+<p>After you have started and connected to the <a href="/docs/rook/v0.8/toolbox.html">Rook toolbox</a>, proceed with the following commands in the toolbox.</p>
+
+<p>Create a volume image (10MB):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbd create replicapool/test <span class="nt">--size</span> 10
+rbd info replicapool/test
+
+<span class="c"># Disable the rbd features that are not in the kernel module</span>
+rbd feature disable replicapool/test fast-diff deep-flatten object-map
+</code></pre></div></div>
+
+<p>Map the block volume and format it and mount it:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Map the rbd device. If this command appears to hang, ctrl-c and check if it actually completed successfully by continuing.</span>
+rbd map replicapool/test
+
+<span class="c"># Find the device name, such as rbd0</span>
+lsblk | <span class="nb">grep </span>rbd
+
+<span class="c"># Format the volume (only do this the first time or you will lose data)</span>
+mkfs.ext4 <span class="nt">-m0</span> /dev/rbd0
+
+<span class="c"># Mount the block device</span>
+<span class="nb">mkdir</span> /tmp/rook-volume
+mount /dev/rbd0 /tmp/rook-volume
+</code></pre></div></div>
+
+<p>Write and read a file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"Hello Rook"</span> <span class="o">&gt;</span> /tmp/rook-volume/hello
+<span class="nb">cat</span> /tmp/rook-volume/hello
+</code></pre></div></div>
+
+<h3 id="unmount-the-block-device">Unmount the Block device</h3>
+
+<p>Unmount the volume and unmap the kernel device:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>umount /tmp/rook-volume
+rbd unmap /dev/rbd0
+</code></pre></div></div>
+
+<h2 id="shared-filesystem-tools">Shared Filesystem Tools</h2>
+
+<p>After you have created a file system as described in the <a href="/docs/rook/v0.8/filesystem.html">Shared Filesystem</a> topic, you can mount the filesystem from multiple pods.
+The the other topic you may have mounted the filesystem already in the registry pod. Now we will mount the same file system in the toolbox pod.
+This is just a simple way to validate the Ceph file system and is not recommended for production Kubernetes pods.</p>
+
+<p>After you have started and connected to the <a href="/docs/rook/v0.8/toolbox.html">Rook toolbox</a>, proceed with the following commands in the toolbox.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create the directory</span>
+<span class="nb">mkdir</span> /tmp/registry
+
+<span class="c"># Detect the mon endpoints and the user secret for the connection</span>
+<span class="nv">mon_endpoints</span><span class="o">=</span><span class="si">$(</span><span class="nb">grep </span>mon_host /etc/ceph/ceph.conf | <span class="nb">awk</span> <span class="s1">'{print $3}'</span><span class="si">)</span>
+<span class="nv">my_secret</span><span class="o">=</span><span class="si">$(</span><span class="nb">grep </span>key /etc/ceph/keyring | <span class="nb">awk</span> <span class="s1">'{print $3}'</span><span class="si">)</span>
+
+<span class="c"># Mount the file system</span>
+mount <span class="nt">-t</span> ceph <span class="nt">-o</span> <span class="nv">mds_namespace</span><span class="o">=</span>myfs,name<span class="o">=</span>admin,secret<span class="o">=</span><span class="nv">$my_secret</span> <span class="nv">$mon_endpoints</span>:/ /tmp/registry
+
+<span class="c"># See your mounted file system</span>
+<span class="nb">df</span> <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>Now you should have a mounted file system. If you have pushed images to the registry you will see a directory called <code class="language-plaintext highlighter-rouge">docker</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls /tmp/registry
+</code></pre></div></div>
+
+<p>Try writing and reading a file to the shared file system.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"Hello Rook"</span> <span class="o">&gt;</span> /tmp/registry/hello
+<span class="nb">cat</span> /tmp/registry/hello
+
+<span class="c"># delete the file when you're done</span>
+<span class="nb">rm</span> <span class="nt">-f</span> /tmp/registry/hello
+</code></pre></div></div>
+
+<h3 id="unmount-the-filesystem">Unmount the Filesystem</h3>
+
+<p>To unmount the shared file system from the toolbox pod:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>umount /tmp/registry
+<span class="nb">rmdir</span> /tmp/registry
+</code></pre></div></div>
+
+<p>No data will be deleted by unmounting the file system.</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v0.8/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v0.8/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v0.8/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cleanup",
+      "/docs/rook/v0.8/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v0.8/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v0.8/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v0.8/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v0.8/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBAC Security",
+      "/docs/rook/v0.8/rbac.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v0.8/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v0.8/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v0.8/storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v0.8/block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v0.8/object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.8/filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Custom Resources",
+      "/docs/rook/v0.8/crds.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v0.8/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Pool",
+      "/docs/rook/v0.8/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Object Store",
+      "/docs/rook/v0.8/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Shared File System",
+      "/docs/rook/v0.8/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster",
+      "/docs/rook/v0.8/cockroachdb-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v0.8/minio-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v0.8/monitoring.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v0.8/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v0.8/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v0.8/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v0.8/upgrade.html",
+      false,
+      false
+    );
+  
+    add(
+      "Patch Upgrades",
+      "/docs/rook/v0.8/upgrade-patch.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tools",
+      "/docs/rook/v0.8/tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v0.8/toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v0.8/direct-tools.html",
+      true,
+      true
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v0.8/advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v0.8/common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v0.8/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v0.8/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v0.8/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v0.8/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

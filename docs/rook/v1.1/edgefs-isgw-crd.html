@@ -1,0 +1,1020 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v1.1/edgefs-isgw-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v1.1</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/edgefs-isgw-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/edgefs-isgw-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/edgefs-isgw-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/edgefs-isgw-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/edgefs-isgw-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/edgefs-isgw-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/edgefs-isgw-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/edgefs-isgw-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/edgefs-isgw-crd.html" class="active">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/edgefs-isgw-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/edgefs-isgw-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/edgefs-isgw-crd.html">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/edgefs-isgw-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/edgefs-isgw-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/edgefs-isgw-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/edgefs-isgw-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/edgefs-isgw-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v1.1 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="edgefs-isgw-inter-segment-gateway-crd">EdgeFS ISGW (Inter-Segment GateWay) CRD</h1>
+
+<p>EdgeFS Inter-Segment Gateway link is a building block for EdgeFS cross-site, cross-cloud global namespace synchronization functionality.</p>
+
+<p>It distributes modified chunks of data asynchronously and enables seamless as well as geographically transparent access to files, objects and block devices.
+It is important to note that a file or a block device consists of one or more objects, and so, within EdgeFS scope, ultimately everything is an object, globally immutable and self-validated.</p>
+
+<p>To create an analogy, EdgeFS concept of global immutability of modifications very similar to how git operates with repository commits and branches.
+As such, this technique empowers EdgeFS users to construct and operate comprehensive wide-spread global namespaces with management overhead greatly simplified.
+A file or object modified at a source site where ISGW link is setup will be immediately noticed by ISGW endpoint links, thus spread out the change.
+Eventually, all the connected sites will receive file modification where only modified blocks get transferred.</p>
+
+<p><img src="/docs/rook/v1.1/media/edgefs-isgw.png" alt="EdgeFS ISGW" /></p>
+
+<p>Not only ISGW link reduces the amount of data needed to be transferred, it also deduplicating the transfers.
+Matching globally unique cryptographic signatures of a file change will not be transferred, thus enabling global namespace deduplication.</p>
+
+<p>ISGW link can be bi-directional, i.e. enabling same file/object modifications across the namespaces.
+It works well for many use cases where application logic can ensure serialization of changes.
+Single bi-directional link can connect two sites but it is possible to create as many non-overlapping links as needed.</p>
+
+<p>ISGW link can also transparently synchronize file, object, directory, bucket or tenant level snapshots, grouped into so-called SnapView construct.
+Thus, modification to a block device, for instance, can be consistently viewed across entire global namespace.</p>
+
+<p>Because EdgeFS metadata is also globally immutable and unique, it is possible to enable a mode of transferring only metadata changes.
+With this mode enabled, users can construct efficient access endpoints where modifications can be fetched on demand, as a result creating globally and geographically distributed cache fog aggregation with a built-in E-LRU eviction policy.</p>
+
+<p>Local I/O at each site executed with the speed of media devices used. Modifications transferred eventually, and not slowing down local site running application workflow.</p>
+
+<p>EdgeFS Rook Operator allows creation and customization of High-Performance Inter-Segment synchronization links through the custom resource definitions (CRDs).</p>
+
+<p>The following settings are available for customization of ISGW services.</p>
+
+<h2 id="sample">Sample</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ISGW</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">isgw01</span>                               <span class="c1"># Inter-Segment Gateway service name</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">direction</span><span class="pi">:</span> <span class="s2">"</span><span class="s">send+receive"</span>
+  <span class="na">remoteURL</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ccow://192.168.1.43:14000"</span>
+  <span class="c1">#replicationType: "initial"</span>
+  <span class="c1">#metadataOnly: all</span>
+  <span class="c1">#dynamicFetchAddr: 0.0.0.0:49600</span>
+  <span class="c1">#localAddr: 0.0.0.0:10000</span>
+  <span class="c1">#useEncryptedTunnel: true</span>
+  <span class="c1">#chunkCacheSize: 1Gi</span>
+  <span class="c1">#placement:</span>
+  <span class="c1">#  nodeAffinity:</span>
+  <span class="c1">#    requiredDuringSchedulingIgnoredDuringExecution:</span>
+  <span class="c1">#      nodeSelectorTerms:</span>
+  <span class="c1">#      - matchExpressions:</span>
+  <span class="c1">#        - key: rook-edgefs-nodetype</span>
+  <span class="c1">#          operator: In</span>
+  <span class="c1">#          values:</span>
+  <span class="c1">#          - isgw</span>
+  <span class="c1">#  tolerations:</span>
+  <span class="c1">#  - key: node230</span>
+  <span class="c1">#    operator: Exists</span>
+  <span class="c1">#  podAffinity:</span>
+  <span class="c1">#  podAntiAffinity:</span>
+  <span class="c1">#resourceProfile: embedded</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="c1">#  limits:</span>
+  <span class="c1">#    cpu: "2"</span>
+  <span class="c1">#    memory: "4Gi"</span>
+  <span class="c1">#  requests:</span>
+  <span class="c1">#    cpu: "2"</span>
+  <span class="c1">#    memory: "4Gi"</span>
+  <span class="c1"># A key/value list of annotations</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+  <span class="c1">#  key: value</span>
+</code></pre></div></div>
+
+<h3 id="metadata">Metadata</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the ISGW link service to create, which must match existing EdgeFS service. Provided CRD metadata can override existing EdgeFS service metadata.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The namespace of the Rook cluster where the ISGW service is created.</li>
+  <li><code class="language-plaintext highlighter-rouge">direction</code>: I/O flow direction: <code class="language-plaintext highlighter-rouge">send</code>, <code class="language-plaintext highlighter-rouge">receive</code> or <code class="language-plaintext highlighter-rouge">send+receive</code> (default).</li>
+  <li><code class="language-plaintext highlighter-rouge">remoteURL</code>: I/O flow with destination pointing to the other ISGW endpoint service, locally mounted directory or other (non-EdgeFS) S3 compatible service. Format should be of form PROTOCOL://LOCATION, where PROTOCOL can be of “ccow”, “file”, “s3” and LOCATION depends on the PROTOCOL. In case of “ccow” LOCATION needs to specify a HOST:PORT of the other EdgeFS site, e.g. ccow://192.168.1.43:14000. In case of “file” LOCATION needs to be a path to a local POSIX directory, e.g. file://volumeDir. In cae of “s3” LOCATION can either point to an existing bucket, e.g. s3://mybucket.aws.com or to the other S3 compatible server IP:HOST, e.g. s3://214.4.34.22:4567. It is important to note that file:// and s3:// protocols only provided for easy integration with existing infrastructure.</li>
+  <li><code class="language-plaintext highlighter-rouge">replicationType</code>: Defines how tenant’s buckets needs to be replicated. Can be specified as <code class="language-plaintext highlighter-rouge">initial</code>, <code class="language-plaintext highlighter-rouge">continuous</code> or <code class="language-plaintext highlighter-rouge">initial+continuous</code> (default). In case of <code class="language-plaintext highlighter-rouge">initial</code> replication type, ISGW service will only sync served buckets once with ability to manually trigger re-sync again. In case of <code class="language-plaintext highlighter-rouge">continuous</code> replication type, ISGW service will enable asynchronous syncing from the moment a bucket added to a served list of buckets, so that only recent changes will be synchronized, continuously. In case of <code class="language-plaintext highlighter-rouge">initial+continuous</code> replication type, ISGW service will first initiate syncing of all existing served buckets contents and once all is copied, it will automatically enable <code class="language-plaintext highlighter-rouge">continuous</code> mode of operation, guaranteeing that none of the source objects are skipped.</li>
+  <li><code class="language-plaintext highlighter-rouge">metadataOnly</code>: If set, then only immutable metadata changes will be transferred. This also enables on-demand data fetch and E-LRU cache capability. In case of metadata only transfers, dynamically fetched data will be cached at the accessing endpoints ISGW links locations. If an application would want to read an offset of a data which isn’t found, global search request will be formed and distributed across all the connected ISGW bi-directional links serving source bucket. Missing data chunks will be found and fetched, delivered transparently to application. Can be set to either <code class="language-plaintext highlighter-rouge">all</code> or <code class="language-plaintext highlighter-rouge">versions</code>. Setting it to <code class="language-plaintext highlighter-rouge">versions</code> enables extremely fast replication (next second!) of data modifications.</li>
+  <li><code class="language-plaintext highlighter-rouge">dynamicFetchAddr</code>: Defines local cluster pod service host:port. Used by EdgeFS gateways (S3, S3X, NFS or iSCSI) to distribute missing chunk fetch requests. It needs to be set to other than 0.0.0.0 on access endpoints so to enable dynamic fetch feature. Default is 0.0.0.0:49678.</li>
+  <li><code class="language-plaintext highlighter-rouge">localAddr</code>: Defines local cluster pod service address and port. Used by ISGW link endpoint. Kubernetes ExternalIP will be automatically constructed if address is provided. Default is 0.0.0.0:14000.</li>
+  <li><code class="language-plaintext highlighter-rouge">useEncryptedTunnel</code>: If true, enables usage of encrypted SSH tunnel. By default, transferred metadata and data chunks are just compressed but unencrypted. Enable encryption if ISGW links crossing boundaries of single data center or multiple clouds.</li>
+  <li><code class="language-plaintext highlighter-rouge">chunkCacheSize</code>: Limit amount of memory allocated for dynamic chunk cache. By default ISGW pod uses up to 75% of available memory as chunk caching area. This option can influence this allocation strategy.</li>
+  <li><code class="language-plaintext highlighter-rouge">annotations</code>: Key value pair list of annotations to add.</li>
+  <li><code class="language-plaintext highlighter-rouge">placement</code>: The ISGW pods can be given standard Kubernetes placement restrictions with <code class="language-plaintext highlighter-rouge">nodeAffinity</code>, <code class="language-plaintext highlighter-rouge">tolerations</code>, <code class="language-plaintext highlighter-rouge">podAffinity</code>, and <code class="language-plaintext highlighter-rouge">podAntiAffinity</code> similar to placement defined for daemons configured by the <a href="/cluster/examples/kubernetes/edgefs/cluster.yaml">cluster CRD</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">resourceProfile</code>: ISGW pod resource utilization profile (Memory and CPU). Can be <code class="language-plaintext highlighter-rouge">embedded</code> or <code class="language-plaintext highlighter-rouge">performance</code> (default). In case of <code class="language-plaintext highlighter-rouge">performance</code> an ISGW pod trying to increase amount of internal I/O resources that results in higher performance at the cost of additional memory allocation and more CPU load. In <code class="language-plaintext highlighter-rouge">embedded</code> profile case, ISGW pod gives preference to preserving memory over I/O and limiting chunk cache (see <code class="language-plaintext highlighter-rouge">chunkCacheSize</code> option). The <code class="language-plaintext highlighter-rouge">performance</code> profile is the default unless cluster wide <code class="language-plaintext highlighter-rouge">embedded</code> option is defined.</li>
+  <li><code class="language-plaintext highlighter-rouge">resources</code>: Set resource requests/limits for the ISGW pods, see <a href="/docs/rook/v1.1/edgefs-cluster-crd.html#resource-requirementslimits">Resource Requirements/Limits</a>.</li>
+</ul>
+
+<h3 id="setting-up-two-sites-bi-directional-syncing-edgefs-namespace-and-tenants">Setting up two-sites bi-directional syncing EdgeFS namespace and tenants</h3>
+
+<p>This example will demonstrate creation of simple syncing namespace between two sites.</p>
+
+<p>For more detailed instructions please refer to <a href="https://github.com/Nexenta/edgefs/wiki">EdgeFS Wiki</a>.</p>
+
+<p>Below is an exampmle procedure to get things initialized and configured.</p>
+
+<p>Before new local namespace (or local site) can be used, it has to be initialized with FlexHash and special purpose root object.</p>
+
+<p>FlexHash consists of dynamically discovered configuration and checkpoint of accepted distribution table. FlexHash is responsible for I/O direction and plays important role in dynamic load balancing logic. It defines so-called Negotiating Groups (typically across zoned 8-24 disks) and final table distribution across all the participating components, e.g. data nodes, service gateways and tools.</p>
+
+<p>Root object holds system information and table of namespaces registered to a local site. Root object is always local and never shared between the sites.</p>
+
+<p>For each cluster, to initialize system and prepare logical definitions, login to the toolbox as shown in this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get po --all-namespaces | grep edgefs-mgr
+kubectl exec -it -n rook-edgefs rook-edgefs-mgr-6cb9598469-czr7p -- env COLUMNS=$COLUMNS LINES=$LINES TERM=linux toolbox
+</code></pre></div></div>
+
+<p>Assumption at this point is that nodes are all configured and can be seen via the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli system status
+</code></pre></div></div>
+
+<ol>
+  <li>Initialize cluster</li>
+</ol>
+
+<p>Verify that HW (or better say emulated in this case) configuration look normal and accept it</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli system init
+</code></pre></div></div>
+
+<p>At this point new dynamically discovered configuration checkpoint will be created at <code class="language-plaintext highlighter-rouge">$NEDGE_HOME/var/run/flexhash-checkpoint.json</code>.
+This will also create system “root” object, holding Site’s Namespace. Namespace may consist of more then single region.</p>
+
+<ol>
+  <li>Create new local namespace (or we also call it “Region” or “Segment”)</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli cluster create Hawaii
+</code></pre></div></div>
+
+<ol>
+  <li>Create logical tenants of cluster namespace “Hawaii”, also buckets if needed</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli tenant create Hawaii/Cola
+efscli bucket create Hawaii/Cola/bk1
+efscli tenant create Hawaii/Pepsi
+efscli bucket create Hawaii/Pepsi/bk1
+</code></pre></div></div>
+
+<p>Now that Hawaii serving namespace cluster is setup, repeat steps on the secondary site:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli cluster create Hawaii
+efscli tenant create Hawaii/Cola -r 2
+efscli tenant create Hawaii/Pepsi -r 2
+</code></pre></div></div>
+
+<p>This steps also includes a possibility to override destination defaults on per-tenant (Cola and Pepsi) basis.
+In the example above we setting replication count to 2 on the secondary site.</p>
+
+<ol>
+  <li>Create ISGW link services on both EdgeFS sites</li>
+</ol>
+
+<p>Order of creation of ISGW links doesn’t matter.
+Link status change will be noticed automatically and syncing can be delayed for up to 7 days by default.</p>
+
+<p>On the primary site:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli service create isgw hawaii
+efscli service serve hawaii Hawaii/Cola/bk1
+efscli service serve hawaii Hawaii/Pepsi/bk1
+</code></pre></div></div>
+
+<p>Because we creating bi-directional link, on the secondary site we would need to create exactly same configuration except X-ISGW-Remote (remoteURL in CRD) where it should point back to primary. Synchronization is enabled on per-bucket level. Buckets which do not yet exist will be automatically created with tenant parameter overrides taken into an account.</p>
+
+<ol>
+  <li>Create ISGW Link CRDs on both EdgeFS sites</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ISGW</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hawaii</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">direction</span><span class="pi">:</span> <span class="s">send+receive</span>
+  <span class="na">remoteURL</span><span class="pi">:</span> <span class="s">ccow://10.3.32.240:14000</span>
+  <span class="na">localAddr</span><span class="pi">:</span> <span class="s">10.3.30.75:14000</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">edgefs.rook.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ISGW</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hawaii</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-edgefs</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">direction</span><span class="pi">:</span> <span class="s">send+receive</span>
+  <span class="na">remoteURL</span><span class="pi">:</span> <span class="s">ccow://10.3.30.75:14000</span>
+  <span class="na">localAddr</span><span class="pi">:</span> <span class="s">10.3.32.240:14000</span>
+</code></pre></div></div>
+
+<p>It also maybe a bit easier to create services and CRDs using <a href="/docs/rook/v1.1/edgefs-ui.html">EdgeFS UI Dashboard</a>. ISGW Link page may look like this:</p>
+
+<p><img src="/docs/rook/v1.1/media/edgefs-isgw-edit.png" alt="EdgeFS ISGW Edit" /></p>
+
+<p>EdgeFS UI Dashboard automates the process of CRD composing but also has a capability to execute and monitor running Kubernetes Rook CRDs.</p>
+
+<p>At this point two ISGW link services should be operational. Verify its operation with <code class="language-plaintext highlighter-rouge">show</code> command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>efscli service show hawaii -s
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v1.1/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v1.1/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cassandra",
+      "/docs/rook/v1.1/cassandra.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.1/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v1.1/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Geo-Transparent Storage",
+      "/docs/rook/v1.1/edgefs-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v1.1/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Network File System (NFS)",
+      "/docs/rook/v1.1/nfs.html",
+      true,
+      false
+    );
+  
+    add(
+      "YugabyteDB",
+      "/docs/rook/v1.1/yugabytedb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v1.1/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v1.1/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "Pod Security Policies",
+      "/docs/rook/v1.1/psp.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v1.1/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v1.1/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v1.1/ceph-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Examples",
+      "/docs/rook/v1.1/ceph-examples.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v1.1/ceph-block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v1.1/ceph-object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v1.1/ceph-filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Dashboard",
+      "/docs/rook/v1.1/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.1/ceph-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.1/ceph-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Block Pool CRD",
+      "/docs/rook/v1.1/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store CRD",
+      "/docs/rook/v1.1/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Bucket Claim",
+      "/docs/rook/v1.1/ceph-object-bucket-claim.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Store User CRD",
+      "/docs/rook/v1.1/ceph-object-store-user-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System CRD",
+      "/docs/rook/v1.1/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "NFS CRD",
+      "/docs/rook/v1.1/ceph-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph CSI",
+      "/docs/rook/v1.1/ceph-csi-drivers.html",
+      true,
+      false
+    );
+  
+    add(
+      "Configuration",
+      "/docs/rook/v1.1/ceph-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v1.1/ceph-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cleanup",
+      "/docs/rook/v1.1/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "EdgeFS Storage",
+      "/docs/rook/v1.1/edgefs-storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Cluster CRD",
+      "/docs/rook/v1.1/edgefs-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "ISGW Link CRD",
+      "/docs/rook/v1.1/edgefs-isgw-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Scale-Out NFS CRD",
+      "/docs/rook/v1.1/edgefs-nfs-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Edge-X S3 CRD",
+      "/docs/rook/v1.1/edgefs-s3x-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "AWS S3 CRD",
+      "/docs/rook/v1.1/edgefs-s3-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenStack/SWIFT CRD",
+      "/docs/rook/v1.1/edgefs-swift-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "iSCSI Target CRD",
+      "/docs/rook/v1.1/edgefs-iscsi-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CSI driver",
+      "/docs/rook/v1.1/edgefs-csi.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v1.1/edgefs-monitoring.html",
+      true,
+      false
+    );
+  
+    add(
+      "User Interface",
+      "/docs/rook/v1.1/edgefs-ui.html",
+      true,
+      false
+    );
+  
+    add(
+      "VDEV Management",
+      "/docs/rook/v1.1/edgefs-vdev-management.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.1/edgefs-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "Cassandra Cluster CRD",
+      "/docs/rook/v1.1/cassandra-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Upgrade",
+      "/docs/rook/v1.1/cassandra-operator-upgrade.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster CRD",
+      "/docs/rook/v1.1/cockroachdb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v1.1/minio-object-store-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "NFS Server CRD",
+      "/docs/rook/v1.1/nfs-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "YugabyteDB Cluster CRD",
+      "/docs/rook/v1.1/yugabytedb-cluster-crd.html",
+      false,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v1.1/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v1.1/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v1.1/common-issues.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Common Issues",
+      "/docs/rook/v1.1/ceph-common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Tools",
+      "/docs/rook/v1.1/ceph-tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v1.1/ceph-toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v1.1/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v1.1/ceph-advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v1.1/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v1.1/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v1.1/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v1.1/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>

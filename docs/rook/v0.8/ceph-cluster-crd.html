@@ -1,0 +1,1020 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    
+    <meta name="robots" content="noindex">
+    
+
+    <title>Ceph Docs</title>
+
+    <link rel="canonical" href="https://rook.io/docs/rook/v0.8/ceph-cluster-crd.html">
+
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+
+    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    
+      <link rel="stylesheet" href="/css/docs.css" />
+    
+  </head>
+  <body>
+    <nav id="navigation" aria-label="Navigation">
+  <div>
+    <div class="logo">
+      <a href="/"><img src="/images/rook-logo.svg"/></a>
+    </div>
+    <div
+      class="hamburger-controls"
+      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      <span></span> <span></span> <span></span>
+    </div>
+    <ul class="links">
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Documentation</a>
+        <div class="dropdown-content">
+          <a href="/docs/rook/v1.9/">Ceph</a>
+          <a href="/docs/cassandra/v1.7/">Cassandra</a>
+          <a href="/docs/nfs/v1.7/">NFS</a>
+        </div>
+      <li class="dropdown">
+        <a role="button" href="javascript:void(0)">Community</a>
+        <div class="dropdown-content">
+          <a href="//github.com/rook/rook">GitHub</a>
+          <a href="//slack.rook.io/">Slack</a>
+          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//twitter.com/rook_io">Twitter</a>
+        </div>
+      </li>
+      <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a class="button small" href="/docs/rook/v1.9/quickstart.html">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <main id="content" aria-label="Content"><div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="docs-header">
+  <h1>Ceph</h1>
+  <div class="versions">
+    <a role="button" href="javascript:void(0)">Rook Ceph v0.8</a>
+    <div class="versions-dropdown-content">
+      
+        <a href="/docs/rook/v1.9/ceph-cluster-crd.html">Rook Ceph v1.9</a>
+      
+        <a href="/docs/rook/v1.8/ceph-cluster-crd.html">Rook Ceph v1.8</a>
+      
+        <a href="/docs/rook/v1.7/ceph-cluster-crd.html">Rook Ceph v1.7</a>
+      
+        <a href="/docs/rook/v1.6/ceph-cluster-crd.html">Rook Ceph v1.6</a>
+      
+        <a href="/docs/rook/v1.5/ceph-cluster-crd.html">Rook Ceph v1.5</a>
+      
+        <a href="/docs/rook/v1.4/ceph-cluster-crd.html">Rook Ceph v1.4</a>
+      
+        <a href="/docs/rook/v1.3/ceph-cluster-crd.html">Rook Ceph v1.3</a>
+      
+        <a href="/docs/rook/v1.2/ceph-cluster-crd.html">Rook Ceph v1.2</a>
+      
+        <a href="/docs/rook/v1.1/ceph-cluster-crd.html">Rook Ceph v1.1</a>
+      
+        <a href="/docs/rook/v1.0/ceph-cluster-crd.html">Rook Ceph v1.0</a>
+      
+        <a href="/docs/rook/v0.9/ceph-cluster-crd.html">Rook Ceph v0.9</a>
+      
+        <a href="/docs/rook/v0.8/ceph-cluster-crd.html" class="active">Rook Ceph v0.8</a>
+      
+        <a href="/docs/rook/v0.7/ceph-cluster-crd.html">Rook Ceph v0.7</a>
+      
+        <a href="/docs/rook/v0.6/ceph-cluster-crd.html">Rook Ceph v0.6</a>
+      
+        <a href="/docs/rook/v0.5/ceph-cluster-crd.html">Rook Ceph v0.5</a>
+      
+        <a href="/docs/rook/latest/ceph-cluster-crd.html">Rook Ceph latest</a>
+      
+    </div>
+    <img src="/images/arrow.svg" />
+  </div>
+</section>
+<div class="page">
+  <div class="docs-menu">
+      <ul id="docs-ul"></ul>
+  </div>
+  <div class="docs-content">
+    <div class="docs-actions">
+      <a id="edit" href="https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md">Edit on GitHub</a>
+    </div>
+    
+      <div class="alert old">
+        <p><b>PLEASE NOTE</b>: This document applies to v0.8 version and not to the latest <strong>stable</strong> release v1.9</p>
+      </div>
+    
+    <div class="docs-text">
+      <h1 id="ceph-cluster-crd">Ceph Cluster CRD</h1>
+<p>Rook allows creation and customization of storage clusters through the custom resource definitions (CRDs).</p>
+
+<h2 id="sample">Sample</h2>
+<p>To get you started, here is a simple example of a CRD to configure a Ceph cluster with all nodes and all devices. More examples are included <a href="#samples">later in this doc</a>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>In addition to the CRD, you will also need to create a namespace, role, and role binding as seen in the <a href="#common-cluster-resources">common cluster resources</a> below.</p>
+
+<h2 id="settings">Settings</h2>
+<p>Settings can be specified at the global level to apply to the cluster as a whole, while other settings can be specified at more fine-grained levels.  If any setting is unspecified, a suitable default will be used automatically.</p>
+
+<h3 id="cluster-metadata">Cluster metadata</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name that will be used internally for the Ceph cluster. Most commonly the name is the same as the namespace since multiple clusters are not supported in the same namespace.</li>
+  <li><code class="language-plaintext highlighter-rouge">namespace</code>: The Kubernetes namespace that will be created for the Rook cluster. The services, pods, and other resources created by the operator will be added to this namespace. The common scenario is to create a single Rook cluster. If multiple clusters are created, they must not have conflicting devices or host paths.</li>
+</ul>
+
+<h3 id="cluster-settings">Cluster Settings</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dataDirHostPath</code>: The path on the host (<a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath">hostPath</a>) where config and data should be stored for each of the services. If the directory does not exist, it will be created. Because this directory persists on the host, it will remain after pods are deleted.
+    <ul>
+      <li>On <strong>Minikube</strong> environments, use <code class="language-plaintext highlighter-rouge">/data/rook</code>. Minikube boots into a tmpfs but it provides some <a href="https://github.com/kubernetes/minikube/blob/master/docs/persistent_volumes.md">directories</a> where files can be persisted across reboots. Using one of these directories will ensure that Rook’s data and configuration files are persisted and that enough storage space is available.</li>
+      <li><strong>WARNING</strong>: For test scenarios, if you delete a cluster and start a new cluster on the same hosts, the path used by <code class="language-plaintext highlighter-rouge">dataDirHostPath</code> must be deleted. Otherwise, stale keys and other config will remain from the previous cluster and the new mons will fail to start.
+If this value is empty, each pod will get an ephemeral directory to store their config files that is tied to the lifetime of the pod running on that node. More details can be found in the Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/#emptydir">empty dir docs</a>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">dashboard</code>: Settings for the Ceph dashboard. To view the dashboard in your browser see the <a href="/docs/rook/v0.8/ceph-dashboard.html">dashboard guide</a>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">enabled</code>: Whether to enable the dashboard to view cluster status</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">serviceAccount</code>: The service account under which the OSD pods will run that will give access to ConfigMaps in the cluster’s namespace. If not set, the default of <code class="language-plaintext highlighter-rouge">rook-ceph-cluster</code> will be used.</li>
+  <li><code class="language-plaintext highlighter-rouge">network</code>: The network settings for the cluster
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">hostNetwork</code>: uses network of the hosts instead of using the SDN below the containers.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: contains mon related options <a href="#mon-settings">mon settings</a>
+For more details on the mons and when to choose a number other than <code class="language-plaintext highlighter-rouge">3</code>, see the <a href="https://github.com/rook/rook/blob/master/design/mon-health.md">mon health design doc</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">placement</code>: <a href="#placement-configuration-settings">placement configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">resources</code>: <a href="#cluster-wide-resources-configuration-settings">resources configuration settings</a></li>
+  <li><code class="language-plaintext highlighter-rouge">storage</code>: Storage selection and configuration that will be used across the cluster.  Note that these settings can be overridden for specific nodes.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useAllNodes</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating if all nodes in the cluster should be used for storage according to the cluster level storage selection and configuration values.
+If individual nodes are specified under the <code class="language-plaintext highlighter-rouge">nodes</code> field below, then <code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">nodes</code>: Names of individual nodes in the cluster that should have their storage included in accordance with either the cluster level configuration specified above or any node specific overrides described in the next section below.
+<code class="language-plaintext highlighter-rouge">useAllNodes</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> to use specific nodes and their config.</li>
+      <li><a href="#storage-selection-settings">storage selection settings</a></li>
+      <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="node-updates">Node Updates</h4>
+<p>Nodes can be added and removed over time by updating the Cluster CRD, for example with <code class="language-plaintext highlighter-rouge">kubectl -n rook-ceph edit cluster.ceph.rook.io rook-ceph</code>.
+This will bring up your default text editor and allow you to add and remove storage nodes from the cluster.
+This feature is only available when <code class="language-plaintext highlighter-rouge">useAllNodes</code> has been set to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<h3 id="mon-settings">Mon Settings</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">count</code>: set the number of mons to be started. The number should be odd and between <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">9</code>. If not specified the default is set to <code class="language-plaintext highlighter-rouge">3</code> and <code class="language-plaintext highlighter-rouge">allowMultiplePerNode</code> is also set to <code class="language-plaintext highlighter-rouge">true</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">allowMultiplePerNode</code>: enable (<code class="language-plaintext highlighter-rouge">true</code>) or disable (<code class="language-plaintext highlighter-rouge">false</code>) the placement of multiple mons on one node. Default is <code class="language-plaintext highlighter-rouge">false</code>.</li>
+</ul>
+
+<h3 id="node-settings">Node Settings</h3>
+<p>In addition to the cluster level settings specified above, each individual node can also specify configuration to override the cluster level settings and defaults.
+If a node does not specify any configuration then it will inherit the cluster level settings.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the node, which should match its <code class="language-plaintext highlighter-rouge">kubernetes.io/hostname</code> label.</li>
+  <li><code class="language-plaintext highlighter-rouge">config</code>: Config settings applied to all OSDs on the node unless overridden by <code class="language-plaintext highlighter-rouge">devices</code> or <code class="language-plaintext highlighter-rouge">directories</code>. See the <a href="#osd-configuration-settings">config settings</a> below.</li>
+  <li><a href="#storage-selection-settings">storage selection settings</a></li>
+  <li><a href="#storage-configuration-settings">storage configuration settings</a></li>
+</ul>
+
+<h3 id="storage-selection-settings">Storage Selection Settings</h3>
+<p>Below are the settings available, both at the cluster and individual node level, for selecting which storage resources will be included in the cluster.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useAllDevices</code>: <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>, indicating whether all devices found on nodes in the cluster should be automatically consumed by OSDs. <strong>Not recommended</strong> unless you have a very controlled environment where you will not risk formatting of devices with existing data. When <code class="language-plaintext highlighter-rouge">true</code>, all devices will be used except those with partitions created or a local filesystem. Is overridden by <code class="language-plaintext highlighter-rouge">deviceFilter</code> if specified.</li>
+  <li><code class="language-plaintext highlighter-rouge">deviceFilter</code>: A regular expression that allows selection of devices to be consumed by OSDs.  If individual devices have been specified for a node then this filter will be ignored.  This field uses <a href="https://golang.org/pkg/regexp/syntax/">golang regular expression syntax</a>. For example:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">sdb</code>: Only selects the <code class="language-plaintext highlighter-rouge">sdb</code> device if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^sd.</code>: Selects all devices starting with <code class="language-plaintext highlighter-rouge">sd</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^sd[a-d]</code>: Selects devices starting with <code class="language-plaintext highlighter-rouge">sda</code>, <code class="language-plaintext highlighter-rouge">sdb</code>, <code class="language-plaintext highlighter-rouge">sdc</code>, and <code class="language-plaintext highlighter-rouge">sdd</code> if found</li>
+      <li><code class="language-plaintext highlighter-rouge">^s</code>: Selects all devices that start with <code class="language-plaintext highlighter-rouge">s</code></li>
+      <li><code class="language-plaintext highlighter-rouge">^[^r]</code>: Selects all devices that do <em>not</em> start with <code class="language-plaintext highlighter-rouge">r</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">devices</code>: A list of individual device names belonging to this node to include in the storage cluster.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code>: The name of the device (e.g., <code class="language-plaintext highlighter-rouge">sda</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Device-specific config settings. See the <a href="#osd-configuration-settings">config settings</a> below.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">directories</code>:  A list of directory paths that will be included in the storage cluster. Note that using two directories on the same physical device can cause a negative performance impact.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">path</code>: The path on disk of the directory (e.g., <code class="language-plaintext highlighter-rouge">/rook/storage-dir</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">config</code>: Directory-specific config settings. See the <a href="#osd-configuration-settings">config settings</a> below.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">location</code>: Location information about the cluster to help with data placement, such as region or data center.  This is directly fed into the underlying Ceph CRUSH map.  More information on CRUSH maps can be found in the <a href="http://docs.ceph.com/docs/master/rados/operations/crush-map/">ceph docs</a>.</li>
+</ul>
+
+<h3 id="osd-configuration-settings">OSD Configuration Settings</h3>
+<p>The following storage selection settings are specific to Ceph and do not apply to other backends. All variables are key-value pairs represented as strings.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">metadataDevice</code>: Name of a device to use for the metadata of OSDs on each node.  Performance can be improved by using a low latency device (such as SSD or NVMe) as the metadata device, while other spinning platter (HDD) devices on a node are used to store data.</li>
+  <li><code class="language-plaintext highlighter-rouge">storeType</code>: <code class="language-plaintext highlighter-rouge">filestore</code> or <code class="language-plaintext highlighter-rouge">bluestore</code>, the underlying storage format to use for each OSD. The default is set dynamically to <code class="language-plaintext highlighter-rouge">bluestore</code> for devices, while <code class="language-plaintext highlighter-rouge">filestore</code> is the default for directories. Set this store type explicitly to override the default. Warning: Bluestore is <strong>not</strong> recommended for directories in production. Bluestore does not purge data from the directory and over time will grow without the ability to compact or shrink.</li>
+  <li><code class="language-plaintext highlighter-rouge">databaseSizeMB</code>:  The size in MB of a bluestore database. Include quotes around the size.</li>
+  <li><code class="language-plaintext highlighter-rouge">walSizeMB</code>:  The size in MB of a bluestore write ahead log (WAL). Include quotes around the size.</li>
+  <li><code class="language-plaintext highlighter-rouge">journalSizeMB</code>:  The size in MB of a filestore journal. Include quotes around the size.</li>
+</ul>
+
+<h3 id="placement-configuration-settings">Placement Configuration Settings</h3>
+<p>Placement configuration for the cluster services. It includes the following keys: <code class="language-plaintext highlighter-rouge">mgr</code>, <code class="language-plaintext highlighter-rouge">mon</code>, <code class="language-plaintext highlighter-rouge">osd</code> and <code class="language-plaintext highlighter-rouge">all</code>. Each service will have its placement configuration generated by merging the generic configuration under <code class="language-plaintext highlighter-rouge">all</code> with the most specific one (which will override any attributes).</p>
+
+<p>A Placement configuration is specified (according to the kubernetes PodSpec) as:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nodeAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature">NodeAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">podAntiAffinity</code>: kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature">PodAntiAffinity</a></li>
+  <li><code class="language-plaintext highlighter-rouge">tolerations</code>: list of kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">Toleration</a></li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">mon</code> pod does not allow <code class="language-plaintext highlighter-rouge">Pod</code> affinity or anti-affinity.
+This is because of the mons having built-in anti-affinity with each other through the operator. The operator chooses which nodes are to run a mon on. Each mon is then tied to a node with a node selector using a hostname.
+See the <a href="https://github.com/rook/rook/blob/master/design/mon-health.md">mon design doc</a> for more details on the mon failover design.</p>
+
+<h3 id="cluster-wide-resources-configuration-settings">Cluster-wide Resources Configuration Settings</h3>
+<p>Resources should be specified so that the rook components are handled after <a href="https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/">Kubernetes Pod Quality of Service classes</a>.
+This allows to keep rook components running when for example a node runs out of memory and the rook components are not killed depending on their Quality of Service class.</p>
+
+<p>You can set resource requests/limits for rook components through the <a href="#resource-requirementslimits">Resource Requirements/Limits</a> structure in the following keys:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mgr</code>: Set resource requests/limits for MGRs.</li>
+  <li><code class="language-plaintext highlighter-rouge">mon</code>: Set resource requests/limits for Mons.</li>
+  <li><code class="language-plaintext highlighter-rouge">osd</code>: Set resource requests/limits for OSDs.</li>
+</ul>
+
+<h3 id="resource-requirementslimits">Resource Requirements/Limits</h3>
+<p>For more information on resource requests/limits see the official Kubernetes documentation: <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container">Kubernetes - Managing Compute Resources for Containers</a></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">requests</code>: Requests for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Request for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">limits</code>: Limits for cpu or memory.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cpu</code>: Limit for CPU (example: one CPU core <code class="language-plaintext highlighter-rouge">1</code>, 50% of one CPU core <code class="language-plaintext highlighter-rouge">500m</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">memory</code>: Limit for Memory (example: one gigabyte of memory <code class="language-plaintext highlighter-rouge">1Gi</code>, half a gigabyte of memory <code class="language-plaintext highlighter-rouge">512Mi</code>).</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="samples">Samples</h2>
+<p>Here are several samples for configuring Ceph clusters. Each of the samples must also include the namespace and corresponding access granted for management by the Ceph operator. See the <a href="#common-cluster-resources">common cluster resources</a> below.</p>
+
+<h3 id="storage-configuration-all-devices">Storage configuration: All devices</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">location</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">metadataDevice</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-specific-devices">Storage Configuration: Specific devices</h3>
+<p>Individual nodes and their config can be specified so that only the named nodes below will be used as storage resources.
+Each node’s ‘name’ field should match their ‘kubernetes.io/hostname’ label.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">deviceFilter</span><span class="pi">:</span>
+    <span class="na">location</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">metadataDevice</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.101"</span>
+      <span class="na">directories</span><span class="pi">:</span>         <span class="c1"># specific directories to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/rook/storage-dir"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">devices</span><span class="pi">:</span>             <span class="c1"># specific devices to use for storage can be specified for each node</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdb"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sdc"</span>
+      <span class="na">config</span><span class="pi">:</span>         <span class="c1"># configuration can be specified at the node level which overrides the cluster level config</span>
+        <span class="na">storeType</span><span class="pi">:</span> <span class="s">bluestore</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.301"</span>
+      <span class="na">deviceFilter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">^sd."</span>
+</code></pre></div></div>
+
+<h3 id="storage-configuration-cluster-wide-directories">Storage Configuration: Cluster wide Directories</h3>
+<p>This example is based up on the <a href="#storage-configuration-specific-devices">Storage Configuration: Specific devices</a>.
+Individual nodes can override the cluster wide specified directories list.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># cluster level storage configuration and selection</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">useAllDevices</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">databaseSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span> <span class="c1"># this value can be removed for environments with normal sized disks (100 GB or larger)</span>
+      <span class="na">journalSizeMB</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024"</span>  <span class="c1"># this value can be removed for environments with normal sized disks (20 GB or larger)</span>
+    <span class="na">directories</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/rook/storage-dir"</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.101"</span>
+      <span class="na">directories</span><span class="pi">:</span> <span class="c1"># specific directories to use for storage can be specified for each node</span>
+      <span class="c1"># overrides the above `directories` values for this node</span>
+      <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/rook/my-node-storage-dir"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+</code></pre></div></div>
+
+<h3 id="node-affinity">Node Affinity</h3>
+<p>To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
+The example under ‘all’ would have all services scheduled on kubernetes nodes labeled with ‘role=storage’ and
+tolerate taints with a key of ‘storage-node’.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">network</span><span class="pi">:</span>
+    <span class="na">hostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">dashboard</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">placement</span><span class="pi">:</span>
+    <span class="na">all</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+        <span class="na">requiredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span>
+          <span class="na">nodeSelectorTerms</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">matchExpressions</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">role</span>
+              <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span>
+              <span class="na">values</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">storage-node</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">storage-node</span>
+        <span class="na">operator</span><span class="pi">:</span> <span class="s">Exists</span>
+    <span class="na">mgr</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="na">mon</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="na">osd</span><span class="pi">:</span>
+      <span class="na">nodeAffinity</span><span class="pi">:</span>
+      <span class="na">tolerations</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h3 id="resource-requestslimits">Resource requests/Limits</h3>
+<p>To control how many resources the rook components can request/use, you can set requests and limits in Kubernetes for them.
+You can override these requests/limits for OSDs per node when using <code class="language-plaintext highlighter-rouge">useAllNodes: false</code> in the <code class="language-plaintext highlighter-rouge">node</code> item in the <code class="language-plaintext highlighter-rouge">nodes</code> list.</p>
+
+<p><strong>WARNING</strong> Before setting resource requests/limits, please take a look at the Ceph documentation for recommendations for each component: <a href="http://docs.ceph.com/docs/master/start/hardware-recommendations/">Ceph - Hardware Recommendations</a>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">ceph.rook.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Cluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">dataDirHostPath</span><span class="pi">:</span> <span class="s">/var/lib/rook</span>
+  <span class="na">serviceAccount</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="c1"># cluster level resource requests/limits configuration</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">useAllNodes</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">nodes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.17.4.201"</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4096Mi"</span>
+</code></pre></div></div>
+
+<h2 id="common-cluster-resources">Common Cluster Resources</h2>
+<p>Each Ceph cluster must be created in a namespace and also give access to the Rook operator to manage the cluster in the namespace. Creating the namespace and these controls must be added to each of the examples previously shown.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="nn">---</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1beta1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">configmaps"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">watch"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">create"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">update"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">delete"</span> <span class="pi">]</span>
+<span class="nn">---</span>
+<span class="c1"># Allow the operator to create resources in this cluster's namespace</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1beta1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster-mgmt</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster-mgmt</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-system</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph-system</span>
+<span class="nn">---</span>
+<span class="c1"># Allow the pods in this namespace to work with configmaps</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1beta1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">Role</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">rook-ceph-cluster</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">rook-ceph</span>
+</code></pre></div></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var menu = [];
+  var BASE_PATH = "";
+
+  function add(name, url, isChild, current) {
+    var item = { name: name, url: url, current: current };
+    var container = menu;
+    if (isChild && menu.length > 0) {
+      menu[menu.length-1].children = menu[menu.length-1].children || [];
+      container = menu[menu.length-1].children;
+      if (current) {
+        menu[menu.length-1].childCurrent = true;
+      }
+    }
+    container.push(item);
+  }
+
+  
+    add(
+      "Rook",
+      "/docs/rook/v0.8/",
+      false,
+      false
+    );
+  
+    add(
+      "Quickstart",
+      "/docs/rook/v0.8/quickstart-toc.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v0.8/ceph-quickstart.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Cleanup",
+      "/docs/rook/v0.8/ceph-teardown.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB",
+      "/docs/rook/v0.8/cockroachdb.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store",
+      "/docs/rook/v0.8/minio-object-store.html",
+      true,
+      false
+    );
+  
+    add(
+      "Prerequisites",
+      "/docs/rook/v0.8/k8s-pre-reqs.html",
+      false,
+      false
+    );
+  
+    add(
+      "FlexVolume Configuration",
+      "/docs/rook/v0.8/flexvolume.html",
+      true,
+      false
+    );
+  
+    add(
+      "RBAC Security",
+      "/docs/rook/v0.8/rbac.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tectonic Bare Metal",
+      "/docs/rook/v0.8/tectonic.html",
+      true,
+      false
+    );
+  
+    add(
+      "OpenShift",
+      "/docs/rook/v0.8/openshift.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Storage",
+      "/docs/rook/v0.8/storage.html",
+      false,
+      false
+    );
+  
+    add(
+      "Block Storage",
+      "/docs/rook/v0.8/block.html",
+      true,
+      false
+    );
+  
+    add(
+      "Object Storage",
+      "/docs/rook/v0.8/object.html",
+      true,
+      false
+    );
+  
+    add(
+      "Shared File System",
+      "/docs/rook/v0.8/filesystem.html",
+      true,
+      false
+    );
+  
+    add(
+      "Custom Resources",
+      "/docs/rook/v0.8/crds.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Cluster",
+      "/docs/rook/v0.8/ceph-cluster-crd.html",
+      true,
+      true
+    );
+  
+    add(
+      "Ceph Pool",
+      "/docs/rook/v0.8/ceph-pool-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Object Store",
+      "/docs/rook/v0.8/ceph-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Ceph Shared File System",
+      "/docs/rook/v0.8/ceph-filesystem-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "CockroachDB Cluster",
+      "/docs/rook/v0.8/cockroachdb-cluster-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Minio Object Store CRD",
+      "/docs/rook/v0.8/minio-object-store-crd.html",
+      true,
+      false
+    );
+  
+    add(
+      "Monitoring",
+      "/docs/rook/v0.8/monitoring.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Dashboard",
+      "/docs/rook/v0.8/ceph-dashboard.html",
+      true,
+      false
+    );
+  
+    add(
+      "Helm Charts",
+      "/docs/rook/v0.8/helm.html",
+      false,
+      false
+    );
+  
+    add(
+      "Ceph Operator",
+      "/docs/rook/v0.8/helm-operator.html",
+      true,
+      false
+    );
+  
+    add(
+      "Upgrades",
+      "/docs/rook/v0.8/upgrade.html",
+      false,
+      false
+    );
+  
+    add(
+      "Patch Upgrades",
+      "/docs/rook/v0.8/upgrade-patch.html",
+      true,
+      false
+    );
+  
+    add(
+      "Tools",
+      "/docs/rook/v0.8/tools.html",
+      false,
+      false
+    );
+  
+    add(
+      "Toolbox",
+      "/docs/rook/v0.8/toolbox.html",
+      true,
+      false
+    );
+  
+    add(
+      "Direct Tools",
+      "/docs/rook/v0.8/direct-tools.html",
+      true,
+      false
+    );
+  
+    add(
+      "Advanced Configuration",
+      "/docs/rook/v0.8/advanced-configuration.html",
+      true,
+      false
+    );
+  
+    add(
+      "Common Issues",
+      "/docs/rook/v0.8/common-issues.html",
+      true,
+      false
+    );
+  
+    add(
+      "Container Linux",
+      "/docs/rook/v0.8/container-linux.html",
+      true,
+      false
+    );
+  
+    add(
+      "Disaster Recovery",
+      "/docs/rook/v0.8/disaster-recovery.html",
+      true,
+      false
+    );
+  
+    add(
+      "Contributing",
+      "/docs/rook/v0.8/development-flow.html",
+      false,
+      false
+    );
+  
+    add(
+      "Multi-Node Test Environment",
+      "/docs/rook/v0.8/development-environment.html",
+      true,
+      false
+    );
+  
+
+  function getEntry(item) {
+    var itemDom = document.createElement('li');
+
+    if (item.current) {
+      itemDom.innerHTML = item.name;
+      itemDom.classList.add('current');
+    } else {
+      itemDom.innerHTML = '<a href="' + item.url + '">' + item.name + '</a>';
+    }
+
+    return itemDom;
+  }
+
+  // Flush css changes as explained in: https://stackoverflow.com/a/34726346
+  // and more completely: https://stackoverflow.com/a/6956049
+  function flushCss(element) {
+    element.offsetHeight;
+  }
+
+  function addArrow(itemDom) {
+    var MAIN_ITEM_HEIGHT = 24;
+    var BOTTOM_PADDING = 20;
+    var arrowDom = document.createElement('a');
+    arrowDom.classList.add('arrow');
+    arrowDom.innerHTML = '<img src="' + BASE_PATH + '/images/arrow.svg" />';
+    arrowDom.onclick = function(itemDom) {
+      return function () {
+        // Calculated full height of the opened list
+        var fullHeight = MAIN_ITEM_HEIGHT + BOTTOM_PADDING + itemDom.lastChild.clientHeight + 'px';
+
+        itemDom.classList.toggle('open');
+
+        if (itemDom.classList.contains('open')) {
+          itemDom.style.height = fullHeight;
+        } else {
+          // If the list height is auto we have to set it to fullHeight
+          // without tranistion before we shrink it to collapsed height
+          if (itemDom.style.height === 'auto') {
+            itemDom.style.transition = 'none';
+            itemDom.style.height = fullHeight;
+            flushCss(itemDom);
+            itemDom.style.transition = '';
+          }
+          itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+        }
+
+        return false;
+      };
+    }(itemDom);
+    itemDom.appendChild(arrowDom);
+
+    if ((item.current && item.children) || item.childCurrent) {
+      itemDom.classList.add('open');
+      itemDom.style.height = 'auto';
+    } else {
+      itemDom.style.height = MAIN_ITEM_HEIGHT + 'px';
+    }
+  }
+
+  var menuDom = document.getElementById('docs-ul');
+  for (var i = 0; i < menu.length; i++) {
+    var item = menu[i];
+    var itemDom = getEntry(item);
+
+    if (item.childCurrent) {
+      itemDom.classList.add('childCurrent');
+    }
+
+    if (item.children) {
+      addArrow(itemDom);
+      itemDom.classList.add('children');
+      var children = document.createElement('ul');
+      for (var j = 0; j < item.children.length; j++) {
+        children.appendChild(getEntry(item.children[j]));
+      }
+      itemDom.appendChild(children);
+    }
+    menuDom.appendChild(itemDom);
+  }
+</script>
+</div></main>
+    <footer id="footer" aria-label="Footer">
+  <div class="top">
+    <a href="//www.cncf.io">
+      <img
+        class="cncf"
+        src="/images/cncf.png"
+        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x" />
+    </a>
+    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+  </div>
+  <div class="middle">
+    <div class="grid-center">
+      <div class="col_sm-12">
+        <span>Getting Started</span>
+        <a href="//github.com/rook/rook">GitHub</a>
+        <a href="/docs/rook/v1.9/">Documentation</a>
+        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Community</span>
+        <a href="//slack.rook.io/">Slack</a>
+        <a href="//twitter.com/rook_io">Twitter</a>
+        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//blog.rook.io/">Blog</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Contact</span>
+        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/issues">Feature request</a>
+      </div>
+      <div class="col_sm-12">
+        <span>Top Contributors</span>
+        <a href="//cloudical.io/">Cloudical</a>
+        <a href="//cybozu.com">Cybozu, Inc</a>
+        <a href="//www.redhat.com">Red Hat</a>
+        <a href="//www.suse.com/">SUSE</a>
+        <a href="//upbound.io">Upbound</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="grid-center">
+      <div class="col-8">
+        <a class="logo" href="/">
+          <img src="/images/rook-logo-small.svg" alt="rook.io" />
+        </a>
+        <p>
+          &#169; Rook Authors 2022. Documentation distributed under
+          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+        </p>
+        <p>
+          &#169; 2022 The Linux Foundation. All rights reserved. The Linux Foundation has
+          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
+          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/anchor.js"></script>
+  <script>
+    anchors.options = {
+      placement: 'right',
+      icon: '#',
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      anchors.add('.docs-text h1, .docs-text h2, .docs-text h3, .docs-text h4, .docs-text h5, .docs-text h6');
+    });
+  </script>
+
+
+
+
+    
+  </body>
+</html>
