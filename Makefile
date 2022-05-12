@@ -11,7 +11,7 @@ help:	## Show this help menu.
 	@echo ""
 
 run:	## run jekyll in development mode
-run: _data/projects.json
+run:
 	docker run --rm -it \
 		-p 4000:4000 -p 4001:4001 \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
@@ -20,7 +20,7 @@ run: _data/projects.json
 		jekyll serve --livereload --livereload-port 4001
 
 build:	## build output is in _site
-build: _data/projects.json
+build:
 	docker run --rm -it \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
@@ -28,17 +28,28 @@ build: _data/projects.json
 		jekyll build
 
 bundle_update: ## Update Gemfile.lock (via bundler)
-bundle_update: _data/projects.json
+bundle_update:
 	docker run --rm -it \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
 		jekyll/jekyll -- \
 		bundle update
 
-publish:	## push new changes to the live site
-publish: _data/projects.json
+publish:	## push changed files to the live site through the gh-pages branch
+publish: build
 	$(eval ROOT_DIR = $(shell pwd -P))
-	git -C "$(ROOT_DIR)" add -A
+	git -C "$(ROOT_DIR)" checkout gh-pages
+
+	rsync -rv \
+		--exclude .git/ \
+		--exclude docs/ \
+		--exclude node_modules/ \
+		--exclude vendor/ \
+		_site/ . \
+		--dry-run
+
+	exti 1
+
 	@if git -C "$(ROOT_DIR)" diff-index --cached --quiet HEAD --; then\
 		echo "no changes detected";\
 	else \
@@ -49,12 +60,4 @@ publish: _data/projects.json
 		echo "rook.github.io changes published"; \
 	fi
 
-_data/projects.json:	## generate projects.json
-_data/projects.json: node_modules docs $(wildcard docs/*)
-	node preprocess.js
-	@touch _data/projects.json
-
-node_modules:	## install node_modules
-node_modules: package.json package-lock.json
-	npm ci
-	@touch node_modules
+	git checkout master
