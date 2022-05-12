@@ -6,12 +6,12 @@
 {% assign emailLink = 'mailto:cncf-rook-info@lists.cncf.io' %}
 {% assign featureRequestLink = '//github.com/rook/rook/issues' %}
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
-{% assign gettingStartedLink = '/docs/rook/latest/quickstart.html' %}
+{% assign gettingStartedLink = '/docs/rook/latest/Getting-Started/quickstart/' %}
 {% assign githubLink = '//github.com/rook/rook' %}
-{% assign cassandraDocLink = '/docs/cassandra/latest/' %}
-{% assign nfsDocLink = '/docs/nfs/latest/' %}
-{% assign cephDocLink = '/docs/rook/latest/' %}
-{% assign latestDocs = '/docs/rook/latest/' %}
+{% assign cassandraDocLink = '/docs/cassandra/latest-release/' %}
+{% assign nfsDocLink = '/docs/nfs/latest-release/' %}
+{% assign cephDocLink = '/docs/rook/latest-release/' %}
+{% assign latestDocs = '/docs/rook/latest-release/' %}
 {% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
 {% assign slackLink = '//slack.rook.io/' %}

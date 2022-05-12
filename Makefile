@@ -3,6 +3,8 @@
 # https://pages.github.com/versions/
 JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.8.6
 
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
 .DEFAULT: help
 help:	## Show this help menu.
 	@echo "Usage: make [TARGET ...]"
@@ -26,6 +28,9 @@ build:
 		-v "$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
+	# Copy the "no jekyll build" file so Github pages does not build the gh-pages branch
+	cp .nojekyll _site/
+	cp .gitignore _site/
 
 bundle_update: ## Update Gemfile.lock (via bundler)
 bundle_update:
@@ -40,16 +45,15 @@ publish: build
 	$(eval ROOT_DIR = $(shell pwd -P))
 	git -C "$(ROOT_DIR)" checkout gh-pages
 
-	rsync -rv \
+	rsync -rv --delete \
 		--exclude .git/ \
+		--exclude _site/ \
+		--exclude CNAME \
 		--exclude docs/ \
-		--exclude node_modules/ \
 		--exclude vendor/ \
-		_site/ . \
-		--dry-run
+		_site/ .
 
-	exti 1
-
+	git -C "$(ROOT_DIR)" add -A
 	@if git -C "$(ROOT_DIR)" diff-index --cached --quiet HEAD --; then\
 		echo "no changes detected";\
 	else \
@@ -60,4 +64,4 @@ publish: build
 		echo "rook.github.io changes published"; \
 	fi
 
-	git checkout master
+	git checkout $(CURRENT_BRANCH)

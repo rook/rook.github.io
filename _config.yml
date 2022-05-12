@@ -15,10 +15,12 @@ plugins:
   - jekyll-readme-index
 
 exclude:
+  - build
   - Gemfile
   - Gemfile.lock
+  - Makefile
+  - README.md
   - vendor
-  - build
 
 defaults:
   -

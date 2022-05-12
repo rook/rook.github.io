@@ -11,10 +11,6 @@ If this a docs page, include the docs values and check if the page should be "no
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    {% if currentVersion and latestVersion and currentVersion != latestVersion %}
-    <meta name="robots" content="noindex">
-    {% endif %}
-
     <title>{{ page.doctitle | default: "Rook" | escape }}</title>
 
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
