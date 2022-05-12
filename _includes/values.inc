@@ -15,7 +15,6 @@
 {% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com' %}
 {% assign slackLink = '//slack.rook.io/' %}
-{% assign suseLink = '//www.suse.com/' %}
 {% assign twitterLink = '//twitter.com/rook_io' %}
 {% assign upboundLink = '//upbound.io' %}
 {% assign koorLink = '//koor.tech' %}
