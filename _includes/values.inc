@@ -13,7 +13,7 @@
 {% assign cephDocLink = '/docs/rook/' | append: site.data.projects[2].versions[site.current_ceph_release_index].version | append: '/' | relative_url %}
 {% assign latestDocs = '/docs/rook/' | append: site.data.projects[2].versions[site.current_ceph_release_index].version | append: '/' | relative_url %}
 {% assign cybozuLink = '//cybozu.com' %}
-{% assign redHatLink = '//www.redhat.com' %}
+{% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
 {% assign slackLink = '//slack.rook.io/' %}
 {% assign twitterLink = '//twitter.com/rook_io' %}
 {% assign upboundLink = '//upbound.io' %}
