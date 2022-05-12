@@ -1,6 +1,7 @@
 .PHONY: help run build publish
 
-JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.7
+# https://pages.github.com/versions/
+JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.8.6
 
 .DEFAULT: help
 help:	## Show this help menu.
