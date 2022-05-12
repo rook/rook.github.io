@@ -1,0 +1,7 @@
+/_site
+/vendor
+/node_modules
+/images_bkup
+.bundle
+.jekyll-metadata
+.sass-cache
