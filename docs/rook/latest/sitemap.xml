@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/CRDs/ceph-block-pool-crd/</loc>
+         <lastmod>2022-05-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/CRDs/ceph-client-crd/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
@@ -51,11 +56,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/CRDs/ceph-pool-crd/</loc>
-         <lastmod>2022-05-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/CRDs/ceph-pool-radosnamespace-crd/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
@@ -67,6 +67,11 @@
     </url>
     <url>
          <loc>https://rook.io/latest/Common-Issues/ceph-common-issues/</loc>
+         <lastmod>2022-05-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Common-Issues/ceph-csi-common-issues/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -216,11 +221,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-common-issues/</loc>
-         <lastmod>2022-05-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-drivers/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
@@ -236,7 +236,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Usage-and-Examples/CephFS-Filesystem-Storage/ceph-filesystem/</loc>
+         <loc>https://rook.io/latest/Usage-and-Examples/CephFS-Filesystem-Storage/filesystem-storage/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -256,12 +256,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Usage-and-Examples/Object-Storage/ceph-object/</loc>
+         <loc>https://rook.io/latest/Usage-and-Examples/Object-Storage/object-storage/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Usage-and-Examples/RBD-Block-Storage/ceph-block/</loc>
+         <loc>https://rook.io/latest/Usage-and-Examples/RBD-Block-Storage/block-storage/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
