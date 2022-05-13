@@ -136,17 +136,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Helm-Charts/helm-ceph-cluster/</loc>
-         <lastmod>2022-05-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://rook.io/latest/Helm-Charts/helm-operator/</loc>
+         <loc>https://rook.io/latest/Helm-Charts/ceph-cluster-chart/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://rook.io/latest/Helm-Charts/helm/</loc>
+         <lastmod>2022-05-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Helm-Charts/operator-chart/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -216,17 +216,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-common-issues/</loc>
+         <lastmod>2022-05-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-drivers/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-snapshot/</loc>
-         <lastmod>2022-05-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://rook.io/latest/Usage-and-Examples/Ceph-CSI/ceph-csi-troubleshooting/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
