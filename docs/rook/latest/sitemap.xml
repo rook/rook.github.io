@@ -6,11 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/ceph-configuration/</loc>
-         <lastmod>2022-05-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/CRDs/ceph-client-crd/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
@@ -172,6 +167,11 @@
     </url>
     <url>
          <loc>https://rook.io/latest/Usage-and-Examples/ceph-advanced-configuration/</loc>
+         <lastmod>2022-05-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Usage-and-Examples/ceph-configuration/</loc>
          <lastmod>2022-05-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
