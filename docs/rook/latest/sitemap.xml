@@ -101,6 +101,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Getting-Started/intro/</loc>
+         <lastmod>2022-05-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Getting-Started/quickstart/</loc>
          <lastmod>2022-05-16</lastmod>
          <changefreq>daily</changefreq>
