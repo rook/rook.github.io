@@ -3,6 +3,8 @@
 # https://pages.github.com/versions/
 JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.8.6
 
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
 .DEFAULT: help
 help:	## Show this help menu.
 	@echo "Usage: make [TARGET ...]"
@@ -11,7 +13,7 @@ help:	## Show this help menu.
 	@echo ""
 
 run:	## run jekyll in development mode
-run: _data/projects.json
+run:
 	docker run --rm -it \
 		-p 4000:4000 -p 4001:4001 \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
@@ -20,24 +22,37 @@ run: _data/projects.json
 		jekyll serve --livereload --livereload-port 4001
 
 build:	## build output is in _site
-build: _data/projects.json
+build:
 	docker run --rm -it \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
+	# Copy the "no jekyll build" file so Github pages does not build the gh-pages branch
+	cp .nojekyll _site/
+	cp .gitignore _site/
 
 bundle_update: ## Update Gemfile.lock (via bundler)
-bundle_update: _data/projects.json
+bundle_update:
 	docker run --rm -it \
 		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
 		-v "$(PWD):/srv/jekyll" \
 		jekyll/jekyll -- \
 		bundle update
 
-publish:	## push new changes to the live site
-publish: _data/projects.json
+publish:	## push changed files to the live site through the gh-pages branch
+publish: build
 	$(eval ROOT_DIR = $(shell pwd -P))
+	git -C "$(ROOT_DIR)" checkout gh-pages
+
+	rsync -rv --delete \
+		--exclude .git/ \
+		--exclude _site/ \
+		--exclude CNAME \
+		--exclude docs/ \
+		--exclude vendor/ \
+		_site/ .
+
 	git -C "$(ROOT_DIR)" add -A
 	@if git -C "$(ROOT_DIR)" diff-index --cached --quiet HEAD --; then\
 		echo "no changes detected";\
@@ -49,12 +64,4 @@ publish: _data/projects.json
 		echo "rook.github.io changes published"; \
 	fi
 
-_data/projects.json:	## generate projects.json
-_data/projects.json: node_modules docs $(wildcard docs/*)
-	node preprocess.js
-	@touch _data/projects.json
-
-node_modules:	## install node_modules
-node_modules: package.json package-lock.json
-	npm ci
-	@touch node_modules
+	git checkout $(CURRENT_BRANCH)

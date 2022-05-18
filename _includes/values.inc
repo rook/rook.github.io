@@ -6,12 +6,12 @@
 {% assign emailLink = 'mailto:cncf-rook-info@lists.cncf.io' %}
 {% assign featureRequestLink = '//github.com/rook/rook/issues' %}
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
-{% assign gettingStartedLink = '/docs/rook/' | append: site.data.projects[2].versions[site.current_ceph_release_index].version | append: '/quickstart.html' | relative_url %}
+{% assign gettingStartedLink = '/docs/rook/latest/Getting-Started/quickstart/' %}
 {% assign githubLink = '//github.com/rook/rook' %}
-{% assign cassandraDocLink = '/docs/cassandra/' | append: site.data.projects[0].versions[site.current_cassandra_release_index].version | append: '/' | relative_url %}
-{% assign nfsDocLink = '/docs/nfs/' | append: site.data.projects[1].versions[site.current_nfs_release_index].version | append: '/' | relative_url %}
-{% assign cephDocLink = '/docs/rook/' | append: site.data.projects[2].versions[site.current_ceph_release_index].version | append: '/' | relative_url %}
-{% assign latestDocs = '/docs/rook/' | append: site.data.projects[2].versions[site.current_ceph_release_index].version | append: '/' | relative_url %}
+{% assign cassandraDocLink = '/docs/cassandra/latest-release/' %}
+{% assign nfsDocLink = '/docs/nfs/latest-release/' %}
+{% assign cephDocLink = '/docs/rook/latest-release/' %}
+{% assign latestDocs = '/docs/rook/latest-release/' %}
 {% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
 {% assign slackLink = '//slack.rook.io/' %}
