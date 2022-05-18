@@ -8,8 +8,8 @@
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
 {% assign gettingStartedLink = '/docs/rook/latest/Getting-Started/quickstart/' %}
 {% assign githubLink = '//github.com/rook/rook' %}
-{% assign cassandraDocLink = '/docs/cassandra/latest-release/' %}
-{% assign nfsDocLink = '/docs/nfs/latest-release/' %}
+{% assign cassandraDocLink = '/docs/cassandra/v1.7/' %}
+{% assign nfsDocLink = '/docs/nfs/v1.7/' %}
 {% assign cephDocLink = '/docs/rook/latest-release/' %}
 {% assign latestDocs = '/docs/rook/latest-release/' %}
 {% assign cybozuLink = '//cybozu.com' %}
