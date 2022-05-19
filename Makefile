@@ -48,6 +48,7 @@ publish: build
 	rsync -rv --delete \
 		--exclude .git/ \
 		--exclude _site/ \
+		--exlude assets/ \
 		--exclude CNAME \
 		--exclude docs/ \
 		--exclude vendor/ \
