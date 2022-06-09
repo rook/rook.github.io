@@ -218,7 +218,7 @@ To avoid this dependency, you can create a single full-disk partition on the dis
 
 <p>A simple Rook cluster can be created with the following kubectl commands and <a href="https://github.com/rook/rook/blob/release-1.8/deploy/examples">example manifests</a>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone <span class="nt">--single-branch</span> <span class="nt">--branch</span> v1.8.9 https://github.com/rook/rook.git
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone <span class="nt">--single-branch</span> <span class="nt">--branch</span> v1.8.10 https://github.com/rook/rook.git
 <span class="go">cd rook/deploy/examples
 kubectl create -f crds.yaml -f common.yaml -f operator.yaml
 kubectl create -f cluster.yaml
