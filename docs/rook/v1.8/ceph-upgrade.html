@@ -260,11 +260,11 @@ both Rook operator updates and for Ceph version updates.</li>
 
 <p>Unless otherwise noted due to extenuating requirements, upgrades from one patch release of Rook to
 another are as simple as updating the common resources and the image of the Rook operator. For
-example, when Rook v1.8.9 is released, the process of updating from v1.8.0 is as simple as running
+example, when Rook v1.8.10 is released, the process of updating from v1.8.0 is as simple as running
 the following:</p>
 
 <p>First get the latest common resources manifests that contain the latest changes for Rook v1.8.</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> v1.8.9 https://github.com/rook/rook.git
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> v1.8.10 https://github.com/rook/rook.git
 <span class="nb">cd </span>rook/deploy/examples
 </code></pre></div></div>
 
@@ -274,7 +274,7 @@ section for instructions on how to change the default namespaces in <code class=
 
 <p>Then apply the latest changes from v1.8 and update the Rook Operator image.</p>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl apply -f common.yaml -f crds.yaml
-kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.8.9
+kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.8.10
 </span></code></pre></div></div>
 
 <p>As exemplified above, it is a good practice to update Rook-Ceph common resources from the example
@@ -459,7 +459,7 @@ kubectl <span class="nt">-n</span> <span class="nv">$ROOK_CLUSTER_NAMESPACE</spa
 <h2 id="rook-operator-upgrade-process">Rook Operator Upgrade Process</h2>
 
 <p>In the examples given in this guide, we will be upgrading a live Rook cluster running <code class="language-plaintext highlighter-rouge">v1.7.11</code> to
-the version <code class="language-plaintext highlighter-rouge">v1.8.9</code>. This upgrade should work from any official patch release of Rook v1.7 to any
+the version <code class="language-plaintext highlighter-rouge">v1.8.10</code>. This upgrade should work from any official patch release of Rook v1.7 to any
 official patch release of v1.8.</p>
 
 <p><strong>Rook release from <code class="language-plaintext highlighter-rouge">master</code> are expressly unsupported.</strong> It is strongly recommended that you use
@@ -485,7 +485,7 @@ if applicable.</p>
 by the Operator. Also update the Custom Resource Definitions (CRDs).</p>
 
 <p>Get the latest common resources manifests that contain the latest changes.</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> v1.8.9 https://github.com/rook/rook.git
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> v1.8.10 https://github.com/rook/rook.git
 <span class="nb">cd </span>rook/deploy/examples
 </code></pre></div></div>
 
@@ -541,7 +541,7 @@ details.</p>
 <p>The largest portion of the upgrade is triggered when the operator’s image is updated to <code class="language-plaintext highlighter-rouge">v1.8.x</code>.
 When the operator is updated, it will proceed to update all of the Ceph daemons.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_OPERATOR_NAMESPACE</span> <span class="nb">set </span>image deploy/rook-ceph-operator rook-ceph-operator<span class="o">=</span>rook/ceph:v1.8.9
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_OPERATOR_NAMESPACE</span> <span class="nb">set </span>image deploy/rook-ceph-operator rook-ceph-operator<span class="o">=</span>rook/ceph:v1.8.10
 </code></pre></div></div>
 
 <h4 id="admission-controller">Admission controller</h4>
@@ -574,16 +574,16 @@ and the Ceph Filesystem may fall offline a few times while the MDSes are upgradi
 </code></pre></div></div>
 
 <p>As an example, this cluster is midway through updating the OSDs. When all deployments report <code class="language-plaintext highlighter-rouge">1/1/1</code>
-availability and <code class="language-plaintext highlighter-rouge">rook-version=v1.8.9</code>, the Ceph cluster’s core components are fully updated.</p>
+availability and <code class="language-plaintext highlighter-rouge">rook-version=v1.8.10</code>, the Ceph cluster’s core components are fully updated.</p>
 
 <blockquote>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Every 2.0s: kubectl -n rook-ceph get deployment -o j...
 
-rook-ceph-mgr-a         req/upd/avl: 1/1/1      rook-version=v1.8.9
-rook-ceph-mon-a         req/upd/avl: 1/1/1      rook-version=v1.8.9
-rook-ceph-mon-b         req/upd/avl: 1/1/1      rook-version=v1.8.9
-rook-ceph-mon-c         req/upd/avl: 1/1/1      rook-version=v1.8.9
-rook-ceph-osd-0         req/upd/avl: 1//        rook-version=v1.8.9
+rook-ceph-mgr-a         req/upd/avl: 1/1/1      rook-version=v1.8.10
+rook-ceph-mon-a         req/upd/avl: 1/1/1      rook-version=v1.8.10
+rook-ceph-mon-b         req/upd/avl: 1/1/1      rook-version=v1.8.10
+rook-ceph-mon-c         req/upd/avl: 1/1/1      rook-version=v1.8.10
+rook-ceph-osd-0         req/upd/avl: 1//        rook-version=v1.8.10
 rook-ceph-osd-1         req/upd/avl: 1/1/1      rook-version=v1.7.11
 rook-ceph-osd-2         req/upd/avl: 1/1/1      rook-version=v1.7.11
 </code></pre></div>  </div>
@@ -595,14 +595,14 @@ rook-ceph-osd-2         req/upd/avl: 1/1/1      rook-version=v1.7.11
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>kubectl <span class="nt">-n</span> <span class="nv">$ROOK_CLUSTER_NAMESPACE</span> get deployment <span class="nt">-l</span> <span class="nv">rook_cluster</span><span class="o">=</span><span class="nv">$ROOK_CLUSTER_NAMESPACE</span> <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{"rook-version="}{.metadata.labels.rook-version}{"\n"}{end}'</span> | <span class="nb">sort</span> | <span class="nb">uniq</span>
 <span class="go">This cluster is not yet finished:
   rook-version=v1.7.11
-  rook-version=v1.8.9
+  rook-version=v1.8.10
 This cluster is finished:
-  rook-version=v1.8.9
+  rook-version=v1.8.10
 </span></code></pre></div></div>
 
 <h3 id="5-verify-the-updated-cluster"><strong>5. Verify the updated cluster</strong></h3>
 
-<p>At this point, your Rook operator should be running version <code class="language-plaintext highlighter-rouge">rook/ceph:v1.8.9</code>.</p>
+<p>At this point, your Rook operator should be running version <code class="language-plaintext highlighter-rouge">rook/ceph:v1.8.10</code>.</p>
 
 <p>Verify the Ceph cluster’s health using the <a href="#health-verification">health verification section</a>.</p>
 
