@@ -160,7 +160,11 @@
 <span class=normal><a href=#__codelineno-2-34>34</a></span>
 <span class=normal><a href=#__codelineno-2-35>35</a></span>
 <span class=normal><a href=#__codelineno-2-36>36</a></span>
-<span class=normal><a href=#__codelineno-2-37>37</a></span></pre></div></td><td class=code><div class=highlight><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span><span class=w></span>
+<span class=normal><a href=#__codelineno-2-37>37</a></span>
+<span class=normal><a href=#__codelineno-2-38>38</a></span>
+<span class=normal><a href=#__codelineno-2-39>39</a></span>
+<span class=normal><a href=#__codelineno-2-40>40</a></span>
+<span class=normal><a href=#__codelineno-2-41>41</a></span></pre></div></td><td class=code><div class=highlight><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span><span class=w></span>
 <a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephFilesystem</span><span class=w></span>
 <a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=nt>metadata</span><span class=p>:</span><span class=w></span>
 <a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">myfs</span><span class=w></span>
@@ -183,20 +187,24 @@
 <a id=__codelineno-2-21 name=__codelineno-2-21></a><span class=w>    </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w></span>
 <a id=__codelineno-2-22 name=__codelineno-2-22></a><span class=w>    </span><span class=c1># list of Kubernetes Secrets containing the peer token</span><span class=w></span>
 <a id=__codelineno-2-23 name=__codelineno-2-23></a><span class=w>    </span><span class=c1># for more details see: https://docs.ceph.com/en/latest/dev/cephfs-mirroring/#bootstrap-peers</span><span class=w></span>
-<a id=__codelineno-2-24 name=__codelineno-2-24></a><span class=w>    </span><span class=nt>peers</span><span class=p>:</span><span class=w></span>
-<a id=__codelineno-2-25 name=__codelineno-2-25></a><span class=w>      </span><span class=nt>secretNames</span><span class=p>:</span><span class=w></span>
-<a id=__codelineno-2-26 name=__codelineno-2-26></a><span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">secondary-cluster-peer</span><span class=w></span>
-<a id=__codelineno-2-27 name=__codelineno-2-27></a><span class=w>    </span><span class=c1># specify the schedule(s) on which snapshots should be taken</span><span class=w></span>
-<a id=__codelineno-2-28 name=__codelineno-2-28></a><span class=w>    </span><span class=c1># see the official syntax here https://docs.ceph.com/en/latest/cephfs/snap-schedule/#add-and-remove-schedules</span><span class=w></span>
-<a id=__codelineno-2-29 name=__codelineno-2-29></a><span class=w>    </span><span class=nt>snapshotSchedules</span><span class=p>:</span><span class=w></span>
-<a id=__codelineno-2-30 name=__codelineno-2-30></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class=w></span>
-<a id=__codelineno-2-31 name=__codelineno-2-31></a><span class=w>        </span><span class=nt>interval</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">24h</span><span class=w> </span><span class=c1># daily snapshots</span><span class=w></span>
-<a id=__codelineno-2-32 name=__codelineno-2-32></a><span class=w>        </span><span class=nt>startTime</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">11:55</span><span class=w></span>
-<a id=__codelineno-2-33 name=__codelineno-2-33></a><span class=w>    </span><span class=c1># manage retention policies</span><span class=w></span>
-<a id=__codelineno-2-34 name=__codelineno-2-34></a><span class=w>    </span><span class=c1># see syntax duration here https://docs.ceph.com/en/latest/cephfs/snap-schedule/#add-and-remove-retention-policies</span><span class=w></span>
-<a id=__codelineno-2-35 name=__codelineno-2-35></a><span class=w>    </span><span class=nt>snapshotRetention</span><span class=p>:</span><span class=w></span>
-<a id=__codelineno-2-36 name=__codelineno-2-36></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class=w></span>
-<a id=__codelineno-2-37 name=__codelineno-2-37></a><span class=w>        </span><span class=nt>duration</span><span class=p>:</span><span class=w> </span><span class=s>&quot;h</span><span class=nv> </span><span class=s>24&quot;</span><span class=w></span>
+<a id=__codelineno-2-24 name=__codelineno-2-24></a><span class=w>    </span><span class=c1># Add the secret name if it already exists else specify the empty list here.</span><span class=w></span>
+<a id=__codelineno-2-25 name=__codelineno-2-25></a><span class=w>    </span><span class=nt>peers</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-2-26 name=__codelineno-2-26></a><span class=w>      </span><span class=nt>secretNames</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-2-27 name=__codelineno-2-27></a><span class=w>        </span><span class=c1>#- secondary-cluster-peer</span><span class=w></span>
+<a id=__codelineno-2-28 name=__codelineno-2-28></a><span class=w>    </span><span class=c1># specify the schedule(s) on which snapshots should be taken</span><span class=w></span>
+<a id=__codelineno-2-29 name=__codelineno-2-29></a><span class=w>    </span><span class=c1># see the official syntax here https://docs.ceph.com/en/latest/cephfs/snap-schedule/#add-and-remove-schedules</span><span class=w></span>
+<a id=__codelineno-2-30 name=__codelineno-2-30></a><span class=w>    </span><span class=nt>snapshotSchedules</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-2-31 name=__codelineno-2-31></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class=w></span>
+<a id=__codelineno-2-32 name=__codelineno-2-32></a><span class=w>        </span><span class=nt>interval</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">24h</span><span class=w> </span><span class=c1># daily snapshots</span><span class=w></span>
+<a id=__codelineno-2-33 name=__codelineno-2-33></a><span class=w>        </span><span class=c1># The startTime should be mentioned in the format YYYY-MM-DDTHH:MM:SS</span><span class=w></span>
+<a id=__codelineno-2-34 name=__codelineno-2-34></a><span class=w>        </span><span class=c1># If startTime is not specified, then by default the start time is considered as midnight UTC.</span><span class=w></span>
+<a id=__codelineno-2-35 name=__codelineno-2-35></a><span class=w>        </span><span class=c1># see usage here https://docs.ceph.com/en/latest/cephfs/snap-schedule/#usage</span><span class=w></span>
+<a id=__codelineno-2-36 name=__codelineno-2-36></a><span class=w>        </span><span class=c1># startTime: 2022-07-15T11:55:00</span><span class=w></span>
+<a id=__codelineno-2-37 name=__codelineno-2-37></a><span class=w>    </span><span class=c1># manage retention policies</span><span class=w></span>
+<a id=__codelineno-2-38 name=__codelineno-2-38></a><span class=w>    </span><span class=c1># see syntax duration here https://docs.ceph.com/en/latest/cephfs/snap-schedule/#add-and-remove-retention-policies</span><span class=w></span>
+<a id=__codelineno-2-39 name=__codelineno-2-39></a><span class=w>    </span><span class=nt>snapshotRetention</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-2-40 name=__codelineno-2-40></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">/</span><span class=w></span>
+<a id=__codelineno-2-41 name=__codelineno-2-41></a><span class=w>        </span><span class=nt>duration</span><span class=p>:</span><span class=w> </span><span class=s>&quot;h</span><span class=nv> </span><span class=s>24&quot;</span><span class=w></span>
 </code></pre></div> </td></tr></table> <p>Once mirroring is enabled, Rook will by default create its own <a href=https://docs.ceph.com/en/latest/dev/cephfs-mirroring/?#bootstrap-peers>bootstrap peer token</a> so that it can be used by another cluster. The bootstrap peer token can be found in a Kubernetes Secret. The name of the Secret is present in the Status field of the CephFilesystem CR:</p> <table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
 <span class=normal><a href=#__codelineno-3-2>2</a></span>
 <span class=normal><a href=#__codelineno-3-3>3</a></span></pre></div></td><td class=code><div class=highlight><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=nt>status</span><span class=p>:</span><span class=w></span>
