@@ -251,6 +251,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-mirroring/</loc>
+         <lastmod>2022-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/</loc>
          <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
