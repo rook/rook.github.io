@@ -236,6 +236,26 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-advanced/</loc>
+         <lastmod>2022-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-csi-driver/</loc>
+         <lastmod>2022-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-security/</loc>
+         <lastmod>2022-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs/</loc>
+         <lastmod>2022-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/</loc>
          <lastmod>2022-08-11</lastmod>
          <changefreq>daily</changefreq>
