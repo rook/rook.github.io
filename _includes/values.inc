@@ -3,10 +3,10 @@
 {% assign cncfLink = '//www.cncf.io' %}
 {% assign communityMeetingLink = '//github.com/rook/rook#community-meeting' %}
 {% assign contributeLink = '//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute' %}
-{% assign emailLink = 'mailto:cncf-rook-info@lists.cncf.io' %}
+{% assign discussionLink = '//github.com/rook/rook/discussions' %}
 {% assign featureRequestLink = '//github.com/rook/rook/issues' %}
 {% assign forumLink = '//groups.google.com/forum/#!forum/rook-dev' %}
-{% assign gettingStartedLink = '/docs/rook/latest/Getting-Started/quickstart/' %}
+{% assign gettingStartedLink = '/docs/rook/latest-release/Getting-Started/quickstart/' %}
 {% assign githubLink = '//github.com/rook/rook' %}
 {% assign cassandraDocLink = '/docs/cassandra/v1.7/' %}
 {% assign nfsDocLink = '/docs/nfs/v1.7/' %}
