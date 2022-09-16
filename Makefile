@@ -14,29 +14,32 @@ help:	## Show this help menu.
 
 run:	## run jekyll in development mode
 run:
-	docker run --rm -it \
+	docker run --rm -i \
 		-p 4000:4000 -p 4001:4001 \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll serve --livereload --livereload-port 4001
 
 build:	## build output is in _site
 build:
-	docker run --rm -it \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+	mkdir -p _site/
+	docker run --rm -i \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
+	# Correct permissions when running in CI
+	if test "$$CI" = "true"; then sudo chown -R "$(shell id -u):$(shell id -g)" _site/; fi
 	# Copy the "no jekyll build" file so Github pages does not build the gh-pages branch
 	cp .nojekyll _site/
 	cp .gitignore _site/
 
 bundle_update: ## Update Gemfile.lock (via bundler)
 bundle_update:
-	docker run --rm -it \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+	docker run --rm -i \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		jekyll/jekyll -- \
 		bundle update
 
@@ -48,7 +51,7 @@ publish: build
 	rsync -rv --delete \
 		--exclude .git/ \
 		--exclude _site/ \
-		--exlude assets/ \
+		--exclude assets/ \
 		--exclude CNAME \
 		--exclude docs/ \
 		--exclude vendor/ \
@@ -56,10 +59,10 @@ publish: build
 
 	git -C "$(ROOT_DIR)" add -A
 	@if git -C "$(ROOT_DIR)" diff-index --cached --quiet HEAD --; then\
-		echo "no changes detected";\
+		echo "no changes detected"; \
 	else \
-		echo "committing changes...";\
-		git -C "$(ROOT_DIR)" -c user.email="cncf-rook-info@lists.cncf.io" -c user.name="Rook" commit --message="docs snapshot for rook version \`$(DOCS_VERSION)\`"; \
+		echo "committing changes..."; \
+		git -C "$(ROOT_DIR)" -c user.email="cncf-rook-info@lists.cncf.io" -c user.name="Rook" commit --message="website changes $(shell date +"%Y-%m-%d %H:%M:%S")"; \
 		echo "pushing changes..."; \
 		git -C "$(ROOT_DIR)" push; \
 		echo "rook.github.io changes published"; \
