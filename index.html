@@ -78,7 +78,7 @@
         </div>
       </li>
       <li><a href="//blog.rook.io/">Blog</a></li>
-      <li><a class="button small" href="/docs/rook/latest/Getting-Started/quickstart/">Get Started</a></li>
+      <li><a class="button small" href="/docs/rook/latest-release/Getting-Started/quickstart/">Get Started</a></li>
     </ul>
   </div>
 </nav>
@@ -110,7 +110,7 @@
         <div class="col-5_md-12">
             <h1>Open-Source,<br />Cloud-Native Storage for Kubernetes</h1>
             <p>Production ready management for File, Block and Object Storage</p>
-            <a class="button" href="/docs/rook/latest/Getting-Started/quickstart/">Try it out now</a>
+            <a class="button" href="/docs/rook/latest-release/Getting-Started/quickstart/">Try it out now</a>
         </div>
         <div class="col-7_md-12_md-first">
             <img src="/images/index-hero.svg" />
@@ -123,7 +123,7 @@
         </div>
         <div class="col-6_md-12">
             <h2>Storage Operators for Kubernetes</h2>
-            <p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.<br /><br />Rook uses the power of the Kubernetes platform to deliver its services via a Kubernetes Operator for each storage provider.</p>
+            <p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.<br /><br />Rook uses the power of the Kubernetes platform to deliver its services via a Kubernetes Operator for Ceph.</p>
             <div class="github-pills">
                 <div id="watch-pill" class="pill">
                     <a href="https://github.com/rook/rook/subscription">Watch</a>
@@ -142,11 +142,10 @@
     </section>
     <section class="grid-middle storage">
         <div class="col-6_md-12">
-            <h2>Multiple Storage Providers</h2>
-            <p>Rook orchestrates multiple storage solutions, each with a specialized Kubernetes Operator to automate management. Choose the best storage provider for your scenarios, and Rook ensures that they all run well on Kubernetes with the same, consistent experience.</p>
+            <h2>Ceph Storage Provider</h2>
+            <p>Rook orchestrates the Ceph storage solution, with a specialized Kubernetes Operator to automate management. Rook ensures that Ceph will run well on Kubernetes and simplify the deployment and management experience.</p>
             <div class="grid providers">
                 <div class="col-4_xs-6"><span>Ceph</span></div>
-                <div class="col-4_xs-6"><span>NFS</span></div>
             </div>
         </div>
         <div class="col-6_md-12">
@@ -160,14 +159,13 @@
                 <div class="terminal-buttons">
                     <div class="grid">
                         <div class="col-4_xs-6"><button class="active" type="button" onclick="terminalTypeClick(this, 'Ceph')" data-terminal-rows="16" data-terminal-src="/data/ceph.cast">Ceph</button></div>
-                        <div class="col-4_xs-6"><button type="button" onclick="terminalTypeClick(this, 'NFS')" data-terminal-rows="13" data-terminal-src="/data/nfs.cast">NFS</button></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <h1 class="text-center">Who loves Rook?</h1>
-    <p class="text-center">With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />Rook operators are deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+    <p class="text-center">With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />The Rook operator is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
     <section class="grid-middle affiliates">
         <div class="col-2_xs-4">
             <a href="//pacificresearchplatform.org/">
@@ -221,7 +219,7 @@
     <section class="grid-bottom features">
         <div class="col-3_xs-6">
             <img class="automate" src="/images/features/automate.svg" />
-            <span>Simple and reliable automated resource management</span>
+            <span>Simple and reliable automated storage management</span>
         </div>
         <div class="col-3_xs-6">
             <img class="scale" src="/images/features/scale.svg" />
@@ -233,11 +231,11 @@
         </div>
         <div class="col-3_xs-6">
             <img class="provision" src="/images/features/provision.svg" />
-            <span>Provision, file, block, and object with multiple storage providers</span>
+            <span>Provision, file, block, and object storage</span>
         </div>
         <div class="col-3_xs-6">
             <img class="manage" src="/images/features/manage.svg" />
-            <span>Manage open-source storage technologies</span>
+            <span>Manage open-source Ceph storage</span>
         </div>
         <div class="col-3_xs-6">
             <img class="elasticstorage" src="/images/features/elasticstorage.svg" />
@@ -322,7 +320,7 @@
       </div>
       <div class="col_sm-12">
         <span>Contact</span>
-        <a href="mailto:cncf-rook-info@lists.cncf.io">Email</a>
+        <a href="//github.com/rook/rook/discussions">Discussion</a>
         <a href="//github.com/rook/rook/issues">Feature request</a>
       </div>
       <div class="col_sm-12">
