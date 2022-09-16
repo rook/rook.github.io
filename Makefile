@@ -14,29 +14,32 @@ help:	## Show this help menu.
 
 run:	## run jekyll in development mode
 run:
-	docker run --rm -it \
+	docker run --rm -i \
 		-p 4000:4000 -p 4001:4001 \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll serve --livereload --livereload-port 4001
 
 build:	## build output is in _site
 build:
-	docker run --rm -it \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+	mkdir -p _site/
+	docker run --rm -i \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		$(JEKYLL_DOCKER_IMAGE) -- \
 		jekyll build
+	# Correct permissions when running in CI
+	if test "$$CI" = "true"; then sudo chown -R "$(shell id -u):$(shell id -g)" _site/; fi
 	# Copy the "no jekyll build" file so Github pages does not build the gh-pages branch
 	cp .nojekyll _site/
 	cp .gitignore _site/
 
 bundle_update: ## Update Gemfile.lock (via bundler)
 bundle_update:
-	docker run --rm -it \
-		-v="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		-v "$(PWD):/srv/jekyll" \
+	docker run --rm -i \
+		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
+		--volume="$(PWD):/srv/jekyll" \
 		jekyll/jekyll -- \
 		bundle update
 

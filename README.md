@@ -4,7 +4,7 @@ This is the GitHub Pages repository that currently powers rook.io using the Jeky
 
 # Contributing
 
-If you would like to contribute to Rook's documentation, please open a PR on the main [rook repository](https://github.com/rook/rook/tree/master/Documentation). Any changes will automatically be mirrored here to be hosted.
+If you would like to contribute to Rook's documentation, please open a PR on the main [Rook repository](https://github.com/rook/rook/tree/master/Documentation). Any changes will automatically be mirrored here to be hosted.
 
 You may preview any changes locally by following the [test](#test) section below.
 
@@ -23,7 +23,7 @@ with all required dependencies and then run the script to preprocess the project
 
 # Publish
 
-Simply commit your changes, do a git push and then to get the changes to the `gh-pages` branch, run  `make publish`.
+Simply open a PR and have it merged by a maintainer. The CI will do the rest that is needed to build the changes and push to the `gh-pages` branch.
 
 # Test
 
