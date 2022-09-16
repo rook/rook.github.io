@@ -48,7 +48,7 @@ publish: build
 	rsync -rv --delete \
 		--exclude .git/ \
 		--exclude _site/ \
-		--exlude assets/ \
+		--exclude assets/ \
 		--exclude CNAME \
 		--exclude docs/ \
 		--exclude vendor/ \
@@ -56,10 +56,10 @@ publish: build
 
 	git -C "$(ROOT_DIR)" add -A
 	@if git -C "$(ROOT_DIR)" diff-index --cached --quiet HEAD --; then\
-		echo "no changes detected";\
+		echo "no changes detected"; \
 	else \
-		echo "committing changes...";\
-		git -C "$(ROOT_DIR)" -c user.email="cncf-rook-info@lists.cncf.io" -c user.name="Rook" commit --message="docs snapshot for rook version \`$(DOCS_VERSION)\`"; \
+		echo "committing changes..."; \
+		git -C "$(ROOT_DIR)" -c user.email="cncf-rook-info@lists.cncf.io" -c user.name="Rook" commit --message="website changes $(shell date +"%Y-%m-%d %H:%M:%S")"; \
 		echo "pushing changes..."; \
 		git -C "$(ROOT_DIR)" push; \
 		echo "rook.github.io changes published"; \

@@ -23,8 +23,7 @@ with all required dependencies and then run the script to preprocess the project
 
 # Publish
 
-Simply commit your changes and do a git push.  There is also `make publish` which integrates with the rook `Makefile`
-nicely, and is meant to be run in conjunction with Jenkins CI -- and expects environment variable `DOCS_VERSION`.
+Simply commit your changes, do a git push and then to get the changes to the `gh-pages` branch, run  `make publish`.
 
 # Test
 
