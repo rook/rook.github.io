@@ -131,6 +131,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Getting-Started/release-cycle/</loc>
+         <lastmod>2022-10-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Getting-Started/storage-architecture/</loc>
          <lastmod>2022-10-11</lastmod>
          <changefreq>daily</changefreq>
