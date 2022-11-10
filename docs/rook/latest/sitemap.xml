@@ -51,7 +51,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-multisite-crd/</loc>
+         <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-realm-crd/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -62,6 +62,16 @@
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-store-user-crd/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-zone-crd/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-zonegroup-crd/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
