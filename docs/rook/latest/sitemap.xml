@@ -111,11 +111,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Contributing/storage-providers/</loc>
-         <lastmod>2022-11-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/Getting-Started/ceph-openshift/</loc>
          <lastmod>2022-11-14</lastmod>
          <changefreq>daily</changefreq>
