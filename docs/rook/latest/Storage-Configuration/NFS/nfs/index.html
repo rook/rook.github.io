@@ -7,7 +7,7 @@
 </code></pre></div></td></tr></table></div> <p>The below command will list the current NFS exports for the example CephNFS cluster, which will give the output shown for the current example.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
 <span class=normal><a href=#__codelineno-2-2>2</a></span>
 <span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=gp>$ </span>ceph nfs <span class=nb>export</span> ls my-nfs
+<span class=normal><a href=#__codelineno-2-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=gp>$ </span>ceph<span class=w> </span>nfs<span class=w> </span><span class=nb>export</span><span class=w> </span>ls<span class=w> </span>my-nfs
 <a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=go>[</span>
 <a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=go>  &quot;/test&quot;</span>
 <a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=go>]</span>
@@ -32,7 +32,7 @@
 <span class=normal><a href=#__codelineno-3-19>19</a></span>
 <span class=normal><a href=#__codelineno-3-20>20</a></span>
 <span class=normal><a href=#__codelineno-3-21>21</a></span>
-<span class=normal><a href=#__codelineno-3-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=gp>$ </span>ceph nfs <span class=nb>export</span> info my-nfs /test
+<span class=normal><a href=#__codelineno-3-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=gp>$ </span>ceph<span class=w> </span>nfs<span class=w> </span><span class=nb>export</span><span class=w> </span>info<span class=w> </span>my-nfs<span class=w> </span>/test
 <a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=go>{</span>
 <a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=go>  &quot;export_id&quot;: 1,</span>
 <a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=go>  &quot;path&quot;: &quot;/&quot;,</span>
