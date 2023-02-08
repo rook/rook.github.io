@@ -126,6 +126,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Getting-Started/glossary/</loc>
+         <lastmod>2023-02-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Getting-Started/intro/</loc>
          <lastmod>2023-02-08</lastmod>
          <changefreq>daily</changefreq>
