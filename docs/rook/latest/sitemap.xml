@@ -156,11 +156,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Getting-Started/Prerequisites/pod-security-policies/</loc>
-         <lastmod>2023-02-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/Getting-Started/Prerequisites/prerequisites/</loc>
          <lastmod>2023-02-14</lastmod>
          <changefreq>daily</changefreq>
