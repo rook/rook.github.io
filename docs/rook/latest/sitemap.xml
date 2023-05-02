@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/CRDs/specification/</loc>
+         <lastmod>2023-05-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/CRDs/Block-Storage/ceph-block-pool-crd/</loc>
          <lastmod>2023-05-02</lastmod>
          <changefreq>daily</changefreq>
