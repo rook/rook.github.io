@@ -23,40 +23,20 @@ exclude:
   - vendor
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: default
       title: "Rook"
-  -
-    scope:
+  - scope:
       path: "docs/rook"
     values:
       layout: "docs"
-      doctitle: "Ceph Docs"
+      doctitle: "Rook Docs"
       github: "https://github.com/rook/rook/blob/master/Documentation/"
-      stylesheet: "docs"
-  -
-    scope:
-      path: "docs/cassandra"
-    values:
-      layout: "docs"
-      doctitle: "Cassandra Docs"
-      github: "https://github.com/rook/cassandra/blob/master/Documentation/"
-      stylesheet: "docs"
-  -
-    scope:
-      path: "docs/nfs"
-    values:
-      layout: "docs"
-      doctitle: "NFS Docs"
-      github: "https://github.com/rook/nfs/blob/master/Documentation/"
       stylesheet: "docs"
 
 sass:
   sass_dir: ./_scss
 
-current_ceph_release_index: 0
-current_cassandra_release_index: 0
-current_nfs_release_index: 0
+current_release_index: 0

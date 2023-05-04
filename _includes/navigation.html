@@ -3,19 +3,13 @@
     <div class="logo">
       <a href="{{ "/" | relative_url }}"><img src="{{ "/images/rook-logo.svg" | relative_url }}"/></a>
     </div>
-    <div
+    <div 
       class="hamburger-controls"
       onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
       <span></span> <span></span> <span></span>
     </div>
     <ul class="links">
-      <li class="dropdown">
-        <a role="button" href="javascript:void(0)">Documentation</a>
-        <div class="dropdown-content">
-          <a href="{{ cephDocLink }}">Ceph</a>
-          <a href="{{ cassandraDocLink }}">Cassandra</a>
-          <a href="{{ nfsDocLink }}">NFS</a>
-        </div>
+      <li><a href="{{ latestDocs }}">Documentation</a></li>
       <li class="dropdown">
         <a role="button" href="javascript:void(0)">Community</a>
         <div class="dropdown-content">
