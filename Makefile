@@ -1,7 +1,7 @@
 .PHONY: help run build publish
 
 # https://pages.github.com/versions/
-JEKYLL_DOCKER_IMAGE ?= jekyll/jekyll:3.8.6
+JEKYLL_DOCKER_IMAGE ?= docker.io/jekyll/jekyll:4.2.2
 
 CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
