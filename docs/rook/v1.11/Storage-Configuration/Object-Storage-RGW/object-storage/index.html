@@ -52,8 +52,7 @@
 <span class=normal><a href=#__codelineno-5-7> 7</a></span>
 <span class=normal><a href=#__codelineno-5-8> 8</a></span>
 <span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-5-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectStore</span>
 <a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-5-4 name=__codelineno-5-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">external-store</span>
@@ -63,7 +62,6 @@
 <a id=__codelineno-5-8 name=__codelineno-5-8></a><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 <a id=__codelineno-5-9 name=__codelineno-5-9></a><span class=w>    </span><span class=nt>externalRgwEndpoints</span><span class=p>:</span>
 <a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>ip</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">192.168.39.182</span>
-<a id=__codelineno-5-11 name=__codelineno-5-11></a><span class=w>        </span><span class=c1># hostname: example.com</span>
 </code></pre></div></td></tr></table></div> <p>Use the existing <code>object-external.yaml</code> file. Even though multiple endpoints can be specified, it is recommend to use only one endpoint. This endpoint is randomly added to <code>configmap</code> of OBC and secret of the <code>cephobjectstoreuser</code>. Rook never guarantees the randomly picked endpoint is a working one or not. If there are multiple endpoints, please add load balancer in front of them and use the load balancer endpoint in the <code>externalRgwEndpoints</code> list.</p> <p>When ready, the message in the <code>cephobjectstore</code> status similar to this one:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
 <span class=normal><a href=#__codelineno-6-2>2</a></span>
 <span class=normal><a href=#__codelineno-6-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=go>kubectl -n rook-ceph get cephobjectstore external-store</span>
