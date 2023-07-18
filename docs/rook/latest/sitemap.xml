@@ -291,6 +291,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/cosi/</loc>
+         <lastmod>2023-07-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/object-storage/</loc>
          <lastmod>2023-07-18</lastmod>
          <changefreq>daily</changefreq>
