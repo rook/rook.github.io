@@ -131,17 +131,19 @@
 <a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=go>export PORT=80</span>
 <a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=go>export AWS_ACCESS_KEY_ID=XEZDB3UJ6X7HVBE7X7MA</span>
 <a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=go>export AWS_SECRET_ACCESS_KEY=7yGIZON7EhFORz0I40BFniML36D2rl8CQQ5kXU6l</span>
-</code></pre></div></td></tr></table></div> <p>The access key and secret key can be retrieved as described in the section above on <a href=#client-connections>client connections</a> or below in the section <a href=#create-a-user>creating a user</a> if you are not creating the buckets with an <code>ObjectBucketClaim</code>.</p> <h3 id=configure-s5cmd>Configure s5cmd<a class=headerlink href=#configure-s5cmd title="Permanent link">&para;</a></h3> <p>To test the <code>CephObjectStore</code>, set the object store credentials in the toolbox pod for the <code>s5cmd</code> tool.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span>
+</code></pre></div></td></tr></table></div> <p>The access key and secret key can be retrieved as described in the section above on <a href=#client-connections>client connections</a> or below in the section <a href=#create-a-user>creating a user</a> if you are not creating the buckets with an <code>ObjectBucketClaim</code>.</p> <h3 id=configure-s5cmd>Configure s5cmd<a class=headerlink href=#configure-s5cmd title="Permanent link">&para;</a></h3> <p>To test the <code>CephObjectStore</code>, set the object store credentials in the toolbox pod that contains the <code>s5cmd</code> tool.</p> <div class="admonition important"> <p class=admonition-title>Important</p> <p>The default toolbox.yaml does not contain the s5cmd. The toolbox must be started with the rook operator image (toolbox-operator-image), which does contain s5cmd.</p> </div> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span>
 <span class=normal><a href=#__codelineno-15-2>2</a></span>
 <span class=normal><a href=#__codelineno-15-3>3</a></span>
 <span class=normal><a href=#__codelineno-15-4>4</a></span>
 <span class=normal><a href=#__codelineno-15-5>5</a></span>
-<span class=normal><a href=#__codelineno-15-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=go>mkdir ~/.aws</span>
-<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=go>cat &gt; ~/.aws/credentials &lt;&lt; EOF</span>
-<a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=go>[default]</span>
-<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=go>aws_access_key_id = ${AWS_ACCESS_KEY_ID}</span>
-<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=go>aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}</span>
-<a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=go>EOF</span>
+<span class=normal><a href=#__codelineno-15-6>6</a></span>
+<span class=normal><a href=#__codelineno-15-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=go>kubectl create -f deploy/examples/toolbox-operator-image.yaml</span>
+<a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=go>mkdir ~/.aws</span>
+<a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=go>cat &gt; ~/.aws/credentials &lt;&lt; EOF</span>
+<a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=go>[default]</span>
+<a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=go>aws_access_key_id = ${AWS_ACCESS_KEY_ID}</span>
+<a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=go>aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}</span>
+<a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=go>EOF</span>
 </code></pre></div></td></tr></table></div> <h3 id=put-or-get-an-object>PUT or GET an object<a class=headerlink href=#put-or-get-an-object title="Permanent link">&para;</a></h3> <p>Upload a file to the newly created bucket</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
 <span class=normal><a href=#__codelineno-16-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=go>echo &quot;Hello Rook&quot; &gt; /tmp/rookObj</span>
 <a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=go>s5cmd --endpoint-url http://$AWS_HOST:$PORT cp /tmp/rookObj s3://$BUCKET_NAME</span>
