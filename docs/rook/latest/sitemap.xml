@@ -116,6 +116,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Contributing/rook-test-framework/</loc>
+         <lastmod>2023-08-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Getting-Started/ceph-openshift/</loc>
          <lastmod>2023-08-17</lastmod>
          <changefreq>daily</changefreq>
