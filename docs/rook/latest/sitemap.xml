@@ -346,7 +346,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rook.io/latest/Troubleshooting/krew-plugin/</loc>
+         <loc>https://rook.io/latest/Troubleshooting/kubectl-plugin/</loc>
          <lastmod>2023-09-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
