@@ -42,7 +42,7 @@
 <a id=__codelineno-5-11 name=__codelineno-5-11></a>
 <a id=__codelineno-5-12 name=__codelineno-5-12></a><span class=gp># </span>Inform<span class=w> </span>the<span class=w> </span>OS<span class=w> </span>of<span class=w> </span>partition<span class=w> </span>table<span class=w> </span>changes
 <a id=__codelineno-5-13 name=__codelineno-5-13></a><span class=go>partprobe $DISK</span>
-</code></pre></div></td></tr></table></div> <p>Ceph can leave LVM and device mapper data that can lock the disks, preventing the disks from being used again. These steps can help to free up old Ceph disks for re-use. Note that this only needs to be run once on each node. If you have <strong>only one</strong> Rook cluster and <strong>all</strong> Ceph disks are being wiped, run the following command.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
+</code></pre></div></td></tr></table></div> <p>Ceph can leave LVM and device mapper data that can lock the disks, preventing the disks from being used again. These steps can help to free up old Ceph disks for reuse. Note that this only needs to be run once on each node. If you have <strong>only one</strong> Rook cluster and <strong>all</strong> Ceph disks are being wiped, run the following command.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
 <span class=normal><a href=#__codelineno-6-2>2</a></span>
 <span class=normal><a href=#__codelineno-6-3>3</a></span>
 <span class=normal><a href=#__codelineno-6-4>4</a></span>
