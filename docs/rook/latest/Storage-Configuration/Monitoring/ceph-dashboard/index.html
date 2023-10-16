@@ -49,7 +49,8 @@
 <span class=normal><a href=#__codelineno-7-16>16</a></span>
 <span class=normal><a href=#__codelineno-7-17>17</a></span>
 <span class=normal><a href=#__codelineno-7-18>18</a></span>
-<span class=normal><a href=#__codelineno-7-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class=normal><a href=#__codelineno-7-19>19</a></span>
+<span class=normal><a href=#__codelineno-7-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph-mgr-dashboard-external-https</span>
@@ -66,8 +67,9 @@
 <a id=__codelineno-7-15 name=__codelineno-7-15></a><span class=w>  </span><span class=nt>selector</span><span class=p>:</span>
 <a id=__codelineno-7-16 name=__codelineno-7-16></a><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph-mgr</span>
 <a id=__codelineno-7-17 name=__codelineno-7-17></a><span class=w>    </span><span class=nt>rook_cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
-<a id=__codelineno-7-18 name=__codelineno-7-18></a><span class=w>  </span><span class=nt>sessionAffinity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
-<a id=__codelineno-7-19 name=__codelineno-7-19></a><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">NodePort</span>
+<a id=__codelineno-7-18 name=__codelineno-7-18></a><span class=w>    </span><span class=nt>mgr_role</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">active</span>
+<a id=__codelineno-7-19 name=__codelineno-7-19></a><span class=w>  </span><span class=nt>sessionAffinity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">None</span>
+<a id=__codelineno-7-20 name=__codelineno-7-20></a><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">NodePort</span>
 </code></pre></div></td></tr></table></div> <p>Now create the service:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=go>kubectl create -f dashboard-external-https.yaml</span>
 </code></pre></div></td></tr></table></div> <p>You will see the new service <code>rook-ceph-mgr-dashboard-external-https</code> created:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span>
 <span class=normal><a href=#__codelineno-9-2>2</a></span>
