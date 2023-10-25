@@ -30,11 +30,25 @@
 <a id=__codelineno-1-14 name=__codelineno-1-14></a>
 <a id=__codelineno-1-15 name=__codelineno-1-15></a><span class=gp># </span>You<span class=w> </span>need<span class=w> </span>to<span class=w> </span>use<span class=w> </span><span class=sb>`</span>apply<span class=sb>`</span><span class=w> </span><span class=k>for</span><span class=w> </span>all<span class=w> </span>Ceph<span class=w> </span>clusters<span class=w> </span>after<span class=w> </span>the<span class=w> </span>first<span class=w> </span><span class=k>if</span><span class=w> </span>you<span class=w> </span>have<span class=w> </span>only<span class=w> </span>one<span class=w> </span>Operator
 <a id=__codelineno-1-16 name=__codelineno-1-16></a><span class=go>kubectl apply -f common.yaml -f operator.yaml -f cluster.yaml # add other files as desired for yourconfig</span>
-</code></pre></div></td></tr></table></div> <h2 id=deploying-a-second-cluster>Deploying a second cluster<a class=headerlink href=#deploying-a-second-cluster title="Permanent link">&para;</a></h2> <p>If you wish to create a new CephCluster in a different namespace than <code>rook-ceph</code> while using a single operator to manage both clusters execute the following:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=go>cd deploy/examples</span>
-<a id=__codelineno-2-2 name=__codelineno-2-2></a>
-<a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=go>NAMESPACE=rook-ceph-secondary envsubst &lt; common-second-cluster.yaml | kubectl create -f -</span>
+</code></pre></div></td></tr></table></div> <h2 id=deploying-a-second-cluster>Deploying a second cluster<a class=headerlink href=#deploying-a-second-cluster title="Permanent link">&para;</a></h2> <p>If you wish to create a new CephCluster in a separate namespace, you can easily do so by modifying the <code>ROOK_OPERATOR_NAMESPACE</code> and <code>SECOND_ROOK_CLUSTER_NAMESPACE</code> values in the below instructions. The default configuration in <code>common-second-cluster.yaml</code> is already set up to utilize <code>rook-ceph</code> for the operator and <code>rook-ceph-secondary</code> for the cluster. There's no need to run the <code>sed</code> command if you prefer to use these default values.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
+<span class=normal><a href=#__codelineno-2-2> 2</a></span>
+<span class=normal><a href=#__codelineno-2-3> 3</a></span>
+<span class=normal><a href=#__codelineno-2-4> 4</a></span>
+<span class=normal><a href=#__codelineno-2-5> 5</a></span>
+<span class=normal><a href=#__codelineno-2-6> 6</a></span>
+<span class=normal><a href=#__codelineno-2-7> 7</a></span>
+<span class=normal><a href=#__codelineno-2-8> 8</a></span>
+<span class=normal><a href=#__codelineno-2-9> 9</a></span>
+<span class=normal><a href=#__codelineno-2-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=go>cd deploy/examples</span>
+<a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=go>export ROOK_OPERATOR_NAMESPACE=&quot;rook-ceph&quot;</span>
+<a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=go>export SECOND_ROOK_CLUSTER_NAMESPACE=&quot;rook-ceph-secondary&quot;</span>
+<a id=__codelineno-2-4 name=__codelineno-2-4></a>
+<a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=go>sed -i.bak \</span>
+<a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:operator/\1: $ROOK_OPERATOR_NAMESPACE # namespace:operator/g&quot; \</span>
+<a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:cluster/\1: $SECOND_ROOK_CLUSTER_NAMESPACE # namespace:cluster/g&quot; \</span>
+<a id=__codelineno-2-8 name=__codelineno-2-8></a><span class=go>  common-second-cluster.yaml</span>
+<a id=__codelineno-2-9 name=__codelineno-2-9></a>
+<a id=__codelineno-2-10 name=__codelineno-2-10></a><span class=go>kubectl create -f common-second-cluster.yaml</span>
 </code></pre></div></td></tr></table></div> <p>This will create all the necessary RBACs as well as the new namespace. The script assumes that <code>common.yaml</code> was already created. When you create the second CephCluster CR, use the same <code>NAMESPACE</code> and the operator will configure the second cluster.</p> <h2 id=log-collection>Log Collection<a class=headerlink href=#log-collection title="Permanent link">&para;</a></h2> <p>All Rook logs can be collected in a Kubernetes environment with the following command:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
 <span class=normal><a href=#__codelineno-3-2>2</a></span>
 <span class=normal><a href=#__codelineno-3-3>3</a></span>
