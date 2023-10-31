@@ -14,7 +14,7 @@
 </code></pre></div></td></tr></table></div> </li> <li> <p>(Optional, if webhook is enabled) Delete the <code>ValidatingWebhookConfiguration</code>. This is the resource which connects Rook custom resources to the operator pod's validating webhook. Because the operator is unavailable, we must temporarily disable the valdiating webhook in order to make changes.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal>1</span>
 <span class=normal>2</span>
 <span class=normal>3</span></pre></div></td><td class=code><div><pre><span></span><code>```console
-kubectl delete ValidatingWebhookConfiguration rook-ceph-webhook
+kubectl -n rook-ceph delete ValidatingWebhookConfiguration rook-ceph-webhook
 ```
 </code></pre></div></td></tr></table></div> </li> <li> <p>Remove the owner references from all critical Rook resources that were referencing the <code>CephCluster</code> CR.</p> <ol> <li> <p>Programmatically determine all such resources, using this command: <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
 <span class=normal><a href=#__codelineno-4-2>2</a></span>
