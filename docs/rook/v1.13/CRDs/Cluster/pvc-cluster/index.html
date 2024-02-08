@@ -127,8 +127,7 @@
 <span class=normal><a href=#__codelineno-1-54>54</a></span>
 <span class=normal><a href=#__codelineno-1-55>55</a></span>
 <span class=normal><a href=#__codelineno-1-56>56</a></span>
-<span class=normal><a href=#__codelineno-1-57>57</a></span>
-<span class=normal><a href=#__codelineno-1-58>58</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-1-57>57</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephCluster</span>
 <a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
@@ -158,34 +157,33 @@
 <a id=__codelineno-1-28 name=__codelineno-1-28></a><span class=w>      </span><span class=nt>portable</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id=__codelineno-1-29 name=__codelineno-1-29></a><span class=w>      </span><span class=nt>resources</span><span class=p>:</span>
 <a id=__codelineno-1-30 name=__codelineno-1-30></a><span class=w>        </span><span class=nt>limits</span><span class=p>:</span>
-<a id=__codelineno-1-31 name=__codelineno-1-31></a><span class=w>          </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s>&quot;500m&quot;</span>
-<a id=__codelineno-1-32 name=__codelineno-1-32></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
-<a id=__codelineno-1-33 name=__codelineno-1-33></a><span class=w>        </span><span class=nt>requests</span><span class=p>:</span>
-<a id=__codelineno-1-34 name=__codelineno-1-34></a><span class=w>          </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s>&quot;500m&quot;</span>
-<a id=__codelineno-1-35 name=__codelineno-1-35></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
-<a id=__codelineno-1-36 name=__codelineno-1-36></a><span class=w>      </span><span class=nt>placement</span><span class=p>:</span>
-<a id=__codelineno-1-37 name=__codelineno-1-37></a><span class=w>        </span><span class=nt>podAntiAffinity</span><span class=p>:</span>
-<a id=__codelineno-1-38 name=__codelineno-1-38></a><span class=w>          </span><span class=nt>preferredDuringSchedulingIgnoredDuringExecution</span><span class=p>:</span>
-<a id=__codelineno-1-39 name=__codelineno-1-39></a><span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<a id=__codelineno-1-40 name=__codelineno-1-40></a><span class=w>            </span><span class=nt>podAffinityTerm</span><span class=p>:</span>
-<a id=__codelineno-1-41 name=__codelineno-1-41></a><span class=w>              </span><span class=nt>labelSelector</span><span class=p>:</span>
-<a id=__codelineno-1-42 name=__codelineno-1-42></a><span class=w>                </span><span class=nt>matchExpressions</span><span class=p>:</span>
-<a id=__codelineno-1-43 name=__codelineno-1-43></a><span class=w>                </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=s>&quot;rook.io/cluster&quot;</span>
-<a id=__codelineno-1-44 name=__codelineno-1-44></a><span class=w>                  </span><span class=nt>operator</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">In</span>
-<a id=__codelineno-1-45 name=__codelineno-1-45></a><span class=w>                  </span><span class=nt>values</span><span class=p>:</span>
-<a id=__codelineno-1-46 name=__codelineno-1-46></a><span class=w>                    </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span>
-<a id=__codelineno-1-47 name=__codelineno-1-47></a><span class=w>              </span><span class=nt>topologyKey</span><span class=p>:</span><span class=w> </span><span class=s>&quot;topology.kubernetes.io/zone&quot;</span>
-<a id=__codelineno-1-48 name=__codelineno-1-48></a><span class=w>      </span><span class=nt>volumeClaimTemplates</span><span class=p>:</span>
-<a id=__codelineno-1-49 name=__codelineno-1-49></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>metadata</span><span class=p>:</span>
-<a id=__codelineno-1-50 name=__codelineno-1-50></a><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
-<a id=__codelineno-1-51 name=__codelineno-1-51></a><span class=w>        </span><span class=nt>spec</span><span class=p>:</span>
-<a id=__codelineno-1-52 name=__codelineno-1-52></a><span class=w>          </span><span class=nt>resources</span><span class=p>:</span>
-<a id=__codelineno-1-53 name=__codelineno-1-53></a><span class=w>            </span><span class=nt>requests</span><span class=p>:</span>
-<a id=__codelineno-1-54 name=__codelineno-1-54></a><span class=w>              </span><span class=nt>storage</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
-<a id=__codelineno-1-55 name=__codelineno-1-55></a><span class=w>          </span><span class=nt>storageClassName</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">local-storage</span>
-<a id=__codelineno-1-56 name=__codelineno-1-56></a><span class=w>          </span><span class=nt>volumeMode</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Block</span>
-<a id=__codelineno-1-57 name=__codelineno-1-57></a><span class=w>          </span><span class=nt>accessModes</span><span class=p>:</span>
-<a id=__codelineno-1-58 name=__codelineno-1-58></a><span class=w>            </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+<a id=__codelineno-1-31 name=__codelineno-1-31></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
+<a id=__codelineno-1-32 name=__codelineno-1-32></a><span class=w>        </span><span class=nt>requests</span><span class=p>:</span>
+<a id=__codelineno-1-33 name=__codelineno-1-33></a><span class=w>          </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s>&quot;500m&quot;</span>
+<a id=__codelineno-1-34 name=__codelineno-1-34></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
+<a id=__codelineno-1-35 name=__codelineno-1-35></a><span class=w>      </span><span class=nt>placement</span><span class=p>:</span>
+<a id=__codelineno-1-36 name=__codelineno-1-36></a><span class=w>        </span><span class=nt>podAntiAffinity</span><span class=p>:</span>
+<a id=__codelineno-1-37 name=__codelineno-1-37></a><span class=w>          </span><span class=nt>preferredDuringSchedulingIgnoredDuringExecution</span><span class=p>:</span>
+<a id=__codelineno-1-38 name=__codelineno-1-38></a><span class=w>          </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<a id=__codelineno-1-39 name=__codelineno-1-39></a><span class=w>            </span><span class=nt>podAffinityTerm</span><span class=p>:</span>
+<a id=__codelineno-1-40 name=__codelineno-1-40></a><span class=w>              </span><span class=nt>labelSelector</span><span class=p>:</span>
+<a id=__codelineno-1-41 name=__codelineno-1-41></a><span class=w>                </span><span class=nt>matchExpressions</span><span class=p>:</span>
+<a id=__codelineno-1-42 name=__codelineno-1-42></a><span class=w>                </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=s>&quot;rook.io/cluster&quot;</span>
+<a id=__codelineno-1-43 name=__codelineno-1-43></a><span class=w>                  </span><span class=nt>operator</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">In</span>
+<a id=__codelineno-1-44 name=__codelineno-1-44></a><span class=w>                  </span><span class=nt>values</span><span class=p>:</span>
+<a id=__codelineno-1-45 name=__codelineno-1-45></a><span class=w>                    </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span>
+<a id=__codelineno-1-46 name=__codelineno-1-46></a><span class=w>              </span><span class=nt>topologyKey</span><span class=p>:</span><span class=w> </span><span class=s>&quot;topology.kubernetes.io/zone&quot;</span>
+<a id=__codelineno-1-47 name=__codelineno-1-47></a><span class=w>      </span><span class=nt>volumeClaimTemplates</span><span class=p>:</span>
+<a id=__codelineno-1-48 name=__codelineno-1-48></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>metadata</span><span class=p>:</span>
+<a id=__codelineno-1-49 name=__codelineno-1-49></a><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
+<a id=__codelineno-1-50 name=__codelineno-1-50></a><span class=w>        </span><span class=nt>spec</span><span class=p>:</span>
+<a id=__codelineno-1-51 name=__codelineno-1-51></a><span class=w>          </span><span class=nt>resources</span><span class=p>:</span>
+<a id=__codelineno-1-52 name=__codelineno-1-52></a><span class=w>            </span><span class=nt>requests</span><span class=p>:</span>
+<a id=__codelineno-1-53 name=__codelineno-1-53></a><span class=w>              </span><span class=nt>storage</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+<a id=__codelineno-1-54 name=__codelineno-1-54></a><span class=w>          </span><span class=nt>storageClassName</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">local-storage</span>
+<a id=__codelineno-1-55 name=__codelineno-1-55></a><span class=w>          </span><span class=nt>volumeMode</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Block</span>
+<a id=__codelineno-1-56 name=__codelineno-1-56></a><span class=w>          </span><span class=nt>accessModes</span><span class=p>:</span>
+<a id=__codelineno-1-57 name=__codelineno-1-57></a><span class=w>            </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
 </code></pre></div></td></tr></table></div> <h2 id=pvc-storage-only-for-monitors>PVC storage only for monitors<a class=headerlink href=#pvc-storage-only-for-monitors title="Permanent link">&para;</a></h2> <p>In the CRD specification below three monitors are created each using a 10Gi PVC created by Rook using the <code>local-storage</code> storage class. Even while the mons consume PVCs, the OSDs in this example will still consume raw devices on the host.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
 <span class=normal><a href=#__codelineno-2-2> 2</a></span>
 <span class=normal><a href=#__codelineno-2-3> 3</a></span>
