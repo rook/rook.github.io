@@ -40,8 +40,7 @@
 <span class=normal><a href=#__codelineno-0-40>40</a></span>
 <span class=normal><a href=#__codelineno-0-41>41</a></span>
 <span class=normal><a href=#__codelineno-0-42>42</a></span>
-<span class=normal><a href=#__codelineno-0-43>43</a></span>
-<span class=normal><a href=#__codelineno-0-44>44</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-0-43>43</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephFilesystem</span>
 <a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">myfs</span>
@@ -80,11 +79,10 @@
 <a id=__codelineno-0-37 name=__codelineno-0-37></a><span class=w>    </span><span class=c1>#  topologySpreadConstraints:</span>
 <a id=__codelineno-0-38 name=__codelineno-0-38></a><span class=w>    </span><span class=nt>resources</span><span class=p>:</span>
 <a id=__codelineno-0-39 name=__codelineno-0-39></a><span class=w>    </span><span class=c1>#  limits:</span>
-<a id=__codelineno-0-40 name=__codelineno-0-40></a><span class=w>    </span><span class=c1>#    cpu: &quot;500m&quot;</span>
-<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
-<a id=__codelineno-0-42 name=__codelineno-0-42></a><span class=w>    </span><span class=c1>#  requests:</span>
-<a id=__codelineno-0-43 name=__codelineno-0-43></a><span class=w>    </span><span class=c1>#    cpu: &quot;500m&quot;</span>
-<a id=__codelineno-0-44 name=__codelineno-0-44></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
+<a id=__codelineno-0-40 name=__codelineno-0-40></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
+<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=c1>#  requests:</span>
+<a id=__codelineno-0-42 name=__codelineno-0-42></a><span class=w>    </span><span class=c1>#    cpu: &quot;500m&quot;</span>
+<a id=__codelineno-0-43 name=__codelineno-0-43></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
 </code></pre></div></td></tr></table></div> <p>(These definitions can also be found in the <a href=https://github.com/rook/rook/blob/master/deploy/examples/filesystem.yaml><code>filesystem.yaml</code></a> file)</p> <h3 id=erasure-coded>Erasure Coded<a class=headerlink href=#erasure-coded title="Permanent link">&para;</a></h3> <p>Erasure coded pools require the OSDs to use <code>bluestore</code> for the configured <a href=../../Cluster/ceph-cluster-crd/#osd-configuration-settings><code>storeType</code></a>. Additionally, erasure coded pools can only be used with <code>dataPools</code>. The <code>metadataPool</code> must use a replicated pool.</p> <div class="admonition note"> <p class=admonition-title>Note</p> <p>This sample requires <em>at least 3 bluestore OSDs</em>, with each OSD located on a <em>different node</em>.</p> </div> <p>The OSDs must be located on different nodes, because the <a href=../../Block-Storage/ceph-block-pool-crd/#spec><code>failureDomain</code></a> will be set to <code>host</code> by default, and the <code>erasureCoded</code> chunk settings require at least 3 different OSDs (2 <code>dataChunks</code> + 1 <code>codingChunks</code>).</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
 <span class=normal><a href=#__codelineno-1-2> 2</a></span>
 <span class=normal><a href=#__codelineno-1-3> 3</a></span>
