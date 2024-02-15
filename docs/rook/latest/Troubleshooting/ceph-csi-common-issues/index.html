@@ -34,7 +34,7 @@
 </code></pre></div></td></tr></table></div> <p>If Ceph is not healthy, check the following health for more clues:</p> <ul> <li>The Ceph monitor logs for errors</li> <li>The OSD logs for errors</li> <li>Disk Health</li> <li>Network Health</li> </ul> <h2 id=ceph-troubleshooting>Ceph Troubleshooting<a class=headerlink href=#ceph-troubleshooting title="Permanent link">&para;</a></h2> <h3 id=check-if-the-rbd-pool-exists>Check if the RBD Pool exists<a class=headerlink href=#check-if-the-rbd-pool-exists title="Permanent link">&para;</a></h3> <p>Make sure the pool you have specified in the <code>storageclass.yaml</code> exists in the ceph cluster.</p> <p>Suppose the pool name mentioned in the <code>storageclass.yaml</code> is <code>replicapool</code>. It can be verified to exist in the toolbox:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
 <span class=normal><a href=#__codelineno-5-2>2</a></span>
 <span class=normal><a href=#__codelineno-5-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=gp>$ </span>ceph<span class=w> </span>osd<span class=w> </span>lspools
-<a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=go>1 device_health_metrics</span>
+<a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=go>1 .mgr</span>
 <a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=go>2 replicapool</span>
 </code></pre></div></td></tr></table></div> <p>If the pool is not in the list, create the <code>CephBlockPool</code> CR for the pool if you have not already. If you have already created the pool, check the Rook operator log for errors creating the pool.</p> <h3 id=check-if-the-filesystem-exists>Check if the Filesystem exists<a class=headerlink href=#check-if-the-filesystem-exists title="Permanent link">&para;</a></h3> <p>For the shared filesystem (CephFS), check that the filesystem and pools you have specified in the <code>storageclass.yaml</code> exist in the Ceph cluster.</p> <p>Suppose the <code>fsName</code> name mentioned in the <code>storageclass.yaml</code> is <code>myfs</code>. It can be verified in the toolbox:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
 <span class=normal><a href=#__codelineno-6-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=gp>$ </span>ceph<span class=w> </span>fs<span class=w> </span>ls
@@ -44,7 +44,7 @@
 <span class=normal><a href=#__codelineno-7-3>3</a></span>
 <span class=normal><a href=#__codelineno-7-4>4</a></span>
 <span class=normal><a href=#__codelineno-7-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=go>ceph osd lspools</span>
-<a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=go>1 device_health_metrics</span>
+<a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=go>1 .mgr</span>
 <a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=go>2 replicapool</span>
 <a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=go>3 myfs-metadata0</span>
 <a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=go>4 myfs-data0</span>
