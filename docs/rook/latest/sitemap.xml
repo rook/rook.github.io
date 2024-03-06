@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://rook.io/latest/intro/</loc>
-         <lastmod>2024-03-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rook.io/latest/CRDs/ceph-client-crd/</loc>
          <lastmod>2024-03-06</lastmod>
          <changefreq>daily</changefreq>
@@ -147,6 +142,11 @@
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/glossary/</loc>
+         <lastmod>2024-03-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rook.io/latest/Getting-Started/intro/</loc>
          <lastmod>2024-03-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
