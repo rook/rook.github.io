@@ -1,0 +1,61 @@
+---
+stylesheet: index
+---
+
+{% include values.inc %}
+
+<div id="holder">
+    <section class="grid-middle hero">
+        <div class="col-5_md-12">
+            <h1>Support</h1>
+            <p>
+                You can ask questions in our community forums in <a href="{{ slackLink }}">Slack</a> or <a href="{{ slackLink }}">GitHub Discussions</a>, both of which have many knowledgeable users.
+                Should you need commercial support be sure to check out the <a href="#support-companies">list of Rook-related support and services companies</a> below.
+            </p>
+        </div>
+        <div class="col-7_md-12_md-first">
+            <img src="{{ "/images/index-what-is-rook.svg" | relative_url }}" />
+        </div>
+    </section>
+    <section class="grid-middle">
+        <div class="col-8_md-12">
+            <h2 id="support-companies">Commercial Support and Services</h2>
+        </div>
+    </section>
+
+    <!-- Support Providers -->
+    <section class="col-12_md-12">
+        <div class="col-12_md-12">
+            <h2><a href="{{ koorLink }}">Koor Technologies, Inc.</a></h2>
+            <p>
+                Koor Technologies offers a variety of services and products to help you with Ceph data storage. Choose stand-alone Ceph or use Rook to connect your storage to Kubernetes. Get help from Koor experts at every step.
+                
+                Offering managed Ceph service, consulting and support, hosted Rook Ceph clusters and the data-control-center for insights into Rook Ceph clusters.
+            </p>
+        </div>
+
+        <div class="col-12_md-12">
+            <h2><a href="{{ redHatLink }}">Red Hat</a></h2>
+            <p>
+                Red Hat® OpenShift® Data Foundation—previously Red Hat OpenShift Container Storage—is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications quickly and efficiently across clouds.
+
+                Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.
+            </p>
+        </div>
+    </section>
+
+    <section class="grid-middle">
+        <div class="col-12_md-12">
+            <p>If you want to add yourself, please open a pull request .</p>
+        </div>
+    </section>
+    <section class="grid-middle">
+        <div class="col-12_md-12">
+            <h2>Reporting Bugs</h2>
+            <p>
+                If you'd like to report a bug/defect, please <a href="{{ newIssueLink }}">open a GitHub Issue</a> on the Rook repository.
+                We've provided some <a href="{{ contributeLink }}">guidelines</a> for doing so here.
+            </p>
+        </div>
+    </section>
+</div>
