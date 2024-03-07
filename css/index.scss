@@ -49,6 +49,16 @@
     }
   }
 
+  ul {
+    li {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.67;
+      color: #4a4a4a;
+      color: $textDark;
+    }
+  }
+
   img {
     width: 100%;
     max-width: 660px;

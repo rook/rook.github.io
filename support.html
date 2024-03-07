@@ -9,8 +9,13 @@ stylesheet: index
         <div class="col-5_md-12">
             <h1>Support</h1>
             <p>
-                You can ask questions in our community forums in <a href="{{ slackLink }}">Slack</a> or <a href="{{ slackLink }}">GitHub Discussions</a>, both of which have many knowledgeable users.
-                Should you need commercial support be sure to check out the <a href="#support-companies">list of Rook-related support and services companies</a> below.
+                The Rook community is here to support you:
+                <ul>
+                    <li>Ask questions in our community forums in <a href="{{ slackLink }}">Slack</a> or <a href="{{ discussionLink }}">GitHub Discussions</a></li>
+                    <li>To request a feature or report a defect, <a href="{{ newIssueLink }}">open a GitHub Issue</a></li>
+                    <li>To contribute to the project, see the <a href="{{ contributeLink }}">Contribution Guide</a></li>
+                    <li>For commercial support check out the <a href="#support-companies">list of Rook-related support and services companies</a> below.</li>
+                </ul>
             </p>
         </div>
         <div class="col-7_md-12_md-first">
@@ -30,16 +35,27 @@ stylesheet: index
             <p>
                 Koor Technologies offers a variety of services and products to help you with Ceph data storage. Choose stand-alone Ceph or use Rook to connect your storage to Kubernetes. Get help from Koor experts at every step.
                     
-                Offering managed Ceph service, consulting and support, hosted Rook Ceph clusters and the data-control-center for insights into Rook Ceph clusters.
+                <br />
+                Services include:
+                <ul>
+                    <li>Managed Ceph and Rook service, consulting and support.</li>
+                    <li>Hosted Rook Ceph clusters.</li>
+                    <li>Data Control Center application for insights into Rook Ceph clusters.</li>
+                </ul>
             </p>
         </section>
 
         <section class="col-12_md-12">
             <h2><a href="{{ redHatLink }}">Red Hat</a></h2>
             <p>
-                Red Hat® OpenShift® Data Foundation—previously Red Hat OpenShift Container Storage—is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications quickly and efficiently across clouds.
+                Red Hat® OpenShift® Data Foundation is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications with storage quickly and efficiently across clouds.
 
                 Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.
+
+                <ul>
+                    <li>Based on Rook, Ceph, and other open source projects</li>
+                    <li>Fully supported Enterprise solution</li>
+                </ul>
             </p>
         </section>
     </div>
@@ -47,17 +63,7 @@ stylesheet: index
     <section class="grid-middle">
         <div class="col-12_md-12">
             <p>
-                If you want to add your company to the list of support providers, please open a pull request against the <a href="https://github.com/rook/rook.github.io">rook.github.io repository</a>.
-            </p>
-        </div>
-    </section>
-
-    <section class="grid-middle text-center">
-        <div class="col-12_md-12">
-            <h1>Reporting Bugs</h1>
-            <p>
-                If you'd like to report a bug/defect, please <a href="{{ newIssueLink }}">open a GitHub Issue</a> on the Rook repository.
-                We've provided some guidelines for contributing to the project <a href="{{ contributeLink }}">here</a>.
+                To add your company to the list of support providers, please open a pull request against the <a href="https://github.com/rook/rook.github.io">rook.github.io repository</a>.
             </p>
         </div>
     </section>
