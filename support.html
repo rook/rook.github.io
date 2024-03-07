@@ -18,43 +18,46 @@ stylesheet: index
         </div>
     </section>
     <section class="grid-middle">
-        <div class="col-8_md-12">
-            <h2 id="support-companies">Commercial Support and Services</h2>
+        <div class="col-12_md-12 text-center">
+            <h1 id="support-companies">Commercial Support and Services</h1>
         </div>
     </section>
 
     <!-- Support Providers -->
-    <section class="col-12_md-12">
-        <div class="col-12_md-12">
+    <div class="providers">
+        <section class="col-12_md-12">
             <h2><a href="{{ koorLink }}">Koor Technologies, Inc.</a></h2>
             <p>
                 Koor Technologies offers a variety of services and products to help you with Ceph data storage. Choose stand-alone Ceph or use Rook to connect your storage to Kubernetes. Get help from Koor experts at every step.
-                
+                    
                 Offering managed Ceph service, consulting and support, hosted Rook Ceph clusters and the data-control-center for insights into Rook Ceph clusters.
             </p>
-        </div>
+        </section>
 
-        <div class="col-12_md-12">
+        <section class="col-12_md-12">
             <h2><a href="{{ redHatLink }}">Red Hat</a></h2>
             <p>
                 Red Hat® OpenShift® Data Foundation—previously Red Hat OpenShift Container Storage—is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications quickly and efficiently across clouds.
 
                 Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.
             </p>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <section class="grid-middle">
         <div class="col-12_md-12">
-            <p>If you want to add yourself, please open a pull request .</p>
+            <p>
+                If you want to add your company to the list of support providers, please open a pull request against the <a href="https://github.com/rook/rook.github.io">rook.github.io repository</a>.
+            </p>
         </div>
     </section>
-    <section class="grid-middle">
+
+    <section class="grid-middle text-center">
         <div class="col-12_md-12">
-            <h2>Reporting Bugs</h2>
+            <h1>Reporting Bugs</h1>
             <p>
                 If you'd like to report a bug/defect, please <a href="{{ newIssueLink }}">open a GitHub Issue</a> on the Rook repository.
-                We've provided some <a href="{{ contributeLink }}">guidelines</a> for doing so here.
+                We've provided some guidelines for contributing to the project <a href="{{ contributeLink }}">here</a>.
             </p>
         </div>
     </section>
