@@ -150,6 +150,7 @@ p {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   overflow: visible;
+  border-bottom: 1px solid $footerDelimiter;
 
   & > div {
     display: -ms-flexbox;
@@ -173,24 +174,20 @@ p {
     display: none;
     cursor: pointer;
 
-    width: 16px;
-    height: 16px;
+    height: 24px;
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
-    transition: 0.5s ease-in-out;
+    transition: all $timingFast ease-in-out;
 
     span {
       display: block;
-      position: absolute;
+      position: relative;
       height: 2px;
-      width: 14px;
+      width: 32px;
       background: $textDark;
       border-radius: 1px;
       opacity: 1;
       left: 0;
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-      transition: 0.25s ease-in-out;
       margin: 0 1px;
     }
 
@@ -211,26 +208,17 @@ p {
       -webkit-transform-origin: left center;
       transform-origin: left center;
     }
+  }
 
-    body.menu-open & {
-      span:nth-child(1) {
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-        top: 2px;
-        left: 2px;
-      }
+  &.menu-open {
+    .hamburger-controls {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+      transition: all $timingFast ease-in-out;
+    }
 
-      span:nth-child(2) {
-        width: 0%;
-        opacity: 0;
-      }
-
-      span:nth-child(3) {
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        top: 12px;
-        left: 2px;
-      }
+    .links {
+      display: block;
     }
   }
 
@@ -246,6 +234,7 @@ p {
     justify-content: flex-end;
     -ms-flex-align: center;
     align-items: center;
+    background-color: $white;
 
     li {
       display: -ms-inline-flexbox;
@@ -261,6 +250,7 @@ p {
     }
 
     a:not(.button) {
+      position: relative;
       text-decoration: none;
       color: $textDark;
       font-family: $fontHeader;
@@ -277,6 +267,28 @@ p {
       &:active {
         color: $black;
       }
+
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        height: 4px;
+        width: 0;
+        border-radius: 3px;
+        background-color: transparent;
+        transition: all $timingFastest ease-in-out;
+      }
+
+      &:hover,
+          &:focus,
+          &:active {
+            color: $textDark;
+
+            &:before {
+              width: 100%;
+              background-color: $blue;
+            }
+          }
     }
 
     .dropdown {
@@ -314,30 +326,8 @@ p {
           font-size: 17px;
           position: relative;
 
-          &:before {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            height: 4px;
-            width: 0;
-            border-radius: 3px;
-            background-color: transparent;
-            transition: all $timingFastest ease-in-out;
-          }
-
           + a {
             margin-top: 24px;
-          }
-
-          &:hover,
-          &:focus,
-          &:active {
-            color: $textDark;
-
-            &:before {
-              width: 100%;
-              background-color: $blue;
-            }
           }
         }
       }
@@ -358,10 +348,10 @@ p {
       bottom: 0;
       padding-left: $pagePadding;
       text-align: left;
-
-      .menu-open & {
-        display: block;
-      }
+      margin-top: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid $footerDelimiter;
+      height: fit-content;
 
       li {
         display: -ms-flexbox;
@@ -409,13 +399,14 @@ p {
 #content {
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
-  margin-bottom: 50px;
+  margin-bottom: 10;
 }
 
 #footer {
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  padding: 0 0 50px;
+  padding: 0 0 40px;
+  border-top: 1px solid $footerDelimiter;
 
   .top,
   .middle,
@@ -437,8 +428,12 @@ p {
     height: 39px;
   }
 
+  .top {
+    margin: 20px auto 30px;
+  }
+
   .middle {
-    margin: 104px auto 30px;
+    margin: 20px auto 10px;
 
     [class*='col'] {
       -ms-flex-positive: 0;

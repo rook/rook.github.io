@@ -3,9 +3,9 @@
     <div class="logo">
       <a href="{{ "/" | relative_url }}"><img src="{{ "/images/rook-logo.svg" | relative_url }}"/></a>
     </div>
-    <div 
+    <div
       class="hamburger-controls"
-      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      onclick="if (document.getElementById('navigation').classList.contains('menu-open')) { document.getElementById('navigation').classList.remove('menu-open') } else { document.getElementById('navigation').classList.add('menu-open') }; return false;">
       <span></span> <span></span> <span></span>
     </div>
     <ul class="links">
@@ -15,11 +15,12 @@
         <div class="dropdown-content">
           <a href="{{ githubLink }}">GitHub</a>
           <a href="{{ slackLink }}">Slack</a>
-          <a href="{{ forumLink }}">Forum</a>
+          <a href="{{ discussionLink }}">Discussions</a>
           <a href="{{ twitterLink }}">Twitter</a>
         </div>
       </li>
       <li><a href="{{ blogLink }}">Blog</a></li>
+      <li><a href="{{ "/support" | relative_url }}">Support</a></li>
       <li><a class="button small" href="{{ gettingStartedLink }}">Get Started</a></li>
     </ul>
   </div>

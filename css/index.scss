@@ -9,7 +9,7 @@
   align-items: center;
   
   #holder {
-    margin: 120px 0 60px;
+    margin: 60px 0 60px;
 
     @media (max-width: $smWidth) {
       margin: 45px 0 25px;
@@ -49,13 +49,23 @@
     }
   }
 
+  ul {
+    li {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.67;
+      color: #4a4a4a;
+      color: $textDark;
+    }
+  }
+
   img {
     width: 100%;
     max-width: 660px;
   }
 
   .hero {
-    margin-bottom: 140px;
+    margin-bottom: 100px;
 
     @media (max-width: $smWidth) {
       margin-bottom: 50px;
@@ -127,39 +137,13 @@
     }
   }
 
-  .storage {
-    margin: 120px 0 140px;
+  .header-section {
+    margin-top: 20px;
+    width: 100%;
 
-    @media (max-width: $smWidth) {
-      margin: 40px 0 70px;
-    }
-  }
-
-  .providers {
-    margin-top: 50px;
-  
-    span {
-      font-family: $fontHeader;
-      font-size: 18px;
-      font-weight: 500;
-      color: $textLight;
-      position: relative;
-      display: -ms-inline-flexbox;
-      display: inline-flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-left: 15px;
-      margin-bottom: 15px;
-
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        height: 12px;
-        width: 12px;
-        background-color: $blue;
-        border-radius: 50%;
-      }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
     }
   }
 
@@ -203,54 +187,10 @@
         color: $white !important;
       }
     }
-
-    .terminal-buttons {
-      margin-bottom: -15px;
-
-      button {
-        border-radius: 5px;
-        background-color: $purpleLight;
-        color: $white;
-        border: none;
-        box-shadow: none;
-        cursor: pointer;
-        display: -ms-flexbox;
-        display: flex;
-        width: 100%;
-        height: 32px;
-        -ms-flex-align: center;
-        align-items: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        font-family: $fontHeader;
-        font-size: 13px;
-        font-weight: 500;
-        transition: all $timingFast ease-in-out;
-
-        &:focus,
-        &:active,
-        &:visited {
-          outline: 0;
-          background-color: $purpleLight;
-        }
-
-        &:hover {
-          background-color: $purpleDark;
-        }
-
-        &.active {
-          background-color: $blue;
-        }
-      }
-    }
   }
 
   .affiliates {
-    margin: 60px 0 140px;
-
-    @media (max-width: $smWidth) {
-      margin: 40px 0 70px;
-    }
+    margin: 30px 0 30px;
 
     [class*='col-'] {
       text-align: center;
@@ -483,6 +423,26 @@
       @media (max-width: $xsWidth) {
         font-size: 11px;
       }
+    }
+  }
+
+  a:not(.button) {
+    color: $blue;
+    &:visited {
+      text-decoration: none;
+    }
+    
+    &:hover,
+    &:focus,
+    &:active {
+      color: $blueDarker;
+      text-decoration: underline;
+    }
+  }
+
+  .providers {
+    h2 {
+      text-align: center;
     }
   }
 }

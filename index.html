@@ -15,7 +15,11 @@ stylesheet: index
             <img src="{{ "/images/index-hero.svg" | relative_url }}" />
         </div>
     </section>
-    <h1 class="text-center">What is Rook?</h1>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1>What is Rook?</h1>
+        </div>
+    </section>
     <section class="grid-middle">
         <div class="col-6_md-12">
             <img src="{{ "/images/index-what-is-rook.svg" | relative_url }}" />
@@ -39,13 +43,10 @@ stylesheet: index
             </div>
         </div>
     </section>
-    <section class="grid-middle storage">
+    <section class="grid-middle">
         <div class="col-6_md-12">
             <h2>Ceph Storage Provider</h2>
             <p>Rook orchestrates the Ceph storage solution, with a specialized Kubernetes Operator to automate management. Rook ensures that Ceph will run well on Kubernetes and simplify the deployment and management experience.</p>
-            <div class="grid providers">
-                <div class="col-4_xs-6"><span>Ceph</span></div>
-            </div>
         </div>
         <div class="col-6_md-12">
             <div class="terminal-wrapper">
@@ -55,16 +56,15 @@ stylesheet: index
                         <asciinema-player id="terminal-player" cols="61" rows="16" preload loop speed="1.25" src="{{ "/data/ceph.cast" | relative_url }}"></asciinema-player>
                     </div>
                 </div>
-                <div class="terminal-buttons">
-                    <div class="grid">
-                        <div class="col-4_xs-6"><button class="active" type="button" onclick="terminalTypeClick(this, 'Ceph')" data-terminal-rows="16" data-terminal-src="{{ "/data/ceph.cast" | relative_url }}">Ceph</button></div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-    <h1 class="text-center">Who loves Rook?</h1>
-    <p class="text-center">With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />The Rook operator is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1>Who loves Rook?</h1>
+            <p>With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />The Rook operator is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+        </div>
+    </section>
     <section class="grid-middle affiliates">
         <div class="col-2_xs-4">
             <a href="//pacificresearchplatform.org/">
@@ -114,7 +114,11 @@ stylesheet: index
             </a>
         </div>
     </section>
-    <h1 class="text-center">Features of Rook</h1>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1 class="text-center">Features of Rook</h1>
+        </div>
+    </section>
     <section class="grid-bottom features">
         <div class="col-3_xs-6">
             <img class="automate" src="{{ "/images/features/automate.svg" | relative_url }}" />
