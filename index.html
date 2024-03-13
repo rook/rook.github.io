@@ -19,6 +19,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,9 +53,9 @@
     <div class="logo">
       <a href="/"><img src="/images/rook-logo.svg"/></a>
     </div>
-    <div 
+    <div
       class="hamburger-controls"
-      onclick="if (document.body.classList.contains('menu-open')) { document.body.classList.remove('menu-open') } else { document.body.classList.add('menu-open') }; return false;">
+      onclick="if (document.getElementById('navigation').classList.contains('menu-open')) { document.getElementById('navigation').classList.remove('menu-open') } else { document.getElementById('navigation').classList.add('menu-open') }; return false;">
       <span></span> <span></span> <span></span>
     </div>
     <ul class="links">
@@ -64,17 +65,19 @@
         <div class="dropdown-content">
           <a href="//github.com/rook/rook">GitHub</a>
           <a href="//slack.rook.io/">Slack</a>
-          <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+          <a href="//github.com/rook/rook/discussions">Discussions</a>
           <a href="//twitter.com/rook_io">Twitter</a>
         </div>
       </li>
       <li><a href="//blog.rook.io/">Blog</a></li>
+      <li><a href="/support">Support</a></li>
       <li><a class="button small" href="/docs/rook/latest-release/Getting-Started/quickstart/">Get Started</a></li>
     </ul>
   </div>
 </nav>
 
     <main id="content" aria-label="Content"><div>
+
 
 
 
@@ -104,7 +107,11 @@
             <img src="/images/index-hero.svg" />
         </div>
     </section>
-    <h1 class="text-center">What is Rook?</h1>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1>What is Rook?</h1>
+        </div>
+    </section>
     <section class="grid-middle">
         <div class="col-6_md-12">
             <img src="/images/index-what-is-rook.svg" />
@@ -128,13 +135,10 @@
             </div>
         </div>
     </section>
-    <section class="grid-middle storage">
+    <section class="grid-middle">
         <div class="col-6_md-12">
             <h2>Ceph Storage Provider</h2>
             <p>Rook orchestrates the Ceph storage solution, with a specialized Kubernetes Operator to automate management. Rook ensures that Ceph will run well on Kubernetes and simplify the deployment and management experience.</p>
-            <div class="grid providers">
-                <div class="col-4_xs-6"><span>Ceph</span></div>
-            </div>
         </div>
         <div class="col-6_md-12">
             <div class="terminal-wrapper">
@@ -144,16 +148,15 @@
                         <asciinema-player id="terminal-player" cols="61" rows="16" preload loop speed="1.25" src="/data/ceph.cast"></asciinema-player>
                     </div>
                 </div>
-                <div class="terminal-buttons">
-                    <div class="grid">
-                        <div class="col-4_xs-6"><button class="active" type="button" onclick="terminalTypeClick(this, 'Ceph')" data-terminal-rows="16" data-terminal-src="/data/ceph.cast">Ceph</button></div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-    <h1 class="text-center">Who loves Rook?</h1>
-    <p class="text-center">With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />The Rook operator is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1>Who loves Rook?</h1>
+            <p>With hundreds of contributors and millions of downloads of the Rook software, this true community-driven effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a global user base.<br /><br />The Rook operator is deployed in production across multiple industries, enabling them to store, deliver & protect the data that powers their businesses.</p>
+        </div>
+    </section>
     <section class="grid-middle affiliates">
         <div class="col-2_xs-4">
             <a href="//pacificresearchplatform.org/">
@@ -203,7 +206,11 @@
             </a>
         </div>
     </section>
-    <h1 class="text-center">Features of Rook</h1>
+    <section class="grid-middle">
+        <div class="header-section">
+            <h1 class="text-center">Features of Rook</h1>
+        </div>
+    </section>
     <section class="grid-bottom features">
         <div class="col-3_xs-6">
             <img class="automate" src="/images/features/automate.svg" />
@@ -303,13 +310,14 @@
         <span>Community</span>
         <a href="//slack.rook.io/">Slack</a>
         <a href="//twitter.com/rook_io">Twitter</a>
-        <a href="//groups.google.com/forum/#!forum/rook-dev">Forum</a>
+        <a href="//github.com/rook/rook/discussions">Discussions</a>
         <a href="//blog.rook.io/">Blog</a>
       </div>
       <div class="col_sm-12">
         <span>Contact</span>
-        <a href="//github.com/rook/rook/discussions">Discussion</a>
+        <a href="//github.com/rook/rook/discussions">Discussions</a>
         <a href="//github.com/rook/rook/issues">Feature request</a>
+        <a href="//github.com/rook/rook/issues/new/choose">New Issue</a>
       </div>
       <div class="col_sm-12">
         <span>Top Contributors</span>

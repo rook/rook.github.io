@@ -452,35 +452,33 @@ p { font-size: 18px; font-weight: 300; line-height: 1.67; color: #4a4a4a; }
 @media (max-width: 64em) { #navigation > div, #content > div, #footer > div { padding: 0 30px; } }
 @media (max-width: 48em) { #navigation > div, #content > div, #footer > div { padding: 0 15px; } }
 
-#navigation { padding: 30px 0; height: 32px; font-size: 16px; -ms-flex-negative: 0; flex-shrink: 0; overflow: visible; }
+#navigation { padding: 30px 0; height: 32px; font-size: 16px; -ms-flex-negative: 0; flex-shrink: 0; overflow: visible; border-bottom: 1px solid #d8d8d8; }
 #navigation > div { display: -ms-flexbox; display: flex; }
 #navigation .logo, #navigation .logo a, #navigation .logo a img { display: block; }
 #navigation .logo img { height: 30px; }
-#navigation .hamburger-controls { position: absolute; right: 15px; top: 37px; display: none; cursor: pointer; width: 16px; height: 16px; -webkit-transform: rotate(0deg); transform: rotate(0deg); transition: 0.5s ease-in-out; }
-#navigation .hamburger-controls span { display: block; position: absolute; height: 2px; width: 14px; background: #2b2b2b; border-radius: 1px; opacity: 1; left: 0; -webkit-transform: rotate(0deg); transform: rotate(0deg); transition: 0.25s ease-in-out; margin: 0 1px; }
+#navigation .hamburger-controls { position: absolute; right: 15px; top: 37px; display: none; cursor: pointer; height: 24px; -webkit-transform: rotate(0deg); transform: rotate(0deg); transition: all 0.25s ease-in-out; }
+#navigation .hamburger-controls span { display: block; position: relative; height: 2px; width: 32px; background: #2b2b2b; border-radius: 1px; opacity: 1; left: 0; margin: 0 1px; }
 #navigation .hamburger-controls span:nth-child(1) { top: 1px; -webkit-transform-origin: left center; transform-origin: left center; }
 #navigation .hamburger-controls span:nth-child(2) { top: 7px; -webkit-transform-origin: left center; transform-origin: left center; }
 #navigation .hamburger-controls span:nth-child(3) { top: 13px; -webkit-transform-origin: left center; transform-origin: left center; }
-body.menu-open #navigation .hamburger-controls span:nth-child(1) { -webkit-transform: rotate(45deg); transform: rotate(45deg); top: 2px; left: 2px; }
-body.menu-open #navigation .hamburger-controls span:nth-child(2) { width: 0%; opacity: 0; }
-body.menu-open #navigation .hamburger-controls span:nth-child(3) { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); top: 12px; left: 2px; }
-#navigation .links { text-align: right; -ms-flex: 1; flex: 1; padding-left: 0; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-pack: end; justify-content: flex-end; -ms-flex-align: center; align-items: center; }
+#navigation.menu-open .hamburger-controls { -webkit-transform: rotate(90deg); transform: rotate(90deg); transition: all 0.25s ease-in-out; }
+#navigation.menu-open .links { display: block; }
+#navigation .links { text-align: right; -ms-flex: 1; flex: 1; padding-left: 0; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-pack: end; justify-content: flex-end; -ms-flex-align: center; align-items: center; background-color: #ffffff; }
 #navigation .links li { display: -ms-inline-flexbox; display: inline-flex; margin-right: 40px; height: 32px; -ms-flex-align: center; align-items: center; }
 #navigation .links li:last-child { margin-right: 0; }
-#navigation .links a:not(.button) { text-decoration: none; color: #2b2b2b; font-family: "Montserrat", sans-serif; font-size: 15px; font-weight: 500; line-height: normal; }
+#navigation .links a:not(.button) { position: relative; text-decoration: none; color: #2b2b2b; font-family: "Montserrat", sans-serif; font-size: 15px; font-weight: 500; line-height: normal; }
 #navigation .links a:not(.button):visited { color: #2b2b2b; }
 #navigation .links a:not(.button):hover, #navigation .links a:not(.button):focus, #navigation .links a:not(.button):active { color: #000000; }
+#navigation .links a:not(.button):before { content: ''; position: absolute; bottom: -4px; height: 4px; width: 0; border-radius: 3px; background-color: transparent; transition: all 0.125s ease-in-out; }
+#navigation .links a:not(.button):hover, #navigation .links a:not(.button):focus, #navigation .links a:not(.button):active { color: #2b2b2b; }
+#navigation .links a:not(.button):hover:before, #navigation .links a:not(.button):focus:before, #navigation .links a:not(.button):active:before { width: 100%; background-color: #2ac6ea; }
 #navigation .links .dropdown { position: relative; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; }
 #navigation .links .dropdown:hover .dropdown-content { display: -ms-flexbox; display: flex; }
 #navigation .links .dropdown .dropdown-content { display: none; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: start; align-items: flex-start; position: absolute; top: 32px; background-color: #ffffff; min-width: 160px; padding: 25px 0 25px 20px; border-radius: 10px; box-shadow: -2px 5px 8px 0 rgba(0, 0, 0, 0.1); z-index: 1; }
 #navigation .links .dropdown .dropdown-content a { font-size: 17px; position: relative; }
-#navigation .links .dropdown .dropdown-content a:before { content: ''; position: absolute; bottom: -4px; height: 4px; width: 0; border-radius: 3px; background-color: transparent; transition: all 0.125s ease-in-out; }
 #navigation .links .dropdown .dropdown-content a + a { margin-top: 24px; }
-#navigation .links .dropdown .dropdown-content a:hover, #navigation .links .dropdown .dropdown-content a:focus, #navigation .links .dropdown .dropdown-content a:active { color: #2b2b2b; }
-#navigation .links .dropdown .dropdown-content a:hover:before, #navigation .links .dropdown .dropdown-content a:focus:before, #navigation .links .dropdown .dropdown-content a:active:before { width: 100%; background-color: #2ac6ea; }
 @media (max-width: 48em) { #navigation .hamburger-controls { display: block; }
-  #navigation .links { display: none; position: absolute; left: 0; right: 0; top: 92px; bottom: 0; padding-left: 30px; text-align: left; }
-  .menu-open #navigation .links { display: block; }
+  #navigation .links { display: none; position: absolute; left: 0; right: 0; top: 92px; bottom: 0; padding-left: 30px; text-align: left; margin-top: 24px; padding-bottom: 20px; border-bottom: 1px solid #d8d8d8; height: fit-content; }
   #navigation .links li { display: -ms-flexbox; display: flex; margin: 0; min-height: 50px; height: auto; -ms-flex-align: start; align-items: flex-start; }
   #navigation .links li a[role='button'] { cursor: default; }
   #navigation .links .button.small { height: 40px; line-height: 40px; }
@@ -488,13 +486,14 @@ body.menu-open #navigation .hamburger-controls span:nth-child(3) { -webkit-trans
   #navigation .links .dropdown .dropdown-content { display: -ms-flexbox; display: flex; position: relative; box-shadow: none; z-index: inherit; background-color: transparent; top: inherit; }
   #navigation .links .dropdown .dropdown-content a { display: -ms-inline-flexbox; display: inline-flex; font-size: 15px; } }
 
-#content { -ms-flex: 1 0 auto; flex: 1 0 auto; margin-bottom: 50px; }
+#content { -ms-flex: 1 0 auto; flex: 1 0 auto; margin-bottom: 10; }
 
-#footer { -ms-flex-negative: 0; flex-shrink: 0; padding: 0 0 50px; }
+#footer { -ms-flex-negative: 0; flex-shrink: 0; padding: 0 0 40px; border-top: 1px solid #d8d8d8; }
 #footer .top, #footer .middle, #footer .bottom { text-align: center; }
 #footer .top p, #footer .middle p, #footer .bottom p { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 500; text-align: center; color: #767676; margin: 13px 0 0; }
 #footer .cncf { width: 250px; height: 39px; }
-#footer .middle { margin: 104px auto 30px; }
+#footer .top { margin: 20px auto 30px; }
+#footer .middle { margin: 20px auto 10px; }
 #footer .middle [class*='col'] { -ms-flex-positive: 0; flex-grow: 0; white-space: nowrap; }
 @media (max-width: 48em) { #footer .middle [class*='col'] { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; -ms-flex-direction: column; flex-direction: column; } }
 #footer .middle [class*='col'] + [class*='col'] { margin: 0 0 0 60px; }
