@@ -13,6 +13,5 @@
 {% assign cloudicalLink = '//cloudical.io/' %}
 {% assign cncfLink = '//www.cncf.io' %}
 {% assign cybozuLink = '//cybozu.com' %}
-{% assign koorLink = '//koor.tech' %}
 {% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
 {% assign upboundLink = '//upbound.io' %}
