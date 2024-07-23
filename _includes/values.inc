@@ -15,4 +15,4 @@
 {% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
 {% assign upboundLink = '//upbound.io' %}
-{% assign cloudRaftLink = '//cloudraft.io' %}
+{% assign cloudRaftLink = '//cloudraft.io/kubernetes-consulting' %}
