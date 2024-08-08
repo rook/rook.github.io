@@ -306,6 +306,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-swift/</loc>
+         <lastmod>2024-08-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/cosi/</loc>
          <lastmod>2024-08-08</lastmod>
          <changefreq>daily</changefreq>
