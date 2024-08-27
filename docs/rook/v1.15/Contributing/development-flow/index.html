@@ -65,9 +65,12 @@
 <span class=normal><a href=#__codelineno-3-34>34</a></span>
 <span class=normal><a href=#__codelineno-3-35>35</a></span>
 <span class=normal><a href=#__codelineno-3-36>36</a></span>
-<span class=normal><a href=#__codelineno-3-37>37</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a>rook
+<span class=normal><a href=#__codelineno-3-37>37</a></span>
+<span class=normal><a href=#__codelineno-3-38>38</a></span>
+<span class=normal><a href=#__codelineno-3-39>39</a></span>
+<span class=normal><a href=#__codelineno-3-40>40</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a>rook
 <a id=__codelineno-3-2 name=__codelineno-3-2></a>├── build                         # build makefiles and logic to build, publish and release all Rook artifacts
-<a id=__codelineno-3-3 name=__codelineno-3-3></a>├── cluster
+<a id=__codelineno-3-3 name=__codelineno-3-3></a>├── deploy
 <a id=__codelineno-3-4 name=__codelineno-3-4></a>│   ├── charts                    # Helm charts
 <a id=__codelineno-3-5 name=__codelineno-3-5></a>│   │   └── rook-ceph
 <a id=__codelineno-3-6 name=__codelineno-3-6></a>│   │   └── rook-ceph-cluster
@@ -88,20 +91,23 @@
 <a id=__codelineno-3-21 name=__codelineno-3-21></a>│   ├── clusterd
 <a id=__codelineno-3-22 name=__codelineno-3-22></a>│   ├── daemon                    # daemons for configuring ceph
 <a id=__codelineno-3-23 name=__codelineno-3-23></a>│   │   ├── ceph
-<a id=__codelineno-3-24 name=__codelineno-3-24></a>│   │   └── discover
-<a id=__codelineno-3-25 name=__codelineno-3-25></a>│   ├── operator                  # all reconcile logic and custom controllers
-<a id=__codelineno-3-26 name=__codelineno-3-26></a>│   │   ├── ceph
-<a id=__codelineno-3-27 name=__codelineno-3-27></a>│   │   ├── discover
-<a id=__codelineno-3-28 name=__codelineno-3-28></a>│   │   ├── k8sutil
-<a id=__codelineno-3-29 name=__codelineno-3-29></a>│   ├── util
-<a id=__codelineno-3-30 name=__codelineno-3-30></a>│   └── version
-<a id=__codelineno-3-31 name=__codelineno-3-31></a>└── tests
-<a id=__codelineno-3-32 name=__codelineno-3-32></a>    ├── framework                 # integration test framework
-<a id=__codelineno-3-33 name=__codelineno-3-33></a>    │   ├── clients
-<a id=__codelineno-3-34 name=__codelineno-3-34></a>    │   ├── installer
-<a id=__codelineno-3-35 name=__codelineno-3-35></a>    │   └── utils
-<a id=__codelineno-3-36 name=__codelineno-3-36></a>    ├── integration               # integration test cases that will be invoked during golang testing
-<a id=__codelineno-3-37 name=__codelineno-3-37></a>    └── scripts                   # scripts for setting up integration and manual testing environments
+<a id=__codelineno-3-24 name=__codelineno-3-24></a>│   │   ├── discover
+<a id=__codelineno-3-25 name=__codelineno-3-25></a>│   │   ├── multus
+<a id=__codelineno-3-26 name=__codelineno-3-26></a>│   │   └── util
+<a id=__codelineno-3-27 name=__codelineno-3-27></a>│   ├── operator                  # all reconcile logic and custom controllers
+<a id=__codelineno-3-28 name=__codelineno-3-28></a>│   │   ├── ceph
+<a id=__codelineno-3-29 name=__codelineno-3-29></a>│   │   ├── discover
+<a id=__codelineno-3-30 name=__codelineno-3-30></a>│   │   ├── k8sutil
+<a id=__codelineno-3-31 name=__codelineno-3-31></a>│   │   └── test
+<a id=__codelineno-3-32 name=__codelineno-3-32></a>│   ├── util
+<a id=__codelineno-3-33 name=__codelineno-3-33></a>│   └── version
+<a id=__codelineno-3-34 name=__codelineno-3-34></a>└── tests
+<a id=__codelineno-3-35 name=__codelineno-3-35></a>    ├── framework                 # integration test framework
+<a id=__codelineno-3-36 name=__codelineno-3-36></a>    │   ├── clients
+<a id=__codelineno-3-37 name=__codelineno-3-37></a>    │   ├── installer
+<a id=__codelineno-3-38 name=__codelineno-3-38></a>    │   └── utils
+<a id=__codelineno-3-39 name=__codelineno-3-39></a>    ├── integration               # integration test cases that will be invoked during golang testing
+<a id=__codelineno-3-40 name=__codelineno-3-40></a>    └── scripts                   # scripts for setting up integration and manual testing environments
 </code></pre></div></td></tr></table></div> <h2 id=development>Development<a class=headerlink href=#development title="Permanent link">&para;</a></h2> <p>To submit a change, create a branch in your fork and then submit a pull request (PR) from the branch.</p> <h3 id=design-document>Design Document<a class=headerlink href=#design-document title="Permanent link">&para;</a></h3> <p>For new features of significant scope and complexity, a design document is recommended before work begins on the implementation. Create a design document if:</p> <ul> <li>Adding a new CRD</li> <li>Adding a significant feature.</li> </ul> <p>For smaller, straightforward features and bug fixes, there is no need for a design document. Authoring a design document has many advantages:</p> <ul> <li>Forces the author to think critically about the feature and identify potential issues early in the design</li> <li>Obtain agreement amongst the community before code is written to avoid wasted effort in the wrong direction</li> <li>Newcomers may more quickly understand the feature</li> </ul> <div class="admonition note"> <p class=admonition-title>Note</p> <p>Writing code to prototype the feature while working on the design may be very useful to help flesh out the approach.</p> </div> <p>A design document should be written as a markdown file in the <a href=https://github.com/rook/rook/tree/release-1.15/design>design folder</a>. Follow the process outlined in the <a href=https://github.com/rook/rook/tree/release-1.15/design/design_template.md>design template</a>. There are many examples of previous design documents in that folder. Submit a pull request for the design to be discussed and approved by the community, just like any other change to the repository.</p> <h3 id=create-a-branch>Create a Branch<a class=headerlink href=#create-a-branch title="Permanent link">&para;</a></h3> <p>From a console, create a new branch based on your fork where changes will be developed:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
 <span class=normal><a href=#__codelineno-4-2>2</a></span>
 <span class=normal><a href=#__codelineno-4-3>3</a></span>
