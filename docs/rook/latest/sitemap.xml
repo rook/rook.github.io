@@ -205,6 +205,10 @@
          <lastmod>2024-09-18</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-volume-group-snapshot/</loc>
+         <lastmod>2024-09-18</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/custom-images/</loc>
          <lastmod>2024-09-18</lastmod>
     </url>
