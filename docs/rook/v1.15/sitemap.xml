@@ -45,11 +45,27 @@
          <lastmod>2024-09-20</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/advance-external/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/consumer-import/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/external-cluster/</loc>
          <lastmod>2024-09-20</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/provider-export/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/topology-for-external-mode/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://rook.io/v1.15/CRDs/Cluster/external-cluster/upgrade-external/</loc>
          <lastmod>2024-09-20</lastmod>
     </url>
     <url>
