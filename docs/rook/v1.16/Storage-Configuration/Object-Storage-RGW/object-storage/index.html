@@ -83,7 +83,9 @@
 <span class=normal><a href=#__codelineno-3-38>38</a></span>
 <span class=normal><a href=#__codelineno-3-39>39</a></span>
 <span class=normal><a href=#__codelineno-3-40>40</a></span>
-<span class=normal><a href=#__codelineno-3-41>41</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-3-41>41</a></span>
+<span class=normal><a href=#__codelineno-3-42>42</a></span>
+<span class=normal><a href=#__codelineno-3-43>43</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephBlockPool</span>
 <a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rgw-root</span>
@@ -123,7 +125,9 @@
 <a id=__codelineno-3-38 name=__codelineno-3-38></a><span class=w>    </span><span class=c1># For production it is recommended to use more chunks, such as 4+2 or 8+4</span>
 <a id=__codelineno-3-39 name=__codelineno-3-39></a><span class=w>    </span><span class=nt>dataChunks</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <a id=__codelineno-3-40 name=__codelineno-3-40></a><span class=w>    </span><span class=nt>codingChunks</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id=__codelineno-3-41 name=__codelineno-3-41></a><span class=w>  </span><span class=nt>application</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rgw</span>
+<a id=__codelineno-3-41 name=__codelineno-3-41></a><span class=w>  </span><span class=nt>parameters</span><span class=p>:</span>
+<a id=__codelineno-3-42 name=__codelineno-3-42></a><span class=w>    </span><span class=nt>bulk</span><span class=p>:</span><span class=w> </span><span class=s>&quot;true&quot;</span>
+<a id=__codelineno-3-43 name=__codelineno-3-43></a><span class=w>  </span><span class=nt>application</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rgw</span>
 </code></pre></div></td></tr></table></div> <p>Create the shared pools:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=go>kubectl create -f object-shared-pools.yaml</span>
 </code></pre></div></td></tr></table></div> <h4 id=create-each-object-store>Create Each Object Store<a class=headerlink href=#create-each-object-store title="Permanent link">&para;</a></h4> <p>After the pools have been created above, create each object store to consume the shared pools.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
 <span class=normal><a href=#__codelineno-5-2> 2</a></span>
