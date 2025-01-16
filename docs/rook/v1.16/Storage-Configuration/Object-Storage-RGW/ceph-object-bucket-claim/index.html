@@ -11,7 +11,27 @@
 <span class=normal><a href=#__codelineno-0-11>11</a></span>
 <span class=normal><a href=#__codelineno-0-12>12</a></span>
 <span class=normal><a href=#__codelineno-0-13>13</a></span>
-<span class=normal><a href=#__codelineno-0-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">objectbucket.io/v1alpha1</span>
+<span class=normal><a href=#__codelineno-0-14>14</a></span>
+<span class=normal><a href=#__codelineno-0-15>15</a></span>
+<span class=normal><a href=#__codelineno-0-16>16</a></span>
+<span class=normal><a href=#__codelineno-0-17>17</a></span>
+<span class=normal><a href=#__codelineno-0-18>18</a></span>
+<span class=normal><a href=#__codelineno-0-19>19</a></span>
+<span class=normal><a href=#__codelineno-0-20>20</a></span>
+<span class=normal><a href=#__codelineno-0-21>21</a></span>
+<span class=normal><a href=#__codelineno-0-22>22</a></span>
+<span class=normal><a href=#__codelineno-0-23>23</a></span>
+<span class=normal><a href=#__codelineno-0-24>24</a></span>
+<span class=normal><a href=#__codelineno-0-25>25</a></span>
+<span class=normal><a href=#__codelineno-0-26>26</a></span>
+<span class=normal><a href=#__codelineno-0-27>27</a></span>
+<span class=normal><a href=#__codelineno-0-28>28</a></span>
+<span class=normal><a href=#__codelineno-0-29>29</a></span>
+<span class=normal><a href=#__codelineno-0-30>30</a></span>
+<span class=normal><a href=#__codelineno-0-31>31</a></span>
+<span class=normal><a href=#__codelineno-0-32>32</a></span>
+<span class=normal><a href=#__codelineno-0-33>33</a></span>
+<span class=normal><a href=#__codelineno-0-34>34</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">objectbucket.io/v1alpha1</span>
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ObjectBucketClaim</span>
 <a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph-bucket [1]</span>
@@ -25,7 +45,27 @@
 <a id=__codelineno-0-12 name=__codelineno-0-12></a><span class=w>    </span><span class=nt>maxSize</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2G&quot;</span>
 <a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=w>    </span><span class=nt>bucketMaxObjects</span><span class=p>:</span><span class=w> </span><span class=s>&quot;3000&quot;</span>
 <a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=w>    </span><span class=nt>bucketMaxSize</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4G&quot;</span>
-</code></pre></div></td></tr></table></div> <ol> <li><code>name</code> of the <code>ObjectBucketClaim</code>. This name becomes the name of the Secret and ConfigMap.</li> <li><code>namespace</code>(optional) of the <code>ObjectBucketClaim</code>, which is also the namespace of the ConfigMap and Secret.</li> <li><code>bucketName</code> name of the <code>bucket</code>. <strong>Not</strong> recommended for new buckets since names must be unique within an entire object store.</li> <li><code>generateBucketName</code> value becomes the prefix for a randomly generated name, if supplied then <code>bucketName</code> must be empty. If both <code>bucketName</code> and <code>generateBucketName</code> are supplied then <code>BucketName</code> has precedence and <code>GenerateBucketName</code> is ignored. If both <code>bucketName</code> and <code>generateBucketName</code> are blank or omitted then the storage class is expected to contain the name of an <em>existing</em> bucket. It's an error if all three bucket related names are blank or omitted.</li> <li><code>storageClassName</code> which defines the StorageClass which contains the names of the bucket provisioner, the object-store and specifies the bucket retention policy.</li> <li> <p><code>additionalConfig</code> is an optional list of key-value pairs used to define attributes specific to the bucket being provisioned by this OBC. This information is typically tuned to a particular bucket provisioner and may limit application portability. Options supported:</p> <ul> <li><code>maxObjects</code>: The maximum number of objects in the bucket as a quota on the user account automatically created for the bucket.</li> <li><code>maxSize</code>: The maximum size of the bucket as a quota on the user account automatically created for the bucket. Please note minimum recommended value is 4K.</li> <li><code>bucketMaxObjects</code>: The maximum number of objects in the bucket as an individual bucket quota. This is useful when the bucket is shared among multiple users.</li> <li><code>bucketMaxSize</code>: The maximum size of the bucket as an individual bucket quota.</li> </ul> </li> </ol> <h3 id=obc-custom-resource-after-bucket-provisioning>OBC Custom Resource after Bucket Provisioning<a class=headerlink href=#obc-custom-resource-after-bucket-provisioning title="Permanent link">&para;</a></h3> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
+<a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=w>    </span><span class=nt>bucketPolicy</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span>
+<a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=w>      </span><span class=no>{</span>
+<a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=w>          </span><span class=no>&quot;Version&quot;: &quot;2012-10-17&quot;,</span>
+<a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=w>          </span><span class=no>&quot;Statement&quot;: [</span>
+<a id=__codelineno-0-19 name=__codelineno-0-19></a><span class=w>              </span><span class=no>{</span>
+<a id=__codelineno-0-20 name=__codelineno-0-20></a><span class=w>                  </span><span class=no>&quot;Effect&quot;: &quot;Allow&quot;,</span>
+<a id=__codelineno-0-21 name=__codelineno-0-21></a><span class=w>                  </span><span class=no>&quot;Principal&quot;: {</span>
+<a id=__codelineno-0-22 name=__codelineno-0-22></a><span class=w>                      </span><span class=no>&quot;AWS&quot;: &quot;arn:aws:iam:::user/bar&quot;</span>
+<a id=__codelineno-0-23 name=__codelineno-0-23></a><span class=w>                  </span><span class=no>},</span>
+<a id=__codelineno-0-24 name=__codelineno-0-24></a><span class=w>                  </span><span class=no>&quot;Action&quot;: [</span>
+<a id=__codelineno-0-25 name=__codelineno-0-25></a><span class=w>                      </span><span class=no>&quot;s3:GetObject&quot;,</span>
+<a id=__codelineno-0-26 name=__codelineno-0-26></a><span class=w>                      </span><span class=no>&quot;s3:ListBucket&quot;,</span>
+<a id=__codelineno-0-27 name=__codelineno-0-27></a><span class=w>                      </span><span class=no>&quot;s3:GetBucketLocation&quot;</span>
+<a id=__codelineno-0-28 name=__codelineno-0-28></a><span class=w>                  </span><span class=no>],</span>
+<a id=__codelineno-0-29 name=__codelineno-0-29></a><span class=w>                  </span><span class=no>&quot;Resource&quot;: [</span>
+<a id=__codelineno-0-30 name=__codelineno-0-30></a><span class=w>                      </span><span class=no>&quot;arn:aws:s3:::bucket-policy-test/*&quot;</span>
+<a id=__codelineno-0-31 name=__codelineno-0-31></a><span class=w>                  </span><span class=no>]</span>
+<a id=__codelineno-0-32 name=__codelineno-0-32></a><span class=w>              </span><span class=no>}</span>
+<a id=__codelineno-0-33 name=__codelineno-0-33></a><span class=w>          </span><span class=no>]</span>
+<a id=__codelineno-0-34 name=__codelineno-0-34></a><span class=w>      </span><span class=no>}</span>
+</code></pre></div></td></tr></table></div> <ol> <li><code>name</code> of the <code>ObjectBucketClaim</code>. This name becomes the name of the Secret and ConfigMap.</li> <li><code>namespace</code>(optional) of the <code>ObjectBucketClaim</code>, which is also the namespace of the ConfigMap and Secret.</li> <li><code>bucketName</code> name of the <code>bucket</code>. <strong>Not</strong> recommended for new buckets since names must be unique within an entire object store.</li> <li><code>generateBucketName</code> value becomes the prefix for a randomly generated name, if supplied then <code>bucketName</code> must be empty. If both <code>bucketName</code> and <code>generateBucketName</code> are supplied then <code>BucketName</code> has precedence and <code>GenerateBucketName</code> is ignored. If both <code>bucketName</code> and <code>generateBucketName</code> are blank or omitted then the storage class is expected to contain the name of an <em>existing</em> bucket. It's an error if all three bucket related names are blank or omitted.</li> <li><code>storageClassName</code> which defines the StorageClass which contains the names of the bucket provisioner, the object-store and specifies the bucket retention policy.</li> <li> <p><code>additionalConfig</code> is an optional list of key-value pairs used to define attributes specific to the bucket being provisioned by this OBC. This information is typically tuned to a particular bucket provisioner and may limit application portability. Options supported:</p> <ul> <li><code>maxObjects</code>: The maximum number of objects in the bucket as a quota on the user account automatically created for the bucket.</li> <li><code>maxSize</code>: The maximum size of the bucket as a quota on the user account automatically created for the bucket. Please note minimum recommended value is 4K.</li> <li><code>bucketMaxObjects</code>: The maximum number of objects in the bucket as an individual bucket quota. This is useful when the bucket is shared among multiple users.</li> <li><code>bucketMaxSize</code>: The maximum size of the bucket as an individual bucket quota.</li> <li><code>bucketPolicy</code>: A raw JSON format string that defines an AWS S3 format the bucket policy. If set, the policy string will override any existing policy set on the bucket and any default bucket policy that the bucket provisioner potentially would have automatically generated.</li> </ul> </li> </ol> <h3 id=obc-custom-resource-after-bucket-provisioning>OBC Custom Resource after Bucket Provisioning<a class=headerlink href=#obc-custom-resource-after-bucket-provisioning title="Permanent link">&para;</a></h3> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
 <span class=normal><a href=#__codelineno-1-2> 2</a></span>
 <span class=normal><a href=#__codelineno-1-3> 3</a></span>
 <span class=normal><a href=#__codelineno-1-4> 4</a></span>
