@@ -29,19 +29,27 @@
 <span class=normal><a href=#__codelineno-5-10>10</a></span>
 <span class=normal><a href=#__codelineno-5-11>11</a></span>
 <span class=normal><a href=#__codelineno-5-12>12</a></span>
-<span class=normal><a href=#__codelineno-5-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=go>DISK=&quot;/dev/sdX&quot;</span>
+<span class=normal><a href=#__codelineno-5-13>13</a></span>
+<span class=normal><a href=#__codelineno-5-14>14</a></span>
+<span class=normal><a href=#__codelineno-5-15>15</a></span>
+<span class=normal><a href=#__codelineno-5-16>16</a></span>
+<span class=normal><a href=#__codelineno-5-17>17</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=go>DISK=&quot;/dev/sdX&quot;</span>
 <a id=__codelineno-5-2 name=__codelineno-5-2></a>
 <a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=gp># </span>Zap<span class=w> </span>the<span class=w> </span>disk<span class=w> </span>to<span class=w> </span>a<span class=w> </span>fresh,<span class=w> </span>usable<span class=w> </span>state<span class=w> </span><span class=o>(</span>zap-all<span class=w> </span>is<span class=w> </span>important,<span class=w> </span>b/c<span class=w> </span>MBR<span class=w> </span>has<span class=w> </span>to<span class=w> </span>be<span class=w> </span>clean<span class=o>)</span>
 <a id=__codelineno-5-4 name=__codelineno-5-4></a><span class=go>sgdisk --zap-all $DISK</span>
 <a id=__codelineno-5-5 name=__codelineno-5-5></a>
-<a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=gp># </span>Wipe<span class=w> </span>a<span class=w> </span>large<span class=w> </span>portion<span class=w> </span>of<span class=w> </span>the<span class=w> </span>beginning<span class=w> </span>of<span class=w> </span>the<span class=w> </span>disk<span class=w> </span>to<span class=w> </span>remove<span class=w> </span>more<span class=w> </span>LVM<span class=w> </span>metadata<span class=w> </span>that<span class=w> </span>may<span class=w> </span>be<span class=w> </span>present
-<a id=__codelineno-5-7 name=__codelineno-5-7></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1M count=100 oflag=direct,dsync</span>
-<a id=__codelineno-5-8 name=__codelineno-5-8></a>
-<a id=__codelineno-5-9 name=__codelineno-5-9></a><span class=gp># </span>SSDs<span class=w> </span>may<span class=w> </span>be<span class=w> </span>better<span class=w> </span>cleaned<span class=w> </span>with<span class=w> </span>blkdiscard<span class=w> </span>instead<span class=w> </span>of<span class=w> </span>dd
-<a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=go>blkdiscard $DISK</span>
-<a id=__codelineno-5-11 name=__codelineno-5-11></a>
-<a id=__codelineno-5-12 name=__codelineno-5-12></a><span class=gp># </span>Inform<span class=w> </span>the<span class=w> </span>OS<span class=w> </span>of<span class=w> </span>partition<span class=w> </span>table<span class=w> </span>changes
-<a id=__codelineno-5-13 name=__codelineno-5-13></a><span class=go>partprobe $DISK</span>
+<a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=gp># </span>Wipe<span class=w> </span>portions<span class=w> </span>of<span class=w> </span>the<span class=w> </span>disk<span class=w> </span>to<span class=w> </span>remove<span class=w> </span>more<span class=w> </span>LVM<span class=w> </span>metadata<span class=w> </span>that<span class=w> </span>may<span class=w> </span>be<span class=w> </span>present
+<a id=__codelineno-5-7 name=__codelineno-5-7></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1K count=200 oflag=direct,dsync seek=0 # Clear at offset 0</span>
+<a id=__codelineno-5-8 name=__codelineno-5-8></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1K count=200 oflag=direct,dsync seek=$((1 * 1024**2)) # Clear at offset 1GB</span>
+<a id=__codelineno-5-9 name=__codelineno-5-9></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1K count=200 oflag=direct,dsync seek=$((10 * 1024**2)) # Clear at offset 10GB</span>
+<a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1K count=200 oflag=direct,dsync seek=$((100 * 1024**2)) # Clear at offset 100GB</span>
+<a id=__codelineno-5-11 name=__codelineno-5-11></a><span class=go>dd if=/dev/zero of=&quot;$DISK&quot; bs=1K count=200 oflag=direct,dsync seek=$((1000 * 1024**2)) # Clear at offset 1000GB</span>
+<a id=__codelineno-5-12 name=__codelineno-5-12></a>
+<a id=__codelineno-5-13 name=__codelineno-5-13></a><span class=gp># </span>SSDs<span class=w> </span>may<span class=w> </span>be<span class=w> </span>better<span class=w> </span>cleaned<span class=w> </span>with<span class=w> </span>blkdiscard<span class=w> </span>instead<span class=w> </span>of<span class=w> </span>dd
+<a id=__codelineno-5-14 name=__codelineno-5-14></a><span class=go>blkdiscard $DISK</span>
+<a id=__codelineno-5-15 name=__codelineno-5-15></a>
+<a id=__codelineno-5-16 name=__codelineno-5-16></a><span class=gp># </span>Inform<span class=w> </span>the<span class=w> </span>OS<span class=w> </span>of<span class=w> </span>partition<span class=w> </span>table<span class=w> </span>changes
+<a id=__codelineno-5-17 name=__codelineno-5-17></a><span class=go>partprobe $DISK</span>
 </code></pre></div></td></tr></table></div> <p>Ceph can leave LVM and device mapper data on storage drives, preventing them from being redeployed. These steps can clean former Ceph drives for reuse. Note that this only needs to be run once on each node. If you have <strong>only one</strong> Rook cluster and <strong>all</strong> Ceph disks are being wiped, run the following command.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
 <span class=normal><a href=#__codelineno-6-2>2</a></span>
 <span class=normal><a href=#__codelineno-6-3>3</a></span>
