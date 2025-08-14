@@ -68,7 +68,9 @@
 <span class=normal><a href=#__codelineno-0-68>68</a></span>
 <span class=normal><a href=#__codelineno-0-69>69</a></span>
 <span class=normal><a href=#__codelineno-0-70>70</a></span>
-<span class=normal><a href=#__codelineno-0-71>71</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-0-71>71</a></span>
+<span class=normal><a href=#__codelineno-0-72>72</a></span>
+<span class=normal><a href=#__codelineno-0-73>73</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephBlockPool</span>
 <a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">replicapool</span>
@@ -125,20 +127,22 @@
 <a id=__codelineno-0-55 name=__codelineno-0-55></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/provisioner-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
 <a id=__codelineno-0-56 name=__codelineno-0-56></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/controller-expand-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-provisioner</span>
 <a id=__codelineno-0-57 name=__codelineno-0-57></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/controller-expand-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
-<a id=__codelineno-0-58 name=__codelineno-0-58></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/node-stage-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-node</span>
-<a id=__codelineno-0-59 name=__codelineno-0-59></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/node-stage-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
-<a id=__codelineno-0-60 name=__codelineno-0-60></a>
-<a id=__codelineno-0-61 name=__codelineno-0-61></a><span class=w>    </span><span class=c1># Specify the filesystem type of the volume. If not specified, csi-provisioner</span>
-<a id=__codelineno-0-62 name=__codelineno-0-62></a><span class=w>    </span><span class=c1># will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock</span>
-<a id=__codelineno-0-63 name=__codelineno-0-63></a><span class=w>    </span><span class=c1># in hyperconverged settings where the volume is mounted on the same node as the osds.</span>
-<a id=__codelineno-0-64 name=__codelineno-0-64></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/fstype</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ext4</span>
-<a id=__codelineno-0-65 name=__codelineno-0-65></a>
-<a id=__codelineno-0-66 name=__codelineno-0-66></a><span class=c1># Delete the rbd volume when a PVC is deleted</span>
-<a id=__codelineno-0-67 name=__codelineno-0-67></a><span class=nt>reclaimPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Delete</span>
-<a id=__codelineno-0-68 name=__codelineno-0-68></a>
-<a id=__codelineno-0-69 name=__codelineno-0-69></a><span class=c1># Optional, if you want to add dynamic resize for PVC.</span>
-<a id=__codelineno-0-70 name=__codelineno-0-70></a><span class=c1># For now only ext3, ext4, xfs resize support provided, like in Kubernetes itself.</span>
-<a id=__codelineno-0-71 name=__codelineno-0-71></a><span class=nt>allowVolumeExpansion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id=__codelineno-0-58 name=__codelineno-0-58></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/controller-publish-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-provisioner</span>
+<a id=__codelineno-0-59 name=__codelineno-0-59></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/controller-publish-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
+<a id=__codelineno-0-60 name=__codelineno-0-60></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/node-stage-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-node</span>
+<a id=__codelineno-0-61 name=__codelineno-0-61></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/node-stage-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<a id=__codelineno-0-62 name=__codelineno-0-62></a>
+<a id=__codelineno-0-63 name=__codelineno-0-63></a><span class=w>    </span><span class=c1># Specify the filesystem type of the volume. If not specified, csi-provisioner</span>
+<a id=__codelineno-0-64 name=__codelineno-0-64></a><span class=w>    </span><span class=c1># will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock</span>
+<a id=__codelineno-0-65 name=__codelineno-0-65></a><span class=w>    </span><span class=c1># in hyperconverged settings where the volume is mounted on the same node as the osds.</span>
+<a id=__codelineno-0-66 name=__codelineno-0-66></a><span class=w>    </span><span class=nt>csi.storage.k8s.io/fstype</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ext4</span>
+<a id=__codelineno-0-67 name=__codelineno-0-67></a>
+<a id=__codelineno-0-68 name=__codelineno-0-68></a><span class=c1># Delete the rbd volume when a PVC is deleted</span>
+<a id=__codelineno-0-69 name=__codelineno-0-69></a><span class=nt>reclaimPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Delete</span>
+<a id=__codelineno-0-70 name=__codelineno-0-70></a>
+<a id=__codelineno-0-71 name=__codelineno-0-71></a><span class=c1># Optional, if you want to add dynamic resize for PVC.</span>
+<a id=__codelineno-0-72 name=__codelineno-0-72></a><span class=c1># For now only ext3, ext4, xfs resize support provided, like in Kubernetes itself.</span>
+<a id=__codelineno-0-73 name=__codelineno-0-73></a><span class=nt>allowVolumeExpansion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div></td></tr></table></div> <p>If you've deployed the Rook operator in a namespace other than <code>rook-ceph</code>, change the prefix in the provisioner to match the namespace you used. For example, if the Rook operator is running in the namespace <code>my-namespace</code> the provisioner value should be <code>my-namespace.rbd.csi.ceph.com</code>.</p> <p>Create the storage class.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=go>kubectl create -f deploy/examples/csi/rbd/storageclass.yaml</span>
 </code></pre></div></td></tr></table></div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>As <a href=https://kubernetes.io/docs/concepts/storage/persistent-volumes/#retain>specified by Kubernetes</a>, when using the <code>Retain</code> reclaim policy, any Ceph RBD image that is backed by a <code>PersistentVolume</code> will continue to exist even after the <code>PersistentVolume</code> has been deleted. These Ceph RBD images will need to be cleaned up manually using <code>rbd rm</code>.</p> </div> <h2 id=consume-the-storage-wordpress-sample>Consume the storage: Wordpress sample<a class=headerlink href=#consume-the-storage-wordpress-sample title="Permanent link">&para;</a></h2> <p>We create a sample app to consume the block storage provisioned by Rook with the classic wordpress and mysql apps. Both of these apps will make use of block volumes provisioned by Rook.</p> <p>Start mysql and wordpress from the <code>deploy/examples</code> folder:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
 <span class=normal><a href=#__codelineno-2-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=go>kubectl create -f mysql.yaml</span>
