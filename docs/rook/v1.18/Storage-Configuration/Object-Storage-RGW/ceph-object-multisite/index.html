@@ -184,37 +184,41 @@
 <span class=normal><a href=#__codelineno-20-28>28</a></span>
 <span class=normal><a href=#__codelineno-20-29>29</a></span>
 <span class=normal><a href=#__codelineno-20-30>30</a></span>
-<span class=normal><a href=#__codelineno-20-31>31</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-20-31>31</a></span>
+<span class=normal><a href=#__codelineno-20-32>32</a></span>
+<span class=normal><a href=#__codelineno-20-33>33</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-20-2 name=__codelineno-20-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectRealm</span>
 <a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
 <a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
-<a id=__codelineno-20-6 name=__codelineno-20-6></a><span class=nn>---</span>
-<a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
-<a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectZoneGroup</span>
-<a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=nt>metadata</span><span class=p>:</span>
-<a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
-<a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
-<a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=nt>spec</span><span class=p>:</span>
-<a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=w>  </span><span class=nt>realm</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
-<a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=nn>---</span>
-<a id=__codelineno-20-15 name=__codelineno-20-15></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
-<a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectZone</span>
-<a id=__codelineno-20-17 name=__codelineno-20-17></a><span class=nt>metadata</span><span class=p>:</span>
-<a id=__codelineno-20-18 name=__codelineno-20-18></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
-<a id=__codelineno-20-19 name=__codelineno-20-19></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
-<a id=__codelineno-20-20 name=__codelineno-20-20></a><span class=nt>spec</span><span class=p>:</span>
-<a id=__codelineno-20-21 name=__codelineno-20-21></a><span class=w>  </span><span class=nt>zoneGroup</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
-<a id=__codelineno-20-22 name=__codelineno-20-22></a><span class=w>  </span><span class=nt>metadataPool</span><span class=p>:</span>
-<a id=__codelineno-20-23 name=__codelineno-20-23></a><span class=w>    </span><span class=nt>replicated</span><span class=p>:</span>
-<a id=__codelineno-20-24 name=__codelineno-20-24></a><span class=w>      </span><span class=nt>size</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-<a id=__codelineno-20-25 name=__codelineno-20-25></a><span class=w>  </span><span class=nt>dataPool</span><span class=p>:</span>
-<a id=__codelineno-20-26 name=__codelineno-20-26></a><span class=w>    </span><span class=nt>replicated</span><span class=p>:</span>
-<a id=__codelineno-20-27 name=__codelineno-20-27></a><span class=w>      </span><span class=nt>size</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-<a id=__codelineno-20-28 name=__codelineno-20-28></a><span class=w>  </span><span class=nt>preservePoolsOnDelete</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id=__codelineno-20-29 name=__codelineno-20-29></a><span class=w>  </span><span class=c1># recommended to set this value if ingress used for exposing rgw endpoints</span>
-<a id=__codelineno-20-30 name=__codelineno-20-30></a><span class=w>  </span><span class=c1># customEndpoints:</span>
-<a id=__codelineno-20-31 name=__codelineno-20-31></a><span class=w>  </span><span class=c1>#   - &quot;http://rgw-a.fqdn&quot;</span>
+<a id=__codelineno-20-6 name=__codelineno-20-6></a><span class=nt>spec</span><span class=p>:</span>
+<a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=w>  </span><span class=nt>defaultRealm</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=nn>---</span>
+<a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectZoneGroup</span>
+<a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=nt>metadata</span><span class=p>:</span>
+<a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
+<a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
+<a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=nt>spec</span><span class=p>:</span>
+<a id=__codelineno-20-15 name=__codelineno-20-15></a><span class=w>  </span><span class=nt>realm</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
+<a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=nn>---</span>
+<a id=__codelineno-20-17 name=__codelineno-20-17></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<a id=__codelineno-20-18 name=__codelineno-20-18></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectZone</span>
+<a id=__codelineno-20-19 name=__codelineno-20-19></a><span class=nt>metadata</span><span class=p>:</span>
+<a id=__codelineno-20-20 name=__codelineno-20-20></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
+<a id=__codelineno-20-21 name=__codelineno-20-21></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span><span class=w> </span><span class=c1># namespace:cluster</span>
+<a id=__codelineno-20-22 name=__codelineno-20-22></a><span class=nt>spec</span><span class=p>:</span>
+<a id=__codelineno-20-23 name=__codelineno-20-23></a><span class=w>  </span><span class=nt>zoneGroup</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
+<a id=__codelineno-20-24 name=__codelineno-20-24></a><span class=w>  </span><span class=nt>metadataPool</span><span class=p>:</span>
+<a id=__codelineno-20-25 name=__codelineno-20-25></a><span class=w>    </span><span class=nt>replicated</span><span class=p>:</span>
+<a id=__codelineno-20-26 name=__codelineno-20-26></a><span class=w>      </span><span class=nt>size</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id=__codelineno-20-27 name=__codelineno-20-27></a><span class=w>  </span><span class=nt>dataPool</span><span class=p>:</span>
+<a id=__codelineno-20-28 name=__codelineno-20-28></a><span class=w>    </span><span class=nt>replicated</span><span class=p>:</span>
+<a id=__codelineno-20-29 name=__codelineno-20-29></a><span class=w>      </span><span class=nt>size</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id=__codelineno-20-30 name=__codelineno-20-30></a><span class=w>  </span><span class=nt>preservePoolsOnDelete</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id=__codelineno-20-31 name=__codelineno-20-31></a><span class=w>  </span><span class=c1># recommended to set this value if ingress used for exposing rgw endpoints</span>
+<a id=__codelineno-20-32 name=__codelineno-20-32></a><span class=w>  </span><span class=c1># customEndpoints:</span>
+<a id=__codelineno-20-33 name=__codelineno-20-33></a><span class=w>  </span><span class=c1>#   - &quot;http://rgw-a.fqdn&quot;</span>
 </code></pre></div></td></tr></table></div> <p>Now modify the existing <code>CephObjectStore</code> CR to exclude pool settings and add a reference to the zone.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
 <span class=normal><a href=#__codelineno-21-2> 2</a></span>
 <span class=normal><a href=#__codelineno-21-3> 3</a></span>
