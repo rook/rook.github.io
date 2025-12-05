@@ -52,7 +52,10 @@
 <span class=normal><a href=#__codelineno-0-52>52</a></span>
 <span class=normal><a href=#__codelineno-0-53>53</a></span>
 <span class=normal><a href=#__codelineno-0-54>54</a></span>
-<span class=normal><a href=#__codelineno-0-55>55</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
+<span class=normal><a href=#__codelineno-0-55>55</a></span>
+<span class=normal><a href=#__codelineno-0-56>56</a></span>
+<span class=normal><a href=#__codelineno-0-57>57</a></span>
+<span class=normal><a href=#__codelineno-0-58>58</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph.rook.io/v1</span>
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">CephObjectStore</span>
 <a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-store</span>
@@ -67,46 +70,49 @@
 <a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=w>    </span><span class=nt>erasureCoded</span><span class=p>:</span>
 <a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=w>      </span><span class=nt>dataChunks</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=w>      </span><span class=nt>codingChunks</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=w>  </span><span class=nt>preservePoolsOnDelete</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span>
-<a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=w>    </span><span class=c1># sslCertificateRef:</span>
-<a id=__codelineno-0-19 name=__codelineno-0-19></a><span class=w>    </span><span class=c1># caBundleRef:</span>
-<a id=__codelineno-0-20 name=__codelineno-0-20></a><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-<a id=__codelineno-0-21 name=__codelineno-0-21></a><span class=w>    </span><span class=c1># securePort: 443</span>
-<a id=__codelineno-0-22 name=__codelineno-0-22></a><span class=w>    </span><span class=nt>instances</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id=__codelineno-0-23 name=__codelineno-0-23></a><span class=w>    </span><span class=c1># A key/value list of annotations</span>
-<a id=__codelineno-0-24 name=__codelineno-0-24></a><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span>
-<a id=__codelineno-0-25 name=__codelineno-0-25></a><span class=w>    </span><span class=c1>#  key: value</span>
-<a id=__codelineno-0-26 name=__codelineno-0-26></a><span class=w>    </span><span class=nt>placement</span><span class=p>:</span>
-<a id=__codelineno-0-27 name=__codelineno-0-27></a><span class=w>    </span><span class=c1>#  nodeAffinity:</span>
-<a id=__codelineno-0-28 name=__codelineno-0-28></a><span class=w>    </span><span class=c1>#    requiredDuringSchedulingIgnoredDuringExecution:</span>
-<a id=__codelineno-0-29 name=__codelineno-0-29></a><span class=w>    </span><span class=c1>#      nodeSelectorTerms:</span>
-<a id=__codelineno-0-30 name=__codelineno-0-30></a><span class=w>    </span><span class=c1>#      - matchExpressions:</span>
-<a id=__codelineno-0-31 name=__codelineno-0-31></a><span class=w>    </span><span class=c1>#        - key: role</span>
-<a id=__codelineno-0-32 name=__codelineno-0-32></a><span class=w>    </span><span class=c1>#          operator: In</span>
-<a id=__codelineno-0-33 name=__codelineno-0-33></a><span class=w>    </span><span class=c1>#          values:</span>
-<a id=__codelineno-0-34 name=__codelineno-0-34></a><span class=w>    </span><span class=c1>#          - rgw-node</span>
-<a id=__codelineno-0-35 name=__codelineno-0-35></a><span class=w>    </span><span class=c1>#  tolerations:</span>
-<a id=__codelineno-0-36 name=__codelineno-0-36></a><span class=w>    </span><span class=c1>#  - key: rgw-node</span>
-<a id=__codelineno-0-37 name=__codelineno-0-37></a><span class=w>    </span><span class=c1>#    operator: Exists</span>
-<a id=__codelineno-0-38 name=__codelineno-0-38></a><span class=w>    </span><span class=c1>#  podAffinity:</span>
-<a id=__codelineno-0-39 name=__codelineno-0-39></a><span class=w>    </span><span class=c1>#  podAntiAffinity:</span>
-<a id=__codelineno-0-40 name=__codelineno-0-40></a><span class=w>    </span><span class=c1>#  topologySpreadConstraints:</span>
-<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=nt>resources</span><span class=p>:</span>
-<a id=__codelineno-0-42 name=__codelineno-0-42></a><span class=w>    </span><span class=c1>#  limits:</span>
-<a id=__codelineno-0-43 name=__codelineno-0-43></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
-<a id=__codelineno-0-44 name=__codelineno-0-44></a><span class=w>    </span><span class=c1>#  requests:</span>
-<a id=__codelineno-0-45 name=__codelineno-0-45></a><span class=w>    </span><span class=c1>#    cpu: &quot;500m&quot;</span>
+<a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=w>    </span><span class=nt>parameters</span><span class=p>:</span>
+<a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=w>      </span><span class=c1># Ceph Tentacle v20 has optimizations that need to be explicitly enabled</span>
+<a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=w>      </span><span class=c1># allow_ec_optimizations: &quot;true&quot;</span>
+<a id=__codelineno-0-19 name=__codelineno-0-19></a><span class=w>  </span><span class=nt>preservePoolsOnDelete</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id=__codelineno-0-20 name=__codelineno-0-20></a><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span>
+<a id=__codelineno-0-21 name=__codelineno-0-21></a><span class=w>    </span><span class=c1># sslCertificateRef:</span>
+<a id=__codelineno-0-22 name=__codelineno-0-22></a><span class=w>    </span><span class=c1># caBundleRef:</span>
+<a id=__codelineno-0-23 name=__codelineno-0-23></a><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<a id=__codelineno-0-24 name=__codelineno-0-24></a><span class=w>    </span><span class=c1># securePort: 443</span>
+<a id=__codelineno-0-25 name=__codelineno-0-25></a><span class=w>    </span><span class=nt>instances</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id=__codelineno-0-26 name=__codelineno-0-26></a><span class=w>    </span><span class=c1># A key/value list of annotations</span>
+<a id=__codelineno-0-27 name=__codelineno-0-27></a><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span>
+<a id=__codelineno-0-28 name=__codelineno-0-28></a><span class=w>    </span><span class=c1>#  key: value</span>
+<a id=__codelineno-0-29 name=__codelineno-0-29></a><span class=w>    </span><span class=nt>placement</span><span class=p>:</span>
+<a id=__codelineno-0-30 name=__codelineno-0-30></a><span class=w>    </span><span class=c1>#  nodeAffinity:</span>
+<a id=__codelineno-0-31 name=__codelineno-0-31></a><span class=w>    </span><span class=c1>#    requiredDuringSchedulingIgnoredDuringExecution:</span>
+<a id=__codelineno-0-32 name=__codelineno-0-32></a><span class=w>    </span><span class=c1>#      nodeSelectorTerms:</span>
+<a id=__codelineno-0-33 name=__codelineno-0-33></a><span class=w>    </span><span class=c1>#      - matchExpressions:</span>
+<a id=__codelineno-0-34 name=__codelineno-0-34></a><span class=w>    </span><span class=c1>#        - key: role</span>
+<a id=__codelineno-0-35 name=__codelineno-0-35></a><span class=w>    </span><span class=c1>#          operator: In</span>
+<a id=__codelineno-0-36 name=__codelineno-0-36></a><span class=w>    </span><span class=c1>#          values:</span>
+<a id=__codelineno-0-37 name=__codelineno-0-37></a><span class=w>    </span><span class=c1>#          - rgw-node</span>
+<a id=__codelineno-0-38 name=__codelineno-0-38></a><span class=w>    </span><span class=c1>#  tolerations:</span>
+<a id=__codelineno-0-39 name=__codelineno-0-39></a><span class=w>    </span><span class=c1>#  - key: rgw-node</span>
+<a id=__codelineno-0-40 name=__codelineno-0-40></a><span class=w>    </span><span class=c1>#    operator: Exists</span>
+<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=c1>#  podAffinity:</span>
+<a id=__codelineno-0-42 name=__codelineno-0-42></a><span class=w>    </span><span class=c1>#  podAntiAffinity:</span>
+<a id=__codelineno-0-43 name=__codelineno-0-43></a><span class=w>    </span><span class=c1>#  topologySpreadConstraints:</span>
+<a id=__codelineno-0-44 name=__codelineno-0-44></a><span class=w>    </span><span class=nt>resources</span><span class=p>:</span>
+<a id=__codelineno-0-45 name=__codelineno-0-45></a><span class=w>    </span><span class=c1>#  limits:</span>
 <a id=__codelineno-0-46 name=__codelineno-0-46></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
-<a id=__codelineno-0-47 name=__codelineno-0-47></a><span class=w>  </span><span class=c1>#zone:</span>
-<a id=__codelineno-0-48 name=__codelineno-0-48></a><span class=w>    </span><span class=c1>#name: zone-a</span>
-<a id=__codelineno-0-49 name=__codelineno-0-49></a><span class=w>  </span><span class=c1>#hosting:</span>
-<a id=__codelineno-0-50 name=__codelineno-0-50></a><span class=w>  </span><span class=c1>#  advertiseEndpoint:</span>
-<a id=__codelineno-0-51 name=__codelineno-0-51></a><span class=w>  </span><span class=c1>#    dnsName: &quot;mystore.example.com&quot;</span>
-<a id=__codelineno-0-52 name=__codelineno-0-52></a><span class=w>  </span><span class=c1>#    port: 80</span>
-<a id=__codelineno-0-53 name=__codelineno-0-53></a><span class=w>  </span><span class=c1>#    useTls: false</span>
-<a id=__codelineno-0-54 name=__codelineno-0-54></a><span class=w>  </span><span class=c1>#  dnsNames:</span>
-<a id=__codelineno-0-55 name=__codelineno-0-55></a><span class=w>  </span><span class=c1>#    - &quot;mystore.example.org&quot;</span>
+<a id=__codelineno-0-47 name=__codelineno-0-47></a><span class=w>    </span><span class=c1>#  requests:</span>
+<a id=__codelineno-0-48 name=__codelineno-0-48></a><span class=w>    </span><span class=c1>#    cpu: &quot;500m&quot;</span>
+<a id=__codelineno-0-49 name=__codelineno-0-49></a><span class=w>    </span><span class=c1>#    memory: &quot;1024Mi&quot;</span>
+<a id=__codelineno-0-50 name=__codelineno-0-50></a><span class=w>  </span><span class=c1>#zone:</span>
+<a id=__codelineno-0-51 name=__codelineno-0-51></a><span class=w>    </span><span class=c1>#name: zone-a</span>
+<a id=__codelineno-0-52 name=__codelineno-0-52></a><span class=w>  </span><span class=c1>#hosting:</span>
+<a id=__codelineno-0-53 name=__codelineno-0-53></a><span class=w>  </span><span class=c1>#  advertiseEndpoint:</span>
+<a id=__codelineno-0-54 name=__codelineno-0-54></a><span class=w>  </span><span class=c1>#    dnsName: &quot;mystore.example.com&quot;</span>
+<a id=__codelineno-0-55 name=__codelineno-0-55></a><span class=w>  </span><span class=c1>#    port: 80</span>
+<a id=__codelineno-0-56 name=__codelineno-0-56></a><span class=w>  </span><span class=c1>#    useTls: false</span>
+<a id=__codelineno-0-57 name=__codelineno-0-57></a><span class=w>  </span><span class=c1>#  dnsNames:</span>
+<a id=__codelineno-0-58 name=__codelineno-0-58></a><span class=w>  </span><span class=c1>#    - &quot;mystore.example.org&quot;</span>
 </code></pre></div></td></tr></table></div> <h2 id=object-store-settings>Object Store Settings<a class=headerlink href=#object-store-settings title="Permanent link">&para;</a></h2> <h3 id=metadata>Metadata<a class=headerlink href=#metadata title="Permanent link">&para;</a></h3> <ul> <li><code>name</code>: The name of the object store to create, which will be reflected in the pool and other resource names.</li> <li><code>namespace</code>: The namespace of the Rook cluster where the object store is created.</li> </ul> <h3 id=pools>Pools<a class=headerlink href=#pools title="Permanent link">&para;</a></h3> <p>The pools allow all of the settings defined in the Block Pool CRD spec. For more details, see the <a href=../../Block-Storage/ceph-block-pool-crd/ >Block Pool CRD</a> settings. In the example above, there must be at least three hosts (size 3) and at least three devices (2 data + 1 coding chunks) in the cluster.</p> <p>When the <code>zone</code> section is set pools with the object stores name will not be created since the object-store will the using the pools created by the ceph-object-zone.</p> <ul> <li><code>metadataPool</code>: The settings used to create all of the object store metadata pools. Must use replication.</li> <li><code>dataPool</code>: The settings to create the object store data pool. Can use replication or erasure coding.</li> <li><code>preservePoolsOnDelete</code>: If it is set to 'true' the pools used to support the object store will remain when the object store will be deleted. This is a security measure to avoid accidental loss of data. It is set to 'false' by default. If not specified is also deemed as 'false'.</li> <li><code>allowUsersInNamespaces</code>: If a CephObjectStoreUser is created in a namespace other than the Rook cluster namespace, the namespace must be added to this list of allowed namespaces, or specify "*" to allow all namespaces. This is useful for applications that need object store credentials to be created in their own namespace, where neither OBCs nor COSI is being used to create buckets. The default is empty.</li> </ul> <h3 id=realm>Realm<a class=headerlink href=#realm title="Permanent link">&para;</a></h3> <ul> <li><code>defaultRealm</code>: When set to true, Rook will mark the CephObjectStore's realm as the default realm in the Ceph cluster. Only one realm can be marked default. Ceph does not allow default to be unassigned after it is assigned; a different realm can be marked default instead.</li> </ul> <h2 id=auth-settings>Auth Settings<a class=headerlink href=#auth-settings title="Permanent link">&para;</a></h2> <p>The <code>auth</code>-section allows the configuration of authentication providers in addition to the regular authentication mechanism.</p> <p>Currently only OpenStack Keystone is supported.</p> <h3 id=keystone-settings>Keystone Settings<a class=headerlink href=#keystone-settings title="Permanent link">&para;</a></h3> <p>The keystone authentication can be configured in the <code>spec.auth.keystone</code> section of the CRD:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
 <span class=normal><a href=#__codelineno-1-2> 2</a></span>
 <span class=normal><a href=#__codelineno-1-3> 3</a></span>
