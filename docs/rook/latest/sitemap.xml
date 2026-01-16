@@ -2,346 +2,346 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://rook.io/latest/CRDs/ceph-client-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/ceph-nfs-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/specification/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Block-Storage/ceph-block-pool-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Block-Storage/ceph-block-pool-rados-namespace-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Block-Storage/ceph-rbd-mirror-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/ceph-cluster-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/host-cluster/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/network-providers/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/pvc-cluster/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/stretch-cluster/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/advance-external/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/consumer-import/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/external-cluster/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/provider-export/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/topology-for-external-mode/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Cluster/external-cluster/upgrade-external/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-realm-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-store-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-store-user-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-zone-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Object-Storage/ceph-object-zonegroup-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Shared-Filesystem/ceph-filesystem-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Shared-Filesystem/ceph-fs-mirror-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/CRDs/Shared-Filesystem/ceph-fs-subvolumegroup-crd/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Contributing/ci-configuration/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Contributing/development-environment/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Contributing/development-flow/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Contributing/documentation/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Contributing/rook-test-framework/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/ceph-openshift/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/ceph-teardown/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/example-configurations/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/glossary/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/intro/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/quickstart/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/release-cycle/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/storage-architecture/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/Prerequisites/authenticated-registry/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Getting-Started/Prerequisites/prerequisites/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Helm-Charts/ceph-cluster-chart/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Helm-Charts/helm-charts/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Helm-Charts/operator-chart/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/ceph-teardown/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/ceph-configuration/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/ceph-mon-health/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/ceph-osd-mgmt/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/cephx-key-rotation/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/configuration/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Advanced/key-management-system/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/app-migration/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/block-storage/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/rbd-async-disaster-recovery-failover-failback/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/rbd-mirroring/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-drivers/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-volume-clone/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-volume-group-snapshot/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/custom-images/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Monitoring/ceph-dashboard/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Monitoring/ceph-monitoring/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-advanced/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-csi-driver/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs-security/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/NFS/nfs/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-notifications/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-multisite/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-swift/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/cosi/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/object-storage/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-mirroring/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/ceph-common-issues/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/ceph-csi-common-issues/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/ceph-toolbox/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/common-issues/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/direct-tools/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/disaster-recovery/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/kubectl-plugin/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/openshift-common-issues/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Troubleshooting/performance-profiling/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Upgrade/ceph-upgrade/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Upgrade/health-verification/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Upgrade/node-maintenance/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
          <loc>https://rook.io/latest/Upgrade/rook-upgrade/</loc>
-         <lastmod>2026-01-14</lastmod>
+         <lastmod>2026-01-16</lastmod>
     </url>
 </urlset>
