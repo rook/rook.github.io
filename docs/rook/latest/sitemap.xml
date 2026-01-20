@@ -209,6 +209,10 @@
          <lastmod>2026-01-20</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/nvme-of/</loc>
+         <lastmod>2026-01-20</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/rbd-async-disaster-recovery-failover-failback/</loc>
          <lastmod>2026-01-20</lastmod>
     </url>
