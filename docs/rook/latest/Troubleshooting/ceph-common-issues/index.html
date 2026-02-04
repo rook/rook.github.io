@@ -137,25 +137,29 @@
 <span class=normal><a href=#__codelineno-17-16>16</a></span>
 <span class=normal><a href=#__codelineno-17-17>17</a></span>
 <span class=normal><a href=#__codelineno-17-18>18</a></span>
-<span class=normal><a href=#__codelineno-17-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=gp># </span>A<span class=w> </span>device<span class=w> </span>will<span class=w> </span>be<span class=w> </span>skipped<span class=w> </span><span class=k>if</span><span class=w> </span>Rook<span class=w> </span>sees<span class=w> </span>it<span class=w> </span>has<span class=w> </span>partitions<span class=w> </span>or<span class=w> </span>a<span class=w> </span>filesystem
+<span class=normal><a href=#__codelineno-17-19>19</a></span>
+<span class=normal><a href=#__codelineno-17-20>20</a></span>
+<span class=normal><a href=#__codelineno-17-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=gp># </span>A<span class=w> </span>device<span class=w> </span>will<span class=w> </span>be<span class=w> </span>skipped<span class=w> </span><span class=k>if</span><span class=w> </span>Rook<span class=w> </span>sees<span class=w> </span>it<span class=w> </span>has<span class=w> </span>partitions<span class=w> </span>or<span class=w> </span>a<span class=w> </span>filesystem
 <a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=go>2019-05-30 19:02:57.353171 W | cephosd: skipping device sda that is in use</span>
 <a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=go>2019-05-30 19:02:57.452168 W | skipping device &quot;sdb5&quot;: [&quot;Used by ceph-disk&quot;]</span>
 <a id=__codelineno-17-4 name=__codelineno-17-4></a>
-<a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=gp># </span>Other<span class=w> </span>messages<span class=w> </span>about<span class=w> </span>a<span class=w> </span>disk<span class=w> </span>being<span class=w> </span>unusable<span class=w> </span>by<span class=w> </span>ceph<span class=w> </span>include:
-<a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=go>Insufficient space (&lt;5GB) on vgs</span>
-<a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=go>Insufficient space (&lt;5GB)</span>
-<a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=go>LVM detected</span>
-<a id=__codelineno-17-9 name=__codelineno-17-9></a><span class=go>Has BlueStore device label</span>
-<a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=go>locked</span>
-<a id=__codelineno-17-11 name=__codelineno-17-11></a><span class=go>read-only</span>
-<a id=__codelineno-17-12 name=__codelineno-17-12></a>
-<a id=__codelineno-17-13 name=__codelineno-17-13></a><span class=gp># </span>A<span class=w> </span>device<span class=w> </span>is<span class=w> </span>going<span class=w> </span>to<span class=w> </span>be<span class=w> </span>configured
-<a id=__codelineno-17-14 name=__codelineno-17-14></a><span class=go>2019-05-30 19:02:57.535598 I | cephosd: device sdc to be configured by ceph-volume</span>
-<a id=__codelineno-17-15 name=__codelineno-17-15></a>
-<a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=gp># </span>For<span class=w> </span>each<span class=w> </span>device<span class=w> </span>configured<span class=w> </span>you<span class=w> </span>will<span class=w> </span>see<span class=w> </span>a<span class=w> </span>report<span class=w> </span>printed<span class=w> </span>to<span class=w> </span>the<span class=w> </span>log
-<a id=__codelineno-17-17 name=__codelineno-17-17></a><span class=go>2019-05-30 19:02:59.844642 I |   Type            Path                                                    LV Size         % of device</span>
-<a id=__codelineno-17-18 name=__codelineno-17-18></a><span class=go>2019-05-30 19:02:59.844651 I | ----------------------------------------------------------------------------------------------------</span>
-<a id=__codelineno-17-19 name=__codelineno-17-19></a><span class=go>2019-05-30 19:02:59.844677 I |   [data]          /dev/sdc                                                7.00 GB         100%</span>
+<a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=gp># </span>NOTE:<span class=w> </span>This<span class=w> </span>can<span class=w> </span>happen<span class=w> </span><span class=k>if</span><span class=w> </span>the<span class=w> </span>raw<span class=w> </span>partition<span class=w> </span>has<span class=w> </span><span class=s2>&quot;ceph&quot;</span><span class=w> </span><span class=k>in</span><span class=w> </span>PARTLABEL
+<a id=__codelineno-17-6 name=__codelineno-17-6></a>
+<a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=gp># </span>Other<span class=w> </span>messages<span class=w> </span>about<span class=w> </span>a<span class=w> </span>disk<span class=w> </span>being<span class=w> </span>unusable<span class=w> </span>by<span class=w> </span>ceph<span class=w> </span>include:
+<a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=go>Insufficient space (&lt;5GB) on vgs</span>
+<a id=__codelineno-17-9 name=__codelineno-17-9></a><span class=go>Insufficient space (&lt;5GB)</span>
+<a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=go>LVM detected</span>
+<a id=__codelineno-17-11 name=__codelineno-17-11></a><span class=go>Has BlueStore device label</span>
+<a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=go>locked</span>
+<a id=__codelineno-17-13 name=__codelineno-17-13></a><span class=go>read-only</span>
+<a id=__codelineno-17-14 name=__codelineno-17-14></a>
+<a id=__codelineno-17-15 name=__codelineno-17-15></a><span class=gp># </span>A<span class=w> </span>device<span class=w> </span>is<span class=w> </span>going<span class=w> </span>to<span class=w> </span>be<span class=w> </span>configured
+<a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=go>2019-05-30 19:02:57.535598 I | cephosd: device sdc to be configured by ceph-volume</span>
+<a id=__codelineno-17-17 name=__codelineno-17-17></a>
+<a id=__codelineno-17-18 name=__codelineno-17-18></a><span class=gp># </span>For<span class=w> </span>each<span class=w> </span>device<span class=w> </span>configured<span class=w> </span>you<span class=w> </span>will<span class=w> </span>see<span class=w> </span>a<span class=w> </span>report<span class=w> </span>printed<span class=w> </span>to<span class=w> </span>the<span class=w> </span>log
+<a id=__codelineno-17-19 name=__codelineno-17-19></a><span class=go>2019-05-30 19:02:59.844642 I |   Type            Path                                                    LV Size         % of device</span>
+<a id=__codelineno-17-20 name=__codelineno-17-20></a><span class=go>2019-05-30 19:02:59.844651 I | ----------------------------------------------------------------------------------------------------</span>
+<a id=__codelineno-17-21 name=__codelineno-17-21></a><span class=go>2019-05-30 19:02:59.844677 I |   [data]          /dev/sdc                                                7.00 GB         100%</span>
 </code></pre></div></td></tr></table></div> <h3 id=solution_5>Solution<a class=headerlink href=#solution_5 title="Permanent link">&para;</a></h3> <p>Either update the CR with the correct settings, or clean the partitions or filesystem from your devices. To clean devices from a previous install see the <a href=../../Storage-Configuration/ceph-teardown/#zapping-devices>cleanup guide</a>.</p> <p>After the settings are updated or the devices are cleaned, trigger the operator to analyze the devices again by restarting the operator. Each time the operator starts, it will ensure all the desired devices are configured. The operator does automatically deploy OSDs in most scenarios, but an operator restart will cover any scenarios that the operator doesn't detect automatically.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
 <span class=normal><a href=#__codelineno-18-2>2</a></span>
 <span class=normal><a href=#__codelineno-18-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=gp># </span>Restart<span class=w> </span>the<span class=w> </span>operator<span class=w> </span>to<span class=w> </span>ensure<span class=w> </span>devices<span class=w> </span>are<span class=w> </span>configured.<span class=w> </span>A<span class=w> </span>new<span class=w> </span>pod<span class=w> </span>will<span class=w> </span>automatically<span class=w> </span>be<span class=w> </span>started<span class=w> </span>when<span class=w> </span>the<span class=w> </span>current<span class=w> </span>operator<span class=w> </span>pod<span class=w> </span>is<span class=w> </span>deleted.
