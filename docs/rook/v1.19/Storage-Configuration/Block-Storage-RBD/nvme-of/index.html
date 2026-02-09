@@ -97,7 +97,11 @@
 <span class=normal><a href=#__codelineno-15-28>28</a></span>
 <span class=normal><a href=#__codelineno-15-29>29</a></span>
 <span class=normal><a href=#__codelineno-15-30>30</a></span>
-<span class=normal><a href=#__codelineno-15-31>31</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
+<span class=normal><a href=#__codelineno-15-31>31</a></span>
+<span class=normal><a href=#__codelineno-15-32>32</a></span>
+<span class=normal><a href=#__codelineno-15-33>33</a></span>
+<span class=normal><a href=#__codelineno-15-34>34</a></span>
+<span class=normal><a href=#__codelineno-15-35>35</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
 <a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">StorageClass</span>
 <a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph-nvmeof</span>
@@ -122,12 +126,16 @@
 <a id=__codelineno-15-23 name=__codelineno-15-23></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/provisioner-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
 <a id=__codelineno-15-24 name=__codelineno-15-24></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/node-stage-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-node</span>
 <a id=__codelineno-15-25 name=__codelineno-15-25></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/node-stage-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
-<a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=w>  </span><span class=nt>imageFormat</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2&quot;</span>
-<a id=__codelineno-15-27 name=__codelineno-15-27></a><span class=w>  </span><span class=nt>imageFeatures</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">layering,deep-flatten,exclusive-lock,object-map,fast-diff</span>
-<a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=nt>provisioner</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">nvmeof.csi.ceph.com</span>
-<a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=nt>reclaimPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Delete</span>
-<a id=__codelineno-15-30 name=__codelineno-15-30></a><span class=nt>volumeBindingMode</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Immediate</span>
-<a id=__codelineno-15-31 name=__codelineno-15-31></a><span class=nt>allowVolumeExpansion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/controller-expand-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-provisioner</span>
+<a id=__codelineno-15-27 name=__codelineno-15-27></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/controller-expand-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/node-expand-secret-name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-csi-rbd-node</span>
+<a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=w>  </span><span class=nt>csi.storage.k8s.io/node-expand-secret-namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
+<a id=__codelineno-15-30 name=__codelineno-15-30></a><span class=w>  </span><span class=nt>imageFormat</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2&quot;</span>
+<a id=__codelineno-15-31 name=__codelineno-15-31></a><span class=w>  </span><span class=nt>imageFeatures</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">layering,deep-flatten,exclusive-lock,object-map,fast-diff</span>
+<a id=__codelineno-15-32 name=__codelineno-15-32></a><span class=nt>provisioner</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">nvmeof.csi.ceph.com</span>
+<a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=nt>reclaimPolicy</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Delete</span>
+<a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=nt>volumeBindingMode</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Immediate</span>
+<a id=__codelineno-15-35 name=__codelineno-15-35></a><span class=nt>allowVolumeExpansion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div></td></tr></table></div> <p>Create the StorageClass:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=go>kubectl create -f deploy/examples/csi/nvmeof/storageclass.yaml</span>
 </code></pre></div></td></tr></table></div> <h2 id=step-6-create-a-persistentvolumeclaim>Step 6: Create a PersistentVolumeClaim<a class=headerlink href=#step-6-create-a-persistentvolumeclaim title="Permanent link">&para;</a></h2> <p>Create a PVC using the NVMe-oF storage class:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
 <span class=normal><a href=#__codelineno-17-2> 2</a></span>
