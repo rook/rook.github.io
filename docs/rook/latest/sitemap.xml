@@ -265,6 +265,10 @@
          <lastmod>2026-04-06</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-accounts/</loc>
+         <lastmod>2026-04-06</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/</loc>
          <lastmod>2026-04-06</lastmod>
     </url>
