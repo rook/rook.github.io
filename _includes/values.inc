@@ -15,4 +15,5 @@
 {% assign clysoLink = '//clyso.com/en/' %}
 {% assign cybozuLink = '//cybozu.com' %}
 {% assign redHatLink = '//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation' %}
+{% assign procedureLink = '//procedure.tech' %}
 {% assign upboundLink = '//upbound.io' %}
