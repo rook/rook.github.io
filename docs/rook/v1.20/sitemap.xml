@@ -165,6 +165,10 @@
          <lastmod>2026-05-12</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/v1.20/Helm-Charts/csi-drivers-chart/</loc>
+         <lastmod>2026-05-12</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/v1.20/Helm-Charts/helm-charts/</loc>
          <lastmod>2026-05-12</lastmod>
     </url>
