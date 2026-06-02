@@ -245,6 +245,10 @@
          <lastmod>2026-06-02</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/csi-configuration/</loc>
+         <lastmod>2026-06-02</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/custom-images/</loc>
          <lastmod>2026-06-02</lastmod>
     </url>
