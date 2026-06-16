@@ -2,7 +2,7 @@
 <span class=normal><a href=#__codelineno-0-2>2</a></span>
 <span class=normal><a href=#__codelineno-0-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=go>helm repo add ceph-csi-operator https://ceph.github.io/ceph-csi-operator</span>
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=go>helm install ceph-csi-drivers --namespace rook-ceph ceph-csi-operator/ceph-csi-drivers \</span>
-<a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=go>  -f https://raw.githubusercontent.com/rook/rook/master/deploy/charts/ceph-csi-drivers/values.yaml</span>
+<a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=go>  -f https://raw.githubusercontent.com/rook/rook/v1.20.1/deploy/charts/ceph-csi-drivers/values.yaml</span>
 </code></pre></div></td></tr></table></div> <h2 id=custom-settings>Custom settings<a class=headerlink href=#custom-settings title="Permanent link">&para;</a></h2> <p>Below are some examples of common settings that may need to be customized in the CSI drivers chart. Create a values file with the desired settings and install with <code>-f values.yaml</code>.</p> <h3 id=csi-addons-sidecar>CSI-Addons sidecar<a class=headerlink href=#csi-addons-sidecar title="Permanent link">&para;</a></h3> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
 <span class=normal><a href=#__codelineno-1-2>2</a></span>
 <span class=normal><a href=#__codelineno-1-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=nt>operatorConfig</span><span class=p>:</span>
