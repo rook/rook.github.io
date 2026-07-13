@@ -233,6 +233,10 @@
          <lastmod>2026-07-13</lastmod>
     </url>
     <url>
+         <loc>https://rook.io/latest/Storage-Configuration/Block-Storage-RBD/rbd-qos/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
          <loc>https://rook.io/latest/Storage-Configuration/Ceph-CSI/ceph-csi-drivers/</loc>
          <lastmod>2026-07-13</lastmod>
     </url>
