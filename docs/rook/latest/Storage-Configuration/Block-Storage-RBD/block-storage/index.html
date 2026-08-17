@@ -90,7 +90,7 @@
 <a id=__codelineno-0-12 name=__codelineno-0-12></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">StorageClass</span>
 <a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph-block</span>
-<a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=c1># Change &quot;rook-ceph&quot; provisioner prefix to match the operator namespace if needed</span>
+<a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=c1># Change "rook-ceph" provisioner prefix to match the operator namespace if needed</span>
 <a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=nt>provisioner</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph.rbd.csi.ceph.com</span>
 <a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=nt>parameters</span><span class=p>:</span>
 <a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=w>    </span><span class=c1># clusterID is the namespace where the rook cluster is running</span>
@@ -112,16 +112,16 @@
 <a id=__codelineno-0-34 name=__codelineno-0-34></a><span class=w>    </span><span class=c1># https://docs.ceph.com/docs/master/man/8/rbd-nbd/#options</span>
 <a id=__codelineno-0-35 name=__codelineno-0-35></a><span class=w>    </span><span class=c1># unmapOptions: force</span>
 <a id=__codelineno-0-36 name=__codelineno-0-36></a>
-<a id=__codelineno-0-37 name=__codelineno-0-37></a><span class=w>    </span><span class=c1># RBD image format. Defaults to &quot;2&quot;.</span>
-<a id=__codelineno-0-38 name=__codelineno-0-38></a><span class=w>    </span><span class=nt>imageFormat</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2&quot;</span>
+<a id=__codelineno-0-37 name=__codelineno-0-37></a><span class=w>    </span><span class=c1># RBD image format. Defaults to "2".</span>
+<a id=__codelineno-0-38 name=__codelineno-0-38></a><span class=w>    </span><span class=nt>imageFormat</span><span class=p>:</span><span class=w> </span><span class=s>"2"</span>
 <a id=__codelineno-0-39 name=__codelineno-0-39></a>
 <a id=__codelineno-0-40 name=__codelineno-0-40></a><span class=w>    </span><span class=c1># RBD image features</span>
-<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=c1># Available for imageFormat: &quot;2&quot;. Older releases of CSI RBD</span>
+<a id=__codelineno-0-41 name=__codelineno-0-41></a><span class=w>    </span><span class=c1># Available for imageFormat: "2". Older releases of CSI RBD</span>
 <a id=__codelineno-0-42 name=__codelineno-0-42></a><span class=w>    </span><span class=c1># support only the `layering` feature. The Linux kernel (KRBD) supports the</span>
 <a id=__codelineno-0-43 name=__codelineno-0-43></a><span class=w>    </span><span class=c1># full complement of features as of 5.4</span>
-<a id=__codelineno-0-44 name=__codelineno-0-44></a><span class=w>    </span><span class=c1># `layering` alone corresponds to Ceph&#39;s bitfield value of &quot;2&quot; ;</span>
+<a id=__codelineno-0-44 name=__codelineno-0-44></a><span class=w>    </span><span class=c1># `layering` alone corresponds to Ceph's bitfield value of "2" ;</span>
 <a id=__codelineno-0-45 name=__codelineno-0-45></a><span class=w>    </span><span class=c1># `layering` + `fast-diff` + `object-map` + `deep-flatten` + `exclusive-lock` together</span>
-<a id=__codelineno-0-46 name=__codelineno-0-46></a><span class=w>    </span><span class=c1># correspond to Ceph&#39;s OR&#39;d bitfield value of &quot;63&quot;. Here we use</span>
+<a id=__codelineno-0-46 name=__codelineno-0-46></a><span class=w>    </span><span class=c1># correspond to Ceph's OR'd bitfield value of "63". Here we use</span>
 <a id=__codelineno-0-47 name=__codelineno-0-47></a><span class=w>    </span><span class=c1># a symbolic, comma-separated format:</span>
 <a id=__codelineno-0-48 name=__codelineno-0-48></a><span class=w>    </span><span class=c1># For 5.4 or later kernels:</span>
 <a id=__codelineno-0-49 name=__codelineno-0-49></a><span class=w>    </span><span class=c1>#imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock</span>
@@ -169,7 +169,7 @@
 </code></pre></div></td></tr></table></div> <div class="admonition example"> <p class=admonition-title>Example Output: <code>kubectl get svc wordpress</code></p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
 <span class=normal><a href=#__codelineno-6-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=go>NAME        CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE</span>
 <a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=go>wordpress   10.3.0.155   &lt;pending&gt;     80:30841/TCP   2m</span>
-</code></pre></div></td></tr></table></div> </div> <p>You should see the wordpress app running.</p> <p>If you are using Minikube, the Wordpress URL can be retrieved with this one-line command:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=go>echo http://$(minikube ip):$(kubectl get service wordpress -o jsonpath=&#39;{.spec.ports[0].nodePort}&#39;)</span>
+</code></pre></div></td></tr></table></div> </div> <p>You should see the wordpress app running.</p> <p>If you are using Minikube, the Wordpress URL can be retrieved with this one-line command:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=go>echo http://$(minikube ip):$(kubectl get service wordpress -o jsonpath='{.spec.ports[0].nodePort}')</span>
 </code></pre></div></td></tr></table></div> <div class="admonition note"> <p class=admonition-title>Note</p> <p>When running in a vagrant environment, there will be no external IP address to reach wordpress with. You will only be able to reach wordpress via the <code>CLUSTER-IP</code> from inside the Kubernetes cluster.</p> </div> <h2 id=rbd-qos-quality-of-service>RBD QoS (Quality of Service)<a class=headerlink href=#rbd-qos-quality-of-service title="Permanent link">&para;</a></h2> <p>To set IOPS and bandwidth limits on RBD volumes, see the <a href=../rbd-qos/ >RBD QoS documentation</a>. QoS limits can be applied dynamically via VolumeAttributesClass.</p> <h2 id=consume-the-storage-toolbox>Consume the storage: Toolbox<a class=headerlink href=#consume-the-storage-toolbox title="Permanent link">&para;</a></h2> <p>With the pool that was created above, we can also create a block image and mount it directly in a pod. See the <a href=../../../Troubleshooting/direct-tools/#block-storage-tools>Direct Block Tools</a> topic for more details.</p> <h2 id=teardown>Teardown<a class=headerlink href=#teardown title="Permanent link">&para;</a></h2> <p>To clean up all the artifacts created by the block demo:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
 <span class=normal><a href=#__codelineno-8-2>2</a></span>
 <span class=normal><a href=#__codelineno-8-3>3</a></span>

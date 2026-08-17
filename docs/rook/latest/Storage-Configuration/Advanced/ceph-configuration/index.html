@@ -16,15 +16,15 @@
 <span class=normal><a href=#__codelineno-1-15>15</a></span>
 <span class=normal><a href=#__codelineno-1-16>16</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=go>cd deploy/examples</span>
 <a id=__codelineno-1-2 name=__codelineno-1-2></a>
-<a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=go>export ROOK_OPERATOR_NAMESPACE=&quot;rook-ceph&quot;</span>
-<a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=go>export ROOK_CLUSTER_NAMESPACE=&quot;rook-ceph&quot;</span>
+<a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=go>export ROOK_OPERATOR_NAMESPACE="rook-ceph"</span>
+<a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=go>export ROOK_CLUSTER_NAMESPACE="rook-ceph"</span>
 <a id=__codelineno-1-5 name=__codelineno-1-5></a>
 <a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=go>sed -i.bak \</span>
-<a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:operator/\1: $ROOK_OPERATOR_NAMESPACE # namespace:operator/g&quot; \</span>
-<a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:cluster/\1: $ROOK_CLUSTER_NAMESPACE # namespace:cluster/g&quot; \</span>
-<a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=go>    -e &quot;s/\(.*serviceaccount\):.*:\(.*\) # serviceaccount:namespace:operator/\1:$ROOK_OPERATOR_NAMESPACE:\2 # serviceaccount:namespace:operator/g&quot; \</span>
-<a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=go>    -e &quot;s/\(.*serviceaccount\):.*:\(.*\) # serviceaccount:namespace:cluster/\1:$ROOK_CLUSTER_NAMESPACE:\2 # serviceaccount:namespace:cluster/g&quot; \</span>
-<a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=go>    -e &quot;s/\(.*\): [-_A-Za-z0-9]*\.\(.*\) # driver:namespace:cluster/\1: $ROOK_CLUSTER_NAMESPACE.\2 # driver:namespace:cluster/g&quot; \</span>
+<a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=go>    -e "s/\(.*\):.*# namespace:operator/\1: $ROOK_OPERATOR_NAMESPACE # namespace:operator/g" \</span>
+<a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=go>    -e "s/\(.*\):.*# namespace:cluster/\1: $ROOK_CLUSTER_NAMESPACE # namespace:cluster/g" \</span>
+<a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=go>    -e "s/\(.*serviceaccount\):.*:\(.*\) # serviceaccount:namespace:operator/\1:$ROOK_OPERATOR_NAMESPACE:\2 # serviceaccount:namespace:operator/g" \</span>
+<a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=go>    -e "s/\(.*serviceaccount\):.*:\(.*\) # serviceaccount:namespace:cluster/\1:$ROOK_CLUSTER_NAMESPACE:\2 # serviceaccount:namespace:cluster/g" \</span>
+<a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=go>    -e "s/\(.*\): [-_A-Za-z0-9]*\.\(.*\) # driver:namespace:cluster/\1: $ROOK_CLUSTER_NAMESPACE.\2 # driver:namespace:cluster/g" \</span>
 <a id=__codelineno-1-12 name=__codelineno-1-12></a><span class=go>  common.yaml operator.yaml csi-operator.yaml cluster.yaml # add other files or change these as desired for your config</span>
 <a id=__codelineno-1-13 name=__codelineno-1-13></a>
 <a id=__codelineno-1-14 name=__codelineno-1-14></a><span class=gp># </span>You<span class=w> </span>need<span class=w> </span>to<span class=w> </span>use<span class=w> </span><span class=sb>`</span>apply<span class=sb>`</span><span class=w> </span><span class=k>for</span><span class=w> </span>all<span class=w> </span>Ceph<span class=w> </span>clusters<span class=w> </span>after<span class=w> </span>the<span class=w> </span>first<span class=w> </span><span class=k>if</span><span class=w> </span>you<span class=w> </span>have<span class=w> </span>only<span class=w> </span>one<span class=w> </span>Operator
@@ -40,12 +40,12 @@
 <span class=normal><a href=#__codelineno-2-8> 8</a></span>
 <span class=normal><a href=#__codelineno-2-9> 9</a></span>
 <span class=normal><a href=#__codelineno-2-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=go>cd deploy/examples</span>
-<a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=go>export ROOK_OPERATOR_NAMESPACE=&quot;rook-ceph&quot;</span>
-<a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=go>export SECOND_ROOK_CLUSTER_NAMESPACE=&quot;rook-ceph-secondary&quot;</span>
+<a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=go>export ROOK_OPERATOR_NAMESPACE="rook-ceph"</span>
+<a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=go>export SECOND_ROOK_CLUSTER_NAMESPACE="rook-ceph-secondary"</span>
 <a id=__codelineno-2-4 name=__codelineno-2-4></a>
 <a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=go>sed -i.bak \</span>
-<a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:operator/\1: $ROOK_OPERATOR_NAMESPACE # namespace:operator/g&quot; \</span>
-<a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=go>    -e &quot;s/\(.*\):.*# namespace:cluster/\1: $SECOND_ROOK_CLUSTER_NAMESPACE # namespace:cluster/g&quot; \</span>
+<a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=go>    -e "s/\(.*\):.*# namespace:operator/\1: $ROOK_OPERATOR_NAMESPACE # namespace:operator/g" \</span>
+<a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=go>    -e "s/\(.*\):.*# namespace:cluster/\1: $SECOND_ROOK_CLUSTER_NAMESPACE # namespace:cluster/g" \</span>
 <a id=__codelineno-2-8 name=__codelineno-2-8></a><span class=go>  common-second-cluster.yaml</span>
 <a id=__codelineno-2-9 name=__codelineno-2-9></a>
 <a id=__codelineno-2-10 name=__codelineno-2-10></a><span class=go>kubectl create -f common-second-cluster.yaml</span>
@@ -57,13 +57,13 @@
 <span class=normal><a href=#__codelineno-3-6>6</a></span>
 <span class=normal><a href=#__codelineno-3-7>7</a></span>
 <span class=normal><a href=#__codelineno-3-8>8</a></span>
-<span class=normal><a href=#__codelineno-3-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=go>for p in $(kubectl -n rook-ceph get pods -o jsonpath=&#39;{.items[*].metadata.name}&#39;)</span>
+<span class=normal><a href=#__codelineno-3-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=go>for p in $(kubectl -n rook-ceph get pods -o jsonpath='{.items[*].metadata.name}')</span>
 <a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=go>do</span>
-<a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=go>    for c in $(kubectl -n rook-ceph get pod ${p} -o jsonpath=&#39;{.spec.containers[*].name}&#39;)</span>
+<a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=go>    for c in $(kubectl -n rook-ceph get pod ${p} -o jsonpath='{.spec.containers[*].name}')</span>
 <a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=go>    do</span>
-<a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=go>        echo &quot;BEGIN logs from pod: ${p} ${c}&quot;</span>
+<a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=go>        echo "BEGIN logs from pod: ${p} ${c}"</span>
 <a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=go>        kubectl -n rook-ceph logs -c ${c} ${p}</span>
-<a id=__codelineno-3-7 name=__codelineno-3-7></a><span class=go>        echo &quot;END logs from pod: ${p} ${c}&quot;</span>
+<a id=__codelineno-3-7 name=__codelineno-3-7></a><span class=go>        echo "END logs from pod: ${p} ${c}"</span>
 <a id=__codelineno-3-8 name=__codelineno-3-8></a><span class=go>    done</span>
 <a id=__codelineno-3-9 name=__codelineno-3-9></a><span class=go>done</span>
 </code></pre></div></td></tr></table></div> <p>This gets the logs for every container in every Rook pod and then compresses them into a <code>.gz</code> archive for easy sharing. Note that instead of <code>gzip</code>, you could instead pipe to <code>less</code> or to a single text file.</p> <h2 id=osd-information>OSD Information<a class=headerlink href=#osd-information title="Permanent link">&para;</a></h2> <p>Keeping track of OSDs and their underlying storage devices can be difficult. The following scripts will clear things up quickly.</p> <h3 id=kubernetes>Kubernetes<a class=headerlink href=#kubernetes title="Permanent link">&para;</a></h3> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
@@ -85,23 +85,23 @@
 <span class=normal><a href=#__codelineno-4-17>17</a></span>
 <span class=normal><a href=#__codelineno-4-18>18</a></span>
 <span class=normal><a href=#__codelineno-4-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=gp># </span>Get<span class=w> </span>OSD<span class=w> </span>Pods
-<a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=gp># </span>This<span class=w> </span>uses<span class=w> </span>the<span class=w> </span>example/default<span class=w> </span>cluster<span class=w> </span>name<span class=w> </span><span class=s2>&quot;rook&quot;</span>
+<a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=gp># </span>This<span class=w> </span>uses<span class=w> </span>the<span class=w> </span>example/default<span class=w> </span>cluster<span class=w> </span>name<span class=w> </span><span class=s2>"rook"</span>
 <a id=__codelineno-4-3 name=__codelineno-4-3></a><span class=go>OSD_PODS=$(kubectl get pods --all-namespaces -l \</span>
-<a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=go>  app=rook-ceph-osd,rook_cluster=rook-ceph -o jsonpath=&#39;{.items[*].metadata.name}&#39;)</span>
+<a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=go>  app=rook-ceph-osd,rook_cluster=rook-ceph -o jsonpath='{.items[*].metadata.name}')</span>
 <a id=__codelineno-4-5 name=__codelineno-4-5></a>
 <a id=__codelineno-4-6 name=__codelineno-4-6></a><span class=gp># </span>Find<span class=w> </span>node<span class=w> </span>and<span class=w> </span>drive<span class=w> </span>associations<span class=w> </span>from<span class=w> </span>OSD<span class=w> </span>pods
 <a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=go>for pod in $(echo ${OSD_PODS})</span>
 <a id=__codelineno-4-8 name=__codelineno-4-8></a><span class=go>do</span>
-<a id=__codelineno-4-9 name=__codelineno-4-9></a><span class=go> echo &quot;Pod:  ${pod}&quot;</span>
-<a id=__codelineno-4-10 name=__codelineno-4-10></a><span class=go> echo &quot;Node: $(kubectl -n rook-ceph get pod ${pod} -o jsonpath=&#39;{.spec.nodeName}&#39;)&quot;</span>
-<a id=__codelineno-4-11 name=__codelineno-4-11></a><span class=go> kubectl -n rook-ceph exec ${pod} -- sh -c &#39;\</span>
+<a id=__codelineno-4-9 name=__codelineno-4-9></a><span class=go> echo "Pod:  ${pod}"</span>
+<a id=__codelineno-4-10 name=__codelineno-4-10></a><span class=go> echo "Node: $(kubectl -n rook-ceph get pod ${pod} -o jsonpath='{.spec.nodeName}')"</span>
+<a id=__codelineno-4-11 name=__codelineno-4-11></a><span class=go> kubectl -n rook-ceph exec ${pod} -- sh -c '\</span>
 <a id=__codelineno-4-12 name=__codelineno-4-12></a><span class=go>  for i in /var/lib/ceph/osd/ceph-*; do</span>
 <a id=__codelineno-4-13 name=__codelineno-4-13></a><span class=go>    [ -f ${i}/ready ] || continue</span>
-<a id=__codelineno-4-14 name=__codelineno-4-14></a><span class=go>    echo -ne &quot;-$(basename ${i}) &quot;</span>
+<a id=__codelineno-4-14 name=__codelineno-4-14></a><span class=go>    echo -ne "-$(basename ${i}) "</span>
 <a id=__codelineno-4-15 name=__codelineno-4-15></a><span class=go>    echo $(lsblk -n -o NAME,SIZE ${i}/block 2&gt; /dev/null || \</span>
 <a id=__codelineno-4-16 name=__codelineno-4-16></a><span class=go>    findmnt -n -v -o SOURCE,SIZE -T ${i}) $(cat ${i}/type)</span>
 <a id=__codelineno-4-17 name=__codelineno-4-17></a><span class=go>  done | sort -V</span>
-<a id=__codelineno-4-18 name=__codelineno-4-18></a><span class=go>  echo&#39;</span>
+<a id=__codelineno-4-18 name=__codelineno-4-18></a><span class=go>  echo'</span>
 <a id=__codelineno-4-19 name=__codelineno-4-19></a><span class=go>done</span>
 </code></pre></div></td></tr></table></div> <p>The output should look something like this.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
 <span class=normal><a href=#__codelineno-5-2> 2</a></span>
@@ -176,7 +176,7 @@
 <a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-config-override</span>
 <a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rook-ceph</span>
 <a id=__codelineno-10-6 name=__codelineno-10-6></a><span class=nt>data</span><span class=p>:</span>
-<a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>  </span><span class=nt>config</span><span class=p>:</span><span class=w> </span><span class=s>&quot;&quot;</span>
+<a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>  </span><span class=nt>config</span><span class=p>:</span><span class=w> </span><span class=s>""</span>
 </code></pre></div></td></tr></table></div> <p>To apply your desired configuration, you will need to update this ConfigMap. The next time the daemon pod(s) start, they will use the updated configs.</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=go>kubectl -n rook-ceph edit configmap rook-config-override</span>
 </code></pre></div></td></tr></table></div> <p>Modify the settings and save. Each line you add should be indented from the <code>config</code> property as such:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
 <span class=normal><a href=#__codelineno-12-2> 2</a></span>
@@ -218,8 +218,8 @@
 <a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>    </span><span class=no>[global]</span>
 <a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>    </span><span class=no>public network = 10.0.7.0/24</span>
 <a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=w>    </span><span class=no>cluster network = 10.0.10.0/24</span>
-<a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=w>    </span><span class=no>public addr = &quot;&quot;</span>
-<a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=w>    </span><span class=no>cluster addr = &quot;&quot;</span>
+<a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=w>    </span><span class=no>public addr = ""</span>
+<a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=w>    </span><span class=no>cluster addr = ""</span>
 </code></pre></div></td></tr></table></div> <p>After applying the updated rook-config-override configmap, it will be necessary to restart the OSDs by deleting the OSD pods in order to apply the change. Restart the OSD pods by deleting them, one at a time, and running ceph -s between each restart to ensure the cluster goes back to "active/clean" state.</p> <h2 id=phantom-osd-removal>Phantom OSD Removal<a class=headerlink href=#phantom-osd-removal title="Permanent link">&para;</a></h2> <p>If you have OSDs in which are not showing any disks, you can remove those "Phantom OSDs" by following the instructions below. To check for "Phantom OSDs", you can run (example output):</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1>1</a></span>
 <span class=normal><a href=#__codelineno-20-2>2</a></span>
 <span class=normal><a href=#__codelineno-20-3>3</a></span>

@@ -127,15 +127,15 @@
 <a id=__codelineno-3-7 name=__codelineno-3-7></a><span class=w>  </span><span class=nt>topic</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-topic [3]</span>
 <a id=__codelineno-3-8 name=__codelineno-3-8></a><span class=w>  </span><span class=nt>filter</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=nv>4</span><span class="p p-Indicator">]</span>
 <a id=__codelineno-3-9 name=__codelineno-3-9></a><span class=w>    </span><span class=nt>keyFilters</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=nv>5</span><span class="p p-Indicator">]</span>
-<a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=w>      </span><span class=c1># match objects with keys that start with &quot;hello&quot;</span>
+<a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=w>      </span><span class=c1># match objects with keys that start with "hello"</span>
 <a id=__codelineno-3-11 name=__codelineno-3-11></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">prefix</span>
 <a id=__codelineno-3-12 name=__codelineno-3-12></a><span class=w>        </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">hello</span>
-<a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=w>      </span><span class=c1># match objects with keys that end with &quot;.png&quot;</span>
+<a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=w>      </span><span class=c1># match objects with keys that end with ".png"</span>
 <a id=__codelineno-3-14 name=__codelineno-3-14></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">suffix</span>
 <a id=__codelineno-3-15 name=__codelineno-3-15></a><span class=w>        </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">.png</span>
 <a id=__codelineno-3-16 name=__codelineno-3-16></a><span class=w>      </span><span class=c1># match objects with keys with only lowercase characters</span>
 <a id=__codelineno-3-17 name=__codelineno-3-17></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
-<a id=__codelineno-3-18 name=__codelineno-3-18></a><span class=w>        </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>&quot;[a-z]*\\.*&quot;</span>
+<a id=__codelineno-3-18 name=__codelineno-3-18></a><span class=w>        </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s>"[a-z]*\\.*"</span>
 <a id=__codelineno-3-19 name=__codelineno-3-19></a><span class=w>    </span><span class=nt>metadataFilters</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=nv>6</span><span class="p p-Indicator">]</span>
 <a id=__codelineno-3-20 name=__codelineno-3-20></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">x-amz-meta-color</span>
 <a id=__codelineno-3-21 name=__codelineno-3-21></a><span class=w>        </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">blue</span>
@@ -168,8 +168,8 @@
 <a id=__codelineno-4-3 name=__codelineno-4-3></a><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ceph-notification-bucket</span>
 <a id=__codelineno-4-5 name=__codelineno-4-5></a><span class=w>  </span><span class=nt>labels</span><span class=p>:</span>
-<a id=__codelineno-4-6 name=__codelineno-4-6></a><span class=w>    </span><span class=c1># labels that don&#39;t have this structure: bucket-notification-&lt;name&gt; : &lt;name&gt;</span>
-<a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=w>    </span><span class=c1># are ignored by the operator&#39;s bucket notifications provisioning mechanism</span>
+<a id=__codelineno-4-6 name=__codelineno-4-6></a><span class=w>    </span><span class=c1># labels that don't have this structure: bucket-notification-&lt;name&gt; : &lt;name&gt;</span>
+<a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=w>    </span><span class=c1># are ignored by the operator's bucket notifications provisioning mechanism</span>
 <a id=__codelineno-4-8 name=__codelineno-4-8></a><span class=w>    </span><span class=nt>some-label</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">some-value</span>
 <a id=__codelineno-4-9 name=__codelineno-4-9></a><span class=w>    </span><span class=c1># the following label adds notifications to this bucket</span>
 <a id=__codelineno-4-10 name=__codelineno-4-10></a><span class=w>    </span><span class=nt>bucket-notification-my-notification</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">my-notification</span>

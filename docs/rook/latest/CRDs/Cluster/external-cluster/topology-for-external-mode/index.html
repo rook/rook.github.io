@@ -20,22 +20,22 @@
 <span class=normal><a href=#__codelineno-0-20>20</a></span>
 <span class=normal><a href=#__codelineno-0-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=gp>$ </span>ceph<span class=w> </span>osd<span class=w> </span>crush<span class=w> </span>rule<span class=w> </span>create-replicated<span class=w> </span>&lt;rule-name&gt;<span class=w> </span>&lt;root&gt;<span class=w> </span>&lt;failure-domain&gt;<span class=w> </span>&lt;class&gt;
 <a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=go> {</span>
-<a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=go>            &quot;rule_id&quot;: 5,</span>
-<a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=go>            &quot;rule_name&quot;: &quot;rule_host-zone-a-hdd&quot;,</span>
-<a id=__codelineno-0-5 name=__codelineno-0-5></a><span class=go>            &quot;type&quot;: 1,</span>
-<a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=go>            &quot;steps&quot;: [</span>
+<a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=go>            "rule_id": 5,</span>
+<a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=go>            "rule_name": "rule_host-zone-a-hdd",</span>
+<a id=__codelineno-0-5 name=__codelineno-0-5></a><span class=go>            "type": 1,</span>
+<a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=go>            "steps": [</span>
 <a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=go>                {</span>
-<a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=go>                    &quot;op&quot;: &quot;take&quot;,</span>
-<a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=go>                    &quot;item&quot;: -10,</span>
-<a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=go>                    &quot;item_name&quot;: &quot;zone-a~hdd&quot;</span>
+<a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=go>                    "op": "take",</span>
+<a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=go>                    "item": -10,</span>
+<a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=go>                    "item_name": "zone-a~hdd"</span>
 <a id=__codelineno-0-11 name=__codelineno-0-11></a><span class=go>                },</span>
 <a id=__codelineno-0-12 name=__codelineno-0-12></a><span class=go>                {</span>
-<a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=go>                    &quot;op&quot;: &quot;choose_firstn&quot;,</span>
-<a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=go>                    &quot;num&quot;: 0,</span>
-<a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=go>                    &quot;type&quot;: &quot;osd&quot;</span>
+<a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=go>                    "op": "choose_firstn",</span>
+<a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=go>                    "num": 0,</span>
+<a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=go>                    "type": "osd"</span>
 <a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=go>                },</span>
 <a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=go>                {</span>
-<a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=go>                    &quot;op&quot;: &quot;emit&quot;</span>
+<a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=go>                    "op": "emit"</span>
 <a id=__codelineno-0-19 name=__codelineno-0-19></a><span class=go>                }</span>
 <a id=__codelineno-0-20 name=__codelineno-0-20></a><span class=go>            ]</span>
 <a id=__codelineno-0-21 name=__codelineno-0-21></a><span class=go>}</span>
@@ -84,24 +84,24 @@
 <a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=go>apiVersion: storage.k8s.io/v1</span>
 <a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=go>kind: StorageClass</span>
 <a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=go>metadata:</span>
-<a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=go>  creationTimestamp: &quot;2024-03-07T12:10:19Z&quot;</span>
+<a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=go>  creationTimestamp: "2024-03-07T12:10:19Z"</span>
 <a id=__codelineno-3-7 name=__codelineno-3-7></a><span class=go>  name: ceph-rbd-topology</span>
-<a id=__codelineno-3-8 name=__codelineno-3-8></a><span class=go>  resourceVersion: &quot;82502&quot;</span>
+<a id=__codelineno-3-8 name=__codelineno-3-8></a><span class=go>  resourceVersion: "82502"</span>
 <a id=__codelineno-3-9 name=__codelineno-3-9></a><span class=go>  uid: 68448a14-3a78-42c5-ac29-261b6c3404af</span>
 <a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=go>parameters:</span>
 <a id=__codelineno-3-11 name=__codelineno-3-11></a><span class=go>  ...</span>
 <a id=__codelineno-3-12 name=__codelineno-3-12></a><span class=go>  ...</span>
 <a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=go>  topologyConstrainedPools: |</span>
 <a id=__codelineno-3-14 name=__codelineno-3-14></a><span class=go>    [</span>
-<a id=__codelineno-3-15 name=__codelineno-3-15></a><span class=go>     {&quot;poolName&quot;:&quot;pool-a&quot;,</span>
-<a id=__codelineno-3-16 name=__codelineno-3-16></a><span class=go>      &quot;domainSegments&quot;:[</span>
-<a id=__codelineno-3-17 name=__codelineno-3-17></a><span class=go>        {&quot;domainLabel&quot;:&quot;zone&quot;,&quot;value&quot;:&quot;zone-a&quot;}]},</span>
-<a id=__codelineno-3-18 name=__codelineno-3-18></a><span class=go>     {&quot;poolName&quot;:&quot;pool-b&quot;,</span>
-<a id=__codelineno-3-19 name=__codelineno-3-19></a><span class=go>      &quot;domainSegments&quot;:[</span>
-<a id=__codelineno-3-20 name=__codelineno-3-20></a><span class=go>        {&quot;domainLabel&quot;:&quot;zone&quot;,&quot;value&quot;:&quot;zone-b&quot;}]},</span>
-<a id=__codelineno-3-21 name=__codelineno-3-21></a><span class=go>     {&quot;poolName&quot;:&quot;pool-c&quot;,</span>
-<a id=__codelineno-3-22 name=__codelineno-3-22></a><span class=go>      &quot;domainSegments&quot;:[</span>
-<a id=__codelineno-3-23 name=__codelineno-3-23></a><span class=go>        {&quot;domainLabel&quot;:&quot;zone&quot;,&quot;value&quot;:&quot;zone-c&quot;}]},</span>
+<a id=__codelineno-3-15 name=__codelineno-3-15></a><span class=go>     {"poolName":"pool-a",</span>
+<a id=__codelineno-3-16 name=__codelineno-3-16></a><span class=go>      "domainSegments":[</span>
+<a id=__codelineno-3-17 name=__codelineno-3-17></a><span class=go>        {"domainLabel":"zone","value":"zone-a"}]},</span>
+<a id=__codelineno-3-18 name=__codelineno-3-18></a><span class=go>     {"poolName":"pool-b",</span>
+<a id=__codelineno-3-19 name=__codelineno-3-19></a><span class=go>      "domainSegments":[</span>
+<a id=__codelineno-3-20 name=__codelineno-3-20></a><span class=go>        {"domainLabel":"zone","value":"zone-b"}]},</span>
+<a id=__codelineno-3-21 name=__codelineno-3-21></a><span class=go>     {"poolName":"pool-c",</span>
+<a id=__codelineno-3-22 name=__codelineno-3-22></a><span class=go>      "domainSegments":[</span>
+<a id=__codelineno-3-23 name=__codelineno-3-23></a><span class=go>        {"domainLabel":"zone","value":"zone-c"}]},</span>
 <a id=__codelineno-3-24 name=__codelineno-3-24></a><span class=go>    ]</span>
 <a id=__codelineno-3-25 name=__codelineno-3-25></a><span class=go>provisioner: rook-ceph.rbd.csi.ceph.com</span>
 <a id=__codelineno-3-26 name=__codelineno-3-26></a><span class=go>reclaimPolicy: Delete</span>

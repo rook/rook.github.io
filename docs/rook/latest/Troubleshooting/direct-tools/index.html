@@ -23,7 +23,7 @@
 <span class=normal><a href=#__codelineno-3-10>10</a></span>
 <span class=normal><a href=#__codelineno-3-11>11</a></span>
 <span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=gp># </span>Map<span class=w> </span>the<span class=w> </span>rbd<span class=w> </span>device.<span class=w> </span>If<span class=w> </span>the<span class=w> </span>Direct<span class=w> </span>Mount<span class=w> </span>Pod<span class=w> </span>was<span class=w> </span>started<span class=w> </span>with<span class=w> </span><span class=s2>&quot;hostNetwork: false&quot;</span><span class=w> </span>this<span class=w> </span>hangs<span class=w> </span>and<span class=w> </span>you<span class=w> </span>have<span class=w> </span>to<span class=w> </span>stop<span class=w> </span>it<span class=w> </span>with<span class=w> </span>Ctrl-C,
+<span class=normal><a href=#__codelineno-3-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=gp># </span>Map<span class=w> </span>the<span class=w> </span>rbd<span class=w> </span>device.<span class=w> </span>If<span class=w> </span>the<span class=w> </span>Direct<span class=w> </span>Mount<span class=w> </span>Pod<span class=w> </span>was<span class=w> </span>started<span class=w> </span>with<span class=w> </span><span class=s2>"hostNetwork: false"</span><span class=w> </span>this<span class=w> </span>hangs<span class=w> </span>and<span class=w> </span>you<span class=w> </span>have<span class=w> </span>to<span class=w> </span>stop<span class=w> </span>it<span class=w> </span>with<span class=w> </span>Ctrl-C,
 <a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=gp># </span>however<span class=w> </span>the<span class=w> </span><span class=nb>command</span><span class=w> </span>still<span class=w> </span>succeeds<span class=p>;</span><span class=w> </span>see<span class=w> </span>https://github.com/rook/rook/issues/2021
 <a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=go>rbd map replicapool/test</span>
 <a id=__codelineno-3-4 name=__codelineno-3-4></a>
@@ -37,7 +37,7 @@
 <a id=__codelineno-3-12 name=__codelineno-3-12></a><span class=go>mkdir /tmp/rook-volume</span>
 <a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=go>mount /dev/rbd0 /tmp/rook-volume</span>
 </code></pre></div></td></tr></table></div> <p>Write and read a file:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=go>echo &quot;Hello Rook&quot; &gt; /tmp/rook-volume/hello</span>
+<span class=normal><a href=#__codelineno-4-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=go>echo "Hello Rook" &gt; /tmp/rook-volume/hello</span>
 <a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=go>cat /tmp/rook-volume/hello</span>
 </code></pre></div></td></tr></table></div> <h3 id=unmount-the-block-device>Unmount the Block device<a class=headerlink href=#unmount-the-block-device title="Permanent link">&para;</a></h3> <p>Unmount the volume and unmap the kernel device:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
 <span class=normal><a href=#__codelineno-5-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=go>umount /tmp/rook-volume</span>
@@ -57,8 +57,8 @@
 <a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=go>mkdir /tmp/registry</span>
 <a id=__codelineno-6-3 name=__codelineno-6-3></a>
 <a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=gp># </span>Detect<span class=w> </span>the<span class=w> </span>mon<span class=w> </span>endpoints<span class=w> </span>and<span class=w> </span>the<span class=w> </span>user<span class=w> </span>secret<span class=w> </span><span class=k>for</span><span class=w> </span>the<span class=w> </span>connection
-<a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=go>mon_endpoints=$(grep mon_host /etc/ceph/ceph.conf | awk &#39;{print $3}&#39;)</span>
-<a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=go>my_secret=$(grep key /etc/ceph/keyring | awk &#39;{print $3}&#39;)</span>
+<a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=go>mon_endpoints=$(grep mon_host /etc/ceph/ceph.conf | awk '{print $3}')</span>
+<a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=go>my_secret=$(grep key /etc/ceph/keyring | awk '{print $3}')</span>
 <a id=__codelineno-6-7 name=__codelineno-6-7></a>
 <a id=__codelineno-6-8 name=__codelineno-6-8></a><span class=gp># </span>Mount<span class=w> </span>the<span class=w> </span>filesystem
 <a id=__codelineno-6-9 name=__codelineno-6-9></a><span class=go>mount -t ceph -o mds_namespace=myfs,name=admin,secret=$my_secret $mon_endpoints:/ /tmp/registry</span>
@@ -70,10 +70,10 @@
 <span class=normal><a href=#__codelineno-8-2>2</a></span>
 <span class=normal><a href=#__codelineno-8-3>3</a></span>
 <span class=normal><a href=#__codelineno-8-4>4</a></span>
-<span class=normal><a href=#__codelineno-8-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=go>echo &quot;Hello Rook&quot; &gt; /tmp/registry/hello</span>
+<span class=normal><a href=#__codelineno-8-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=go>echo "Hello Rook" &gt; /tmp/registry/hello</span>
 <a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=go>cat /tmp/registry/hello</span>
 <a id=__codelineno-8-3 name=__codelineno-8-3></a>
-<a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=gp># </span>delete<span class=w> </span>the<span class=w> </span>file<span class=w> </span>when<span class=w> </span>you<span class=err>&#39;</span>re<span class=w> </span><span class=k>done</span>
+<a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=gp># </span>delete<span class=w> </span>the<span class=w> </span>file<span class=w> </span>when<span class=w> </span>you<span class=err>'</span>re<span class=w> </span><span class=k>done</span>
 <a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=go>rm -f /tmp/registry/hello</span>
 </code></pre></div></td></tr></table></div> <h3 id=unmount-the-filesystem>Unmount the Filesystem<a class=headerlink href=#unmount-the-filesystem title="Permanent link">&para;</a></h3> <p>To unmount the shared filesystem from the Direct Mount Pod:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span>
 <span class=normal><a href=#__codelineno-9-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=go>umount /tmp/registry</span>

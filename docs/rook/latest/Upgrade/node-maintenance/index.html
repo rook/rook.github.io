@@ -18,9 +18,9 @@
 <span class=normal><a href=#__codelineno-4-6>6</a></span>
 <span class=normal><a href=#__codelineno-4-7>7</a></span>
 <span class=normal><a href=#__codelineno-4-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=go>for _category in rook-ceph-rgw csi-cephfsplugin-provisioner csi-rbdplugin-provisioner rook-ceph-osd rook-ceph-mon rook-ceph-mgr rook-ceph-exporter rook-ceph-crashcollector; do</span>
-<a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=go>    for _item in $(kubectl get deployment -n rook-ceph | awk &#39;/^&#39;&quot;${_category}&quot;&#39;/{print $1}&#39;); do</span>
+<a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=go>    for _item in $(kubectl get deployment -n rook-ceph | awk '/^'"${_category}"'/{print $1}'); do</span>
 <a id=__codelineno-4-3 name=__codelineno-4-3></a><span class=go>        kubectl -n rook-ceph scale deployment ${_item} --replicas=0;</span>
-<a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=go>        while [[ $(kubectl get deployment -n rook-ceph ${_item} -o jsonpath=&#39;{.status.readyReplicas}&#39;) != &quot;&quot; ]]; do</span>
+<a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=go>        while [[ $(kubectl get deployment -n rook-ceph ${_item} -o jsonpath='{.status.readyReplicas}') != "" ]]; do</span>
 <a id=__codelineno-4-5 name=__codelineno-4-5></a><span class=go>            sleep 5;</span>
 <a id=__codelineno-4-6 name=__codelineno-4-6></a><span class=go>        done;</span>
 <a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=go>    done;</span>
@@ -30,9 +30,9 @@
 <span class=normal><a href=#__codelineno-5-3>3</a></span>
 <span class=normal><a href=#__codelineno-5-4>4</a></span>
 <span class=normal><a href=#__codelineno-5-5>5</a></span>
-<span class=normal><a href=#__codelineno-5-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=go>for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk &#39;/^rook-ceph-mon/{print $1}&#39;); do</span>
+<span class=normal><a href=#__codelineno-5-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=go>for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk '/^rook-ceph-mon/{print $1}'); do</span>
 <a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=go>    kubectl -n $ROOK_CLUSTER_NAMESPACE scale deployment ${_item} --replicas=1;</span>
-<a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=go>    while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath=&#39;{.status.replicas}&#39;) != &quot;1&quot; ]]; do</span>
+<a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=go>    while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath='{.status.replicas}') != "1" ]]; do</span>
 <a id=__codelineno-5-4 name=__codelineno-5-4></a><span class=go>        sleep 5;</span>
 <a id=__codelineno-5-5 name=__codelineno-5-5></a><span class=go>    done;</span>
 <a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=go>done</span>
@@ -44,9 +44,9 @@
 <span class=normal><a href=#__codelineno-6-6>6</a></span>
 <span class=normal><a href=#__codelineno-6-7>7</a></span>
 <span class=normal><a href=#__codelineno-6-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=go>for _category in rook-ceph-mgr rook-ceph-osd; do</span>
-<a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=go>    for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk &#39;/^&#39;&quot;${_category}&quot;&#39;/{print $1}&#39;); do</span>
+<a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=go>    for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk '/^'"${_category}"'/{print $1}'); do</span>
 <a id=__codelineno-6-3 name=__codelineno-6-3></a><span class=go>        kubectl -n $ROOK_CLUSTER_NAMESPACE scale deployment ${_item} --replicas=1;</span>
-<a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=go>        while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath=&#39;{.status.replicas}&#39;) != &quot;1&quot; ]]; do</span>
+<a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=go>        while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath='{.status.replicas}') != "1" ]]; do</span>
 <a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=go>            sleep 5;</span>
 <a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=go>        done;</span>
 <a id=__codelineno-6-7 name=__codelineno-6-7></a><span class=go>    done;</span>
@@ -59,9 +59,9 @@
 <span class=normal><a href=#__codelineno-7-6>6</a></span>
 <span class=normal><a href=#__codelineno-7-7>7</a></span>
 <span class=normal><a href=#__codelineno-7-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=go>for _category in rook-ceph-exporter rook-ceph-crashcollector; do</span>
-<a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=go>    for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk &#39;/^&#39;&quot;${_category}&quot;&#39;/{print $1}&#39;); do</span>
+<a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=go>    for _item in $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE | awk '/^'"${_category}"'/{print $1}'); do</span>
 <a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=go>        kubectl -n $ROOK_CLUSTER_NAMESPACE scale deployment ${_item} --replicas=1;</span>
-<a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=go>        while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath=&#39;{.status.replicas}&#39;) != &quot;1&quot; ]]; do</span>
+<a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=go>        while [[ $(kubectl get deployment -n $ROOK_CLUSTER_NAMESPACE ${_item} -o jsonpath='{.status.replicas}') != "1" ]]; do</span>
 <a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=go>            sleep 5;</span>
 <a id=__codelineno-7-6 name=__codelineno-7-6></a><span class=go>        done;</span>
 <a id=__codelineno-7-7 name=__codelineno-7-7></a><span class=go>    done;</span>

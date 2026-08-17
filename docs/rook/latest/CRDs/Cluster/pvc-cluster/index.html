@@ -157,10 +157,10 @@
 <a id=__codelineno-1-28 name=__codelineno-1-28></a><span class=w>      </span><span class=nt>portable</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id=__codelineno-1-29 name=__codelineno-1-29></a><span class=w>      </span><span class=nt>resources</span><span class=p>:</span>
 <a id=__codelineno-1-30 name=__codelineno-1-30></a><span class=w>        </span><span class=nt>limits</span><span class=p>:</span>
-<a id=__codelineno-1-31 name=__codelineno-1-31></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
+<a id=__codelineno-1-31 name=__codelineno-1-31></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>"4Gi"</span>
 <a id=__codelineno-1-32 name=__codelineno-1-32></a><span class=w>        </span><span class=nt>requests</span><span class=p>:</span>
-<a id=__codelineno-1-33 name=__codelineno-1-33></a><span class=w>          </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s>&quot;500m&quot;</span>
-<a id=__codelineno-1-34 name=__codelineno-1-34></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>&quot;4Gi&quot;</span>
+<a id=__codelineno-1-33 name=__codelineno-1-33></a><span class=w>          </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s>"500m"</span>
+<a id=__codelineno-1-34 name=__codelineno-1-34></a><span class=w>          </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s>"4Gi"</span>
 <a id=__codelineno-1-35 name=__codelineno-1-35></a><span class=w>      </span><span class=nt>placement</span><span class=p>:</span>
 <a id=__codelineno-1-36 name=__codelineno-1-36></a><span class=w>        </span><span class=nt>podAntiAffinity</span><span class=p>:</span>
 <a id=__codelineno-1-37 name=__codelineno-1-37></a><span class=w>          </span><span class=nt>preferredDuringSchedulingIgnoredDuringExecution</span><span class=p>:</span>
@@ -168,11 +168,11 @@
 <a id=__codelineno-1-39 name=__codelineno-1-39></a><span class=w>            </span><span class=nt>podAffinityTerm</span><span class=p>:</span>
 <a id=__codelineno-1-40 name=__codelineno-1-40></a><span class=w>              </span><span class=nt>labelSelector</span><span class=p>:</span>
 <a id=__codelineno-1-41 name=__codelineno-1-41></a><span class=w>                </span><span class=nt>matchExpressions</span><span class=p>:</span>
-<a id=__codelineno-1-42 name=__codelineno-1-42></a><span class=w>                </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=s>&quot;rook.io/cluster&quot;</span>
+<a id=__codelineno-1-42 name=__codelineno-1-42></a><span class=w>                </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=s>"rook.io/cluster"</span>
 <a id=__codelineno-1-43 name=__codelineno-1-43></a><span class=w>                  </span><span class=nt>operator</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">In</span>
 <a id=__codelineno-1-44 name=__codelineno-1-44></a><span class=w>                  </span><span class=nt>values</span><span class=p>:</span>
 <a id=__codelineno-1-45 name=__codelineno-1-45></a><span class=w>                    </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span>
-<a id=__codelineno-1-46 name=__codelineno-1-46></a><span class=w>              </span><span class=nt>topologyKey</span><span class=p>:</span><span class=w> </span><span class=s>&quot;topology.kubernetes.io/zone&quot;</span>
+<a id=__codelineno-1-46 name=__codelineno-1-46></a><span class=w>              </span><span class=nt>topologyKey</span><span class=p>:</span><span class=w> </span><span class=s>"topology.kubernetes.io/zone"</span>
 <a id=__codelineno-1-47 name=__codelineno-1-47></a><span class=w>      </span><span class=nt>volumeClaimTemplates</span><span class=p>:</span>
 <a id=__codelineno-1-48 name=__codelineno-1-48></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>metadata</span><span class=p>:</span>
 <a id=__codelineno-1-49 name=__codelineno-1-49></a><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
