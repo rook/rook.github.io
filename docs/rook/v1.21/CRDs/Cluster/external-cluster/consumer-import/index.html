@@ -20,7 +20,7 @@
 </code></pre></div></td></tr></table></div> <h3 id=manifest-installation>Manifest Installation<a class=headerlink href=#manifest-installation title="Permanent link">&para;</a></h3> <p>If not installing with Helm, here are the steps to install with manifests.</p> <p>Deploy Rook:</p> <div class=highlight><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
 <span class=normal><a href=#__codelineno-1-2>2</a></span>
 <span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=gp>$ </span>git<span class=w> </span>clone<span class=w> </span>--single-branch<span class=w> </span>--branch<span class=w> </span>v1.21.0-beta.0<span class=w> </span>https://github.com/rook/rook.git
+<span class=normal><a href=#__codelineno-1-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=gp>$ </span>git<span class=w> </span>clone<span class=w> </span>--single-branch<span class=w> </span>--branch<span class=w> </span>v1.21.0<span class=w> </span>https://github.com/rook/rook.git
 <a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=go>cd rook/deploy/examples</span>
 <a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=go>kubectl create -f crds.yaml -f common.yaml -f csi-operator.yaml</span>
 <a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=go>kubectl create -f operator.yaml -f common-external.yaml -f cluster-external.yaml</span>
