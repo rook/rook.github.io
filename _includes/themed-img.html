@@ -1,0 +1,7 @@
+{%- comment -%}
+css/site.scss hides the inactive copy with display:none, so screen readers get one image.
+Params: src, dark (paths relative to the site root), alt, class, width, height, loading.
+loading="lazy" goes on both copies, so the browser never fetches the hidden one.
+{%- endcomment -%}
+{%- capture attrs %} alt="{{ include.alt }}"{% if include.width %} width="{{ include.width }}"{% endif %}{% if include.height %} height="{{ include.height }}"{% endif %}{% if include.loading %} loading="{{ include.loading }}"{% endif %}{% endcapture -%}
+<img class="theme-light{% if include.class %} {{ include.class }}{% endif %}" src="{{ include.src | relative_url }}"{{ attrs }}><img class="theme-dark{% if include.class %} {{ include.class }}{% endif %}" src="{{ include.dark | relative_url }}"{{ attrs }}>

@@ -20,6 +20,7 @@ exclude:
   - Gemfile.lock
   - Makefile
   - README.md
+  - scripts
   - vendor
 
 defaults:
