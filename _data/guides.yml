@@ -1,0 +1,36 @@
+- title: "Self-service S3 for your teams"
+  text: "Teams claim buckets and get credentials as a Secret."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/"
+  icon: object
+- title: "Shared filesystem for many pods"
+  text: "RWX volumes from CephFS."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/"
+  icon: filesystem
+- title: "Cut raw capacity with erasure coding"
+  text: "Same protection as three copies, half the disks."
+  url: "https://rook.io/docs/rook/latest-release/CRDs/Block-Storage/ceph-block-pool-crd/#erasure-coding"
+  icon: disk
+- title: "Encrypt with keys in your KMS"
+  text: "Vault, KMIP and cloud key services."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/key-management-system/"
+  icon: key
+- title: "Monitor with Grafana and the Ceph Dashboard"
+  text: "Prometheus metrics, alerts and dashboards."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-monitoring/"
+  icon: monitor
+- title: "Use the Ceph CSI drivers"
+  text: "Static, ephemeral and expandable volumes, with RBD QoS."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Ceph-CSI/ceph-csi-drivers/"
+  icon: csi
+- title: "Replace a failed disk"
+  text: "Keep the OSD ID, so Ceph refills only that disk."
+  url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/ceph-osd-mgmt/#replace-an-osd"
+  icon: disk
+- title: "Run on cloud block volumes"
+  text: "OSDs on your provider's storage class."
+  url: "https://rook.io/docs/rook/latest-release/CRDs/Cluster/pvc-cluster/"
+  icon: disk
+- title: "Metadata on NVMe, data on HDD"
+  text: "Speed up HDD clusters with a fast metadata device."
+  url: "https://rook.io/docs/rook/latest-release/CRDs/Cluster/host-cluster/"
+  icon: disk

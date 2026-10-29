@@ -1,153 +1,262 @@
 ---
 asciinema: true
-stylesheet: index
+nav: home
 ---
 {% include values.inc %}
+{% include illo-symbols.html %}
 
-<div id="holder">
-    <section class="grid-middle hero">
-        <div class="col-5_md-12">
-            <h1>Open-Source,<br />Cloud-Native Storage for Kubernetes</h1>
-            <p>Production ready management for File, Block and Object Storage</p>
-            <a class="button" href="{{ gettingStartedLink }}">Try it out now</a>
+<section class="section--hero hero">
+  <div class="container">
+    <div class="grid hero__grid">
+      <div class="hero__text">
+        <h1 class="t-display">Open-source, <span class="nowrap">cloud-native</span> storage for Kubernetes</h1>
+        <p class="lead">Rook declaratively deploys and operates distributed block, file and S3 object storage on your Kubernetes clusters.</p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="{{ gettingStartedLink }}">Quickstart</a>
         </div>
-        <div class="col-7_md-12_md-first">
-            <img src="{{ "/images/index-hero.svg" | relative_url }}" alt="" />
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1>What is Rook?</h1>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-6_md-12">
-            <img src="{{ "/images/index-what-is-rook.svg" | relative_url }}" alt="" />
-        </div>
-        <div class="col-6_md-12">
-            <h2>Storage Operators for Kubernetes</h2>
-            <p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.<br /><br />Rook uses the power of the Kubernetes platform to deliver its services via a Kubernetes Operator for Ceph.</p>
-            <div class="github-pills">
-                <div id="watch-pill" class="pill">
-                    <a href="https://github.com/rook/rook/subscription">Watch</a>
-                    <a id="watch-pill-count" class="count" href="https://github.com/rook/rook/watchers"></a>
-                </div>
-                <div id="star-pill" class="pill">
-                    <a href="https://github.com/rook/rook">Star</a>
-                    <a id="star-pill-count" class="count" href="https://github.com/rook/rook/stargazers"></a>
-                </div>
-                <div id="fork-pill" class="pill">
-                    <a href="https://github.com/rook/rook/fork">Forks</a>
-                    <a id="fork-pill-count" class="count" href="https://github.com/rook/rook/network"></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-6_md-12">
-            <h2>Ceph Storage Provider</h2>
-            <p>Rook orchestrates the Ceph storage solution, with a specialized Kubernetes Operator to automate management. Rook ensures that Ceph will run well on Kubernetes and simplify the deployment and management experience.</p>
-        </div>
-        <div class="col-6_md-12">
-            <div class="terminal-wrapper">
-                <h3 id="terminal-header">Ceph</h3>
-                <div class="terminal-body">
-                    <div id="terminal-player-wrapper" class="terminal">
-                        <asciinema-player id="terminal-player" cols="61" rows="16" preload loop speed="1.25" src="{{ "/data/ceph.cast" | relative_url }}"></asciinema-player>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1>Who loves Rook?</h1>
-            <p>With hundreds of contributors and millions of downloads of the Rook software, this true community-driven
-                effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a
-                global user base.<br /><br />The Rook operator is deployed in production across many industries,
-                enabling them to store, deliver & protect the data that powers their businesses.<br />
-                See the list of published <a href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
-                for just a hint of who is running Rook in production.</p>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1 class="text-center">Features of Rook</h1>
-        </div>
-    </section>
-    <section class="grid-bottom features">
-        <div class="col-3_xs-6">
-            <img class="automate" src="{{ "/images/features/automate.svg" | relative_url }}" alt="" />
-            <span>Simple and reliable automated storage management</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="scale" src="{{ "/images/features/scale.svg" | relative_url }}" alt="" />
-            <span>Hyper-scale or hyper-converge your storage clusters</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="distribute" src="{{ "/images/features/distribute.svg" | relative_url }}" alt="" />
-            <span>Efficiently distribute and replicate data to minimize loss</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="provision" src="{{ "/images/features/provision.svg" | relative_url }}" alt="" />
-            <span>Provision, file, block, and object storage</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="manage" src="{{ "/images/features/manage.svg" | relative_url }}" alt="" />
-            <span>Manage open-source Ceph storage</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="elasticstorage" src="{{ "/images/features/elasticstorage.svg" | relative_url }}" alt="" />
-            <span>Easily enable elastic storage in your datacenter</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="opensource" src="{{ "/images/features/opensource.svg" | relative_url }}" alt="" />
-            <span>Open source software released under the Apache 2.0 license</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="optimize" src="{{ "/images/features/optimize.svg" | relative_url }}" alt="" />
-            <span>Optimize workloads on commodity hardware</span>
-        </div>
-    </section>
+      </div>
+      <div class="hero__art">
+        {% include themed-img.html src="/images/index-hero.svg" dark="/images/dark/index-hero.svg" alt="" width="520" height="302" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="users-link">
+  <div class="container">
+    <a class="arrow-link" href="{{ adoptersMdLink }}">See who runs Rook in production{% include icon.html name="arrow" %}</a>
+  </div>
 </div>
 
-<script>
-    function githubFetch(path) {
-        var el = document.createElement('script');
-        var head = document.getElementsByTagName('head')[0];
-        el.src = path + '?callback=githubFetchCallback';
-        head.insertBefore(el, head.firstChild);
-    }
+<section class="section--compact section--gray proof" aria-label="Rook in numbers">
+  <div class="container">
+    <ul class="stats">
+      {%- for c in site.data.stats.cells %}
+      <li><a class="stats__cell" href="{{ c.url }}">{% if c.image %}{% include themed-img.html class="stats__badge" src=c.image dark=c.image_dark alt=c.alt width="174" height="48" loading="lazy" %}{% else %}<span class="stat">{% if c.live %}{{ live[c.live] | default: c.number }}{% else %}{{ c.number }}{% endif %}</span>{% endif %}<span class="stats__label">{{ c.label }}</span></a></li>
+      {%- endfor %}
+    </ul>
+    {% include contributors-wall.html limit=74 %}
+  </div>
+</section>
 
-    function githubFetchCallback(obj) {
-        document.getElementById('watch-pill-count').innerText = (obj.data.subscribers_count).toLocaleString();
-        document.getElementById('star-pill-count').innerText = (obj.data.stargazers_count).toLocaleString();
-        document.getElementById('fork-pill-count').innerText = (obj.data.network_count).toLocaleString();
-    }
+<nav class="secnav" aria-label="Sections" data-secnav>
+  <div class="container">
+    <ul class="secnav__list">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#why-rook">Why Rook</a></li>
+      <li><a href="#interfaces">Storage interfaces</a></li>
+      <li><a href="#data-protection">Data protection</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
 
-    function terminalTypeClick(elem, text) {
-        if (elem.classList.contains('active')) {
-            return;
-        }
+<section class="section band-night" id="how-it-works">
+  <div class="container">
+    <div class="grid grid--start how-grid" data-how>
+      <div class="c-5 md-12 how">
+        <h2>You describe the cluster. Rook builds and runs it.</h2>
+        <div class="segmented segmented--night" role="tablist" aria-label="How it works">
+          <button role="tab" id="how-tab-day1" aria-selected="true" aria-controls="how-panel-day1">Day 1</button>
+          <button role="tab" id="how-tab-day2" aria-selected="false" aria-controls="how-panel-day2" tabindex="-1">Day 2</button>
+          <button role="tab" id="how-tab-demo" aria-selected="false" aria-controls="how-panel-demo" tabindex="-1" data-demo="true">Demo</button>
+        </div>
+        <div class="how__texts">
+          <p class="how__text" id="how-text-day1" data-for="how-panel-day1">Describe the cluster you want: which disks to use, how to protect your data (copies or erasure coding) and where to place it, and which pools and S3 object stores to create. Apply it, and Rook provisions the rest.</p>
+          <ul class="how__text how__list" id="how-text-day2" data-for="how-panel-day2" hidden>
+            <li>Upgrade Ceph by changing one line. Rook rolls it out daemon by daemon and checks cluster health as it goes.</li>
+            <li>Drain a node for an OS or Kubernetes upgrade. Rook takes its disks offline only when that is safe for your data.</li>
+            <li>New disks go to work as they appear. To replace a failed disk, mark it and swap it.</li>
+            <li>App teams request S3 buckets and credentials in YAML.</li>
+          </ul>
+        </div>
+        <div class="how__after">
+          <a class="btn btn--secondary" href="{{ gettingStartedLink }}">Open the quickstart</a>
+        </div>
+      </div>
+      <div class="c-7 md-12">
+        <div class="how__stage">
+          <div class="how__panel" id="how-panel-day1" role="tabpanel" aria-labelledby="how-tab-day1" aria-describedby="how-text-day1" tabindex="0">
+            {% include how-day1.html %}
+          </div>
+          <div class="how__panel" id="how-panel-day2" role="tabpanel" aria-labelledby="how-tab-day2" aria-describedby="how-text-day2" tabindex="0" hidden>
+            {% include how-day2.html %}
+          </div>
+          <div class="how__panel how__panel--demo" id="how-panel-demo" role="tabpanel" aria-labelledby="how-tab-demo" hidden>
+            <div class="terminal">
+              <div class="terminal__bar"><span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <div class="terminal__body terminal__demo">
+                <div id="terminal-demo" data-src="{{ "/data/ceph.cast" | relative_url }}" data-cols="61" data-rows="16"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        var terminalPlayer = document.getElementById('terminal-player');
-        var terminalPlayerWrapper = document.getElementById('terminal-player-wrapper');
-        var terminalSrc = elem.dataset.terminalSrc;
-        var terminalRows = elem.dataset.terminalRows;
-        var buttons = document.querySelectorAll('.terminal-buttons button');
+<section class="section" id="why-rook">
+  <div class="container">
+    <div class="head">
+      <h2>Why Rook</h2>
+    </div>
+    <div class="why4">
+      <article class="why4__card">
+        {% include themed-img.html class="why4__icon" src="/images/features/automate.svg" dark="/images/dark/features/automate.svg" alt="" loading="lazy" %}
+        <h3 class="why4__title">Cost efficiency</h3>
+        <ul class="why4__list">
+          <li><strong class="why4__em">2&times;</strong> less raw space than three copies, same redundancy, with <strong class="why4__em nowrap">erasure coding</strong></li>
+          <li>NVMe for metadata, HDDs for data: <span class="nowrap">flash-speed</span> metadata at HDD cost</li>
+        </ul>
+        <a class="arrow-link why4__link" href="{{ docsBase }}/CRDs/Block-Storage/ceph-block-pool-crd/#erasure-coded-rbd-pool">Erasure coding{% include icon.html name="arrow" %}</a>
+      </article>
+      <article class="why4__card">
+        {% include themed-img.html class="why4__icon" src="/images/features/elasticstorage.svg" dark="/images/dark/features/elasticstorage.svg" alt="" loading="lazy" %}
+        <h3 class="why4__title">Runs everywhere Kubernetes runs</h3>
+        <p class="why4__text">On bare metal or in any cloud, on local disks or your provider's block volumes.</p>
+        <a class="arrow-link why4__link" href="{{ docsBase }}/CRDs/Cluster/ceph-cluster-crd/">Cluster types{% include icon.html name="arrow" %}</a>
+      </article>
+      <article class="why4__card">
+        {% include themed-img.html class="why4__icon" src="/images/features/opensource.svg" dark="/images/dark/features/opensource.svg" alt="" loading="lazy" %}
+        <h3 class="why4__title">Open source, no vendor <span class="nowrap">lock-in</span></h3>
+        <p class="why4__text">Rook (Apache 2.0) and Ceph (LGPL) run on hardware you choose, and no single company controls the project.</p>
+        <a class="arrow-link why4__link" href="{{ governanceLink }}">Governance{% include icon.html name="arrow" %}</a>
+      </article>
+      <article class="why4__card">
+        {% include themed-img.html class="why4__icon" src="/images/features/provision.svg" dark="/images/dark/features/provision.svg" alt="" loading="lazy" %}
+        <h3 class="why4__title">Hardware fails, your data stays</h3>
+        <p class="why4__text">Ceph keeps each copy on a different host, rack or zone, rebuilds lost copies on its own, and spreads data onto new disks as you add them.</p>
+        <a class="arrow-link why4__link" href="{{ docsBase }}/CRDs/Cluster/ceph-cluster-crd/#osd-topology">Failure domains{% include icon.html name="arrow" %}</a>
+      </article>
+    </div>
+  </div>
+</section>
 
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
-        }
+<section class="section section--gray" id="interfaces">
+  <div class="container">
+    <div class="head">
+      <h2>Block, file and S3 storage from one cluster</h2>
+    </div>
+    <div class="card itable-wrap">
+      <table class="itable">
+        <thead>
+          <tr><th scope="col">Interface</th><th scope="col"><span class="itable__k8s"><svg class="itable__mark" viewBox="0 0 230 223" aria-hidden="true"><use href="#i-k8s"/></svg>Kubernetes</span></th><th scope="col">Outside Kubernetes</th><th scope="col" class="itable__docs">Docs</th></tr>
+        </thead>
+        <tbody>
+          {%- capture tux %}<img class="itable__mark" src="{{ "/images/brand/tux.svg" | relative_url }}" alt="" width="14" height="16">{% endcapture %}
+          {%- for it in site.data.storage_interfaces %}
+          <tr>
+            <th scope="row"><span class="itable__name"><svg class="itable__icon" aria-hidden="true"><use href="#i-{{ it.id }}"/></svg><span>{{ it.name }}{% if it.tech %} <span class="itable__tech">{{ it.tech }}</span>{% endif %}{% if it.desc %}<span class="itable__desc">{{ it.desc }}</span>{% endif %}</span></span></th>
+            <td data-label="Kubernetes">{{ it.k8s }}</td>
+            <td data-label="Outside Kubernetes">{% if it.client_html %}{{ it.client_html | replace: "[tux]", tux }}{% else %}{{ it.client }}{% endif %}</td>
+            <td class="itable__docs">{% for d in it.docs %}<a class="arrow-link" href="{{ d.url }}">{{ d.label }}{% include icon.html name="arrow" %}</a>{% endfor %}</td>
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-        elem.classList.add('active');
-        document.getElementById('terminal-header').innerText = text;
-        terminalPlayerWrapper.innerHTML = '<asciinema-player id="terminal-player" cols="61" rows="' + terminalRows + '" preload autoplay loop speed="1.25" src="' + terminalSrc + '"></asciinema-player>';
-    }
+<section class="section" id="data-protection">
+  <div class="container">
+    <div class="grid dr-grid">
+      <div class="dr-head">
+        <div class="head head--flush">
+          <h2>Survive a zone outage. Recover from a site loss.</h2>
+        </div>
+      </div>
+      <div class="dr-body">
+        <ul class="dr-list">
+          <li class="dr-item">{% include icon.html name="zones" %}<div>
+            <h3>Stretch a cluster across zones</h3>
+            <p>One cluster runs in two zones, with a small third zone that only breaks ties.</p>
+            <a class="arrow-link" href="{{ docsBase }}/CRDs/Cluster/stretch-cluster/">Stretch cluster docs{% include icon.html name="arrow" %}</a>
+          </div></li>
+          <li class="dr-item">{% include icon.html name="database" %}<div>
+            <h3>Replicate to a second site</h3>
+            <p>Mirror block volumes and filesystems, and replicate object storage, to another cluster. Fail over in a disaster and fail back later.</p>
+            <div class="dr-links">
+              <a class="arrow-link" href="{{ docsBase }}/Storage-Configuration/Block-Storage-RBD/rbd-async-disaster-recovery-failover-failback/">Block{% include icon.html name="arrow" %}</a>
+              <a class="arrow-link" href="{{ docsBase }}/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-mirroring/">Filesystem{% include icon.html name="arrow" %}</a>
+              <a class="arrow-link" href="{{ docsBase }}/Storage-Configuration/Object-Storage-RGW/ceph-object-multisite/">Object{% include icon.html name="arrow" %}</a>
+            </div>
+          </div></li>
+          <li class="dr-item">{% include icon.html name="lock" %}<div>
+            <h3>Lock backups against ransomware</h3>
+            <p>With S3 Object Lock, objects can't be overwritten or deleted until their retention period ends.</p>
+            <a class="arrow-link" href="https://docs.ceph.com/en/latest/radosgw/s3/bucketops/">S3 Object Lock in the Ceph docs{% include icon.html name="arrow" %}</a>
+          </div></li>
+          <li class="dr-item">{% include icon.html name="camera" %}<div>
+            <h3>Snapshot and clone volumes</h3>
+            <p>Take point-in-time copies of volumes, then restore or clone them.</p>
+            <a class="arrow-link" href="{{ docsBase }}/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/">Snapshot docs{% include icon.html name="arrow" %}</a>
+          </div></li>
+        </ul>
+      </div>
+      <div class="dr-vis">
+        <div class="dr-visual" data-tabs>
+          <div class="segmented" role="tablist" aria-label="Protection scope">
+            <button role="tab" id="seg-zones" aria-selected="true" aria-controls="dr-zones">Across zones</button>
+            <button role="tab" id="seg-sites" aria-selected="false" aria-controls="dr-sites" tabindex="-1">Across sites</button>
+          </div>
+          <div class="dr-panel" id="dr-zones" role="tabpanel" aria-labelledby="seg-zones">
+            <figure>{% include dr-zones.html %}</figure>
+          </div>
+          <div class="dr-panel" id="dr-sites" role="tabpanel" aria-labelledby="seg-sites" hidden>
+            <figure>{% include dr-sites.html %}</figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    githubFetch('https://api.github.com/repos/rook/rook');
+<section class="section section--gray" id="guides">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Guides</h2>
+      <p class="lead">Step-by-step guides in the Rook docs.</p>
+    </div>
+    <ul class="glist">
+      {%- for g in site.data.guides %}
+      <li><a class="glist__item" href="{{ g.url }}">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-{{ g.icon }}"/></svg>
+        <span class="glist__body"><span class="glist__title">{{ g.title }}</span><span class="glist__text">{{ g.text }}</span></span>
+        {% include icon.html name="arrow" class="glist__arrow" %}
+      </a></li>
+      {%- endfor %}
+    </ul>
+    <div class="links-row glist__more">
+      <a class="arrow-link" href="{{ latestDocs | relative_url }}">Browse all docs{% include icon.html name="arrow" %}</a>
+    </div>
+  </div>
+</section>
 
-    document.getElementById('terminal-player').addEventListener('loadedmetadata', function(e) {
-        this.play();
-    });
-  </script>
+<section class="section" id="faq">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2>FAQ</h2>
+          <a class="arrow-link" href="{{ "/faq/" | relative_url }}">All questions{% include icon.html name="arrow" %}</a>
+        </div>
+      </div>
+      <div class="c-8 md-12">
+        {%- assign homefaq = site.data.faq | where: "home", true -%}
+        {% include faq-list.html items=homefaq open=1 home=true %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--compact section--gray community" id="community">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Join the community</h2>
+    </div>
+    {% include community.html %}
+  </div>
+</section>

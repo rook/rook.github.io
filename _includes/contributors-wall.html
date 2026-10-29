@@ -1,0 +1,17 @@
+{%- comment -%} Live list from _data/live_stats.json when present, else _data/contributors.yml with local avatars. Params: limit. {%- endcomment -%}
+<div class="contrib">
+  <div class="contrib__head">
+    <p class="eyebrow contrib__label">Contributors from {{ site.data.stats.organizations }} organizations</p>
+  </div>
+  <div class="avatars">
+    {%- if site.data.live_stats.contributors.size > 0 %}
+    {%- for p in site.data.live_stats.contributors limit: include.limit %}
+    <a href="{{ p.url }}" title="{{ p.login }}"><img src="{{ p.avatar }}" alt="{{ p.login }}" loading="lazy" width="40" height="40"></a>
+    {%- endfor %}
+    {%- else %}
+    {%- for login in site.data.contributors limit: include.limit %}
+    <a href="https://github.com/{{ login }}" title="{{ login }}"><img src="{{ "/images/contributors/" | append: login | append: ".jpg" | relative_url }}" alt="{{ login }}" loading="lazy" width="40" height="40"></a>
+    {%- endfor %}
+    {%- endif %}
+  </div>
+</div>

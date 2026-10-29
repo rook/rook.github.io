@@ -1,7 +1,13 @@
 .PHONY: help run build publish
 
 # https://pages.github.com/versions/
-JEKYLL_DOCKER_IMAGE ?= docker.io/jekyll/jekyll:4.2.2
+JEKYLL_DOCKER_IMAGE ?= docker.io/library/ruby:3.1
+
+# Gems go to vendor/bundle (gitignored, excluded from the site). Runs as the calling user so files stay theirs.
+JEKYLL_DOCKER_RUN = docker run --rm -i \
+	--user "$(shell id -u):$(shell id -g)" -e HOME=/tmp \
+	-e BUNDLE_PATH=/srv/jekyll/vendor/bundle -e PAGES_REPO_NWO=rook/rook.github.io \
+	--volume="$(PWD):/srv/jekyll" --workdir /srv/jekyll
 
 CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -14,21 +20,14 @@ help:	## Show this help menu.
 
 run:	## run jekyll in development mode
 run:
-	docker run --rm -i \
-		-p 4000:4000 -p 4001:4001 \
-		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		--volume="$(PWD):/srv/jekyll" \
-		$(JEKYLL_DOCKER_IMAGE) -- \
-		jekyll serve --livereload --livereload-port 4001
+	$(JEKYLL_DOCKER_RUN) -p 4000:4000 -p 4001:4001 $(JEKYLL_DOCKER_IMAGE) \
+		bash -c 'bundle install && bundle exec jekyll serve --host 0.0.0.0 --livereload --livereload-port 4001'
 
 build:	## build output is in _site
 build:
 	mkdir -p _site/
-	docker run --rm -i \
-		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		--volume="$(PWD):/srv/jekyll" \
-		$(JEKYLL_DOCKER_IMAGE) -- \
-		jekyll build
+	$(JEKYLL_DOCKER_RUN) $(JEKYLL_DOCKER_IMAGE) \
+		bash -c 'bundle install && bundle exec jekyll build'
 	# Correct permissions when running in CI
 	if test "$$CI" = "true"; then sudo chown -R "$(shell id -u):$(shell id -g)" _site/; fi
 	# Copy the "no jekyll build" file so Github pages does not build the gh-pages branch
@@ -37,11 +36,8 @@ build:
 
 bundle_update: ## Update Gemfile.lock (via bundler)
 bundle_update:
-	docker run --rm -i \
-		--volume="$(PWD)/vendor/bundle:/usr/local/bundle" \
-		--volume="$(PWD):/srv/jekyll" \
-		jekyll/jekyll -- \
-		bundle update
+	$(JEKYLL_DOCKER_RUN) $(JEKYLL_DOCKER_IMAGE) \
+		bash -c 'bundle update'
 
 publish:	## push changed files to the live site through the gh-pages branch
 publish: build

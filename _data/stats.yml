@@ -1,0 +1,29 @@
+# Homepage stats strip, release ribbon and contributor label: the committed fallbacks. When scripts/fetch-stats.py
+# has written _data/live_stats.json (CI runs it before every build, plus a daily scheduled build), its labels win:
+# the same top-level keys, and for a cell the key named by `live`. Refresh these now and then so builds without the
+# live file stay close. The contributors and organizations figures are static (CNCF devstats).
+latest_minor: "1.21"
+release_url: "https://github.com/rook/rook/releases/tag/v1.21.0"
+organizations: "580+"
+cells:
+  - image: "/images/brand/cncf-graduated-color.svg"
+    image_dark: "/images/brand/cncf-graduated-white.svg"
+    alt: "CNCF Graduated project"
+    label: "since 2020"
+    url: "https://www.cncf.io/announcements/2020/10/07/cloud-native-computing-foundation-announces-rook-graduation/"
+  - number: "240+"
+    live: releases
+    label: "releases since 2016"
+    url: "https://github.com/rook/rook/releases"
+  # "Contributors" row (Last decade, bots excluded): https://rook.devstats.cncf.io/d/18/overall-project-statistics-table?orgId=1
+  - number: "3,800+"
+    label: "contributors"
+    url: "https://rook.devstats.cncf.io"
+  - number: "330M+"
+    live: pulls
+    label: "image pulls"
+    url: "https://hub.docker.com/r/rook/ceph"
+  - number: "13.7k"
+    live: stars
+    label: "GitHub stars"
+    url: "https://github.com/rook/rook"

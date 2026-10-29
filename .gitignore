@@ -5,3 +5,4 @@
 .bundle
 .jekyll-metadata
 .sass-cache
+/_data/live_stats.json
