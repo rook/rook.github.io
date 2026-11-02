@@ -22,13 +22,22 @@ nav: home
   </div>
 </section>
 
-<div class="users-link">
+<nav class="secnav" aria-label="Sections" data-secnav>
   <div class="container">
-    <a class="arrow-link" href="{{ adoptersMdLink }}">See who runs Rook in production{% include icon.html name="arrow" %}</a>
+    <ul class="secnav__list">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#why-rook">Why Rook</a></li>
+      <li><a href="#interfaces">Storage interfaces</a></li>
+      <li><a href="#data-protection">Data protection</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
   </div>
-</div>
+</nav>
 
-<section class="section--compact section--gray proof" aria-label="Rook in numbers">
+<section class="section--compact section--gray proof" id="stats" aria-label="Rook in numbers">
   <div class="container">
     <ul class="stats">
       {%- for c in site.data.stats.cells %}
@@ -39,25 +48,12 @@ nav: home
   </div>
 </section>
 
-<nav class="secnav" aria-label="Sections" data-secnav>
-  <div class="container">
-    <ul class="secnav__list">
-      <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#why-rook">Why Rook</a></li>
-      <li><a href="#interfaces">Storage interfaces</a></li>
-      <li><a href="#data-protection">Data protection</a></li>
-      <li><a href="#guides">Guides</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-  </div>
-</nav>
-
 <section class="section band-night" id="how-it-works">
   <div class="container">
     <div class="grid grid--start how-grid" data-how>
       <div class="c-5 md-12 how">
         <h2>You describe the cluster. Rook builds and runs it.</h2>
-        <div class="segmented segmented--night" role="tablist" aria-label="How it works">
+        <div class="segmented" role="tablist" aria-label="How it works">
           <button role="tab" id="how-tab-day1" aria-selected="true" aria-controls="how-panel-day1">Day 1</button>
           <button role="tab" id="how-tab-day2" aria-selected="false" aria-controls="how-panel-day2" tabindex="-1">Day 2</button>
           <button role="tab" id="how-tab-demo" aria-selected="false" aria-controls="how-panel-demo" tabindex="-1" data-demo="true">Demo</button>
@@ -72,7 +68,7 @@ nav: home
           </ul>
         </div>
         <div class="how__after">
-          <a class="btn btn--secondary" href="{{ gettingStartedLink }}">Open the quickstart</a>
+          <a class="btn btn--primary how__cta" href="{{ gettingStartedLink }}">Open the quickstart</a>
         </div>
       </div>
       <div class="c-7 md-12">
@@ -87,7 +83,7 @@ nav: home
             <div class="terminal">
               <div class="terminal__bar"><span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
               <div class="terminal__body terminal__demo">
-                <div id="terminal-demo" data-src="{{ "/data/ceph.cast" | relative_url }}" data-cols="61" data-rows="16"></div>
+                <div id="terminal-demo" data-src="{{ "/data/ceph.cast" | relative_url }}" data-cols="61" data-rows="17"></div>
               </div>
             </div>
           </div>
@@ -97,7 +93,7 @@ nav: home
   </div>
 </section>
 
-<section class="section" id="why-rook">
+<section class="section section--gray" id="why-rook">
   <div class="container">
     <div class="head">
       <h2>Why Rook</h2>
@@ -134,7 +130,7 @@ nav: home
   </div>
 </section>
 
-<section class="section section--gray" id="interfaces">
+<section class="section" id="interfaces">
   <div class="container">
     <div class="head">
       <h2>Block, file and S3 storage from one cluster</h2>
@@ -160,7 +156,7 @@ nav: home
   </div>
 </section>
 
-<section class="section" id="data-protection">
+<section class="section section--gray" id="data-protection">
   <div class="container">
     <div class="grid dr-grid">
       <div class="dr-head">
@@ -214,7 +210,7 @@ nav: home
   </div>
 </section>
 
-<section class="section section--gray" id="guides">
+<section class="section" id="guides">
   <div class="container">
     <div class="head head--tight">
       <h2>Guides</h2>
@@ -235,6 +231,15 @@ nav: home
   </div>
 </section>
 
+<section class="section--compact section--gray community" id="community">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Join the community</h2>
+    </div>
+    {% include community.html %}
+  </div>
+</section>
+
 <section class="section" id="faq">
   <div class="container">
     <div class="grid grid--start">
@@ -249,14 +254,5 @@ nav: home
         {% include faq-list.html items=homefaq open=1 home=true %}
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section--compact section--gray community" id="community">
-  <div class="container">
-    <div class="head head--tight">
-      <h2>Join the community</h2>
-    </div>
-    {% include community.html %}
   </div>
 </section>

@@ -272,7 +272,7 @@ h4 { font-size: 18px; line-height: 26px; }
 .no-js .theme-toggle, .no-js .nav__theme { display: none; }
 
 /* ========================================================================== Hero (homepage; also the 404/500 art) */
-.section--hero.hero { padding-top: $space-16; padding-bottom: $space-8; @include md { padding-top: $space-12; } @include sm { padding-top: $space-8; } }
+.section--hero.hero { padding-top: $space-16; padding-bottom: $space-12; @include md { padding-top: $space-12; } @include sm { padding-top: $space-8; padding-bottom: $space-8; } }
 .hero__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; row-gap: 0; }
 .hero__text { grid-column: 1 / span 6; grid-row: 1 / span 2; }
 .hero .t-display { max-width: 560px; }
@@ -287,7 +287,6 @@ h4 { font-size: 18px; line-height: 26px; }
   .hero__text { order: 1; }
 }
 
-.users-link { padding: $space-4 0 $space-12; text-align: center; @include md { padding: $space-2 0 $space-10; } @include sm { padding: 0 0 $space-8; } }
 
 /* ========================================================================== Stats + contributor wall */
 .stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -314,7 +313,8 @@ h4 { font-size: 18px; line-height: 26px; }
 @include sm { .avatars a:nth-of-type(n+37) { display: none; } }
 
 /* ========================================================================== Sticky section nav */
-.secnav { position: sticky; top: 73px; z-index: 40; background: $white; border-bottom: $border; }
+// The top hairline separates it from the hero; once stuck it lies under the header's bottom border.
+.secnav { position: sticky; top: 72px; z-index: 40; background: $white; border-top: $border; border-bottom: $border; }
 .secnav .container { overflow-x: auto; scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
 .secnav__list { display: flex; gap: $space-8; @include sm { gap: $space-6; } }
 .secnav__list li { flex: none; }
@@ -331,20 +331,12 @@ h4 { font-size: 18px; line-height: 26px; }
   &:hover { color: $navy-900; }
   &[aria-selected='true'] { background: $surface; color: $navy-900; box-shadow: 0 1px 2px rgba(27, 12, 89, .12); }
 }
-.segmented--night { background: rgba(255, 255, 255, .06); border-color: $night-line;
-  button { color: $on-night-muted; &:hover { color: $on-night; } &[aria-selected='true'] { background: rgba(255, 255, 255, .14); color: $on-night; box-shadow: none; } } }
 
-/* ========================================================================== Night band (How it works) */
-.band-night { position: relative; background: $night-950; color: $on-night-muted; overflow: hidden; }
-.band-night::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 300px at 70% 40%, rgba(42, 198, 234, .12), transparent); pointer-events: none; }
-.band-night .container { position: relative; }
-.band-night h2, .band-night h4 { color: $on-night; }
-.band-night .lead, .band-night p, .band-night .small { color: $on-night-muted; }
-.band-night code { background: rgba(255, 255, 255, .06); border-color: $night-line; color: $on-night; }
-.band-night .btn--secondary { color: $fixed-white; border-color: rgba(255, 255, 255, .28); &:hover { border-color: $fixed-white; } }
-
+/* ========================================================================== How it works (a gray section in light; the night band in dark, see the dark theme) */
 // Panels share one grid cell, and so do the texts, so switching tabs never changes the height.
 .how-grid { align-items: start; @include md { row-gap: $space-10; } }
+// min-width: 0 lets the wide Demo terminal scroll inside its frame instead of overflowing the column.
+.how-grid > *, .how__stage > .how__panel { min-width: 0; }
 .how .segmented { margin: $space-8 0 0; }
 .how__texts { margin-top: $space-6; display: grid; @include md { display: block; } }
 .how__texts > .how__text { grid-area: 1 / 1; }
@@ -375,6 +367,8 @@ h4 { font-size: 18px; line-height: 26px; }
 .terminal__demo .asciinema-player-wrapper { text-align: left; }
 .terminal__demo .asciinema-terminal { background-color: $night-990 !important; border: 0 !important; }
 .terminal__demo .asciinema-player .control-bar { display: none; }
+// The player keeps its 61-column width; on narrow screens the frame scrolls sideways instead of clipping it.
+.terminal__demo .asciinema-player { max-width: none; }
 @include sm {
   .terminal__body { padding: $space-4; }
   .terminal__body pre { font-size: 12px; line-height: 20px; }
@@ -620,10 +614,19 @@ $dk-diagram-line: #8a80dc;
 
   :focus-visible { outline-color: rgba(42, 198, 234, .7); }
   ::selection { background: rgba(42, 198, 234, .35); color: $on-night; }
-  // Night band has the page colour: a hairline marks its end; inside, the light theme (and light shadow) stays.
-  .band-night { border-bottom: 1px solid $dk-line; --shadow-float: #{$shadow-float-light}; }
-  .segmented:not(.segmented--night) { background: $dk-bg;
+  .segmented { background: $dk-bg;
     button[aria-selected='true'] { background: $dk-raise; box-shadow: none; } }
+  // How it works: the night band, with a radial glow. It has the page colour, so a hairline marks its end; the code
+  // views keep the light theme's shadow.
+  .band-night { position: relative; overflow: hidden; background: $night-950; color: $on-night-muted; border-bottom: 1px solid $dk-line; --shadow-float: #{$shadow-float-light};
+    &::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 300px at 70% 40%, rgba(42, 198, 234, .12), transparent); pointer-events: none; }
+    .container { position: relative; }
+    h2 { color: $on-night; }
+    p { color: $on-night-muted; }
+    .segmented { background: rgba(255, 255, 255, .06); border-color: $night-line;
+      button { color: $on-night-muted; &:hover { color: $on-night; } &[aria-selected='true'] { background: rgba(255, 255, 255, .14); color: $on-night; box-shadow: none; } } }
+    .how__cta { background: transparent; color: $fixed-white; border-color: rgba(255, 255, 255, .28); &:hover { background: transparent; border-color: $fixed-white; } }
+  }
   .theme-toggle__sun { display: none; }
   .theme-toggle__moon { display: block; }
   .btn--secondary:hover { border-color: $on-night; }

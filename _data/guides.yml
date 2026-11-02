@@ -6,8 +6,8 @@
   text: "RWX volumes from CephFS."
   url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/"
   icon: filesystem
-- title: "Cut raw capacity with erasure coding"
-  text: "Same protection as three copies, half the disks."
+- title: "Increase usable capacity with erasure coding"
+  text: "Same protection as three copies, twice the usable capacity."
   url: "https://rook.io/docs/rook/latest-release/CRDs/Block-Storage/ceph-block-pool-crd/#erasure-coding"
   icon: disk
 - title: "Encrypt with keys in your KMS"
