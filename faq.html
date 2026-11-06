@@ -1,0 +1,45 @@
+---
+title: FAQ
+description: "Questions we hear about Rook: production readiness, data safety, upgrades, security, support and more."
+nav: community
+permalink: /faq/
+---
+{% include values.inc %}
+{%- assign evalfaq = site.data.faq | where: "group", "evaluating" -%}
+{%- assign runfaq = site.data.faq | where: "group", "running" -%}
+<section class="section--hero section--gray page-hero">
+  <div class="container">
+    <div class="head head--flush">
+      <h1 class="t-display">FAQ</h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2 class="t-h3">Evaluating Rook</h2>
+        </div>
+      </div>
+      <div class="c-8 md-12">{% include faq-list.html items=evalfaq open=0 %}</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2 class="t-h3">Running Rook</h2>
+        </div>
+      </div>
+      <div class="c-8 md-12">{% include faq-list.html items=runfaq open=0 %}</div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,74 @@
+// Design tokens for css/site.scss. The only allowed values for color, type, space, radius and shadow.
+
+// ---- Brand ----
+$cyan-500: #2ac6ea;
+$cyan-600: #14aacc;
+$cyan-700: #0e748b;
+$cyan-800: #0a5a6d;
+$cyan-100: #cdf1fa;
+$cyan-50:  #eaf9fd;
+
+$navy-900: #1b0c59;
+$navy-700: #4f4384;
+$navy-50:  #ebe8f5;
+
+// ---- Neutrals ----
+$gray-700: #3b3f55;
+$gray-500: #5b6178;
+$gray-400: #8a90a6;
+$gray-300: #cfd4e0;
+$gray-200: #e3e6ef;
+$gray-50:  #f5f7fb;
+$white:    #ffffff;
+
+// ---- Night band ----
+$night-950: #0d0f26;
+$night-900: #15183a;
+$night-990: #080a1c;
+$night-line: rgba(255, 255, 255, .10);
+$on-night: #ffffff;
+$on-night-muted: #a9aecb;
+
+// ---- Illustration only ----
+$illo-paleblue: #d8e9f0;
+
+// ---- Type ----
+$font-head: 'Montserrat', system-ui, sans-serif;
+$font-body: 'Open Sans', system-ui, sans-serif;
+$font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+// ---- Space (4px base) ----
+$space-1: 4px;  $space-2: 8px;  $space-3: 12px; $space-4: 16px;
+$space-6: 24px; $space-8: 32px; $space-10: 40px; $space-12: 48px;
+$space-16: 64px; $space-20: 80px; $space-24: 96px; $space-32: 128px;
+
+// ---- Layout ----
+$container: 1216px;
+$container-narrow: 800px;
+$pad-lg: 40px;
+$pad-md: 24px;
+$pad-sm: 16px;
+$gutter: 32px;
+$gutter-sm: 16px;
+
+// Breakpoints (gridlex values, max-width queries)
+$bp-lg: 75em;   // below: header drops the GitHub stars
+$bp-md: 64em;   // below: tablet
+$bp-sm: 48em;   // below: phone
+$bp-xs: 36em;
+
+// ---- Radius, border, shadow ----
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-pill: 999px;
+$border: 1px solid $gray-200;
+$shadow-hover: 0 8px 24px rgba(27, 12, 89, .08);
+$shadow-float: 0 12px 32px rgba(13, 15, 38, .16);
+
+$ease: 150ms ease-out;
+
+@mixin lg { @media (max-width: $bp-lg) { @content; } }
+@mixin md { @media (max-width: $bp-md) { @content; } }
+@mixin sm { @media (max-width: $bp-sm) { @content; } }
+@mixin xs { @media (max-width: $bp-xs) { @content; } }
+@mixin gt-sm { @media (min-width: $bp-sm + .0001em) { @content; } }

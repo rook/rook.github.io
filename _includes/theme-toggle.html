@@ -1,0 +1,2 @@
+{%- comment -%} CSS picks the icon from html[data-theme], so it is right on first paint; js/site.js keeps the label in sync. {%- endcomment -%}
+<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme">{% include icon.html name="sun" class="theme-toggle__sun" %}{% include icon.html name="moon" class="theme-toggle__moon" %}</button>

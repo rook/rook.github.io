@@ -1,75 +1,59 @@
 ---
-stylesheet: index
+title: Support
+description: "Community support channels and companies that offer commercial support and services for Rook."
+nav: support
 ---
-
 {% include values.inc %}
-
-<div id="holder">
-    <section class="grid-middle hero">
-        <div class="col-5_md-12">
-            <h1>Support</h1>
-            <p>
-                The Rook community is here to support you:
-                <ul>
-                    <li>Ask questions in our community forums in <a href="{{ slackLink }}">Slack</a> or <a href="{{ discussionLink }}">GitHub Discussions</a></li>
-                    <li>To request a feature or report a defect, <a href="{{ newIssueLink }}">open a GitHub Issue</a></li>
-                    <li>To contribute to the project, see the <a href="{{ contributeLink }}">Contribution Guide</a></li>
-                    <li>For commercial support check out the <a href="#support-companies">list of Rook-related support and services companies</a> below.</li>
-                </ul>
-            </p>
+<section class="section--hero section--gray page-hero">
+  <div class="container">
+    <div class="grid grid--middle">
+      <div class="c-6 md-12">
+        <div class="head head--flush">
+          <h1 class="t-display">Support</h1>
+          <p class="lead">Get help from the community, or buy support from a company that works on Rook.</p>
         </div>
-        <div class="col-7_md-12_md-first">
-            <img src="{{ "/images/index-what-is-rook.svg" | relative_url }}" alt="" />
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-12_md-12 text-center">
-            <h1 id="support-companies">Commercial Support and Services</h1>
-        </div>
-    </section>
-
-    <!-- Support Providers -->
-    <div class="providers">
-        <section class="col-12_md-12">
-            <h2><a href="{{ clysoLink }}">Clyso</a></h2>
-            <p>
-                As a premium partner of Ceph, Clyso provides expert support, integration, development, and consulting services specifically for Rook and Ceph in large enterprise environments. Clyso’s managed services encompass
-                hybrid cloud solutions utilizing open-source technologies, including Kubernetes, Rook Ceph, and more, ensuring flexibility and eliminating vendor lock-ins.
-                <br />
-                Additionally, Clyso offers advanced backup solutions, comprehensive cloud migration support, and digitalization services through microservices.
-                <br />
-                Services include:
-                <ul>
-                    <li>Managed Ceph and Rook service, consulting and support</li>
-                    <li>Ceph Full System Analysis: helps fine tune your Rook and Ceph clusters for optimal performance</li>
-                    <li>Clyso Enterprise Storage powered by Ceph</li>
-                    <li>Emergency Support</li>
-                </ul>
-            </p>
-        </section>
-        <section class="col-12_md-12">
-            <h2><a href="{{ redHatLink }}">Red Hat</a></h2>
-            <p>
-                Red Hat® OpenShift® Data Foundation is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications with storage quickly and efficiently across clouds.
-
-                Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.
-
-                <ul>
-                    <li>Based on Rook, Ceph, and other open source projects</li>
-                    <li>Fully supported Enterprise solution</li>
-                </ul>
-            </p>
-        </section>
+        <ul class="help-list">
+          <li>{% include icon.html name="message" %}<span>Ask in <a href="{{ slackLink }}">Slack</a> or <a href="{{ discussionLink }}">GitHub Discussions</a></span></li>
+          <li>{% include icon.html name="github" %}<span>Report a bug or request a feature: <a href="{{ newIssueLink }}">open an issue</a></span></li>
+          <li>{% include icon.html name="pr" %}<span>Contribute: <a href="{{ contributeLink }}">contribution guide</a></span></li>
+          <li>{% include icon.html name="check" %}<span>Commercial support: <a href="#support-companies">see below</a></span></li>
+        </ul>
+      </div>
+      <div class="c-6 md-12 md-first cta-art">
+        {% include themed-img.html src="/images/index-what-is-rook.svg" dark="/images/dark/index-what-is-rook.svg" alt="" width="460" height="221" %}
+      </div>
     </div>
+  </div>
+</section>
 
-    <section class="grid-middle">
-        <div class="col-12_md-12">
-            <p>
-                Does your company want to be added to the list of support providers? If so, open an
-                <a href="https://github.com/rook/rook.github.io/issues">issue</a> with
-                details about your company and your plans for contributing back to the Rook
-                community. Rook maintainers will look forward to your contributions!
-            </p>
-        </div>
-    </section>
-</div>
+<section class="section" id="support-companies">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Commercial support</h2>
+    </div>
+    <div class="grid">
+      <div class="card provider c-6 md-12">
+        <h3 class="t-h3"><a href="{{ clysoLink }}">CLYSO</a></h3>
+        <p>As a premium partner of Ceph, CLYSO provides expert support, integration, development, and consulting services specifically for Rook and Ceph in large enterprise environments. CLYSO’s managed services encompass hybrid cloud solutions utilizing open-source technologies, including Kubernetes, Rook Ceph, and more, ensuring flexibility and eliminating vendor lock-ins.</p>
+        <p>Additionally, CLYSO offers advanced backup solutions, comprehensive cloud migration support, and digitalization services through microservices.</p>
+        <p>Services include:</p>
+        <ul>
+          <li>Managed Ceph and Rook service, consulting and support</li>
+          <li>Ceph Full System Analysis: helps fine tune your Rook and Ceph clusters for optimal performance</li>
+          <li>CLYSO Enterprise Storage powered by Ceph</li>
+          <li>Emergency Support</li>
+        </ul>
+      </div>
+      <div class="card provider c-6 md-12">
+        <h3 class="t-h3"><a href="{{ redHatLink }}">Red Hat</a></h3>
+        <p>Red Hat® OpenShift® Data Foundation is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications with storage quickly and efficiently across clouds.</p>
+        <p>Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.</p>
+        <ul>
+          <li>Based on Rook, Ceph, and other open source projects</li>
+          <li>Fully supported Enterprise solution</li>
+        </ul>
+      </div>
+    </div>
+    <p class="providers-note">To be listed, open an <a href="https://github.com/rook/rook.github.io/issues">issue</a> with details about your company and how you contribute to Rook.</p>
+  </div>
+</section>

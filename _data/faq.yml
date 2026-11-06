@@ -1,0 +1,118 @@
+# FAQ. `home: true` items show on the homepage, in this order; /faq/ shows all.
+# group: evaluating | running (the two /faq/ sections). home_q / home_a override the question and answer
+# on the homepage only; /faq/ keeps the full text.
+- id: production-ready
+  group: evaluating
+  q: "Is Rook production-ready? Who runs it?"
+  a: "Yes. The Rook Ceph operator was declared stable in 2018, and Rook is a CNCF graduated project. Organizations run it in production at petabyte scale."
+  links:
+    - { label: "Who runs Rook", url: "https://github.com/rook/rook/blob/master/ADOPTERS.md" }
+    - { label: "Rook docs", url: "https://rook.io/docs/rook/latest-release/" }
+- id: operator-down
+  home: true
+  group: evaluating
+  q: "What happens to my data if the Rook operator goes down?"
+  a: "Your data keeps flowing. Rook is not in the Ceph data path: applications read and write directly to Ceph. Management tasks such as upgrades and configuration changes resume when the operator is back."
+  links:
+    - { label: "Storage architecture", url: "https://rook.io/docs/rook/latest-release/Getting-Started/storage-architecture/" }
+- id: rook-or-cephadm
+  home: true
+  group: evaluating
+  q: "Rook or cephadm?"
+  a: "Both are installers recommended by the Ceph documentation. Choose Rook if you run Kubernetes and want storage managed through its APIs. Choose cephadm for Ceph clusters outside Kubernetes."
+  links:
+    - { label: "Ceph docs: Installing Ceph", url: "https://docs.ceph.com/en/latest/install/" }
+- id: fork
+  home: true
+  group: evaluating
+  q: "Is Rook a fork of Ceph? Does it slow Ceph down?"
+  a: "No. Rook runs the official upstream Ceph images, and the usual `ceph` tools and the Ceph Dashboard work as before. For the best performance, give Ceph its own networks."
+  links:
+    - { label: "Network providers", url: "https://rook.io/docs/rook/latest-release/CRDs/Cluster/network-providers/" }
+    - { label: "Ceph Dashboard", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-dashboard/" }
+- id: requirements
+  home: true
+  group: evaluating
+  q: "What do I need?"
+  a: "A Kubernetes cluster on amd64 or arm64 nodes, with local disks or block volumes for Ceph. One VM is enough to try Rook; production starts at three nodes."
+  links:
+    - { label: "Prerequisites", url: "https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/prerequisites/" }
+- id: upgrades
+  home: true
+  group: evaluating
+  q: "How do upgrades work, and how often is Rook released?"
+  home_q: "How often is Rook released?"
+  home_a: "A new minor release ships about every four months, and the two most recent are maintained."
+  a: "Change the Ceph version in your spec and Rook rolls the upgrade out across the daemons, checking Ceph's health as it goes. A new minor release ships about every four months, and the two most recent are maintained."
+  links:
+    - { label: "Upgrade guide", url: "https://rook.io/docs/rook/latest-release/Upgrade/ceph-upgrade/" }
+    - { label: "Supported versions", url: "https://rook.io/docs/rook/latest-release/Getting-Started/maintenance-and-support/" }
+- id: security
+  home: true
+  group: evaluating
+  q: "Is it secure?"
+  a: "Rook can encrypt data at rest and in transit, integrates with external key managers such as HashiCorp Vault, and has a private vulnerability disclosure process through the CNCF. It was audited by Trail of Bits in 2019."
+  home_a: "Rook has a private vulnerability disclosure process through the CNCF, and an independent firm audited it in 2019."
+  links:
+    - { label: "Security policy", url: "https://github.com/rook/rook/blob/master/SECURITY.md" }
+    - { label: "Encryption docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/key-management-system/" }
+- id: support
+  home: true
+  group: evaluating
+  q: "Can I get commercial support?"
+  a: "Yes. The companies on our support page offer Rook support and services, and several commercial storage products are built on Rook."
+  links:
+    - { label: "Support providers", url: "/support" }
+- id: control-plane
+  group: running
+  q: "What if the Kubernetes control plane goes down?"
+  a: "Running Ceph daemons and mounted volumes keep serving data. New pods, volumes and mounts wait until the control plane is back, so plan its availability like any other dependency of your storage."
+  links:
+    - { label: "Storage architecture", url: "https://rook.io/docs/rook/latest-release/Getting-Started/storage-architecture/" }
+- id: lose-cluster
+  group: running
+  q: "What if I lose the whole Kubernetes cluster?"
+  a: "Your data is on the Ceph disks, not in Kubernetes. The disaster recovery guide shows how to bring an existing Rook Ceph cluster up in a new Kubernetes cluster."
+  links:
+    - { label: "Disaster recovery guide", url: "https://rook.io/docs/rook/latest-release/Troubleshooting/disaster-recovery/" }
+- id: existing-cluster
+  group: running
+  q: "Can I use an existing Ceph cluster?"
+  a: "Yes. In external mode, Rook connects your Kubernetes workloads to a Ceph cluster you already run, for example one managed by cephadm."
+  links:
+    - { label: "External cluster", url: "https://rook.io/docs/rook/latest-release/CRDs/Cluster/external-cluster/external-cluster/" }
+- id: cloud-airgapped
+  group: running
+  q: "Can I run it in the cloud or air-gapped?"
+  a: "Yes. In the cloud, Rook builds Ceph on block volumes from your provider's storage class. For air-gapped sites, mirror the images to your own registry."
+  links:
+    - { label: "PVC-based clusters", url: "https://rook.io/docs/rook/latest-release/CRDs/Cluster/pvc-cluster/" }
+    - { label: "Private registries", url: "https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/authenticated-registry/" }
+- id: maintainers
+  group: running
+  q: "Who maintains Rook? Is it controlled by one vendor?"
+  a: "Maintainers come from several companies and research organizations, and more than 580 organizations have contributed. Governance rules bar any single company from holding a majority on the steering committee."
+  links:
+    - { label: "Maintainers", url: "https://github.com/rook/rook/blob/master/OWNERS.md" }
+    - { label: "Governance", url: "https://github.com/rook/rook/blob/master/GOVERNANCE.md" }
+- id: only-s3
+  group: running
+  q: "Can I use Rook only for S3, or only for block volumes?"
+  a: "Yes. Each storage type is a separate resource, so you deploy only what you need: an object store, block pools, a filesystem, or any mix."
+  links:
+    - { label: "Object storage", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/object-storage/" }
+    - { label: "Block storage", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/block-storage/" }
+- id: license
+  group: running
+  q: "What is the license?"
+  a: "Rook is Apache 2.0. Ceph is LGPL (2.1 or 3.0)."
+  links:
+    - { label: "Rook license", url: "https://github.com/rook/rook/blob/master/LICENSE" }
+    - { label: "Ceph license", url: "https://github.com/ceph/ceph/blob/main/COPYING" }
+- id: help
+  group: running
+  q: "Where do I get help?"
+  a: "Ask in the Rook Slack or GitHub Discussions, and join the monthly community meeting."
+  links:
+    - { label: "Slack", url: "https://slack.rook.io" }
+    - { label: "Community meeting", url: "https://github.com/rook/rook#community-meeting" }

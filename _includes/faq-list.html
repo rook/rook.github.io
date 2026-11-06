@@ -1,0 +1,19 @@
+{%- comment -%} Params: items (from _data/faq.yml), open (count open by default), home (use home_q / home_a). {%- endcomment -%}
+{%- assign openN = include.open | default: 0 -%}
+<div class="faq">
+  {%- for f in include.items %}
+  {%- assign q = f.q %}{% assign a = f.a %}{% assign links = f.links %}
+  {%- if include.home %}{% if f.home_q %}{% assign q = f.home_q %}{% endif %}{% if f.home_a %}{% assign a = f.home_a %}{% endif %}{% endif %}
+  <details id="{{ f.id }}"{% if forloop.index <= openN %} open{% endif %}>
+    <summary>{{ q }}{% include icon.html name="chevron" %}</summary>
+    <div class="faq__a">
+      <div class="faq__text">{{ a | markdownify }}</div>
+      <div class="links-row">
+        {%- for l in links %}
+        <a class="arrow-link" href="{{ l.url | relative_url }}">{{ l.label }}{% include icon.html name="arrow" %}</a>
+        {%- endfor %}
+      </div>
+    </div>
+  </details>
+  {%- endfor %}
+</div>

@@ -1,18 +1,20 @@
 ---
 layout: default
+title: "Whoops"
 permalink: /500.html
-stylesheet: error-code
 ---
-<div id="holder">
-    <div class="grid-middle">
-        <div class="col-5_md-12">
-            <h1>Whoops</h1>
-            <h2>Something went wrong.</h2>
-            <p>Error code: 500 Internal Server Error<br />We&apos;re working towards building something better. Try again soon.</p>
-            <a class="button" href="{{ "/" | relative_url }}">Retreat to Home</a>
-        </div>
-        <div class="col-7_md-12_md-first text-right">
-            <img src="{{ "/images/500.svg" | relative_url }}" />
-        </div>
+<section class="section--hero">
+  <div class="container">
+    <div class="grid grid--middle">
+      <div class="c-5 md-12 error-text">
+        <h1 class="t-display">Whoops</h1>
+        <h2 class="t-h3">Something went wrong.</h2>
+        <p class="lead">Error code: 500 Internal Server Error<br>Something went wrong on our side. Try again in a minute.</p>
+        <div class="btn-group"><a class="btn btn--primary" href="{{ "/" | relative_url }}">Back to home</a></div>
+      </div>
+      <div class="c-7 md-12 md-first hero__art">
+        {% include themed-img.html src="/images/500.svg" dark="/images/dark/500.svg" alt="" %}
+      </div>
     </div>
-</div>
+  </div>
+</section>

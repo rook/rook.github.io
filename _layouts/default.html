@@ -1,37 +1,60 @@
-{% include values.inc %}
-
-{% comment %}
-If this a docs page, include the docs values and check if the page should be "noindex"ed
-{% endcomment %}
-
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+{% include values.inc %}<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" class="no-js">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Runs before the CSS so the first paint has the right colours. js/site.js drives the toggle through window.rookTheme.
+      (function (d, w) {
+        var key = 'rook-theme';
+        var mq = w.matchMedia ? w.matchMedia('(prefers-color-scheme: dark)') : null;
+        var stored = null;
+        function valid(v) { return v === 'light' || v === 'dark' ? v : null; }
+        try { stored = valid(w.localStorage.getItem(key)); } catch (e) {}
+        function apply() {
+          var t = stored || (mq && mq.matches ? 'dark' : 'light');
+          d.setAttribute('data-theme', t);
+          d.style.colorScheme = t;
+        }
+        d.className = d.className.replace('no-js', 'js');
+        apply();
+        if (mq) { if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply); }
+        w.rookTheme = {
+          key: key,
+          set: function (t) {
+            stored = valid(t);
+            try { if (stored) w.localStorage.setItem(key, stored); else w.localStorage.removeItem(key); } catch (e) {}
+            apply();
+          },
+          // Another tab already stored the choice; null means follow the system.
+          sync: function (t) { stored = valid(t); apply(); }
+        };
+      })(document.documentElement, window);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>{{ page.doctitle | default: "Rook" | escape }}</title>
-
+    {%- if page.url == "/" %}
+    <title>Rook: open-source, cloud-native storage for Kubernetes</title>
+    {%- elsif page.title and page.title != "Rook" %}
+    <title>{{ page.title | escape }} · Rook</title>
+    {%- else %}
+    <title>Rook</title>
+    {%- endif %}
+    <meta name="description" content="{{ page.description | default: 'Rook is the CNCF-graduated Kubernetes operator for Ceph. Block, file and S3-compatible object storage, managed declaratively on your Kubernetes clusters.' | escape }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-
     {% include favicon.html %}
-
-    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
-    {% if page.asciinema %}
-      <link rel="stylesheet" type="text/css" href="{{ "/css/asciinema-player.css?v2.6.1" | relative_url }}" />
-    {% endif %}
-    <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
-    {% if page.stylesheet %}
-      <link rel="stylesheet" href="{{ "/css/" | append: page.stylesheet | append: ".css" | relative_url }}" />
-    {% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    {% if page.asciinema %}<link rel="stylesheet" href="{{ "/css/asciinema-player.css?v2.6.1" | relative_url }}" />{% endif %}
+    <link rel="stylesheet" href="{{ "/css/site.css" | relative_url }}">
   </head>
   <body>
+    <a class="skip" href="#content">Skip to content</a>
     {% include navigation.html %}
-    <main id="content" aria-label="Content"><div>{{ content }}</div></main>
+    <main id="content">{{ content }}</main>
     {% include footer.html %}
-    {% if jekyll.environment == 'production' and site.google_analytics %}
-      {% include google-analytics.html %}
-    {% endif %}
+    <script src="{{ "/js/site.js" | relative_url }}"></script>
+    {% if page.asciinema %}<script src="{{ "/js/asciinema-player.js?v2.6.1" | relative_url }}"></script>{% endif %}
+    {% if jekyll.environment == 'production' and site.google_analytics %}{% include google-analytics.html %}{% endif %}
   </body>
 </html>

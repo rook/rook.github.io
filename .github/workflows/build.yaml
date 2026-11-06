@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+  schedule:
+    # rebuild once a day at 04:17 UTC to refresh the live stats (scripts/fetch-stats.py)
+    - cron: "17 4 * * *"
+  workflow_dispatch:
 
 defaults:
   run:
@@ -12,6 +16,10 @@ defaults:
 
 permissions:
   contents: read
+
+concurrency:
+  group: publish-website
+  cancel-in-progress: false
 
 jobs:
   build-and-publish-website:
@@ -31,6 +39,12 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       
+      - name: Fetch live stats
+        run: |
+          python3 scripts/fetch-stats.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and publish website
         run: |
           make publish

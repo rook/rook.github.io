@@ -1,0 +1,35 @@
+# client_html: the same text with [tux] markers for the small Tux logo (images/brand/tux.svg, by Larry Ewing and The GIMP).
+# Columns: interface (name, Ceph component, optional one-line description) | Kubernetes | outside Kubernetes | docs links.
+- id: object
+  name: S3 object storage
+  tech: RGW
+  desc: "S3 compatible: versioning, lifecycle, replication, notifications, IAM."
+  k8s: "Buckets and credentials through an ObjectBucketClaim, or COSI"
+  client: "Any S3-compatible client or SDK"
+  docs:
+    - { label: "Object storage docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/object-storage/" }
+- id: block
+  name: Block
+  tech: RBD
+  desc: "Durable volumes for databases and VMs."
+  k8s: "RWO volumes through a PVC, via Ceph CSI"
+  client: "Linux kernel client or librbd (for example QEMU/KVM); NVMe-oF for other hosts"
+  client_html: "[tux]Linux kernel client or librbd (for example QEMU/KVM); NVMe-oF for other hosts"
+  docs:
+    - { label: "Block docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/block-storage/" }
+    - { label: "NVMe-oF docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/nvme-of/" }
+- id: filesystem
+  name: Shared filesystem
+  tech: CephFS
+  desc: "POSIX filesystem shared by many readers and writers."
+  k8s: "RWX volumes that many pods mount at once, via Ceph CSI"
+  client: "Mount as a POSIX filesystem from any Linux client"
+  client_html: "Mount as a POSIX filesystem from any [tux]Linux client"
+  docs:
+    - { label: "Filesystem docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/" }
+- id: nfs
+  name: NFS
+  k8s: "PVCs through the NFS CSI driver"
+  client: "Any NFS client"
+  docs:
+    - { label: "NFS docs", url: "https://rook.io/docs/rook/latest-release/Storage-Configuration/NFS/nfs/" }
