@@ -1,240 +1,245 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Runs before the CSS so the first paint has the right colours. js/site.js drives the toggle through window.rookTheme.
+      (function (d, w) {
+        var key = 'rook-theme';
+        var mq = w.matchMedia ? w.matchMedia('(prefers-color-scheme: dark)') : null;
+        var stored = null;
+        function valid(v) { return v === 'light' || v === 'dark' ? v : null; }
+        try { stored = valid(w.localStorage.getItem(key)); } catch (e) {}
+        function apply() {
+          var t = stored || (mq && mq.matches ? 'dark' : 'light');
+          d.setAttribute('data-theme', t);
+          d.style.colorScheme = t;
+        }
+        d.className = d.className.replace('no-js', 'js');
+        apply();
+        if (mq) { if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply); }
+        w.rookTheme = {
+          key: key,
+          set: function (t) {
+            stored = valid(t);
+            try { if (stored) w.localStorage.setItem(key, stored); else w.localStorage.removeItem(key); } catch (e) {}
+            apply();
+          },
+          // Another tab already stored the choice; null means follow the system.
+          sync: function (t) { stored = valid(t); apply(); }
+        };
+      })(document.documentElement, window);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>Rook</title>
-
+    <title>Support · Rook</title>
+    <meta name="description" content="Community support channels and companies that offer commercial support and services for Rook.">
     <link rel="canonical" href="https://rook.io/support.html">
-
     <link rel="icon" href="/favicon.ico" />
 <link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
 <link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
 <link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
 <link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
 
-
-    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="/css/main.css">
-    
-      <link rel="stylesheet" href="/css/index.css" />
-    
+    <link rel="stylesheet" href="/css/site.css">
   </head>
   <body>
-    <nav id="navigation" aria-label="Navigation">
-  <div>
-    <div class="logo">
-      <a href="/"><img src="/images/rook-logo.svg" alt="Rook Home"/></a>
-    </div>
-    <div
-      class="hamburger-controls"
-      onclick="if (document.getElementById('navigation').classList.contains('menu-open')) { document.getElementById('navigation').classList.remove('menu-open') } else { document.getElementById('navigation').classList.add('menu-open') }; return false;">
-      <span></span> <span></span> <span></span>
-    </div>
-    <ul class="links">
-      <li><a href="/docs/rook/latest-release/">Documentation</a></li>
-      <li class="dropdown">
-        <a role="button" href="javascript:void(0)">Community</a>
-        <div class="dropdown-content">
-          <a href="//github.com/rook/rook">GitHub</a>
-          <a href="//slack.rook.io/">Slack</a>
-          <a href="//github.com/rook/rook/discussions">Discussions</a>
-          <a href="//twitter.com/rook_io">Twitter</a>
-        </div>
-      </li>
-      <li><a href="//blog.rook.io/">Blog</a></li>
-      <li><a href="/support">Support</a></li>
-      <li><a class="button small" href="/docs/rook/latest-release/Getting-Started/quickstart/">Get Started</a></li>
-    </ul>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="ribbon">
+  <div class="container">
+    <span><strong>Rook v1.21 is out.</strong></span>
+    <a href="https://github.com/rook/rook/releases/tag/v1.21.2">Release notes<svg class="ico ico--16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
   </div>
-</nav>
-
-    <main id="content" aria-label="Content"><div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="holder">
-    <section class="grid-middle hero">
-        <div class="col-5_md-12">
-            <h1>Support</h1>
-            <p>
-                The Rook community is here to support you:
-                <ul>
-                    <li>Ask questions in our community forums in <a href="//slack.rook.io/">Slack</a> or <a href="//github.com/rook/rook/discussions">GitHub Discussions</a></li>
-                    <li>To request a feature or report a defect, <a href="//github.com/rook/rook/issues/new/choose">open a GitHub Issue</a></li>
-                    <li>To contribute to the project, see the <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribution Guide</a></li>
-                    <li>For commercial support check out the <a href="#support-companies">list of Rook-related support and services companies</a> below.</li>
-                </ul>
-            </p>
-        </div>
-        <div class="col-7_md-12_md-first">
-            <img src="/images/index-what-is-rook.svg" alt="" />
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-12_md-12 text-center">
-            <h1 id="support-companies">Commercial Support and Services</h1>
-        </div>
-    </section>
-
-    <!-- Support Providers -->
-    <div class="providers">
-        <section class="col-12_md-12">
-            <h2><a href="//clyso.com/en/">Clyso</a></h2>
-            <p>
-                As a premium partner of Ceph, Clyso provides expert support, integration, development, and consulting services specifically for Rook and Ceph in large enterprise environments. Clyso’s managed services encompass
-                hybrid cloud solutions utilizing open-source technologies, including Kubernetes, Rook Ceph, and more, ensuring flexibility and eliminating vendor lock-ins.
-                <br />
-                Additionally, Clyso offers advanced backup solutions, comprehensive cloud migration support, and digitalization services through microservices.
-                <br />
-                Services include:
-                <ul>
-                    <li>Managed Ceph and Rook service, consulting and support</li>
-                    <li>Ceph Full System Analysis: helps fine tune your Rook and Ceph clusters for optimal performance</li>
-                    <li>Clyso Enterprise Storage powered by Ceph</li>
-                    <li>Emergency Support</li>
-                </ul>
-            </p>
-        </section>
-        <section class="col-12_md-12">
-            <h2><a href="//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></h2>
-            <p>
-                Red Hat® OpenShift® Data Foundation is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications with storage quickly and efficiently across clouds.
-
-                Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.
-
-                <ul>
-                    <li>Based on Rook, Ceph, and other open source projects</li>
-                    <li>Fully supported Enterprise solution</li>
-                </ul>
-            </p>
-        </section>
-    </div>
-
-    <section class="grid-middle">
-        <div class="col-12_md-12">
-            <p>
-                Does your company want to be added to the list of support providers? If so, open an
-                <a href="https://github.com/rook/rook.github.io/issues">issue</a> with
-                details about your company and your plans for contributing back to the Rook
-                community. Rook maintainers will look forward to your contributions!
-            </p>
-        </div>
-    </section>
 </div>
-</div></main>
-    <footer id="footer" aria-label="Footer">
-  <div class="top">
-    <a href="//www.cncf.io">
-      <img
-        class="cncf"
-        src="/images/cncf.png"
-        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x"
-        alt="Cloud Native Computing Foundation" />
-    </a>
-    <p>We are a Cloud Native Computing Foundation graduated project.</p>
+<header class="nav" id="nav">
+  <div class="container nav__bar">
+    <a class="nav__logo" href="/"><img class="theme-light" src="/images/rook-logo.svg" alt="Rook" width="155" height="32"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="Rook" width="155" height="32">
+</a>
+    <nav class="nav__links" aria-label="Main">
+      <a class="nav__link" href="/docs/rook/latest-release/">Docs</a>
+      <a class="nav__link" href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <div class="dropdown" data-dropdown>
+        <button class="nav__link dropdown__toggle dropdown__toggle--label" type="button" aria-expanded="false" aria-controls="dd-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+        <div class="dropdown__menu" id="dd-community">
+          <a href="https://slack.rook.io/">Slack</a>
+          <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+          <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+          <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+          <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+          <a href="/faq/">FAQ</a>
+        </div>
+      </div>
+      <a class="nav__link" href="https://blog.rook.io/">Blog</a>
+      <a class="nav__link is-active" href="/support">Support</a>
+    </nav>
+    <div class="nav__actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+
+      <a class="nav__slack" href="https://slack.rook.io/" aria-label="Rook on Slack" title="Join the Rook Slack"><img src="/images/brand/slack.svg" alt="" width="18" height="18"></a>
+      <a class="nav__stars" href="https://github.com/rook/rook" aria-label="Rook on GitHub, 13.7k stars"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+<span>13.7k</span></a>
+      <a class="btn btn--primary btn--sm" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menu"><svg class="ico nav__open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+</button>
   </div>
-  <div class="middle">
-    <div class="grid-center">
-      <div class="col_sm-12">
-        <span>Getting Started</span>
-        <a href="//github.com/rook/rook">GitHub</a>
-        <a href="/docs/rook/latest-release/">Documentation</a>
-        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+  <div class="nav__sheet" id="nav-sheet">
+    <div class="container">
+      <a href="/docs/rook/latest-release/">Docs</a>
+      <a href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <button class="nav__group" type="button" aria-expanded="false" aria-controls="sheet-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+      <div class="nav__sub" id="sheet-community" hidden>
+        <a href="https://slack.rook.io/">Slack</a>
+        <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+        <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+        <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+        <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+        <a href="/faq/">FAQ</a>
       </div>
-      <div class="col_sm-12">
-        <span>Community</span>
-        <a href="//slack.rook.io/">Slack</a>
-        <a href="//twitter.com/rook_io">Twitter</a>
-        <a href="//github.com/rook/rook/discussions">Discussions</a>
-        <a href="//blog.rook.io/">Blog</a>
+      <a href="https://blog.rook.io/">Blog</a>
+      <a href="/support">Support</a>
+      <div class="nav__theme"><span class="nav__theme-label">Theme</span><button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+</div>
+      <a class="btn btn--primary" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+  </div>
+</header>
+
+    <main id="content">
+<section class="section--hero section--gray page-hero">
+  <div class="container">
+    <div class="grid grid--middle">
+      <div class="c-6 md-12">
+        <div class="head head--flush">
+          <h1 class="t-display">Support</h1>
+          <p class="lead">Get help from the community, or buy support from a company that works on Rook.</p>
+        </div>
+        <ul class="help-list">
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+<span>Ask in <a href="https://slack.rook.io/">Slack</a> or <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a></span></li>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+<span>Report a bug or request a feature: <a href="https://github.com/rook/rook/issues/new/choose">open an issue</a></span></li>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>
+<span>Contribute: <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">contribution guide</a></span></li>
+          <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>
+<span>Commercial support: <a href="#support-companies">see below</a></span></li>
+        </ul>
       </div>
-      <div class="col_sm-12">
-        <span>Contact</span>
-        <a href="//github.com/rook/rook/discussions">Discussions</a>
-        <a href="//github.com/rook/rook/issues">Feature request</a>
-        <a href="//github.com/rook/rook/issues/new/choose">New Issue</a>
-      </div>
-      <div class="col_sm-12">
-        <span>Top Contributors</span>
-        <a href="//cloudical.io/">Cloudical</a>
-        <a href="//clyso.com/en/">Clyso</a>
-        <a href="//cybozu.com">Cybozu, Inc</a>
-        <a href="//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a>
-        <a href="//upbound.io">Upbound</a>
-      </div>
-      <div class="col_sm-12">
-        <span>Support Providers</span>
-        <a href="//clyso.com/en/">Clyso</a>
-        <a href="//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a>
+      <div class="c-6 md-12 md-first cta-art">
+        <img class="theme-light" src="/images/index-what-is-rook.svg" alt="" width="460" height="221"><img class="theme-dark" src="/images/dark/index-what-is-rook.svg" alt="" width="460" height="221">
+
       </div>
     </div>
   </div>
-  <div class="bottom">
-    <div class="grid-center">
-      <div class="col-8">
-        <a class="logo" href="/">
-          <img src="/images/rook-logo-small.svg" alt="rook.io" />
-        </a>
-        <p>
-          &#169; Rook Authors 2026. Documentation distributed under
-          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
-        </p>
-        <p>
-          &#169; 2026 The Linux Foundation. All rights reserved. The Linux Foundation has
-          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
-          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
-        </p>
+</section>
+
+<section class="section" id="support-companies">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Commercial support</h2>
+    </div>
+    <div class="grid">
+      <div class="card provider c-6 md-12">
+        <h3 class="t-h3"><a href="https://clyso.com/en/">CLYSO</a></h3>
+        <p>As a premium partner of Ceph, CLYSO provides expert support, integration, development, and consulting services specifically for Rook and Ceph in large enterprise environments. CLYSO’s managed services encompass hybrid cloud solutions utilizing open-source technologies, including Kubernetes, Rook Ceph, and more, ensuring flexibility and eliminating vendor lock-ins.</p>
+        <p>Additionally, CLYSO offers advanced backup solutions, comprehensive cloud migration support, and digitalization services through microservices.</p>
+        <p>Services include:</p>
+        <ul>
+          <li>Managed Ceph and Rook service, consulting and support</li>
+          <li>Ceph Full System Analysis: helps fine tune your Rook and Ceph clusters for optimal performance</li>
+          <li>CLYSO Enterprise Storage powered by Ceph</li>
+          <li>Emergency Support</li>
+        </ul>
+      </div>
+      <div class="card provider c-6 md-12">
+        <h3 class="t-h3"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></h3>
+        <p>Red Hat® OpenShift® Data Foundation is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications with storage quickly and efficiently across clouds.</p>
+        <p>Red Hat OpenShift Data Foundation is included with Red Hat OpenShift Platform Plus, a complete set of powerful, optimized tools to secure, protect, and manage your apps.</p>
+        <ul>
+          <li>Based on Rook, Ceph, and other open source projects</li>
+          <li>Fully supported Enterprise solution</li>
+        </ul>
+      </div>
+    </div>
+    <p class="providers-note">To be listed, open an <a href="https://github.com/rook/rook.github.io/issues">issue</a> with details about your company and how you contribute to Rook.</p>
+  </div>
+</section>
+</main>
+    <footer class="footer" id="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer__cncf">
+      <a href="https://www.cncf.io"><img class="theme-light" src="/images/brand/cncf-graduated-color.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy"><img class="theme-dark" src="/images/brand/cncf-graduated-white.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy">
+</a>
+      <p>We are a Cloud Native Computing Foundation graduated project.</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4>Getting Started</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook">GitHub</a></li>
+          <li><a href="/docs/rook/latest-release/">Documentation</a></li>
+          <li><a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://slack.rook.io/">Slack</a></li>
+          <li><a href="https://twitter.com/rook_io">Twitter</a></li>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://blog.rook.io/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://github.com/rook/rook/issues">Feature request</a></li>
+          <li><a href="https://github.com/rook/rook/issues/new/choose">New Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Top Contributors</h4>
+        <ul>
+          <li><a href="https://cloudical.io/">Cloudical</a></li>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://cybozu.com">Cybozu, Inc</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+          <li><a href="https://upbound.io">Upbound</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Support Providers</h4>
+        <ul>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <a class="footer__logo" href="/"><img class="theme-light" src="/images/rook-logo-small.svg" alt="rook.io" width="80" height="17" loading="lazy"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="rook.io" width="80" height="17" loading="lazy">
+</a>
+      <div class="footer__legal">
+        <p>&#169; Rook Authors 2026. Documentation distributed under <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.</p>
+        <p>&#169; 2026 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.</p>
       </div>
     </div>
   </div>
 </footer>
 
-
-
-
-
+    <script src="/js/site.js"></script>
+    
     
   </body>
 </html>

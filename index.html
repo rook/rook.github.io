@@ -1,323 +1,823 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Runs before the CSS so the first paint has the right colours. js/site.js drives the toggle through window.rookTheme.
+      (function (d, w) {
+        var key = 'rook-theme';
+        var mq = w.matchMedia ? w.matchMedia('(prefers-color-scheme: dark)') : null;
+        var stored = null;
+        function valid(v) { return v === 'light' || v === 'dark' ? v : null; }
+        try { stored = valid(w.localStorage.getItem(key)); } catch (e) {}
+        function apply() {
+          var t = stored || (mq && mq.matches ? 'dark' : 'light');
+          d.setAttribute('data-theme', t);
+          d.style.colorScheme = t;
+        }
+        d.className = d.className.replace('no-js', 'js');
+        apply();
+        if (mq) { if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply); }
+        w.rookTheme = {
+          key: key,
+          set: function (t) {
+            stored = valid(t);
+            try { if (stored) w.localStorage.setItem(key, stored); else w.localStorage.removeItem(key); } catch (e) {}
+            apply();
+          },
+          // Another tab already stored the choice; null means follow the system.
+          sync: function (t) { stored = valid(t); apply(); }
+        };
+      })(document.documentElement, window);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>Rook</title>
-
+    <title>Rook: open-source, cloud-native storage for Kubernetes</title>
+    <meta name="description" content="Rook is the CNCF-graduated Kubernetes operator for Ceph. Block, file and S3-compatible object storage, managed declaratively on your Kubernetes clusters.">
     <link rel="canonical" href="https://rook.io/">
-
     <link rel="icon" href="/favicon.ico" />
 <link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
 <link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
 <link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
 <link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
 
-
-    <link href="//fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:300,400,600" rel="stylesheet">
-    
-      <link rel="stylesheet" type="text/css" href="/css/asciinema-player.css?v2.6.1" />
-    
-    <link rel="stylesheet" href="/css/main.css">
-    
-      <link rel="stylesheet" href="/css/index.css" />
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/asciinema-player.css?v2.6.1" />
+    <link rel="stylesheet" href="/css/site.css">
   </head>
   <body>
-    <nav id="navigation" aria-label="Navigation">
-  <div>
-    <div class="logo">
-      <a href="/"><img src="/images/rook-logo.svg" alt="Rook Home"/></a>
-    </div>
-    <div
-      class="hamburger-controls"
-      onclick="if (document.getElementById('navigation').classList.contains('menu-open')) { document.getElementById('navigation').classList.remove('menu-open') } else { document.getElementById('navigation').classList.add('menu-open') }; return false;">
-      <span></span> <span></span> <span></span>
-    </div>
-    <ul class="links">
-      <li><a href="/docs/rook/latest-release/">Documentation</a></li>
-      <li class="dropdown">
-        <a role="button" href="javascript:void(0)">Community</a>
-        <div class="dropdown-content">
-          <a href="//github.com/rook/rook">GitHub</a>
-          <a href="//slack.rook.io/">Slack</a>
-          <a href="//github.com/rook/rook/discussions">Discussions</a>
-          <a href="//twitter.com/rook_io">Twitter</a>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="ribbon">
+  <div class="container">
+    <span><strong>Rook v1.21 is out.</strong></span>
+    <a href="https://github.com/rook/rook/releases/tag/v1.21.2">Release notes<svg class="ico ico--16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+</div>
+<header class="nav" id="nav">
+  <div class="container nav__bar">
+    <a class="nav__logo" href="/"><img class="theme-light" src="/images/rook-logo.svg" alt="Rook" width="155" height="32"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="Rook" width="155" height="32">
+</a>
+    <nav class="nav__links" aria-label="Main">
+      <a class="nav__link" href="/docs/rook/latest-release/">Docs</a>
+      <a class="nav__link" href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <div class="dropdown" data-dropdown>
+        <button class="nav__link dropdown__toggle dropdown__toggle--label" type="button" aria-expanded="false" aria-controls="dd-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+        <div class="dropdown__menu" id="dd-community">
+          <a href="https://slack.rook.io/">Slack</a>
+          <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+          <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+          <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+          <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+          <a href="/faq/">FAQ</a>
         </div>
-      </li>
-      <li><a href="//blog.rook.io/">Blog</a></li>
-      <li><a href="/support">Support</a></li>
-      <li><a class="button small" href="/docs/rook/latest-release/Getting-Started/quickstart/">Get Started</a></li>
+      </div>
+      <a class="nav__link" href="https://blog.rook.io/">Blog</a>
+      <a class="nav__link" href="/support">Support</a>
+    </nav>
+    <div class="nav__actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+
+      <a class="nav__slack" href="https://slack.rook.io/" aria-label="Rook on Slack" title="Join the Rook Slack"><img src="/images/brand/slack.svg" alt="" width="18" height="18"></a>
+      <a class="nav__stars" href="https://github.com/rook/rook" aria-label="Rook on GitHub, 13.7k stars"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+<span>13.7k</span></a>
+      <a class="btn btn--primary btn--sm" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menu"><svg class="ico nav__open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+</button>
+  </div>
+  <div class="nav__sheet" id="nav-sheet">
+    <div class="container">
+      <a href="/docs/rook/latest-release/">Docs</a>
+      <a href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <button class="nav__group" type="button" aria-expanded="false" aria-controls="sheet-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+      <div class="nav__sub" id="sheet-community" hidden>
+        <a href="https://slack.rook.io/">Slack</a>
+        <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+        <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+        <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+        <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <a href="https://blog.rook.io/">Blog</a>
+      <a href="/support">Support</a>
+      <div class="nav__theme"><span class="nav__theme-label">Theme</span><button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+</div>
+      <a class="btn btn--primary" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+  </div>
+</header>
+
+    <main id="content">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-block" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M24 6 41 14.5 24 23 7 14.5Z" fill="#2ac6ea"/>
+        <path d="M7 14.5 24 23v19L7 33.5Z" fill="#fff"/>
+        <path d="M24 23 41 14.5v19L24 42Z" fill="#cdf1fa"/>
+        <path d="M7 24 24 32.5 41 24" fill="none"/>
+      </g>
+    </symbol>
+    <symbol id="i-filesystem" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M5 12a2 2 0 0 1 2-2h11l4 4h19a2 2 0 0 1 2 2v24H5Z" fill="#cdf1fa"/>
+        <rect x="11" y="7" width="20" height="22" rx="1.5" fill="#fff"/>
+        <rect x="17" y="11" width="20" height="22" rx="1.5" fill="#fff"/>
+        <path d="M22 17h10M22 22h10" fill="none"/>
+        <path d="M3 22h42l-3.2 17.4a2 2 0 0 1-2 1.6H8.2a2 2 0 0 1-2-1.6Z" fill="#2ac6ea"/>
+      </g>
+    </symbol>
+    <symbol id="i-object" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M8 14 12.5 41a2 2 0 0 0 2 1.7h19a2 2 0 0 0 2-1.7L40 14Z" fill="#cdf1fa"/>
+        <path d="M9.5 23h29l-1.3 8H10.8Z" fill="#2ac6ea"/>
+        <ellipse cx="24" cy="14" rx="16" ry="5" fill="#fff"/>
+      </g>
+      <text x="24" y="30" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="7.5" style="fill:var(--illo-line,#1b0c59)">S3</text>
+    </symbol>
+    <symbol id="i-nfs" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M9 9a2 2 0 0 1 2-2h8l3 3h15a2 2 0 0 1 2 2v17H9Z" fill="#fff"/>
+        <path d="M7 15h34l-2 13a2 2 0 0 1-2 1.7H11a2 2 0 0 1-2-1.7Z" fill="#2ac6ea"/>
+        <path d="M24 30v6M10 36h28" fill="none"/>
+        <circle cx="10" cy="40" r="3.5" fill="#cdf1fa"/>
+        <circle cx="24" cy="40" r="3.5" fill="#cdf1fa"/>
+        <circle cx="38" cy="40" r="3.5" fill="#cdf1fa"/>
+      </g>
+    </symbol>
+    <symbol id="i-csi" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="2" y="11" width="18" height="26" rx="3" fill="#fff"/>
+        <path d="M6 17h10M6 22h10" fill="none"/>
+        <circle cx="11" cy="30" r="3" fill="#cdf1fa"/>
+        <path d="M20 24h6" fill="none" stroke="#2ac6ea" stroke-width="3"/>
+        <path d="M26 12v24c0 2.8 4.5 5 10 5s10-2.2 10-5V12" fill="#d8e9f0"/>
+        <path d="M26 24c0 2.8 4.5 5 10 5s10-2.2 10-5" fill="none"/>
+        <ellipse cx="36" cy="12" rx="10" ry="4.5" fill="#2ac6ea"/>
+      </g>
+    </symbol>
+    <symbol id="i-key" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <circle cx="15" cy="24" r="10" fill="#2ac6ea"/>
+        <circle cx="12" cy="24" r="3.5" fill="#fff"/>
+        <path d="M25 21h19v6h-4v5h-5v-5H25Z" fill="#cdf1fa"/>
+      </g>
+    </symbol>
+    <symbol id="i-monitor" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="4" y="7" width="40" height="28" rx="3" fill="#fff"/>
+        <path d="M18 35v6M30 35v6M13 41h22" fill="none"/>
+        <path d="M4 12h40" fill="none"/>
+      </g>
+      <path d="M9 29l7-7 6 4 8-9 9 6" fill="none" stroke="#2ac6ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-disk" viewBox="0 0 48 48">
+      <g style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M10 12v24c0 2.8 6.3 5 14 5s14-2.2 14-5V12" fill="#d8e9f0"/>
+        <path d="M10 24c0 2.8 6.3 5 14 5s14-2.2 14-5" fill="none"/>
+        <ellipse cx="24" cy="12" rx="14" ry="5" fill="#2ac6ea"/>
+      </g>
+    </symbol>
+    <!-- Official Kubernetes icon (cncf/artwork projects/kubernetes/icon/color, classes inlined as fills). -->
+    <symbol id="i-k8s" viewBox="-0.17 0.08 230.10 223.35">
+      <path fill="#326ce5" d="M134.358 126.466a3.59 3.59 0 0 0-.855-.065 3.685 3.685 0 0 0-1.425.37 3.725 3.725 0 0 0-1.803 4.825l-.026.037 8.528 20.603a43.53 43.53 0 0 0 17.595-22.102l-21.976-3.714zm-34.194 2.92a3.72 3.72 0 0 0-3.568-2.894 3.656 3.656 0 0 0-.733.065l-.037-.045-21.785 3.698a43.695 43.695 0 0 0 17.54 21.946l8.442-20.4-.066-.08a3.683 3.683 0 0 0 .207-2.29zm18.245 8a3.718 3.718 0 0 0-6.557.008h-.018l-10.713 19.372a43.637 43.637 0 0 0 23.815 1.225q2.197-.5 4.292-1.2l-10.738-19.406zm33.914-45l-16.483 14.753.009.047a3.725 3.725 0 0 0 1.46 6.395l.02.089 21.35 6.15a44.278 44.278 0 0 0-6.356-27.432zM121.7 94.039a3.725 3.725 0 0 0 5.913 2.84l.065.027 18.036-12.788a43.85 43.85 0 0 0-25.287-12.19l1.253 22.105zm-19.1 2.921a3.72 3.72 0 0 0 5.904-2.85l.092-.043 1.253-22.14a44.682 44.682 0 0 0-4.501.776 43.467 43.467 0 0 0-20.937 11.409l18.154 12.869zm-9.678 16.729a3.72 3.72 0 0 0 1.462-6.396l.018-.088-16.574-14.824a43.454 43.454 0 0 0-6.168 27.51l21.245-6.13zm16.098 6.512l6.114 2.94 6.096-2.934 1.514-6.581-4.219-5.276h-6.79l-4.231 5.268z"/>
+      <path fill="#326ce5" d="M216.208 133.167l-17.422-75.675a13.602 13.602 0 0 0-7.293-9.073l-70.521-33.67a13.589 13.589 0 0 0-11.705 0L38.76 48.437a13.598 13.598 0 0 0-7.295 9.072l-17.394 75.673a13.315 13.315 0 0 0-.004 5.81 13.506 13.506 0 0 0 .491 1.718 13.1 13.1 0 0 0 1.343 2.726c.239.365.491.72.765 1.064l48.804 60.678c.213.264.448.505.681.75a13.423 13.423 0 0 0 2.574 2.133 13.924 13.924 0 0 0 3.857 1.677 13.298 13.298 0 0 0 3.43.473h.759l77.504-.018a12.993 12.993 0 0 0 1.41-.083 13.47 13.47 0 0 0 1.989-.378 13.872 13.872 0 0 0 1.381-.442c.353-.135.705-.27 1.045-.433a13.941 13.941 0 0 0 1.479-.822 13.303 13.303 0 0 0 3.237-2.865l1.488-1.85 47.299-58.84a13.185 13.185 0 0 0 2.108-3.785 13.67 13.67 0 0 0 .5-1.724 13.282 13.282 0 0 0-.004-5.81zm-73.147 29.432a14.516 14.516 0 0 0 .703 1.703 3.314 3.314 0 0 0-.327 2.49 39.372 39.372 0 0 0 3.742 6.7 35.06 35.06 0 0 1 2.263 3.364c.17.315.392.803.553 1.136a4.24 4.24 0 1 1-7.63 3.607c-.161-.33-.385-.77-.522-1.082a35.275 35.275 0 0 1-1.225-3.868 39.305 39.305 0 0 0-2.896-7.097 3.335 3.335 0 0 0-2.154-1.307c-.135-.233-.635-1.15-.903-1.623a54.617 54.617 0 0 1-38.948-.1l-.955 1.73a3.429 3.429 0 0 0-1.819.887 29.517 29.517 0 0 0-3.268 7.582 34.9 34.9 0 0 1-1.218 3.868c-.135.31-.361.744-.522 1.073v.009l-.007.008a4.238 4.238 0 1 1-7.619-3.616c.159-.335.372-.82.54-1.135a35.177 35.177 0 0 1 2.262-3.373 41.228 41.228 0 0 0 3.82-6.866 4.188 4.188 0 0 0-.376-2.387l.768-1.84a54.922 54.922 0 0 1-24.338-30.387l-1.839.313a4.68 4.68 0 0 0-2.428-.855 39.524 39.524 0 0 0-7.356 2.165 35.589 35.589 0 0 1-3.787 1.45c-.305.084-.745.168-1.093.244-.028.01-.052.022-.08.029a.605.605 0 0 1-.065.006 4.236 4.236 0 1 1-1.874-8.224l.061-.015.037-.01c.353-.083.805-.2 1.127-.262a35.27 35.27 0 0 1 4.05-.326 39.388 39.388 0 0 0 7.564-1.242 5.835 5.835 0 0 0 1.814-1.83l1.767-.516a54.613 54.613 0 0 1 8.613-38.073l-1.353-1.206a4.688 4.688 0 0 0-.848-2.436 39.366 39.366 0 0 0-6.277-4.41 35.25 35.25 0 0 1-3.499-2.046c-.256-.191-.596-.478-.874-.704l-.063-.044a4.473 4.473 0 0 1-1.038-6.222 4.066 4.066 0 0 1 3.363-1.488 5.03 5.03 0 0 1 2.942 1.11c.287.225.68.526.935.745a35.253 35.253 0 0 1 2.78 2.95 39.383 39.383 0 0 0 5.69 5.142 3.333 3.333 0 0 0 2.507.243q.754.55 1.522 1.082A54.289 54.289 0 0 1 102.86 61.89a55.052 55.052 0 0 1 7.63-1.173l.1-1.784a4.6 4.6 0 0 0 1.37-2.184 39.476 39.476 0 0 0-.47-7.654 35.466 35.466 0 0 1-.576-4.014c-.011-.307.006-.731.01-1.081 0-.04-.01-.08-.01-.118a4.242 4.242 0 1 1 8.441-.004c0 .37.022.86.009 1.2a35.109 35.109 0 0 1-.579 4.013 39.533 39.533 0 0 0-.478 7.656 3.344 3.344 0 0 0 1.379 2.11c.015.305.065 1.323.102 1.884a55.309 55.309 0 0 1 35.032 16.927l1.606-1.147a4.69 4.69 0 0 0 2.56-.278 39.532 39.532 0 0 0 5.69-5.148 35.004 35.004 0 0 1 2.787-2.95c.259-.222.65-.52.936-.746a4.242 4.242 0 1 1 5.258 6.598c-.283.229-.657.548-.929.75a35.095 35.095 0 0 1-3.507 2.046 39.495 39.495 0 0 0-6.277 4.41 3.337 3.337 0 0 0-.792 2.39c-.235.216-1.06.947-1.497 1.343a54.837 54.837 0 0 1 8.792 37.983l1.704.496a4.745 4.745 0 0 0 1.82 1.83 39.464 39.464 0 0 0 7.568 1.246 35.64 35.64 0 0 1 4.046.324c.355.065.868.207 1.23.29a4.236 4.236 0 1 1-1.878 8.223l-.061-.008c-.028-.007-.054-.022-.083-.03-.348-.075-.785-.151-1.09-.231a35.14 35.14 0 0 1-3.785-1.462 39.477 39.477 0 0 0-7.363-2.165 3.337 3.337 0 0 0-2.362.877q-.9-.171-1.804-.316a54.92 54.92 0 0 1-24.328 30.605z"/>
+      <path fill="#fff" d="M225.407 135.107L206.4 52.547a14.838 14.838 0 0 0-7.958-9.9l-76.935-36.73a14.825 14.825 0 0 0-12.771 0L31.808 42.669a14.838 14.838 0 0 0-7.961 9.895L4.873 135.129a14.668 14.668 0 0 0 1.995 11.185c.261.4.538.788.838 1.162l53.246 66.205a14.98 14.98 0 0 0 11.499 5.487l85.387-.02a14.986 14.986 0 0 0 11.5-5.48l53.227-66.211a14.72 14.72 0 0 0 2.842-12.347zm-9.197 3.866a13.677 13.677 0 0 1-.498 1.723 13.184 13.184 0 0 1-2.11 3.786l-47.299 58.838-1.486 1.852a13.305 13.305 0 0 1-3.24 2.865 13.945 13.945 0 0 1-1.474.822q-.513.237-1.045.43a13.873 13.873 0 0 1-1.383.445 13.473 13.473 0 0 1-1.989.379 12.988 12.988 0 0 1-1.41.082l-77.504.018h-.76a13.298 13.298 0 0 1-3.429-.472 13.925 13.925 0 0 1-3.855-1.679 13.424 13.424 0 0 1-2.576-2.132c-.233-.246-.468-.487-.68-.75l-48.805-60.679q-.408-.514-.765-1.066a13.102 13.102 0 0 1-1.343-2.726 13.505 13.505 0 0 1-.491-1.719 13.315 13.315 0 0 1 .004-5.809l17.394-75.675a13.598 13.598 0 0 1 7.295-9.07l70.508-33.685a13.589 13.589 0 0 1 11.705 0l70.519 33.67a13.602 13.602 0 0 1 7.293 9.073l17.422 75.674a13.282 13.282 0 0 1 .002 5.807z"/>
+      <path fill="#fff" d="M185.814 127.106c-.36-.083-.874-.225-1.227-.29a35.642 35.642 0 0 0-4.046-.326 39.464 39.464 0 0 1-7.57-1.242 4.745 4.745 0 0 1-1.82-1.832l-1.704-.496a54.837 54.837 0 0 0-8.79-37.983c.436-.396 1.262-1.127 1.495-1.342a3.338 3.338 0 0 1 .792-2.39 39.495 39.495 0 0 1 6.277-4.41 35.095 35.095 0 0 0 3.507-2.046c.272-.202.644-.522.929-.75a4.242 4.242 0 1 0-5.256-6.6c-.288.227-.68.525-.936.747a35.004 35.004 0 0 0-2.789 2.95 39.533 39.533 0 0 1-5.69 5.148 4.69 4.69 0 0 1-2.56.278l-1.606 1.147a55.309 55.309 0 0 0-35.032-16.927c-.039-.561-.087-1.577-.102-1.884a3.344 3.344 0 0 1-1.377-2.11 39.533 39.533 0 0 1 .478-7.656 35.112 35.112 0 0 0 .575-4.012c.013-.34-.007-.834-.007-1.201a4.242 4.242 0 1 0-8.441.004c0 .04.009.078.01.118-.004.35-.021.774-.01 1.08a35.476 35.476 0 0 0 .576 4.015 39.475 39.475 0 0 1 .47 7.654 4.601 4.601 0 0 1-1.37 2.182l-.1 1.786a55.052 55.052 0 0 0-7.63 1.173 54.289 54.289 0 0 0-27.574 15.754q-.77-.531-1.526-1.082a3.333 3.333 0 0 1-2.506-.243 39.383 39.383 0 0 1-5.69-5.141 35.255 35.255 0 0 0-2.777-2.95c-.257-.22-.65-.52-.938-.75a5.03 5.03 0 0 0-2.942-1.11 4.066 4.066 0 0 0-3.363 1.49 4.473 4.473 0 0 0 1.038 6.222l.065.046c.276.226.616.515.872.702a35.256 35.256 0 0 0 3.499 2.048 39.367 39.367 0 0 1 6.276 4.412 4.69 4.69 0 0 1 .849 2.434l1.351 1.208a54.613 54.613 0 0 0-8.611 38.073l-1.767.514a5.835 5.835 0 0 1-1.814 1.827 39.39 39.39 0 0 1-7.565 1.247 35.266 35.266 0 0 0-4.049.326c-.324.06-.774.174-1.127.262l-.037.008-.06.018a4.236 4.236 0 1 0 1.875 8.224l.063-.01c.028-.006.052-.02.08-.025.348-.08.786-.163 1.092-.246a35.59 35.59 0 0 0 3.786-1.451 39.527 39.527 0 0 1 7.358-2.165 4.68 4.68 0 0 1 2.426.857l1.84-.315a54.922 54.922 0 0 0 24.34 30.387l-.769 1.84a4.188 4.188 0 0 1 .377 2.387 41.228 41.228 0 0 1-3.82 6.864 35.183 35.183 0 0 0-2.263 3.372c-.168.318-.381.805-.542 1.138a4.238 4.238 0 1 0 7.621 3.616l.007-.008v-.01c.16-.33.387-.763.522-1.072a34.903 34.903 0 0 0 1.218-3.868 29.517 29.517 0 0 1 3.268-7.582 3.43 3.43 0 0 1 1.819-.888l.957-1.73a54.617 54.617 0 0 0 38.946.099c.268.478.768 1.392.9 1.623a3.335 3.335 0 0 1 2.155 1.31 39.306 39.306 0 0 1 2.898 7.096 35.275 35.275 0 0 0 1.225 3.868c.137.312.36.75.522 1.082a4.24 4.24 0 1 0 7.63-3.607c-.161-.333-.383-.82-.55-1.136a35.06 35.06 0 0 0-2.263-3.364 39.372 39.372 0 0 1-3.742-6.7 3.314 3.314 0 0 1 .324-2.49 14.519 14.519 0 0 1-.703-1.703 54.92 54.92 0 0 0 24.328-30.605c.546.087 1.497.253 1.806.316a3.337 3.337 0 0 1 2.36-.877 39.476 39.476 0 0 1 7.36 2.165 35.135 35.135 0 0 0 3.788 1.462c.305.08.74.156 1.09.233.029.008.055.02.083.028l.06.009a4.236 4.236 0 1 0 1.878-8.224zm-40.1-42.987l-18.037 12.787-.063-.03a3.723 3.723 0 0 1-5.913-2.838l-.02-.01-1.253-22.103a43.85 43.85 0 0 1 25.285 12.194zm-33.978 24.228h6.788l4.22 5.276-1.513 6.58-6.096 2.934-6.114-2.94-1.516-6.583zm-6.386-35.648a44.672 44.672 0 0 1 4.503-.774l-1.255 22.137-.092.044a3.72 3.72 0 0 1-5.904 2.852l-.035.02-18.154-12.872a43.467 43.467 0 0 1 20.937-11.407zm-27.52 19.68l16.574 14.824-.018.09a3.72 3.72 0 0 1-1.462 6.395l-.017.072-21.245 6.13a43.454 43.454 0 0 1 6.168-27.51zm22.191 39.38l-8.441 20.397a43.696 43.696 0 0 1-17.536-21.948l21.783-3.7.037.049a3.655 3.655 0 0 1 .73-.065 3.72 3.72 0 0 1 3.364 5.185zm24.916 26.23a43.637 43.637 0 0 1-23.815-1.223l10.713-19.372h.018a3.725 3.725 0 0 1 6.557-.006h.08l10.74 19.404q-2.091.698-4.293 1.199zm13.841-5.751l-8.528-20.605.026-.037a3.725 3.725 0 0 1 1.803-4.823 3.685 3.685 0 0 1 1.425-.37 3.59 3.59 0 0 1 .855.063l.037-.046 21.977 3.714a43.53 43.53 0 0 1-17.595 22.105zm19.903-32.42l-21.352-6.15-.02-.09a3.725 3.725 0 0 1-1.46-6.395l-.008-.043 16.482-14.751a44.279 44.279 0 0 1 6.357 27.43z"/>
+    </symbol>
+    <symbol id="i-cyl" viewBox="0 0 24 28">
+      <path d="M1 5v18c0 2.2 4.9 4 11 4s11-1.8 11-4V5" fill="#d8e9f0" style="stroke:var(--illo-line,#1b0c59)" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="12" cy="5" rx="11" ry="4" fill="#2ac6ea" style="stroke:var(--illo-line,#1b0c59)" stroke-width="2"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<section class="section--hero hero">
+  <div class="container">
+    <div class="grid hero__grid">
+      <div class="hero__text">
+        <h1 class="t-display">Open-source, <span class="nowrap">cloud-native</span> storage for Kubernetes</h1>
+        <p class="lead">Rook declaratively deploys and operates distributed block, file and S3 object storage on your Kubernetes clusters.</p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Quickstart</a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <img class="theme-light" src="/images/index-hero.svg" alt="" width="520" height="302"><img class="theme-dark" src="/images/dark/index-hero.svg" alt="" width="520" height="302">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="secnav" aria-label="Sections" data-secnav>
+  <div class="container">
+    <ul class="secnav__list">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#why-rook">Why Rook</a></li>
+      <li><a href="#interfaces">Storage interfaces</a></li>
+      <li><a href="#data-protection">Data protection</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
 </nav>
 
-    <main id="content" aria-label="Content"><div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="holder">
-    <section class="grid-middle hero">
-        <div class="col-5_md-12">
-            <h1>Open-Source,<br />Cloud-Native Storage for Kubernetes</h1>
-            <p>Production ready management for File, Block and Object Storage</p>
-            <a class="button" href="/docs/rook/latest-release/Getting-Started/quickstart/">Try it out now</a>
-        </div>
-        <div class="col-7_md-12_md-first">
-            <img src="/images/index-hero.svg" alt="" />
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1>What is Rook?</h1>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-6_md-12">
-            <img src="/images/index-what-is-rook.svg" alt="" />
-        </div>
-        <div class="col-6_md-12">
-            <h2>Storage Operators for Kubernetes</h2>
-            <p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.<br /><br />Rook uses the power of the Kubernetes platform to deliver its services via a Kubernetes Operator for Ceph.</p>
-            <div class="github-pills">
-                <div id="watch-pill" class="pill">
-                    <a href="https://github.com/rook/rook/subscription">Watch</a>
-                    <a id="watch-pill-count" class="count" href="https://github.com/rook/rook/watchers"></a>
-                </div>
-                <div id="star-pill" class="pill">
-                    <a href="https://github.com/rook/rook">Star</a>
-                    <a id="star-pill-count" class="count" href="https://github.com/rook/rook/stargazers"></a>
-                </div>
-                <div id="fork-pill" class="pill">
-                    <a href="https://github.com/rook/rook/fork">Forks</a>
-                    <a id="fork-pill-count" class="count" href="https://github.com/rook/rook/network"></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="col-6_md-12">
-            <h2>Ceph Storage Provider</h2>
-            <p>Rook orchestrates the Ceph storage solution, with a specialized Kubernetes Operator to automate management. Rook ensures that Ceph will run well on Kubernetes and simplify the deployment and management experience.</p>
-        </div>
-        <div class="col-6_md-12">
-            <div class="terminal-wrapper">
-                <h3 id="terminal-header">Ceph</h3>
-                <div class="terminal-body">
-                    <div id="terminal-player-wrapper" class="terminal">
-                        <asciinema-player id="terminal-player" cols="61" rows="16" preload loop speed="1.25" src="/data/ceph.cast"></asciinema-player>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1>Who loves Rook?</h1>
-            <p>With hundreds of contributors and millions of downloads of the Rook software, this true community-driven
-                effort is putting dynamic orchestration, high performance, and solid reliability in the hands of a
-                global user base.<br /><br />The Rook operator is deployed in production across many industries,
-                enabling them to store, deliver & protect the data that powers their businesses.<br />
-                See the list of published <a href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
-                for just a hint of who is running Rook in production.</p>
-        </div>
-    </section>
-    <section class="grid-middle">
-        <div class="header-section">
-            <h1 class="text-center">Features of Rook</h1>
-        </div>
-    </section>
-    <section class="grid-bottom features">
-        <div class="col-3_xs-6">
-            <img class="automate" src="/images/features/automate.svg" alt="" />
-            <span>Simple and reliable automated storage management</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="scale" src="/images/features/scale.svg" alt="" />
-            <span>Hyper-scale or hyper-converge your storage clusters</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="distribute" src="/images/features/distribute.svg" alt="" />
-            <span>Efficiently distribute and replicate data to minimize loss</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="provision" src="/images/features/provision.svg" alt="" />
-            <span>Provision, file, block, and object storage</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="manage" src="/images/features/manage.svg" alt="" />
-            <span>Manage open-source Ceph storage</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="elasticstorage" src="/images/features/elasticstorage.svg" alt="" />
-            <span>Easily enable elastic storage in your datacenter</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="opensource" src="/images/features/opensource.svg" alt="" />
-            <span>Open source software released under the Apache 2.0 license</span>
-        </div>
-        <div class="col-3_xs-6">
-            <img class="optimize" src="/images/features/optimize.svg" alt="" />
-            <span>Optimize workloads on commodity hardware</span>
-        </div>
-    </section>
+<section class="section--compact section--gray proof" id="stats" aria-label="Rook in numbers">
+  <div class="container">
+    <ul class="stats">
+      <li><a class="stats__cell" href="https://www.cncf.io/announcements/2020/10/07/cloud-native-computing-foundation-announces-rook-graduation/"><img class="theme-light stats__badge" src="/images/brand/cncf-graduated-color.svg" alt="CNCF Graduated project" width="174" height="48" loading="lazy"><img class="theme-dark stats__badge" src="/images/brand/cncf-graduated-white.svg" alt="CNCF Graduated project" width="174" height="48" loading="lazy">
+<span class="stats__label">since 2020</span></a></li>
+      <li><a class="stats__cell" href="https://github.com/rook/rook/releases"><span class="stat">260+</span><span class="stats__label">releases since 2016</span></a></li>
+      <li><a class="stats__cell" href="https://rook.devstats.cncf.io"><span class="stat">3,800+</span><span class="stats__label">contributors</span></a></li>
+      <li><a class="stats__cell" href="https://hub.docker.com/r/rook/ceph"><span class="stat">330M+</span><span class="stats__label">image pulls</span></a></li>
+      <li><a class="stats__cell" href="https://github.com/rook/rook"><span class="stat">13.7k</span><span class="stats__label">GitHub stars</span></a></li>
+    </ul>
+    <div class="contrib">
+  <div class="contrib__head">
+    <p class="eyebrow contrib__label">Contributors from 580+ organizations</p>
+    <a class="arrow-link" href="https://github.com/rook/rook/blob/master/ADOPTERS.md">See who runs Rook in production<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+  <div class="avatars">
+    <a href="https://github.com/travisn" title="travisn"><img src="https://avatars.githubusercontent.com/u/1048514?v=4&s=80" alt="travisn" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/leseb" title="leseb"><img src="https://avatars.githubusercontent.com/u/912735?v=4&s=80" alt="leseb" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/BlaineEXE" title="BlaineEXE"><img src="https://avatars.githubusercontent.com/u/3989526?v=4&s=80" alt="BlaineEXE" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/subhamkrai" title="subhamkrai"><img src="https://avatars.githubusercontent.com/u/34444611?v=4&s=80" alt="subhamkrai" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/jbw976" title="jbw976"><img src="https://avatars.githubusercontent.com/u/4313439?v=4&s=80" alt="jbw976" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/bassam" title="bassam"><img src="https://avatars.githubusercontent.com/u/1463491?v=4&s=80" alt="bassam" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/jhoblitt" title="jhoblitt"><img src="https://avatars.githubusercontent.com/u/948901?v=4&s=80" alt="jhoblitt" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/galexrt" title="galexrt"><img src="https://avatars.githubusercontent.com/u/3718398?v=4&s=80" alt="galexrt" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/Madhu-1" title="Madhu-1"><img src="https://avatars.githubusercontent.com/u/18114231?v=4&s=80" alt="Madhu-1" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/parth-gr" title="parth-gr"><img src="https://avatars.githubusercontent.com/u/50455445?v=4&s=80" alt="parth-gr" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/satoru-takeuchi" title="satoru-takeuchi"><img src="https://avatars.githubusercontent.com/u/6075867?v=4&s=80" alt="satoru-takeuchi" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/sp98" title="sp98"><img src="https://avatars.githubusercontent.com/u/9363998?v=4&s=80" alt="sp98" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/obnoxxx" title="obnoxxx"><img src="https://avatars.githubusercontent.com/u/8081179?v=4&s=80" alt="obnoxxx" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/thotz" title="thotz"><img src="https://avatars.githubusercontent.com/u/2588766?v=4&s=80" alt="thotz" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/Rakshith-R" title="Rakshith-R"><img src="https://avatars.githubusercontent.com/u/31369230?v=4&s=80" alt="Rakshith-R" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/OdedViner" title="OdedViner"><img src="https://avatars.githubusercontent.com/u/61982127?v=4&s=80" alt="OdedViner" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/rkachach" title="rkachach"><img src="https://avatars.githubusercontent.com/u/15921511?v=4&s=80" alt="rkachach" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/arttor" title="arttor"><img src="https://avatars.githubusercontent.com/u/18706293?v=4&s=80" alt="arttor" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/dangula" title="dangula"><img src="https://avatars.githubusercontent.com/u/2524996?v=4&s=80" alt="dangula" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/kokhang" title="kokhang"><img src="https://avatars.githubusercontent.com/u/1672672?v=4&s=80" alt="kokhang" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/rohan47" title="rohan47"><img src="https://avatars.githubusercontent.com/u/11498120?v=4&s=80" alt="rohan47" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/dotnwat" title="dotnwat"><img src="https://avatars.githubusercontent.com/u/242417?v=4&s=80" alt="dotnwat" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/aruniiird" title="aruniiird"><img src="https://avatars.githubusercontent.com/u/895234?v=4&s=80" alt="aruniiird" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/umangachapagain" title="umangachapagain"><img src="https://avatars.githubusercontent.com/u/10368581?v=4&s=80" alt="umangachapagain" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/rohantmp" title="rohantmp"><img src="https://avatars.githubusercontent.com/u/8311215?v=4&s=80" alt="rohantmp" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/phlogistonjohn" title="phlogistonjohn"><img src="https://avatars.githubusercontent.com/u/33039589?v=4&s=80" alt="phlogistonjohn" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/iPraveenParihar" title="iPraveenParihar"><img src="https://avatars.githubusercontent.com/u/30765265?v=4&s=80" alt="iPraveenParihar" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/sabbot" title="sabbot"><img src="https://avatars.githubusercontent.com/u/2191991?v=4&s=80" alt="sabbot" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/humblec" title="humblec"><img src="https://avatars.githubusercontent.com/u/5001742?v=4&s=80" alt="humblec" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/jmolmo" title="jmolmo"><img src="https://avatars.githubusercontent.com/u/1820049?v=4&s=80" alt="jmolmo" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/alimaredia" title="alimaredia"><img src="https://avatars.githubusercontent.com/u/4624480?v=4&s=80" alt="alimaredia" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/sebastianriese" title="sebastianriese"><img src="https://avatars.githubusercontent.com/u/152464?v=4&s=80" alt="sebastianriese" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/anmolsachan" title="anmolsachan"><img src="https://avatars.githubusercontent.com/u/8753636?v=4&s=80" alt="anmolsachan" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/anxkhn" title="anxkhn"><img src="https://avatars.githubusercontent.com/u/83116240?v=4&s=80" alt="anxkhn" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/nixpanic" title="nixpanic"><img src="https://avatars.githubusercontent.com/u/400257?v=4&s=80" alt="nixpanic" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/avanthakkar" title="avanthakkar"><img src="https://avatars.githubusercontent.com/u/23611106?v=4&s=80" alt="avanthakkar" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/taraasrita10" title="taraasrita10"><img src="https://avatars.githubusercontent.com/u/256354556?v=4&s=80" alt="taraasrita10" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/y1r" title="y1r"><img src="https://avatars.githubusercontent.com/u/4938419?v=4&s=80" alt="y1r" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/ahmadnurus" title="ahmadnurus"><img src="https://avatars.githubusercontent.com/u/43454825?v=4&s=80" alt="ahmadnurus" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/jtlayton" title="jtlayton"><img src="https://avatars.githubusercontent.com/u/10671515?v=4&s=80" alt="jtlayton" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/jshen28" title="jshen28"><img src="https://avatars.githubusercontent.com/u/13613955?v=4&s=80" alt="jshen28" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/arm64b" title="arm64b"><img src="https://avatars.githubusercontent.com/u/29669302?v=4&s=80" alt="arm64b" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/nizamial09" title="nizamial09"><img src="https://avatars.githubusercontent.com/u/71764184?v=4&s=80" alt="nizamial09" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/ideepika" title="ideepika"><img src="https://avatars.githubusercontent.com/u/22215384?v=4&s=80" alt="ideepika" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/binoue" title="binoue"><img src="https://avatars.githubusercontent.com/u/47234761?v=4&s=80" alt="binoue" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/varshar16" title="varshar16"><img src="https://avatars.githubusercontent.com/u/22663880?v=4&s=80" alt="varshar16" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/ashishranjan738" title="ashishranjan738"><img src="https://avatars.githubusercontent.com/u/15130992?v=4&s=80" alt="ashishranjan738" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/davidvossel" title="davidvossel"><img src="https://avatars.githubusercontent.com/u/683713?v=4&s=80" alt="davidvossel" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/degorenko" title="degorenko"><img src="https://avatars.githubusercontent.com/u/4005275?v=4&s=80" alt="degorenko" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/Javlopez" title="Javlopez"><img src="https://avatars.githubusercontent.com/u/638376?v=4&s=80" alt="Javlopez" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/microyahoo" title="microyahoo"><img src="https://avatars.githubusercontent.com/u/10202906?v=4&s=80" alt="microyahoo" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/sebastian-philipp" title="sebastian-philipp"><img src="https://avatars.githubusercontent.com/u/2574405?v=4&s=80" alt="sebastian-philipp" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/synarete" title="synarete"><img src="https://avatars.githubusercontent.com/u/8100039?v=4&s=80" alt="synarete" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/yati1998" title="yati1998"><img src="https://avatars.githubusercontent.com/u/29514565?v=4&s=80" alt="yati1998" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/invidian" title="invidian"><img src="https://avatars.githubusercontent.com/u/16539896?v=4&s=80" alt="invidian" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/TomHellier" title="TomHellier"><img src="https://avatars.githubusercontent.com/u/4739623?v=4&s=80" alt="TomHellier" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/consideRatio" title="consideRatio"><img src="https://avatars.githubusercontent.com/u/3837114?v=4&s=80" alt="consideRatio" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/Sheetalpamecha" title="Sheetalpamecha"><img src="https://avatars.githubusercontent.com/u/17064454?v=4&s=80" alt="Sheetalpamecha" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/mvollman" title="mvollman"><img src="https://avatars.githubusercontent.com/u/10772926?v=4&s=80" alt="mvollman" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/thephred" title="thephred"><img src="https://avatars.githubusercontent.com/u/110422?v=4&s=80" alt="thephred" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/AnikaYadav1" title="AnikaYadav1"><img src="https://avatars.githubusercontent.com/u/305736448?v=4&s=80" alt="AnikaYadav1" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/iamniting" title="iamniting"><img src="https://avatars.githubusercontent.com/u/22993933?v=4&s=80" alt="iamniting" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/patrostkowski" title="patrostkowski"><img src="https://avatars.githubusercontent.com/u/48490105?v=4&s=80" alt="patrostkowski" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/giovanism" title="giovanism"><img src="https://avatars.githubusercontent.com/u/18410908?v=4&s=80" alt="giovanism" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/anthonyeleven" title="anthonyeleven"><img src="https://avatars.githubusercontent.com/u/15161140?v=4&s=80" alt="anthonyeleven" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/sathieu" title="sathieu"><img src="https://avatars.githubusercontent.com/u/741106?v=4&s=80" alt="sathieu" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/mazarmi" title="mazarmi"><img src="https://avatars.githubusercontent.com/u/510851?v=4&s=80" alt="mazarmi" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/takirala" title="takirala"><img src="https://avatars.githubusercontent.com/u/2296947?v=4&s=80" alt="takirala" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/NymanRobin" title="NymanRobin"><img src="https://avatars.githubusercontent.com/u/55130152?v=4&s=80" alt="NymanRobin" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/zhucan" title="zhucan"><img src="https://avatars.githubusercontent.com/u/13997135?v=4&s=80" alt="zhucan" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/samkulkarni20" title="samkulkarni20"><img src="https://avatars.githubusercontent.com/u/15933023?v=4&s=80" alt="samkulkarni20" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/pujitha24" title="pujitha24"><img src="https://avatars.githubusercontent.com/u/10557236?v=4&s=80" alt="pujitha24" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/black-dragon74" title="black-dragon74"><img src="https://avatars.githubusercontent.com/u/13179334?v=4&s=80" alt="black-dragon74" loading="lazy" width="40" height="40"></a>
+    <a href="https://github.com/elias-dbx" title="elias-dbx"><img src="https://avatars.githubusercontent.com/u/124840696?v=4&s=80" alt="elias-dbx" loading="lazy" width="40" height="40"></a>
+  </div>
 </div>
 
-<script>
-    function githubFetch(path) {
-        var el = document.createElement('script');
-        var head = document.getElementsByTagName('head')[0];
-        el.src = path + '?callback=githubFetchCallback';
-        head.insertBefore(el, head.firstChild);
-    }
-
-    function githubFetchCallback(obj) {
-        document.getElementById('watch-pill-count').innerText = (obj.data.subscribers_count).toLocaleString();
-        document.getElementById('star-pill-count').innerText = (obj.data.stargazers_count).toLocaleString();
-        document.getElementById('fork-pill-count').innerText = (obj.data.network_count).toLocaleString();
-    }
-
-    function terminalTypeClick(elem, text) {
-        if (elem.classList.contains('active')) {
-            return;
-        }
-
-        var terminalPlayer = document.getElementById('terminal-player');
-        var terminalPlayerWrapper = document.getElementById('terminal-player-wrapper');
-        var terminalSrc = elem.dataset.terminalSrc;
-        var terminalRows = elem.dataset.terminalRows;
-        var buttons = document.querySelectorAll('.terminal-buttons button');
-
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
-        }
-
-        elem.classList.add('active');
-        document.getElementById('terminal-header').innerText = text;
-        terminalPlayerWrapper.innerHTML = '<asciinema-player id="terminal-player" cols="61" rows="' + terminalRows + '" preload autoplay loop speed="1.25" src="' + terminalSrc + '"></asciinema-player>';
-    }
-
-    githubFetch('https://api.github.com/repos/rook/rook');
-
-    document.getElementById('terminal-player').addEventListener('loadedmetadata', function(e) {
-        this.play();
-    });
-  </script>
-</div></main>
-    <footer id="footer" aria-label="Footer">
-  <div class="top">
-    <a href="//www.cncf.io">
-      <img
-        class="cncf"
-        src="/images/cncf.png"
-        srcset="/images/cncf@2x.png 2x, /images/cncf@3x.png 3x"
-        alt="Cloud Native Computing Foundation" />
-    </a>
-    <p>We are a Cloud Native Computing Foundation graduated project.</p>
   </div>
-  <div class="middle">
-    <div class="grid-center">
-      <div class="col_sm-12">
-        <span>Getting Started</span>
-        <a href="//github.com/rook/rook">GitHub</a>
-        <a href="/docs/rook/latest-release/">Documentation</a>
-        <a href="//github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a>
+</section>
+
+<section class="section band-night" id="how-it-works">
+  <div class="container">
+    <div class="grid grid--start how-grid" data-how>
+      <div class="c-5 md-12 how">
+        <h2>You describe the cluster. Rook builds and runs it.</h2>
+        <div class="segmented" role="tablist" aria-label="How it works">
+          <button role="tab" id="how-tab-day1" aria-selected="true" aria-controls="how-panel-day1">Day 1</button>
+          <button role="tab" id="how-tab-day2" aria-selected="false" aria-controls="how-panel-day2" tabindex="-1">Day 2</button>
+          <button role="tab" id="how-tab-demo" aria-selected="false" aria-controls="how-panel-demo" tabindex="-1" data-demo="true">Demo</button>
+        </div>
+        <div class="how__texts">
+          <p class="how__text" id="how-text-day1" data-for="how-panel-day1">Describe the cluster you want: which disks to use, how to protect your data (copies or erasure coding) and where to place it, and which pools and S3 object stores to create. Apply it, and Rook provisions the rest.</p>
+          <ul class="how__text how__list" id="how-text-day2" data-for="how-panel-day2" hidden>
+            <li>Upgrade Ceph by changing one line. Rook rolls it out daemon by daemon and checks cluster health as it goes.</li>
+            <li>Drain a node for an OS or Kubernetes upgrade. Rook takes its disks offline only when that is safe for your data.</li>
+            <li>New disks go to work as they appear. To replace a failed disk, mark it and swap it.</li>
+            <li>App teams request S3 buckets and credentials in YAML.</li>
+          </ul>
+        </div>
+        <div class="how__after">
+          <a class="btn btn--primary how__cta" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Open the quickstart</a>
+        </div>
       </div>
-      <div class="col_sm-12">
-        <span>Community</span>
-        <a href="//slack.rook.io/">Slack</a>
-        <a href="//twitter.com/rook_io">Twitter</a>
-        <a href="//github.com/rook/rook/discussions">Discussions</a>
-        <a href="//blog.rook.io/">Blog</a>
-      </div>
-      <div class="col_sm-12">
-        <span>Contact</span>
-        <a href="//github.com/rook/rook/discussions">Discussions</a>
-        <a href="//github.com/rook/rook/issues">Feature request</a>
-        <a href="//github.com/rook/rook/issues/new/choose">New Issue</a>
-      </div>
-      <div class="col_sm-12">
-        <span>Top Contributors</span>
-        <a href="//cloudical.io/">Cloudical</a>
-        <a href="//clyso.com/en/">Clyso</a>
-        <a href="//cybozu.com">Cybozu, Inc</a>
-        <a href="//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a>
-        <a href="//upbound.io">Upbound</a>
-      </div>
-      <div class="col_sm-12">
-        <span>Support Providers</span>
-        <a href="//clyso.com/en/">Clyso</a>
-        <a href="//www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a>
+      <div class="c-7 md-12">
+        <div class="how__stage">
+          <div class="how__panel" id="how-panel-day1" role="tabpanel" aria-labelledby="how-tab-day1" aria-describedby="how-text-day1" tabindex="0">
+            <div class="ghv ghv--file"><div class="ghv__bar"><span class="ghv__path">clusters/prod/ceph-cluster.yaml</span><span class="ghv__meta">36 lines</span></div><div class="ghv__body"><table class="ghv__table"><tbody><tr><td class="ghv__num" data-line="1"></td><td class="ghv__code"><span class="k">apiVersion</span>: <span class="s">ceph.rook.io/v1</span></td></tr><tr><td class="ghv__num" data-line="2"></td><td class="ghv__code"><span class="k">kind</span>: <span class="s">CephCluster</span></td></tr><tr><td class="ghv__num" data-line="3"></td><td class="ghv__code"><span class="k">metadata</span>:</td></tr><tr><td class="ghv__num" data-line="4"></td><td class="ghv__code">  <span class="k">name</span>: <span class="s">rook-ceph</span></td></tr><tr><td class="ghv__num" data-line="5"></td><td class="ghv__code"><span class="k">spec</span>:</td></tr><tr><td class="ghv__num" data-line="6"></td><td class="ghv__code">  <span class="k">cephVersion</span>:</td></tr><tr><td class="ghv__num" data-line="7"></td><td class="ghv__code">    <span class="k">image</span>: <span class="s">quay.io/ceph/ceph:v20.2.2-20260616</span></td></tr><tr><td class="ghv__num" data-line="8"></td><td class="ghv__code">  <span class="k">dataDirHostPath</span>: <span class="s">/var/lib/rook</span></td></tr><tr><td class="ghv__num" data-line="9"></td><td class="ghv__code">  <span class="k">mon</span>:</td></tr><tr><td class="ghv__num" data-line="10"></td><td class="ghv__code">    <span class="k">count</span>: <span class="n">3</span></td></tr><tr><td class="ghv__num" data-line="11"></td><td class="ghv__code">  <span class="k">storage</span>:</td></tr><tr><td class="ghv__num" data-line="12"></td><td class="ghv__code">    <span class="k">useAllNodes</span>: <span class="n">true</span></td></tr><tr><td class="ghv__num" data-line="13"></td><td class="ghv__code">    <span class="k">useAllDevices</span>: <span class="n">false</span></td></tr><tr><td class="ghv__num" data-line="14"></td><td class="ghv__code">    <span class="k">deviceFilter</span>: <span class="s">&quot;^nvme&quot;</span>       <span class="c"># every NVMe disk on every node</span></td></tr><tr><td class="ghv__num" data-line="15"></td><td class="ghv__code"><span class="c">---</span></td></tr><tr><td class="ghv__num" data-line="16"></td><td class="ghv__code"><span class="k">apiVersion</span>: <span class="s">ceph.rook.io/v1</span></td></tr><tr><td class="ghv__num" data-line="17"></td><td class="ghv__code"><span class="k">kind</span>: <span class="s">CephBlockPool</span></td></tr><tr><td class="ghv__num" data-line="18"></td><td class="ghv__code"><span class="k">metadata</span>:</td></tr><tr><td class="ghv__num" data-line="19"></td><td class="ghv__code">  <span class="k">name</span>: <span class="s">replicapool</span></td></tr><tr><td class="ghv__num" data-line="20"></td><td class="ghv__code"><span class="k">spec</span>:</td></tr><tr><td class="ghv__num" data-line="21"></td><td class="ghv__code">  <span class="k">failureDomain</span>: <span class="s">zone</span>           <span class="c"># one copy per zone</span></td></tr><tr><td class="ghv__num" data-line="22"></td><td class="ghv__code">  <span class="k">replicated</span>:</td></tr><tr><td class="ghv__num" data-line="23"></td><td class="ghv__code">    <span class="k">size</span>: <span class="n">3</span></td></tr><tr><td class="ghv__num" data-line="24"></td><td class="ghv__code"><span class="c">---</span></td></tr><tr><td class="ghv__num" data-line="25"></td><td class="ghv__code"><span class="k">apiVersion</span>: <span class="s">ceph.rook.io/v1</span></td></tr><tr><td class="ghv__num" data-line="26"></td><td class="ghv__code"><span class="k">kind</span>: <span class="s">CephObjectStore</span></td></tr><tr><td class="ghv__num" data-line="27"></td><td class="ghv__code"><span class="k">metadata</span>:</td></tr><tr><td class="ghv__num" data-line="28"></td><td class="ghv__code">  <span class="k">name</span>: <span class="s">my-store</span></td></tr><tr><td class="ghv__num" data-line="29"></td><td class="ghv__code"><span class="k">spec</span>:</td></tr><tr><td class="ghv__num" data-line="30"></td><td class="ghv__code">  <span class="k">metadataPool</span>:</td></tr><tr><td class="ghv__num" data-line="31"></td><td class="ghv__code">    <span class="k">replicated</span>: {<span class="k"> size</span>: <span class="s">3 </span>}</td></tr><tr><td class="ghv__num" data-line="32"></td><td class="ghv__code">  <span class="k">dataPool</span>:</td></tr><tr><td class="ghv__num" data-line="33"></td><td class="ghv__code">    <span class="k">erasureCoded</span>: {<span class="k"> dataChunks</span>: <span class="n">2</span>, <span class="k">codingChunks</span>: <span class="s">1 </span>}</td></tr><tr><td class="ghv__num" data-line="34"></td><td class="ghv__code">  <span class="k">gateway</span>:</td></tr><tr><td class="ghv__num" data-line="35"></td><td class="ghv__code">    <span class="k">port</span>: <span class="n">80</span></td></tr><tr><td class="ghv__num" data-line="36"></td><td class="ghv__code">    <span class="k">instances</span>: <span class="n">2</span></td></tr></tbody></table></div></div>
+
+          </div>
+          <div class="how__panel" id="how-panel-day2" role="tabpanel" aria-labelledby="how-tab-day2" aria-describedby="how-text-day2" tabindex="0" hidden>
+            <div class="ghv ghv--diff"><div class="ghv__pr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg><span class="ghv__pr-title">Upgrade Ceph to v20.2.4</span></div><div class="ghv__bar"><svg class="ghv__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg><span class="ghv__path">clusters/prod/ceph-cluster.yaml</span><span class="ghv__stat"><span class="ghv__plus">+1</span> <span class="ghv__minus">&minus;1</span><span class="ghv__boxes" aria-hidden="true"><i class="a"></i><i class="d"></i><i></i><i></i><i></i></span></span></div><div class="ghv__body"><table class="ghv__table"><tbody><tr class="ghv__hunk"><td class="ghv__num" colspan="2"></td><td class="ghv__code" colspan="2">@@ -4,6 +4,6 @@ metadata:</td></tr><tr><td class="ghv__num" data-line="4"></td><td class="ghv__num" data-line="4"></td><td class="ghv__sign"></td><td class="ghv__code">  <span class="k">name</span>: <span class="s">rook-ceph</span></td></tr><tr><td class="ghv__num" data-line="5"></td><td class="ghv__num" data-line="5"></td><td class="ghv__sign"></td><td class="ghv__code"><span class="k">spec</span>:</td></tr><tr><td class="ghv__num" data-line="6"></td><td class="ghv__num" data-line="6"></td><td class="ghv__sign"></td><td class="ghv__code">  <span class="k">cephVersion</span>:</td></tr><tr class="ghv__del"><td class="ghv__num" data-line="7"></td><td class="ghv__num"></td><td class="ghv__sign">-</td><td class="ghv__code">    <span class="k">image</span>: <span class="s">quay.io/ceph/ceph:v20.2.<span class="x">2-20260616</span></span></td></tr><tr class="ghv__add"><td class="ghv__num"></td><td class="ghv__num" data-line="7"></td><td class="ghv__sign">+</td><td class="ghv__code">    <span class="k">image</span>: <span class="s">quay.io/ceph/ceph:v20.2.<span class="x">4-20260818</span></span></td></tr><tr><td class="ghv__num" data-line="8"></td><td class="ghv__num" data-line="8"></td><td class="ghv__sign"></td><td class="ghv__code">  <span class="k">dataDirHostPath</span>: <span class="s">/var/lib/rook</span></td></tr><tr><td class="ghv__num" data-line="9"></td><td class="ghv__num" data-line="9"></td><td class="ghv__sign"></td><td class="ghv__code">  <span class="k">mon</span>:</td></tr></tbody></table></div></div>
+
+          </div>
+          <div class="how__panel how__panel--demo" id="how-panel-demo" role="tabpanel" aria-labelledby="how-tab-demo" hidden>
+            <div class="terminal">
+              <div class="terminal__bar"><span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <div class="terminal__body terminal__demo">
+                <div id="terminal-demo" data-src="/data/ceph.cast" data-cols="61" data-rows="17"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="bottom">
-    <div class="grid-center">
-      <div class="col-8">
-        <a class="logo" href="/">
-          <img src="/images/rook-logo-small.svg" alt="rook.io" />
-        </a>
-        <p>
-          &#169; Rook Authors 2026. Documentation distributed under
-          <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
-        </p>
-        <p>
-          &#169; 2026 The Linux Foundation. All rights reserved. The Linux Foundation has
-          registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our
-          <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.
-        </p>
+</section>
+
+<section class="section section--gray" id="why-rook">
+  <div class="container">
+    <div class="head">
+      <h2>Why Rook</h2>
+    </div>
+    <div class="why4">
+      <article class="why4__card">
+        <img class="theme-light why4__icon" src="/images/features/automate.svg" alt="" loading="lazy"><img class="theme-dark why4__icon" src="/images/dark/features/automate.svg" alt="" loading="lazy">
+
+        <h3 class="why4__title">Cost efficiency</h3>
+        <ul class="why4__list">
+          <li><strong class="why4__em">2&times;</strong> less raw space than three copies, same redundancy, with <strong class="why4__em nowrap">erasure coding</strong></li>
+          <li>NVMe for metadata, HDDs for data: <span class="nowrap">flash-speed</span> metadata at HDD cost</li>
+        </ul>
+        <a class="arrow-link why4__link" href="https://rook.io/docs/rook/latest-release/CRDs/Block-Storage/ceph-block-pool-crd/#erasure-coded-rbd-pool">Erasure coding<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </article>
+      <article class="why4__card">
+        <img class="theme-light why4__icon" src="/images/features/elasticstorage.svg" alt="" loading="lazy"><img class="theme-dark why4__icon" src="/images/dark/features/elasticstorage.svg" alt="" loading="lazy">
+
+        <h3 class="why4__title">Runs everywhere Kubernetes runs</h3>
+        <p class="why4__text">On bare metal or in any cloud, on local disks or your provider's block volumes.</p>
+        <a class="arrow-link why4__link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/ceph-cluster-crd/">Cluster types<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </article>
+      <article class="why4__card">
+        <img class="theme-light why4__icon" src="/images/features/opensource.svg" alt="" loading="lazy"><img class="theme-dark why4__icon" src="/images/dark/features/opensource.svg" alt="" loading="lazy">
+
+        <h3 class="why4__title">Open source, no vendor <span class="nowrap">lock-in</span></h3>
+        <p class="why4__text">Rook (Apache 2.0) and Ceph (LGPL) run on hardware you choose, and no single company controls the project.</p>
+        <a class="arrow-link why4__link" href="https://github.com/rook/rook/blob/master/GOVERNANCE.md">Governance<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </article>
+      <article class="why4__card">
+        <img class="theme-light why4__icon" src="/images/features/provision.svg" alt="" loading="lazy"><img class="theme-dark why4__icon" src="/images/dark/features/provision.svg" alt="" loading="lazy">
+
+        <h3 class="why4__title">Hardware fails, your data stays</h3>
+        <p class="why4__text">Ceph keeps each copy on a different host, rack or zone, rebuilds lost copies on its own, and spreads data onto new disks as you add them.</p>
+        <a class="arrow-link why4__link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/ceph-cluster-crd/#osd-topology">Failure domains<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="interfaces">
+  <div class="container">
+    <div class="head">
+      <h2>Block, file and S3 storage from one cluster</h2>
+    </div>
+    <div class="card itable-wrap">
+      <table class="itable">
+        <thead>
+          <tr><th scope="col">Interface</th><th scope="col"><span class="itable__k8s"><svg class="itable__mark" viewBox="0 0 230 223" aria-hidden="true"><use href="#i-k8s"/></svg>Kubernetes</span></th><th scope="col">Outside Kubernetes</th><th scope="col" class="itable__docs">Docs</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="itable__name"><svg class="itable__icon" aria-hidden="true"><use href="#i-object"/></svg><span>S3 object storage <span class="itable__tech">RGW</span><span class="itable__desc">S3 compatible: versioning, lifecycle, replication, notifications, IAM.</span></span></span></th>
+            <td data-label="Kubernetes">Buckets and credentials through an ObjectBucketClaim, or COSI</td>
+            <td data-label="Outside Kubernetes">Any S3-compatible client or SDK</td>
+            <td class="itable__docs"><a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/object-storage/">Object storage docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="itable__name"><svg class="itable__icon" aria-hidden="true"><use href="#i-block"/></svg><span>Block <span class="itable__tech">RBD</span><span class="itable__desc">Durable volumes for databases and VMs.</span></span></span></th>
+            <td data-label="Kubernetes">RWO volumes through a PVC, via Ceph CSI</td>
+            <td data-label="Outside Kubernetes"><img class="itable__mark" src="/images/brand/tux.svg" alt="" width="14" height="16">Linux kernel client or librbd (for example QEMU/KVM); NVMe-oF for other hosts</td>
+            <td class="itable__docs"><a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/block-storage/">Block docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a><a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/nvme-of/">NVMe-oF docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="itable__name"><svg class="itable__icon" aria-hidden="true"><use href="#i-filesystem"/></svg><span>Shared filesystem <span class="itable__tech">CephFS</span><span class="itable__desc">POSIX filesystem shared by many readers and writers.</span></span></span></th>
+            <td data-label="Kubernetes">RWX volumes that many pods mount at once, via Ceph CSI</td>
+            <td data-label="Outside Kubernetes">Mount as a POSIX filesystem from any <img class="itable__mark" src="/images/brand/tux.svg" alt="" width="14" height="16">Linux client</td>
+            <td class="itable__docs"><a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/">Filesystem docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="itable__name"><svg class="itable__icon" aria-hidden="true"><use href="#i-nfs"/></svg><span>NFS</span></span></th>
+            <td data-label="Kubernetes">PVCs through the NFS CSI driver</td>
+            <td data-label="Outside Kubernetes">Any NFS client</td>
+            <td class="itable__docs"><a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/NFS/nfs/">NFS docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section--gray" id="data-protection">
+  <div class="container">
+    <div class="grid dr-grid">
+      <div class="dr-head">
+        <div class="head head--flush">
+          <h2>Survive a zone outage. Recover from a site loss.</h2>
+        </div>
+      </div>
+      <div class="dr-body">
+        <ul class="dr-list">
+          <li class="dr-item"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="8" height="14" rx="1.5"/><rect x="13.5" y="5" width="8" height="14" rx="1.5"/><path d="M10.5 12h3"/></svg>
+<div>
+            <h3>Stretch a cluster across zones</h3>
+            <p>One cluster runs in two zones, with a small third zone that only breaks ties.</p>
+            <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/stretch-cluster/">Stretch cluster docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+          </div></li>
+          <li class="dr-item"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+<div>
+            <h3>Replicate to a second site</h3>
+            <p>Mirror block volumes and filesystems, and replicate object storage, to another cluster. Fail over in a disaster and fail back later.</p>
+            <div class="dr-links">
+              <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/rbd-async-disaster-recovery-failover-failback/">Block<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+              <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-mirroring/">Filesystem<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+              <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/ceph-object-multisite/">Object<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+            </div>
+          </div></li>
+          <li class="dr-item"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+<div>
+            <h3>Lock backups against ransomware</h3>
+            <p>With S3 Object Lock, objects can't be overwritten or deleted until their retention period ends.</p>
+            <a class="arrow-link" href="https://docs.ceph.com/en/latest/radosgw/s3/bucketops/">S3 Object Lock in the Ceph docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+          </div></li>
+          <li class="dr-item"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+<div>
+            <h3>Snapshot and clone volumes</h3>
+            <p>Take point-in-time copies of volumes, then restore or clone them.</p>
+            <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/">Snapshot docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+          </div></li>
+        </ul>
+      </div>
+      <div class="dr-vis">
+        <div class="dr-visual" data-tabs>
+          <div class="segmented" role="tablist" aria-label="Protection scope">
+            <button role="tab" id="seg-zones" aria-selected="true" aria-controls="dr-zones">Across zones</button>
+            <button role="tab" id="seg-sites" aria-selected="false" aria-controls="dr-sites" tabindex="-1">Across sites</button>
+          </div>
+          <div class="dr-panel" id="dr-zones" role="tabpanel" aria-labelledby="seg-zones">
+            <figure><svg class="dr-svg dr-landscape" viewBox="0 0 720 410" role="img"><title>Stretch cluster across two zones and an arbiter</title><desc>One Ceph cluster spans Zone A and Zone B, each with two nodes running OSDs and monitors. A small arbiter zone runs one monitor. Writes are replicated synchronously between the zones.</desc><rect x="288" y="1" width="144" height="70" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5" stroke-dasharray="6 4"/><text x="360" y="19" font-size="11" font-weight="600" letter-spacing="1" text-anchor="middle" fill="#5b6178">ARBITER ZONE</text><rect x="312" y="30" width="96" height="30" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="319" y="35" width="20" height="20"/><rect x="352" y="35" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="372.0" y="49" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><path d="M360 71V130" stroke="#1b0c59" stroke-width="2"/><rect x="1" y="96" width="334" height="312" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5" stroke-dasharray="6 4"/><text x="17" y="120" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">ZONE A</text><rect x="385" y="96" width="334" height="312" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5" stroke-dasharray="6 4"/><text x="401" y="120" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">ZONE B</text><rect x="16" y="136" width="688" height="256" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="32" y="150" width="16" height="20"/><text x="56" y="165" font-size="15" font-weight="600" fill="#1b0c59">One Ceph cluster (stretch mode)</text><circle cx="360" cy="136" r="6" fill="#2ac6ea" stroke="#1b0c59" stroke-width="2"/><rect x="32" y="184" width="140" height="128" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="42" y="193" width="20" height="20"/><text class="mono" x="68" y="208" font-size="12" fill="#5b6178">node-1</text><rect x="44" y="222" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="72.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="106" y="222" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="126.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="44" y="264" width="24" height="28"/><use href="#i-cyl" x="80" y="264" width="24" height="28"/><use href="#i-cyl" x="116" y="264" width="24" height="28"/><rect x="184" y="184" width="140" height="128" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="194" y="193" width="20" height="20"/><text class="mono" x="220" y="208" font-size="12" fill="#5b6178">node-2</text><rect x="196" y="222" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="224.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="258" y="222" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="278.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="196" y="264" width="24" height="28"/><use href="#i-cyl" x="232" y="264" width="24" height="28"/><use href="#i-cyl" x="268" y="264" width="24" height="28"/><rect x="396" y="184" width="140" height="128" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="406" y="193" width="20" height="20"/><text class="mono" x="432" y="208" font-size="12" fill="#5b6178">node-3</text><rect x="408" y="222" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="436.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="470" y="222" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="490.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="408" y="264" width="24" height="28"/><use href="#i-cyl" x="444" y="264" width="24" height="28"/><use href="#i-cyl" x="480" y="264" width="24" height="28"/><rect x="548" y="184" width="140" height="128" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="558" y="193" width="20" height="20"/><text class="mono" x="584" y="208" font-size="12" fill="#5b6178">node-4</text><rect x="560" y="222" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="588.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="622" y="222" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="642.0" y="236" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="560" y="264" width="24" height="28"/><use href="#i-cyl" x="596" y="264" width="24" height="28"/><use href="#i-cyl" x="632" y="264" width="24" height="28"/><path d="M184 352H536" stroke="#2ac6ea" stroke-width="3"/><path d="M534 346L544 352L534 358Z" fill="#2ac6ea"/><path d="M186 346L176 352L186 358Z" fill="#2ac6ea"/><path class="dr-sync" d="M360.0 352H186" fill="none"/><path class="dr-sync" d="M360.0 352H534" fill="none"/><rect x="287.2" y="340" width="145.6" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="360.0" y="356.3" font-size="12" text-anchor="middle" fill="#1b0c59">synchronous writes</text></svg>
+<svg class="dr-svg dr-portrait" viewBox="0 0 360 548" role="img"><title>Stretch cluster across two zones and an arbiter</title><desc>One Ceph cluster spans Zone A and Zone B, each with two nodes running OSDs and monitors. A small arbiter zone runs one monitor. Writes are replicated synchronously between the zones.</desc><rect x="100" y="1" width="160" height="70" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5" stroke-dasharray="6 4"/><text x="180" y="19" font-size="11" font-weight="600" letter-spacing="1" text-anchor="middle" fill="#5b6178">ARBITER ZONE</text><rect x="132" y="30" width="96" height="30" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="139" y="35" width="20" height="20"/><rect x="172" y="35" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="192.0" y="49" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><path d="M180 71V114" stroke="#1b0c59" stroke-width="2"/><rect x="12" y="120" width="336" height="424" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="28" y="134" width="16" height="20"/><text x="52" y="149" font-size="14" font-weight="600" fill="#1b0c59">One Ceph cluster (stretch mode)</text><path d="M14 360H346" stroke="#8a90a6" stroke-width="1.5" stroke-dasharray="6 4"/><circle cx="180" cy="120" r="6" fill="#2ac6ea" stroke="#1b0c59" stroke-width="2"/><text x="28" y="182" font-size="11" font-weight="600" letter-spacing="1" fill="#5b6178">ZONE A</text><text x="28" y="394" font-size="11" font-weight="600" letter-spacing="1" fill="#5b6178">ZONE B</text><rect x="28" y="194" width="144" height="120" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="38" y="203" width="20" height="20"/><text class="mono" x="64" y="218" font-size="12" fill="#5b6178">node-1</text><rect x="40" y="232" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="68.0" y="246" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="102" y="232" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="122.0" y="246" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="40" y="270" width="24" height="28"/><use href="#i-cyl" x="76" y="270" width="24" height="28"/><use href="#i-cyl" x="112" y="270" width="24" height="28"/><rect x="28" y="406" width="144" height="120" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="38" y="415" width="20" height="20"/><text class="mono" x="64" y="430" font-size="12" fill="#5b6178">node-3</text><rect x="40" y="444" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="68.0" y="458" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="102" y="444" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="122.0" y="458" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="40" y="482" width="24" height="28"/><use href="#i-cyl" x="76" y="482" width="24" height="28"/><use href="#i-cyl" x="112" y="482" width="24" height="28"/><rect x="188" y="194" width="144" height="120" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="198" y="203" width="20" height="20"/><text class="mono" x="224" y="218" font-size="12" fill="#5b6178">node-2</text><rect x="200" y="232" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="228.0" y="246" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="262" y="232" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="282.0" y="246" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="200" y="270" width="24" height="28"/><use href="#i-cyl" x="236" y="270" width="24" height="28"/><use href="#i-cyl" x="272" y="270" width="24" height="28"/><rect x="188" y="406" width="144" height="120" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="198" y="415" width="20" height="20"/><text class="mono" x="224" y="430" font-size="12" fill="#5b6178">node-4</text><rect x="200" y="444" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="228.0" y="458" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="262" y="444" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="282.0" y="458" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="200" y="482" width="24" height="28"/><use href="#i-cyl" x="236" y="482" width="24" height="28"/><use href="#i-cyl" x="272" y="482" width="24" height="28"/><path d="M180 326V394" stroke="#2ac6ea" stroke-width="3"/><path d="M174 392L180 402L186 392Z" fill="#2ac6ea"/><path d="M174 328L180 318L186 328Z" fill="#2ac6ea"/><path class="dr-sync" d="M180 360.0V328" fill="none"/><path class="dr-sync" d="M180 360.0V392" fill="none"/><rect x="107.2" y="348" width="145.6" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="180.0" y="364.3" font-size="12" text-anchor="middle" fill="#1b0c59">synchronous writes</text></svg>
+</figure>
+          </div>
+          <div class="dr-panel" id="dr-sites" role="tabpanel" aria-labelledby="seg-sites" hidden>
+            <figure><svg class="dr-svg dr-landscape" viewBox="0 0 720 440" role="img"><title>Asynchronous replication to a peer cluster in another site</title><desc>A primary site runs Ceph cluster A and a peer site runs Ceph cluster B, each with three nodes running OSDs and a monitor. Replication between the sites is asynchronous: block volumes with RBD mirroring, filesystems with CephFS mirroring, and object storage with RGW multisite, which replicates in both directions.</desc><rect x="1" y="1" width="250" height="438" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5"/><text x="17" y="23" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">PRIMARY SITE</text><rect x="16" y="40" width="220" height="388" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="32" y="54" width="16" height="20"/><text x="56" y="69" font-size="15" font-weight="600" fill="#1b0c59">Ceph cluster A</text><rect x="32" y="88" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="42" y="97" width="20" height="20"/><text class="mono" x="68" y="112" font-size="12" fill="#5b6178">node-1</text><rect x="44" y="126" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="72.0" y="140" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="106" y="126" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="126.0" y="140" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="44" y="154" width="24" height="28"/><use href="#i-cyl" x="80" y="154" width="24" height="28"/><use href="#i-cyl" x="116" y="154" width="24" height="28"/><rect x="32" y="200" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="42" y="209" width="20" height="20"/><text class="mono" x="68" y="224" font-size="12" fill="#5b6178">node-2</text><rect x="44" y="238" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="72.0" y="252" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="106" y="238" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="126.0" y="252" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="44" y="266" width="24" height="28"/><use href="#i-cyl" x="80" y="266" width="24" height="28"/><use href="#i-cyl" x="116" y="266" width="24" height="28"/><rect x="32" y="312" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="42" y="321" width="20" height="20"/><text class="mono" x="68" y="336" font-size="12" fill="#5b6178">node-3</text><rect x="44" y="350" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="72.0" y="364" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="106" y="350" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="126.0" y="364" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="44" y="378" width="24" height="28"/><use href="#i-cyl" x="80" y="378" width="24" height="28"/><use href="#i-cyl" x="116" y="378" width="24" height="28"/><rect x="469" y="1" width="250" height="438" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5"/><text x="485" y="23" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">PEER SITE</text><rect x="484" y="40" width="220" height="388" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="500" y="54" width="16" height="20"/><text x="524" y="69" font-size="15" font-weight="600" fill="#1b0c59">Ceph cluster B</text><rect x="500" y="88" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="510" y="97" width="20" height="20"/><text class="mono" x="536" y="112" font-size="12" fill="#5b6178">node-1</text><rect x="512" y="126" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="540.0" y="140" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="574" y="126" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="594.0" y="140" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="512" y="154" width="24" height="28"/><use href="#i-cyl" x="548" y="154" width="24" height="28"/><use href="#i-cyl" x="584" y="154" width="24" height="28"/><rect x="500" y="200" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="510" y="209" width="20" height="20"/><text class="mono" x="536" y="224" font-size="12" fill="#5b6178">node-2</text><rect x="512" y="238" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="540.0" y="252" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="574" y="238" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="594.0" y="252" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="512" y="266" width="24" height="28"/><use href="#i-cyl" x="548" y="266" width="24" height="28"/><use href="#i-cyl" x="584" y="266" width="24" height="28"/><rect x="500" y="312" width="188" height="100" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="510" y="321" width="20" height="20"/><text class="mono" x="536" y="336" font-size="12" fill="#5b6178">node-3</text><rect x="512" y="350" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="540.0" y="364" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="574" y="350" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="594.0" y="364" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="512" y="378" width="24" height="28"/><use href="#i-cyl" x="548" y="378" width="24" height="28"/><use href="#i-cyl" x="584" y="378" width="24" height="28"/><path class="dr-async" d="M251 64H461" stroke="#2ac6ea" stroke-width="3"/><path d="M459 58L469 64L459 70Z" fill="#2ac6ea"/><rect x="265.6" y="52" width="188.8" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="360.0" y="68.3" font-size="12" text-anchor="middle" fill="#1b0c59">asynchronous replication</text><path class="dr-async dr-lag-1" d="M236 150H334" stroke="#2ac6ea" stroke-width="3"/><path class="dr-async dr-lag-2" d="M386 150H476" stroke="#2ac6ea" stroke-width="3"/><path d="M474 144L484 150L474 156Z" fill="#2ac6ea"/><use href="#i-block" x="342" y="132" width="36" height="36"/><rect x="305.2" y="174" width="109.6" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="360.0" y="190.3" font-size="12" text-anchor="middle" fill="#1b0c59">RBD mirroring</text><path class="dr-async dr-lag-2" d="M236 262H334" stroke="#2ac6ea" stroke-width="3"/><path class="dr-async dr-lag-3" d="M386 262H476" stroke="#2ac6ea" stroke-width="3"/><path d="M474 256L484 262L474 268Z" fill="#2ac6ea"/><use href="#i-filesystem" x="342" y="244" width="36" height="36"/><rect x="294.4" y="286" width="131.2" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="360.0" y="302.3" font-size="12" text-anchor="middle" fill="#1b0c59">CephFS mirroring</text><path d="M246 368L236 374L246 380Z" fill="#2ac6ea"/><path class="dr-async dr-lag-3" d="M244 371H334" stroke="#2ac6ea" stroke-width="2"/><path class="dr-async dr-lag-4" d="M334 377H244" stroke="#2ac6ea" stroke-width="2"/><path d="M474 368L484 374L474 380Z" fill="#2ac6ea"/><path class="dr-async dr-lag-4" d="M386 371H476" stroke="#2ac6ea" stroke-width="2"/><path class="dr-async dr-lag-5" d="M476 377H386" stroke="#2ac6ea" stroke-width="2"/><use href="#i-object" x="342" y="356" width="36" height="36"/><rect x="305.2" y="398" width="109.6" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="360.0" y="414.3" font-size="12" text-anchor="middle" fill="#1b0c59">RGW multisite</text></svg>
+<svg class="dr-svg dr-portrait" viewBox="0 0 360 704" role="img"><title>Asynchronous replication to a peer cluster in another site</title><desc>A primary site runs Ceph cluster A and a peer site runs Ceph cluster B, each with three nodes running OSDs and a monitor. Replication between the sites is asynchronous: block volumes with RBD mirroring, filesystems with CephFS mirroring, and object storage with RGW multisite, which replicates in both directions.</desc><rect x="1" y="1" width="358" height="220" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5"/><text x="17" y="23" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">PRIMARY SITE</text><rect x="12" y="35" width="336" height="174" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="28" y="49" width="16" height="20"/><text x="52" y="64" font-size="14" font-weight="600" fill="#1b0c59">Ceph cluster A</text><rect x="26" y="77" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="36" y="86" width="20" height="20"/><text class="mono" x="62" y="101" font-size="12" fill="#5b6178">node-1</text><rect x="38" y="113" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="66.0" y="127" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="38" y="137" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="58.0" y="151" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="38" y="165" width="21" height="24"/><use href="#i-cyl" x="64" y="165" width="21" height="24"/><use href="#i-cyl" x="90" y="165" width="21" height="24"/><rect x="133" y="77" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="143" y="86" width="20" height="20"/><text class="mono" x="169" y="101" font-size="12" fill="#5b6178">node-2</text><rect x="145" y="113" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="173.0" y="127" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="145" y="137" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="165.0" y="151" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="145" y="165" width="21" height="24"/><use href="#i-cyl" x="171" y="165" width="21" height="24"/><use href="#i-cyl" x="197" y="165" width="21" height="24"/><rect x="240" y="77" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="250" y="86" width="20" height="20"/><text class="mono" x="276" y="101" font-size="12" fill="#5b6178">node-3</text><rect x="252" y="113" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="280.0" y="127" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="252" y="137" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="272.0" y="151" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="252" y="165" width="21" height="24"/><use href="#i-cyl" x="278" y="165" width="21" height="24"/><use href="#i-cyl" x="304" y="165" width="21" height="24"/><rect x="1" y="483" width="358" height="220" rx="12" fill="none" stroke="#8a90a6" stroke-width="1.5"/><text x="17" y="505" font-size="11" font-weight="600" letter-spacing="1" text-anchor="start" fill="#5b6178">PEER SITE</text><rect x="12" y="517" width="336" height="174" rx="12" fill="#ebe8f5" stroke="#1b0c59" stroke-width="2"/><image href="/images/brand/rook-icon-color.svg" x="28" y="531" width="16" height="20"/><text x="52" y="546" font-size="14" font-weight="600" fill="#1b0c59">Ceph cluster B</text><rect x="26" y="559" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="36" y="568" width="20" height="20"/><text class="mono" x="62" y="583" font-size="12" fill="#5b6178">node-1</text><rect x="38" y="595" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="66.0" y="609" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="38" y="619" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="58.0" y="633" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="38" y="647" width="21" height="24"/><use href="#i-cyl" x="64" y="647" width="21" height="24"/><use href="#i-cyl" x="90" y="647" width="21" height="24"/><rect x="133" y="559" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="143" y="568" width="20" height="20"/><text class="mono" x="169" y="583" font-size="12" fill="#5b6178">node-2</text><rect x="145" y="595" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="173.0" y="609" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="145" y="619" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="165.0" y="633" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="145" y="647" width="21" height="24"/><use href="#i-cyl" x="171" y="647" width="21" height="24"/><use href="#i-cyl" x="197" y="647" width="21" height="24"/><rect x="240" y="559" width="94" height="122" rx="6" fill="#fff" stroke="#1b0c59" stroke-width="2"/><use href="#i-k8s" x="250" y="568" width="20" height="20"/><text class="mono" x="276" y="583" font-size="12" fill="#5b6178">node-3</text><rect x="252" y="595" width="56" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="280.0" y="609" font-size="11" text-anchor="middle" fill="#1b0c59">OSD ×3</text><rect x="252" y="619" width="40" height="20" rx="10" fill="#fff" stroke="#1b0c59" stroke-width="1.5"/><text class="mono" x="272.0" y="633" font-size="11" text-anchor="middle" fill="#1b0c59">MON</text><use href="#i-cyl" x="252" y="647" width="21" height="24"/><use href="#i-cyl" x="278" y="647" width="21" height="24"/><use href="#i-cyl" x="304" y="647" width="21" height="24"/><path class="dr-async dr-lag-1" d="M60 223V320" stroke="#2ac6ea" stroke-width="3"/><use href="#i-block" x="42" y="324" width="36" height="36"/><rect x="10.1" y="368" width="99.8" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="60.0" y="384.0" font-size="11" text-anchor="middle" fill="#1b0c59">RBD mirroring</text><path class="dr-async dr-lag-2" d="M60 398V473" stroke="#2ac6ea" stroke-width="3"/><path d="M54 471L60 481L66 471Z" fill="#2ac6ea"/><path class="dr-async dr-lag-2" d="M180 223V320" stroke="#2ac6ea" stroke-width="3"/><use href="#i-filesystem" x="162" y="324" width="36" height="36"/><rect x="120.2" y="368" width="119.6" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="180.0" y="384.0" font-size="11" text-anchor="middle" fill="#1b0c59">CephFS mirroring</text><path class="dr-async dr-lag-3" d="M180 398V473" stroke="#2ac6ea" stroke-width="3"/><path d="M174 471L180 481L186 471Z" fill="#2ac6ea"/><path d="M294 233L300 223L306 233Z" fill="#2ac6ea"/><path class="dr-async dr-lag-3" d="M297 231V320" stroke="#2ac6ea" stroke-width="2"/><path class="dr-async dr-lag-4" d="M303 320V231" stroke="#2ac6ea" stroke-width="2"/><use href="#i-object" x="282" y="324" width="36" height="36"/><rect x="250.1" y="368" width="99.8" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="300.0" y="384.0" font-size="11" text-anchor="middle" fill="#1b0c59">RGW multisite</text><path d="M294 471L300 481L306 471Z" fill="#2ac6ea"/><path class="dr-async dr-lag-4" d="M297 398V473" stroke="#2ac6ea" stroke-width="2"/><path class="dr-async dr-lag-5" d="M303 473V398" stroke="#2ac6ea" stroke-width="2"/><rect x="85.6" y="248" width="188.8" height="24" rx="12.0" fill="#fff" stroke="#cdf1fa"/><text class="mono" x="180.0" y="264.3" font-size="12" text-anchor="middle" fill="#1b0c59">asynchronous replication</text></svg>
+</figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="guides">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Guides</h2>
+      <p class="lead">Step-by-step guides in the Rook docs.</p>
+    </div>
+    <ul class="glist">
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-object"/></svg>
+        <span class="glist__body"><span class="glist__title">Self-service S3 for your teams</span><span class="glist__text">Teams claim buckets and get credentials as a Secret.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-filesystem"/></svg>
+        <span class="glist__body"><span class="glist__title">Shared filesystem for many pods</span><span class="glist__text">RWX volumes from CephFS.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/CRDs/Block-Storage/ceph-block-pool-crd/#erasure-coding">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-disk"/></svg>
+        <span class="glist__body"><span class="glist__title">Increase usable capacity with erasure coding</span><span class="glist__text">Same protection as three copies, twice the usable capacity.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/key-management-system/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-key"/></svg>
+        <span class="glist__body"><span class="glist__title">Encrypt with keys in your KMS</span><span class="glist__text">Vault, KMIP and cloud key services.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-monitoring/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-monitor"/></svg>
+        <span class="glist__body"><span class="glist__title">Monitor with Grafana and the Ceph Dashboard</span><span class="glist__text">Prometheus metrics, alerts and dashboards.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Ceph-CSI/ceph-csi-drivers/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-csi"/></svg>
+        <span class="glist__body"><span class="glist__title">Use the Ceph CSI drivers</span><span class="glist__text">Static, ephemeral and expandable volumes, with RBD QoS.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/ceph-osd-mgmt/#replace-an-osd">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-disk"/></svg>
+        <span class="glist__body"><span class="glist__title">Replace a failed disk</span><span class="glist__text">Keep the OSD ID, so Ceph refills only that disk.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/pvc-cluster/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-disk"/></svg>
+        <span class="glist__body"><span class="glist__title">Run on cloud block volumes</span><span class="glist__text">OSDs on your provider's storage class.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+      <li><a class="glist__item" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/host-cluster/">
+        <svg class="glist__icon" aria-hidden="true"><use href="#i-disk"/></svg>
+        <span class="glist__body"><span class="glist__title">Metadata on NVMe, data on HDD</span><span class="glist__text">Speed up HDD clusters with a fast metadata device.</span></span>
+        <svg class="ico glist__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a></li>
+    </ul>
+    <div class="links-row glist__more">
+      <a class="arrow-link" href="/docs/rook/latest-release/">Browse all docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+    </div>
+  </div>
+</section>
+
+<section class="section--compact section--gray community" id="community">
+  <div class="container">
+    <div class="head head--tight">
+      <h2>Join the community</h2>
+    </div>
+    <div class="grid tiles">
+  <div class="card tile c-3 md-6 sm-12">
+    <div class="tile__head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="3" height="8" x="13" y="2" rx="1.5"/><path d="M19 8.5V10h1.5A1.5 1.5 0 1 0 19 8.5"/><rect width="3" height="8" x="8" y="14" rx="1.5"/><path d="M5 15.5V14H3.5A1.5 1.5 0 1 0 5 15.5"/><rect width="8" height="3" x="14" y="13" rx="1.5"/><path d="M15.5 19H14v1.5a1.5 1.5 0 1 0 1.5-1.5"/><rect width="8" height="3" x="2" y="8" rx="1.5"/><path d="M8.5 5H10V3.5A1.5 1.5 0 1 0 8.5 5"/></svg>
+<h3>Slack</h3></div>
+    <p>Ask questions and share configs with maintainers and other users.</p>
+    <a class="arrow-link tile__link" href="https://slack.rook.io/">slack.rook.io<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+  <div class="card tile c-3 md-6 sm-12">
+    <div class="tile__head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+<h3>Community meeting</h3></div>
+    <p>Second Tuesday of every month, 9:00 AM Pacific. Agenda and recordings are public.</p>
+    <a class="arrow-link tile__link" href="https://zoom-lfx.platform.linuxfoundation.org/meetings/rook?view=month">Meeting calendar<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+  <div class="card tile c-3 md-6 sm-12">
+    <div class="tile__head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg>
+<h3>Contribute</h3></div>
+    <p>Start with a good first issue.</p>
+    <a class="arrow-link tile__link" href="https://github.com/rook/rook/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Find a first issue<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+  <div class="card tile c-3 md-6 sm-12">
+    <div class="tile__head"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+<h3>GitHub</h3></div>
+    <p>Discussions, releases and source.</p>
+    <a class="arrow-link tile__link" href="https://github.com/rook/rook">github.com/rook/rook<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2>FAQ</h2>
+          <a class="arrow-link" href="/faq/">All questions<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        </div>
+      </div>
+      <div class="c-8 md-12"><div class="faq">
+  <details id="operator-down" open>
+    <summary>What happens to my data if the Rook operator goes down?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Your data keeps flowing. Rook is not in the Ceph data path: applications read and write directly to Ceph. Management tasks such as upgrades and configuration changes resume when the operator is back.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/storage-architecture/">Storage architecture<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="rook-or-cephadm">
+    <summary>Rook or cephadm?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Both are installers recommended by the Ceph documentation. Choose Rook if you run Kubernetes and want storage managed through its APIs. Choose cephadm for Ceph clusters outside Kubernetes.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://docs.ceph.com/en/latest/install/">Ceph docs: Installing Ceph<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="fork">
+    <summary>Is Rook a fork of Ceph? Does it slow Ceph down?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>No. Rook runs the official upstream Ceph images, and the usual <code class="language-plaintext highlighter-rouge">ceph</code> tools and the Ceph Dashboard work as before. For the best performance, give Ceph its own networks.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/network-providers/">Network providers<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-dashboard/">Ceph Dashboard<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="requirements">
+    <summary>What do I need?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>A Kubernetes cluster on amd64 or arm64 nodes, with local disks or block volumes for Ceph. One VM is enough to try Rook; production starts at three nodes.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/prerequisites/">Prerequisites<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="upgrades">
+    <summary>How often is Rook released?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>A new minor release ships about every four months, and the two most recent are maintained.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Upgrade/ceph-upgrade/">Upgrade guide<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/maintenance-and-support/">Supported versions<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="security">
+    <summary>Is it secure?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Rook has a private vulnerability disclosure process through the CNCF, and an independent firm audited it in 2019.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/SECURITY.md">Security policy<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/key-management-system/">Encryption docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="support">
+    <summary>Can I get commercial support?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. The companies on our support page offer Rook support and services, and several commercial storage products are built on Rook.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="/support">Support providers<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+    <footer class="footer" id="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer__cncf">
+      <a href="https://www.cncf.io"><img class="theme-light" src="/images/brand/cncf-graduated-color.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy"><img class="theme-dark" src="/images/brand/cncf-graduated-white.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy">
+</a>
+      <p>We are a Cloud Native Computing Foundation graduated project.</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4>Getting Started</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook">GitHub</a></li>
+          <li><a href="/docs/rook/latest-release/">Documentation</a></li>
+          <li><a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://slack.rook.io/">Slack</a></li>
+          <li><a href="https://twitter.com/rook_io">Twitter</a></li>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://blog.rook.io/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://github.com/rook/rook/issues">Feature request</a></li>
+          <li><a href="https://github.com/rook/rook/issues/new/choose">New Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Top Contributors</h4>
+        <ul>
+          <li><a href="https://cloudical.io/">Cloudical</a></li>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://cybozu.com">Cybozu, Inc</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+          <li><a href="https://upbound.io">Upbound</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Support Providers</h4>
+        <ul>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <a class="footer__logo" href="/"><img class="theme-light" src="/images/rook-logo-small.svg" alt="rook.io" width="80" height="17" loading="lazy"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="rook.io" width="80" height="17" loading="lazy">
+</a>
+      <div class="footer__legal">
+        <p>&#169; Rook Authors 2026. Documentation distributed under <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.</p>
+        <p>&#169; 2026 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.</p>
       </div>
     </div>
   </div>
 </footer>
 
-
-
-
-  <script async defer src="//buttons.github.io/buttons.js"></script>
-  <script src="/js/asciinema-player.js?v2.6.1"></script>
-
-
+    <script src="/js/site.js"></script>
+    <script src="/js/asciinema-player.js?v2.6.1"></script>
     
   </body>
 </html>

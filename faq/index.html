@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Runs before the CSS so the first paint has the right colours. js/site.js drives the toggle through window.rookTheme.
+      (function (d, w) {
+        var key = 'rook-theme';
+        var mq = w.matchMedia ? w.matchMedia('(prefers-color-scheme: dark)') : null;
+        var stored = null;
+        function valid(v) { return v === 'light' || v === 'dark' ? v : null; }
+        try { stored = valid(w.localStorage.getItem(key)); } catch (e) {}
+        function apply() {
+          var t = stored || (mq && mq.matches ? 'dark' : 'light');
+          d.setAttribute('data-theme', t);
+          d.style.colorScheme = t;
+        }
+        d.className = d.className.replace('no-js', 'js');
+        apply();
+        if (mq) { if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply); }
+        w.rookTheme = {
+          key: key,
+          set: function (t) {
+            stored = valid(t);
+            try { if (stored) w.localStorage.setItem(key, stored); else w.localStorage.removeItem(key); } catch (e) {}
+            apply();
+          },
+          // Another tab already stored the choice; null means follow the system.
+          sync: function (t) { stored = valid(t); apply(); }
+        };
+      })(document.documentElement, window);
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>FAQ · Rook</title>
+    <meta name="description" content="Questions we hear about Rook: production readiness, data safety, upgrades, security, support and more.">
+    <link rel="canonical" href="https://rook.io/faq/">
+    <link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/images/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/images/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon_48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/images/favicon_192x192.png" sizes="192x192" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/site.css">
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="ribbon">
+  <div class="container">
+    <span><strong>Rook v1.21 is out.</strong></span>
+    <a href="https://github.com/rook/rook/releases/tag/v1.21.2">Release notes<svg class="ico ico--16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+  </div>
+</div>
+<header class="nav" id="nav">
+  <div class="container nav__bar">
+    <a class="nav__logo" href="/"><img class="theme-light" src="/images/rook-logo.svg" alt="Rook" width="155" height="32"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="Rook" width="155" height="32">
+</a>
+    <nav class="nav__links" aria-label="Main">
+      <a class="nav__link" href="/docs/rook/latest-release/">Docs</a>
+      <a class="nav__link" href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <div class="dropdown" data-dropdown>
+        <button class="nav__link dropdown__toggle dropdown__toggle--label is-active" type="button" aria-expanded="false" aria-controls="dd-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+        <div class="dropdown__menu" id="dd-community">
+          <a href="https://slack.rook.io/">Slack</a>
+          <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+          <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+          <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+          <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+          <a href="/faq/">FAQ</a>
+        </div>
+      </div>
+      <a class="nav__link" href="https://blog.rook.io/">Blog</a>
+      <a class="nav__link" href="/support">Support</a>
+    </nav>
+    <div class="nav__actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+
+      <a class="nav__slack" href="https://slack.rook.io/" aria-label="Rook on Slack" title="Join the Rook Slack"><img src="/images/brand/slack.svg" alt="" width="18" height="18"></a>
+      <a class="nav__stars" href="https://github.com/rook/rook" aria-label="Rook on GitHub, 13.7k stars"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+<span>13.7k</span></a>
+      <a class="btn btn--primary btn--sm" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menu"><svg class="ico nav__open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+</button>
+  </div>
+  <div class="nav__sheet" id="nav-sheet">
+    <div class="container">
+      <a href="/docs/rook/latest-release/">Docs</a>
+      <a href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Adopters</a>
+      <button class="nav__group" type="button" aria-expanded="false" aria-controls="sheet-community">Community <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+      <div class="nav__sub" id="sheet-community" hidden>
+        <a href="https://slack.rook.io/">Slack</a>
+        <a href="https://github.com/rook/rook/discussions">GitHub Discussions</a>
+        <a href="https://github.com/rook/rook#community-meeting">Community meeting</a>
+        <a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">Contribute</a>
+        <a href="https://github.com/rook/rook/blob/master/SECURITY.md">Security</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <a href="https://blog.rook.io/">Blog</a>
+      <a href="/support">Support</a>
+      <div class="nav__theme"><span class="nav__theme-label">Theme</span><button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="ico theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+<svg class="ico theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+</div>
+      <a class="btn btn--primary" href="https://rook.io/docs/rook/latest-release/Getting-Started/quickstart/">Deploy Rook</a>
+    </div>
+  </div>
+</header>
+
+    <main id="content"><section class="section--hero section--gray page-hero">
+  <div class="container">
+    <div class="head head--flush">
+      <h1 class="t-display">FAQ</h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2 class="t-h3">Evaluating Rook</h2>
+        </div>
+      </div>
+      <div class="c-8 md-12"><div class="faq">
+  <details id="production-ready">
+    <summary>Is Rook production-ready? Who runs it?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. The Rook Ceph operator was declared stable in 2018, and Rook is a CNCF graduated project. Organizations run it in production at petabyte scale.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/ADOPTERS.md">Who runs Rook<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/">Rook docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="operator-down">
+    <summary>What happens to my data if the Rook operator goes down?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Your data keeps flowing. Rook is not in the Ceph data path: applications read and write directly to Ceph. Management tasks such as upgrades and configuration changes resume when the operator is back.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/storage-architecture/">Storage architecture<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="rook-or-cephadm">
+    <summary>Rook or cephadm?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Both are installers recommended by the Ceph documentation. Choose Rook if you run Kubernetes and want storage managed through its APIs. Choose cephadm for Ceph clusters outside Kubernetes.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://docs.ceph.com/en/latest/install/">Ceph docs: Installing Ceph<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="fork">
+    <summary>Is Rook a fork of Ceph? Does it slow Ceph down?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>No. Rook runs the official upstream Ceph images, and the usual <code class="language-plaintext highlighter-rouge">ceph</code> tools and the Ceph Dashboard work as before. For the best performance, give Ceph its own networks.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/network-providers/">Network providers<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Monitoring/ceph-dashboard/">Ceph Dashboard<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="requirements">
+    <summary>What do I need?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>A Kubernetes cluster on amd64 or arm64 nodes, with local disks or block volumes for Ceph. One VM is enough to try Rook; production starts at three nodes.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/prerequisites/">Prerequisites<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="upgrades">
+    <summary>How do upgrades work, and how often is Rook released?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Change the Ceph version in your spec and Rook rolls the upgrade out across the daemons, checking Ceph’s health as it goes. A new minor release ships about every four months, and the two most recent are maintained.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Upgrade/ceph-upgrade/">Upgrade guide<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/maintenance-and-support/">Supported versions<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="security">
+    <summary>Is it secure?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Rook can encrypt data at rest and in transit, integrates with external key managers such as HashiCorp Vault, and has a private vulnerability disclosure process through the CNCF. It was audited by Trail of Bits in 2019.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/SECURITY.md">Security policy<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/key-management-system/">Encryption docs<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="support">
+    <summary>Can I get commercial support?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. The companies on our support page offer Rook support and services, and several commercial storage products are built on Rook.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="/support">Support providers<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--start">
+      <div class="c-4 md-12">
+        <div class="faq-aside">
+          <h2 class="t-h3">Running Rook</h2>
+        </div>
+      </div>
+      <div class="c-8 md-12"><div class="faq">
+  <details id="control-plane">
+    <summary>What if the Kubernetes control plane goes down?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Running Ceph daemons and mounted volumes keep serving data. New pods, volumes and mounts wait until the control plane is back, so plan its availability like any other dependency of your storage.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/storage-architecture/">Storage architecture<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="lose-cluster">
+    <summary>What if I lose the whole Kubernetes cluster?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Your data is on the Ceph disks, not in Kubernetes. The disaster recovery guide shows how to bring an existing Rook Ceph cluster up in a new Kubernetes cluster.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Troubleshooting/disaster-recovery/">Disaster recovery guide<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="existing-cluster">
+    <summary>Can I use an existing Ceph cluster?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. In external mode, Rook connects your Kubernetes workloads to a Ceph cluster you already run, for example one managed by cephadm.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/external-cluster/external-cluster/">External cluster<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="cloud-airgapped">
+    <summary>Can I run it in the cloud or air-gapped?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. In the cloud, Rook builds Ceph on block volumes from your provider’s storage class. For air-gapped sites, mirror the images to your own registry.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/CRDs/Cluster/pvc-cluster/">PVC-based clusters<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/authenticated-registry/">Private registries<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="maintainers">
+    <summary>Who maintains Rook? Is it controlled by one vendor?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Maintainers come from several companies and research organizations, and more than 580 organizations have contributed. Governance rules bar any single company from holding a majority on the steering committee.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/OWNERS.md">Maintainers<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/GOVERNANCE.md">Governance<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="only-s3">
+    <summary>Can I use Rook only for S3, or only for block volumes?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Yes. Each storage type is a separate resource, so you deploy only what you need: an object store, block pools, a filesystem, or any mix.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Object-Storage-RGW/object-storage/">Object storage<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://rook.io/docs/rook/latest-release/Storage-Configuration/Block-Storage-RBD/block-storage/">Block storage<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="license">
+    <summary>What is the license?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Rook is Apache 2.0. Ceph is LGPL (2.1 or 3.0).</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://github.com/rook/rook/blob/master/LICENSE">Rook license<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://github.com/ceph/ceph/blob/main/COPYING">Ceph license<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+  <details id="help">
+    <summary>Where do I get help?<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+</summary>
+    <div class="faq__a">
+      <div class="faq__text"><p>Ask in the Rook Slack or GitHub Discussions, and join the monthly community meeting.</p>
+</div>
+      <div class="links-row">
+        <a class="arrow-link" href="https://slack.rook.io">Slack<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+        <a class="arrow-link" href="https://github.com/rook/rook#community-meeting">Community meeting<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+</a>
+      </div>
+    </div>
+  </details>
+</div>
+</div>
+    </div>
+  </div>
+</section>
+
+</main>
+    <footer class="footer" id="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer__cncf">
+      <a href="https://www.cncf.io"><img class="theme-light" src="/images/brand/cncf-graduated-color.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy"><img class="theme-dark" src="/images/brand/cncf-graduated-white.svg" alt="Cloud Native Computing Foundation" width="116" height="32" loading="lazy">
+</a>
+      <p>We are a Cloud Native Computing Foundation graduated project.</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4>Getting Started</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook">GitHub</a></li>
+          <li><a href="/docs/rook/latest-release/">Documentation</a></li>
+          <li><a href="https://github.com/rook/rook/blob/master/CONTRIBUTING.md#how-to-contribute">How to Contribute</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://slack.rook.io/">Slack</a></li>
+          <li><a href="https://twitter.com/rook_io">Twitter</a></li>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://blog.rook.io/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://github.com/rook/rook/discussions">Discussions</a></li>
+          <li><a href="https://github.com/rook/rook/issues">Feature request</a></li>
+          <li><a href="https://github.com/rook/rook/issues/new/choose">New Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Top Contributors</h4>
+        <ul>
+          <li><a href="https://cloudical.io/">Cloudical</a></li>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://cybozu.com">Cybozu, Inc</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+          <li><a href="https://upbound.io">Upbound</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Support Providers</h4>
+        <ul>
+          <li><a href="https://clyso.com/en/">Clyso</a></li>
+          <li><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <a class="footer__logo" href="/"><img class="theme-light" src="/images/rook-logo-small.svg" alt="rook.io" width="80" height="17" loading="lazy"><img class="theme-dark" src="/images/brand/rook-horizontal-white.svg" alt="rook.io" width="80" height="17" loading="lazy">
+</a>
+      <div class="footer__legal">
+        <p>&#169; Rook Authors 2026. Documentation distributed under <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.</p>
+        <p>&#169; 2026 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <script src="/js/site.js"></script>
+    
+    
+  </body>
+</html>
